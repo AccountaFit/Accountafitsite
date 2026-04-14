@@ -377,7 +377,7 @@ function Problem() {
       <Inner>
         <div ref={ref}>
           <SectionHead vis={vis} label="The Problem"
-            headline={`MOTIVATION FADES.<br/><span style="color:#EF4444">ACCOUNTABILITY STICKS.</span>`}
+            headline={`MOTIVATION FADES.<br/><span style='color:#EF4444'>ACCOUNTABILITY STICKS.</span>`}
             sub="The problem isn't willpower. It's having no one to answer to."/>
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))",gap:16}}>
             {cards.map(({e,t},i)=>(
@@ -500,7 +500,7 @@ function Features() {
       <Inner>
         <div ref={ref}>
           <SectionHead vis={vis} label="Features"
-            headline={`BUILT FOR <span style="color:#EF4444">DISCIPLINE</span>`}
+            headline={`BUILT FOR <span style='color:#EF4444'>DISCIPLINE</span>`}
             sub="Every feature designed to make consistency your new default."/>
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:16}}>
             {feats.map(({icon,title,desc},i)=>(
@@ -532,7 +532,7 @@ function HowItWorks() {
       <Inner max={1000}>
         <div ref={ref}>
           <SectionHead vis={vis} label="How It Works"
-            headline={`FOUR STEPS TO <span style="color:#EF4444">CONSISTENCY</span>`}/>
+            headline={`FOUR STEPS TO <span style='color:#EF4444'>CONSISTENCY</span>`}/>
           <div style={{display:"flex",flexDirection:"column",gap:44,position:"relative"}}>
             <div className="hide-m" style={{position:"absolute",left:33,top:0,bottom:0,width:1,background:"linear-gradient(to bottom,var(--red) 0%,var(--red) 72%,transparent)",opacity:.22,pointerEvents:"none"}}/>
             {steps.map(({n,title,desc},i)=>(
@@ -670,7 +670,7 @@ function Benefits() {
       <Inner>
         <div ref={ref}>
           <SectionHead vis={vis} label="The Research"
-            headline={`ACCOUNTABILITY <span style="color:#EF4444">WORKS</span>`}
+            headline={`ACCOUNTABILITY <span style='color:#EF4444'>WORKS</span>`}
             sub="The science is clear. The right partner doesn't just motivate — they rewire your relationship with commitment."/>
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))",gap:22}}>
             {stats.map(({v,l},i)=>(
@@ -702,7 +702,7 @@ function Testimonials() {
       <Inner>
         <div ref={ref}>
           <SectionHead vis={vis} label="Testimonials"
-            headline={`REAL PEOPLE. <span style="color:#EF4444">REAL RESULTS.</span>`}/>
+            headline={`REAL PEOPLE. <span style='color:#EF4444'>REAL RESULTS.</span>`}/>
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:16}}>
             {ts.map(({name,role,ini,q},i)=>(
               <div key={i} className="card" style={{opacity:vis?1:0,transform:vis?"none":"translateY(20px)",transition:`all .6s ${i*.08}s ease`}}>
@@ -1067,3 +1067,5 @@ export default function AccountaFit() {
         {modal&&<Modal onClose={()=>setModal(false)}/>}
       </div>
     </>
+  );
+}
