@@ -348,10 +348,10 @@ function Hero({ onCTA, dark, onToggle }) {
               textShadow: "0 10px 60px rgba(0,0,0,.75)",
               animation: "fadeUp .8s .18s ease both", opacity: 0,
             }}>
-              <span style={{ color: "#fff" }}>Accounta</span>
+              <span className="hero-wordmark-white" style={{ color: "#fff" }}>Accounta</span>
               <span style={{ color: "#dc2626" }}>Fit</span>
             </h1>
-            <p className="bc" style={{
+            <p className="bc hero-tagline" style={{
               fontSize: "clamp(15px,2.2vw,30px)", fontWeight: 600,
               letterSpacing: ".32em", textTransform: "uppercase",
               color: "rgba(255,255,255,.94)", marginTop: "clamp(8px,1.5vh,16px)",
@@ -359,7 +359,7 @@ function Hero({ onCTA, dark, onToggle }) {
             }}>
               FIND YOUR FIT. <span style={{ color: "#dc2626" }}>STAY ACCOUNTABLE.</span> ACHIEVE MORE.
             </p>
-            <p style={{
+            <p className="hero-sub-copy" style={{
               fontSize: "clamp(17px,1.9vw,29px)", lineHeight: 1.52,
               color: "rgba(255,255,255,.86)", maxWidth: 900, margin: "clamp(10px,2vh,20px) auto 0",
               animation: "fadeUp .8s .44s ease both", opacity: 0,
@@ -381,8 +381,8 @@ function Hero({ onCTA, dark, onToggle }) {
             {FEATS.map((f, i) => (
               <div key={f.title} style={{ textAlign: "center", animation: `fadeUp .7s ${.7 + i * .12}s ease both`, opacity: 0 }}>
                 <div className="feat-icon-ring">{f.icon}</div>
-                <h3 className="bc" style={{ fontSize: "clamp(14px,1.5vw,20px)", fontWeight: 800, letterSpacing: ".18em", textTransform: "uppercase", color: "#fff" }}>{f.title}</h3>
-                <p style={{ fontSize: "clamp(14px,1.2vw,19px)", lineHeight: 1.55, color: "rgba(255,255,255,.68)", marginTop: 14, maxWidth: 280, margin: "14px auto 0" }}>{f.body}</p>
+                <h3 className="bc hero-feat-title" style={{ fontSize: "clamp(14px,1.5vw,20px)", fontWeight: 800, letterSpacing: ".18em", textTransform: "uppercase", color: "#fff" }}>{f.title}</h3>
+                <p className="hero-feat-body" style={{ fontSize: "clamp(14px,1.2vw,19px)", lineHeight: 1.55, color: "rgba(255,255,255,.68)", marginTop: 14, maxWidth: 280, margin: "14px auto 0" }}>{f.body}</p>
               </div>
             ))}
           </div>
@@ -621,10 +621,10 @@ function Features({ dark }) {
 /* ══════════════════════════════════════════════════════════════════
    7. STATS BAND
 ══════════════════════════════════════════════════════════════════ */
-function Stats() {
+function Stats({ dark }) {
   return (
-    <section style={{ padding: "56px 5%", background: "linear-gradient(135deg,#0B0101,#110202,#0B0101)", borderTop: "1px solid #1C0303", borderBottom: "1px solid #1C0303", position: "relative", overflow: "hidden" }}>
-      <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 50%,rgba(185,28,28,.14) 0%,transparent 65%)", pointerEvents: "none" }} />
+    <section id="stats-band" style={{ padding: "56px 5%", background: dark ? "linear-gradient(135deg,#0B0101,#110202,#0B0101)" : "#fff", borderTop: dark ? "1px solid #1C0303" : "1px solid #E0E0E0", borderBottom: dark ? "1px solid #1C0303" : "1px solid #E0E0E0", position: "relative", overflow: "hidden" }}>
+      <div style={{ position: "absolute", inset: 0, background: dark ? "radial-gradient(ellipse at 50% 50%,rgba(185,28,28,.14) 0%,transparent 65%)" : "none", pointerEvents: "none" }} />
       <W>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 24 }}>
           {[
@@ -635,7 +635,7 @@ function Stats() {
           ].map(([v, l]) => (
             <div key={v} style={{ textAlign: "center" }}>
               <div className="d" style={{ fontSize: "3.4rem", color: "#EF4444", lineHeight: 1, marginBottom: 8 }}>{v}</div>
-              <p className="body-t" style={{ fontSize: ".92rem" }}>{l}</p>
+              <p style={{ fontSize: ".92rem", color: dark ? "var(--gray)" : "#1A1A1A", lineHeight: 1.72 }}>{l}</p>
             </div>
           ))}
         </div>
@@ -657,24 +657,24 @@ function Testimonials({ dark }) {
     { ini: "JB", name: "Jordan B.",  role: "Beta tester · Back after 2-year gap",q: "I'm not motivated every day. I haven't quit because someone else's streak is on the line too. That's a completely different feeling." },
   ];
   return (
-    <section style={{ padding: "72px 5%", background: dark ? "#000" : "#F5F5F5" }}>
+    <section id="testimonials-section" style={{ padding: "72px 5%", background: dark ? "#000" : "#F5F5F5" }}>
       <W>
         <div style={{ textAlign: "center", marginBottom: 40 }}>
           <span className="lbl">Early Feedback</span>
-          <h2 className="d" style={{ fontSize: "clamp(2rem,4.5vw,3.4rem)", lineHeight: .93, color: "#fff" }}>
+          <h2 className="d" style={{ fontSize: "clamp(2rem,4.5vw,3.4rem)", lineHeight: .93, color: dark ? "#fff" : "#0A0A0A" }}>
             THEY STOPPED<br /><span style={{ color: "#EF4444" }}>STARTING OVER.</span>
           </h2>
-          <p className="body-t" style={{ maxWidth: 440, margin: "18px auto 0", textAlign: "center" }}>Feedback from our beta and early access community. Real people. Real results.</p>
+          <p className="body-t" style={{ maxWidth: 440, margin: "18px auto 0", textAlign: "center", color: dark ? undefined : "#333" }}>Feedback from our beta and early access community. Real people. Real results.</p>
         </div>
         <div className="tgrid" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 12 }}>
           {ts.map(({ ini, name, role, q }) => (
             <div key={ini} className="tcard">
               <div className="tcard-quote">"</div>
-              <p style={{ color: "#E8E8E8", fontSize: "1rem", lineHeight: 1.78, flex: 1 }}>{q}</p>
-              <div style={{ borderTop: "1px solid #1E1E1E", paddingTop: 16, display: "flex", alignItems: "center", gap: 12 }}>
+              <p style={{ color: dark ? "#E8E8E8" : "#111", fontSize: "1rem", lineHeight: 1.78, flex: 1, fontWeight: dark ? 400 : 500 }}>{q}</p>
+              <div style={{ borderTop: `1px solid ${dark ? "#1E1E1E" : "#D8D8D8"}`, paddingTop: 16, display: "flex", alignItems: "center", gap: 12 }}>
                 <div className="avatar">{ini}</div>
                 <div>
-                  <div style={{ fontWeight: 600, color: "#fff", fontSize: ".9rem" }}>{name}</div>
+                  <div style={{ fontWeight: 600, color: dark ? "#fff" : "#0A0A0A", fontSize: ".9rem" }}>{name}</div>
                   <div className="bc" style={{ fontSize: ".7rem", letterSpacing: ".1em", color: "#B91C1C" }}>{role}</div>
                 </div>
               </div>
@@ -723,19 +723,21 @@ function FAQ({ dark }) {
 /* ══════════════════════════════════════════════════════════════════
    10. FINAL CTA — "You've Restarted Enough"
 ══════════════════════════════════════════════════════════════════ */
-function FinalCTA({ onCTA }) {
+function FinalCTA({ onCTA, dark }) {
   const [email, setEmail] = useState("");
   const [done, setDone]   = useState(false);
   const submit = (e) => { e.preventDefault(); if (email.trim()) setDone(true); };
   return (
-    <section id="contact" style={{
+    <section id="final-cta" style={{
       padding: "88px 5%", textAlign: "center", position: "relative", overflow: "hidden",
-      background: "radial-gradient(ellipse at 50% 50%,rgba(185,28,28,.18) 0%,transparent 60%), linear-gradient(160deg,#070707,#100101,#070707)",
+      background: dark
+        ? "radial-gradient(ellipse at 50% 50%,rgba(185,28,28,.18) 0%,transparent 60%), linear-gradient(160deg,#070707,#100101,#070707)"
+        : "#fff",
     }}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(185,28,28,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(185,28,28,.04) 1px,transparent 1px)", backgroundSize: "64px 64px", pointerEvents: "none" }} />
       <div style={{ position: "relative", zIndex: 2, maxWidth: 640, margin: "0 auto" }}>
         <span className="lbl" style={{ display: "inline-block" }}>This Is Your Moment</span>
-        <h2 className="d" style={{ fontSize: "clamp(3rem,8vw,6rem)", lineHeight: .9, color: "#fff", marginBottom: 8 }}>
+        <h2 className="d" style={{ fontSize: "clamp(3rem,8vw,6rem)", lineHeight: .9, color: dark ? "#fff" : "#0A0A0A", marginBottom: 8 }}>
           YOU'VE RESTARTED<br /><span style={{ color: "#EF4444" }}>ENOUGH.</span>
         </h2>
         <p style={{ fontSize: "1.2rem", color: "rgba(255,255,255,.55)", lineHeight: 1.65, fontStyle: "italic", marginBottom: 18 }}>This time, stay with it.</p>
@@ -778,15 +780,37 @@ function Footer({ dark }) {
             <p className="body-t" style={{ marginTop: 12, maxWidth: 240, fontSize: ".95rem" }}>
               Consistency over motivation.<br />Accountability over intention.
             </p>
-            {/* Social */}
+            {/* Social icons — real brand logos */}
             <div style={{ display: "flex", gap: 10, marginTop: 22 }}>
-              {["X", "IG", "TK"].map(s => (
-                <div key={s} style={{ width: 36, height: 36, borderRadius: "50%", background: "#1A1A1A", border: "1px solid #2A2A2A", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "border-color .2s" }}
-                  onMouseEnter={e => e.currentTarget.style.borderColor = "#B91C1C"}
-                  onMouseLeave={e => e.currentTarget.style.borderColor = "#2A2A2A"}>
-                  <span className="bc" style={{ fontSize: ".65rem", color: "#606060", letterSpacing: ".06em" }}>{s}</span>
-                </div>
-              ))}
+              {/* X (Twitter) */}
+              <a href="https://x.com/accountafit" target="_blank" rel="noopener noreferrer"
+                style={{ width: 36, height: 36, borderRadius: "50%", background: "#000", border: "1px solid #2A2A2A", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "border-color .2s", flexShrink: 0 }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = "#B91C1C"}
+                onMouseLeave={e => e.currentTarget.style.borderColor = "#2A2A2A"}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.633 5.905-5.633Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+              {/* Instagram */}
+              <a href="https://instagram.com/accountafit" target="_blank" rel="noopener noreferrer"
+                style={{ width: 36, height: 36, borderRadius: "50%", background: "linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)", border: "1px solid transparent", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "opacity .2s", flexShrink: 0 }}
+                onMouseEnter={e => e.currentTarget.style.opacity = ".85"}
+                onMouseLeave={e => e.currentTarget.style.opacity = "1"}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                  <circle cx="12" cy="12" r="4.5"/>
+                  <circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/>
+                </svg>
+              </a>
+              {/* TikTok */}
+              <a href="https://tiktok.com/@accountafit" target="_blank" rel="noopener noreferrer"
+                style={{ width: 36, height: 36, borderRadius: "50%", background: "#000", border: "1px solid #2A2A2A", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "border-color .2s", flexShrink: 0 }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = "#B91C1C"}
+                onMouseLeave={e => e.currentTarget.style.borderColor = "#2A2A2A"}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff">
+                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.69a8.24 8.24 0 0 0 4.84 1.56V6.79a4.85 4.85 0 0 1-1.08-.1z"/>
+                </svg>
+              </a>
             </div>
             {/* App badges */}
             <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 22 }}>
@@ -836,8 +860,8 @@ function Footer({ dark }) {
         </div>
         <div style={{ height: 1, background: "linear-gradient(90deg,transparent,#2A2A2A,transparent)", marginBottom: 22 }} />
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: 10 }}>
-          <p style={{ fontSize: ".78rem", color: "rgba(255,255,255,.45)" }}>© 2026 AccountaFit. All rights reserved.</p>
-          <p style={{ fontSize: ".78rem", color: "rgba(255,255,255,.45)" }}>Built for people who don't quit.</p>
+          <p className="footer-bottom-text" style={{ fontSize: ".78rem", color: "rgba(255,255,255,.45)" }}>© 2026 AccountaFit. All rights reserved.</p>
+          <p className="footer-bottom-text" style={{ fontSize: ".78rem", color: "rgba(255,255,255,.45)" }}>Built for people who don't quit.</p>
         </div>
       </W>
     </footer>
@@ -894,34 +918,84 @@ export default function AccountaFit() {
   // Light mode CSS overrides injected when dark=false
   const lightOverrides = dark ? "" : `
     body { background: #F5F5F5 !important; color: #0A0A0A !important; }
-    .body-t { color: #444 !important; }
+
+    /* ── Global type ── */
+    .body-t { color: #1A1A1A !important; }
     .lbl { color: #B91C1C !important; }
-    .d { color: #0A0A0A; }
-    .nav-link { color: rgba(10,10,10,.75) !important; }
-    .nav-link:hover { color: #0A0A0A !important; }
-    .nav-join { border-color: rgba(185,28,28,.6) !important; color: #0A0A0A !important; }
+    .d { color: #0A0A0A !important; }
+    .bc { color: inherit !important; }
+
+    /* ── FIX: Hero in light mode — nav links + hero text readable ── */
+    .nav-link { color: rgba(255,255,255,.9) !important; }
+    .nav-link:hover { color: #fff !important; }
+    .nav-join { color: #fff !important; border-color: rgba(220,38,38,.7) !important; }
+    .hero-wordmark-white { color: #fff !important; }
+    .hero-tagline { color: rgba(255,255,255,.95) !important; }
+    .hero-sub-copy { color: rgba(255,255,255,.88) !important; }
+    .hero-feat-title { color: #fff !important; }
+    .hero-feat-body { color: rgba(255,255,255,.72) !important; }
+
+    /* ── FIX 1: WhatItIs section — checklist text and h2 ── */
+    #what-it-is .d { color: #0A0A0A !important; }
+    #what-it-is p { color: #1A1A1A !important; }
+    #what-it-is span[style*="E8E8E8"], #what-it-is span { color: #1A1A1A !important; }
+
+    /* ── Cards ── */
     .card { background: #fff !important; border-color: #E0E0E0 !important; box-shadow: 0 2px 16px rgba(0,0,0,.07); }
-    .card h3, .card .bc { color: #0A0A0A !important; }
+    .card h3 { color: #0A0A0A !important; }
+    .card p { color: #1A1A1A !important; }
     .card:hover { border-color: #B91C1C !important; box-shadow: 0 8px 32px rgba(185,28,28,.1) !important; }
-    .tcard { background: #fff !important; border-color: #E0E0E0 !important; }
-    .tcard p { color: #333 !important; }
+
+    /* ── FIX 2: Stats band — white background, black text ── */
+    #stats-band { background: #fff !important; border-color: #E0E0E0 !important; }
+    #stats-band::before { opacity: 0 !important; }
+    #stats-band p { color: #1A1A1A !important; }
+
+    /* ── FIX 3: Testimonials — black headings, strong body text ── */
+    #testimonials-section .d { color: #0A0A0A !important; }
+    #testimonials-section .body-t { color: #1A1A1A !important; }
+    .tcard { background: #fff !important; border-color: #D0D0D0 !important; }
+    .tcard p { color: #111 !important; font-weight: 500 !important; }
     .tcard:hover { border-color: rgba(185,28,28,.35) !important; }
-    .tcard-quote { color: rgba(185,28,28,.25) !important; }
-    .faq-item { background: #fff !important; border-color: #E0E0E0 !important; }
+    .tcard-quote { color: rgba(185,28,28,.3) !important; }
+    .quote-name { color: #0A0A0A !important; }
+
+    /* ── FIX 4: FAQ — "REAL" word black, questions strong ── */
+    #faq .d { color: #0A0A0A !important; }
+    .faq-item { background: #fff !important; border-color: #D0D0D0 !important; }
     .faq-item.open { border-color: rgba(185,28,28,.4) !important; }
-    .faq-q { color: #0A0A0A !important; }
-    .faq-ans { color: #555 !important; }
-    .step-num { background: #F5F5F5 !important; color: #B91C1C !important; }
-    .cmp-left { background: #DCDCDC !important; color: rgba(10,10,10,.45) !important; text-decoration: line-through; text-decoration-color: rgba(10,10,10,.2) !important; }
+    .faq-q { color: #0A0A0A !important; font-weight: 700 !important; }
+    .faq-ans { color: #333 !important; }
+
+    /* ── FIX 5: Final CTA — white background, black headings ── */
+    #final-cta { background: #fff !important; }
+    #final-cta::before { opacity: 0 !important; }
+    #final-cta .d { color: #0A0A0A !important; }
+    #final-cta p { color: #333 !important; }
+    #final-cta .lbl { color: #B91C1C !important; }
+
+    /* ── Steps ── */
+    .step-num { background: #F0F0F0 !important; color: #B91C1C !important; border-color: #B91C1C !important; }
+
+    /* ── Compare table ── */
+    .cmp-left { background: #DCDCDC !important; color: rgba(10,10,10,.45) !important; }
     .cmp-right { background: rgba(185,28,28,.07) !important; color: #0A0A0A !important; }
+
+    /* ── Email input ── */
     .email-in { background: rgba(0,0,0,.06) !important; border-color: rgba(0,0,0,.15) !important; color: #0A0A0A !important; }
-    .email-in::placeholder { color: #999 !important; }
-    .store-badge { background: #E8E8E8 !important; border-color: #D0D0D0 !important; }
+    .email-in::placeholder { color: #888 !important; }
+
+    /* ── FIX 6: Footer — black bold text ── */
+    footer { background: #E8E8E8 !important; border-color: #D0D0D0 !important; }
+    footer p { color: #111 !important; font-weight: 600 !important; }
+    footer a { color: #111 !important; font-weight: 600 !important; }
+    footer a:hover { color: #B91C1C !important; }
+    .footer-col-title { color: #333 !important; font-weight: 700 !important; }
+    .store-badge { background: #D8D8D8 !important; border-color: #C0C0C0 !important; }
     .store-badge:hover { border-color: #B91C1C !important; }
-    .bc { color: inherit; }
-    footer a { color: #555 !important; }
-    footer a:hover { color: #0A0A0A !important; }
-    .footer-col-title { color: #888 !important; }
+    .footer-bottom-text { color: #222 !important; font-weight: 600 !important; }
+
+    /* ── Scroll to top ── */
     .scroll-top { background: #B91C1C !important; }
   `;
 
@@ -946,10 +1020,10 @@ export default function AccountaFit() {
         <HowItWorks dark={dark} />
         <WhyDifferent dark={dark} />
         <Features dark={dark} />
-        <Stats />
+        <Stats dark={dark} />
         <Testimonials dark={dark} />
         <FAQ dark={dark} />
-        <FinalCTA onCTA={() => setModal(true)} />
+        <FinalCTA onCTA={() => setModal(true)} dark={dark} />
         <Footer dark={dark} />
         {modal && <Modal onClose={() => setModal(false)} dark={dark} />}
         <button
