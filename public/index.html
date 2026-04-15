@@ -4,11 +4,74 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#050505" />
-    <meta name="description" content="AccountaFit — Find your fitness accountability partner. Stop starting over." />
     <title>AccountaFit — Stop Starting Over</title>
+    <meta name="description" content="AccountaFit pairs you with a real accountability partner who matches your goals, schedule, and commitment level. Stop falling off. Start staying consistent." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://accountafit.com" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://accountafit.com" />
+    <meta property="og:title" content="AccountaFit — Stop Starting Over" />
+    <meta property="og:description" content="Real accountability. Smart matching. Daily check-ins that keep you from falling off — again. Join the waitlist." />
+    <meta property="og:site_name" content="AccountaFit" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AccountaFit — Stop Starting Over" />
+    <meta name="twitter:description" content="Real accountability. Smart matching. Daily check-ins that keep you from falling off — again." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
+      body { background: #050505; color: #F5F5F5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+      #initial-loader { position: fixed; inset: 0; background: #050505; display: flex; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.4s ease; }
+      #initial-loader.hidden { opacity: 0; pointer-events: none; }
+      .loader-logo { font-size: 1.8rem; font-weight: 900; letter-spacing: 0.02em; font-style: italic; }
+      .loader-logo span { color: #EF4444; }
+      .loader-bar { width: 120px; height: 2px; background: #1A1A1A; border-radius: 2px; margin: 16px auto 0; overflow: hidden; }
+      .loader-fill { height: 100%; background: linear-gradient(90deg, #B91C1C, #EF4444); border-radius: 2px; animation: loadbar 1.2s ease-in-out forwards; }
+      @keyframes loadbar { from { width: 0; } to { width: 100%; } }
+      #root { min-height: 100vh; }
+    </style>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="initial-loader">
+      <div style="text-align: center;">
+        <div class="loader-logo">Accounta<span>Fit</span></div>
+        <div class="loader-bar"><div class="loader-fill"></div></div>
+      </div>
+    </div>
     <div id="root"></div>
+    <script>
+      (function() {
+        var observer = new MutationObserver(function() {
+          var root = document.getElementById('root');
+          if (root && root.children.length > 0) {
+            var loader = document.getElementById('initial-loader');
+            if (loader) { loader.classList.add('hidden'); setTimeout(function() { loader.remove(); }, 500); }
+            observer.disconnect();
+          }
+        });
+        var root = document.getElementById('root');
+        if (root) observer.observe(root, { childList: true });
+        setTimeout(function() {
+          var loader = document.getElementById('initial-loader');
+          if (loader) { loader.classList.add('hidden'); setTimeout(function() { loader.remove(); }, 500); }
+        }, 4000);
+      })();
+    </script>
+    <noscript>
+      <style>
+        body { display: flex; align-items: center; justify-content: center; min-height: 100vh; text-align: center; padding: 40px; }
+        .ns-logo { font-size: 2.5rem; font-style: italic; margin-bottom: 16px; }
+        .ns-logo span { color: #EF4444; }
+        .ns-p { color: #A3A3A3; font-size: 1.1rem; line-height: 1.7; max-width: 480px; margin: 0 auto 24px; }
+        .ns-cta { display: inline-block; background: #B91C1C; color: #F5F5F5; padding: 14px 36px; border-radius: 100px; text-decoration: none; font-size: 0.9rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; }
+      </style>
+      <div>
+        <div class="ns-logo">Accounta<span>Fit</span></div>
+        <p class="ns-p">Stop Starting Over. AccountaFit pairs you with a real accountability partner to keep you consistent — for real this time.</p>
+        <p class="ns-p" style="font-size:0.85rem; color:#555;">Please enable JavaScript to use AccountaFit.</p>
+        <a class="ns-cta" href="mailto:hello@accountafit.com">Get In Touch</a>
+      </div>
+    </noscript>
   </body>
 </html>
