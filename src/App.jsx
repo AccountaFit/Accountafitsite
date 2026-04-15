@@ -43,7 +43,7 @@ a { color: inherit; text-decoration: none; }
 .d  { font-family: 'Anton', sans-serif; font-style: italic; }
 .bc { font-family: 'Barlow Condensed', sans-serif; }
 .lbl { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .75rem; letter-spacing: .28em; text-transform: uppercase; color: var(--redhi); display: block; margin-bottom: 14px; }
-.body-t { font-size: 1.06rem; color: var(--gray); line-height: 1.82; }
+.body-t { font-size: 1.06rem; color: var(--gray); line-height: 1.72; }
 
 /* ── Keyframes ── */
 @keyframes fadeUp   { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
@@ -131,13 +131,13 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ── Compare table ── */
-.cmp-left { background: var(--card); padding: 18px 22px; display: flex; align-items: center; gap: 12px; font-size: .96rem; color: var(--muted); }
+.cmp-left { background: var(--card); padding: 18px 22px; display: flex; align-items: center; gap: 12px; font-size: .96rem; color: rgba(255,255,255,.55); text-decoration: line-through; text-decoration-color: rgba(255,255,255,.2); }
 .cmp-right { background: rgba(185,28,28,.08); border: 1px solid rgba(185,28,28,.18); padding: 18px 22px; display: flex; align-items: center; gap: 12px; font-size: .96rem; color: #E8E8E8; }
 
 /* ── Testimonial card ── */
 .tcard {
   background: #0F0F0F; border: 1px solid #1E1E1E; border-radius: 16px;
-  padding: 28px 26px; display: flex; flex-direction: column; gap: 16px;
+  padding: 22px 20px; display: flex; flex-direction: column; gap: 16px;
   transition: border-color .3s ease;
 }
 .tcard:hover { border-color: rgba(185,28,28,.4); }
@@ -152,7 +152,7 @@ a { color: inherit; text-decoration: none; }
 /* ── FAQ ── */
 .faq-item { background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: border-color .2s; margin-bottom: 8px; }
 .faq-item.open { border-color: rgba(185,28,28,.42); }
-.faq-btn { width: 100%; background: none; border: none; cursor: pointer; padding: 22px 26px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.faq-btn { width: 100%; background: none; border: none; cursor: pointer; padding: 18px 22px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
 .faq-q { font-family: 'DM Sans', sans-serif; font-weight: 600; color: #fff; font-size: 1.05rem; flex: 1; text-align: left; }
 .faq-plus { color: var(--red); font-size: 1.5rem; line-height: 1; transition: transform .2s; flex-shrink: 0; }
 .faq-ans { padding: 0 26px 20px; color: var(--gray); line-height: 1.78; font-size: 1rem; animation: fadeIn .2s ease; }
@@ -291,10 +291,10 @@ function Hero({ onCTA }) {
       </header>
 
       {/* ── HERO CONTENT ── */}
-      <main style={{ position: "relative", zIndex: 10, flex: 1, maxWidth: 1440, width: "100%", margin: "0 auto", display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "0 48px 44px" }}>
+      <main style={{ position: "relative", zIndex: 10, flex: 1, maxWidth: 1440, width: "100%", margin: "0 auto", display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "0 48px 28px" }}>
 
         {/* Giant centered wordmark block */}
-        <section style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", paddingTop: "clamp(24px,4vh,56px)" }}>
+        <section style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", paddingTop: "clamp(16px,2.5vh,32px)" }}>
           <div style={{ textAlign: "center", width: "100%", maxWidth: 1200 }}>
             <h1 className="hero-h d" style={{
               fontSize: "clamp(72px,13vw,188px)", lineHeight: .88,
@@ -320,7 +320,7 @@ function Hero({ onCTA }) {
             }}>
               The fitness accountability platform built to help you find the right partner, build unshakable habits, and get real results — <span style={{ color: "#ef4444" }}>together.</span>
             </p>
-            <div style={{ marginTop: "clamp(24px,3.5vh,44px)", animation: "fadeUp .8s .58s ease both", opacity: 0 }}>
+            <div style={{ marginTop: "clamp(18px,2.5vh,32px)", animation: "fadeUp .8s .58s ease both", opacity: 0 }}>
               <a href="#contact" className="hero-cta">
                 <span>Join the Movement</span>
                 <span style={{ fontSize: 30, lineHeight: 1 }}>→</span>
@@ -330,7 +330,7 @@ function Hero({ onCTA }) {
         </section>
 
         {/* Four feature pillars at base */}
-        <section style={{ paddingTop: "clamp(32px,4vh,56px)" }}>
+        <section style={{ paddingTop: "clamp(20px,2.5vh,36px)" }}>
           <div className="hero-feat-4" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "clamp(16px,2.5vw,40px)", maxWidth: 1360, margin: "0 auto" }}>
             {FEATS.map((f, i) => (
               <div key={f.title} style={{ textAlign: "center", animation: `fadeUp .7s ${.7 + i * .12}s ease both`, opacity: 0 }}>
@@ -351,16 +351,16 @@ function Hero({ onCTA }) {
 ══════════════════════════════════════════════════════════════════ */
 function Problem() {
   return (
-    <section style={{ padding: "112px 5%", background: "#050505" }}>
+    <section style={{ padding: "72px 5%", background: "#050505" }}>
       <W>
         <span className="lbl">Sound Familiar?</span>
-        <h2 className="d" style={{ fontSize: "clamp(2.6rem,6vw,5rem)", lineHeight: .92, color: "#fff", maxWidth: 900, marginBottom: 24 }}>
+        <h2 className="d" style={{ fontSize: "clamp(2.2rem,5vw,3.8rem)", lineHeight: .92, color: "#fff", maxWidth: 900, marginBottom: 24 }}>
           YOU DON'T HAVE<br />A DISCIPLINE PROBLEM.<br /><span style={{ color: "#EF4444" }}>YOU HAVE A SUPPORT PROBLEM.</span>
         </h2>
-        <p className="body-t" style={{ maxWidth: 640, marginBottom: 56 }}>
+        <p className="body-t" style={{ maxWidth: 640, marginBottom: 36 }}>
           The cycle is the same every time. You start strong. Life picks up. The streak breaks. And then you're staring at day one — again. That's not a character flaw. That's what happens when you're trying to do it alone.
         </p>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 16 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 12 }}>
           {[
             { icon: I.break, title: "The January Effect",   body: "You go all-in the first week. Then life happens and you disappear until next year." },
             { icon: I.alone, title: "No One Is Watching",   body: "When there's no one counting on you, skipping is the path of least resistance. Every time." },
@@ -387,13 +387,13 @@ function WhatItIs({ onCTA }) {
   const youD = [1,1,1,1,1,0,0];
   const parD = [1,1,1,1,0,0,0];
   return (
-    <section style={{ padding: "112px 5%", background: "#000" }}>
+    <section style={{ padding: "72px 5%", background: "#000" }}>
       <W>
         <div className="split-5-7" style={{ display: "grid", gridTemplateColumns: "5fr 7fr", gap: 80, alignItems: "center" }}>
           {/* Match card */}
           <div style={{ position: "relative" }}>
             <div style={{ position: "absolute", top: -16, left: -16, width: 80, height: 80, border: "2px solid rgba(185,28,28,.28)", borderRadius: 12, zIndex: 0 }} />
-            <div style={{ position: "relative", zIndex: 1, background: "#111", border: "1px solid #222", borderRadius: 20, padding: 28, boxShadow: "0 32px 80px rgba(0,0,0,.55),0 0 60px rgba(185,28,28,.07)" }}>
+            <div style={{ position: "relative", zIndex: 1, background: "#111", border: "1px solid #222", borderRadius: 20, padding: 22, boxShadow: "0 32px 80px rgba(0,0,0,.55),0 0 60px rgba(185,28,28,.07)" }}>
               <span className="lbl">Your Match · 97% Compatible</span>
               {/* Partner rows */}
               {[
@@ -469,18 +469,18 @@ function HowItWorks() {
     { n: "04", title: "Build the Streak Together",body: "Daily check-ins. Shared progress. Mutual accountability. The longer the streak, the harder it is to break. That's the whole design." },
   ];
   return (
-    <section id="how-it-works" style={{ padding: "112px 5%", background: "#030303" }}>
+    <section id="how-it-works" style={{ padding: "72px 5%", background: "#030303" }}>
       <W max={980}>
-        <div style={{ textAlign: "center", marginBottom: 72 }}>
+        <div style={{ textAlign: "center", marginBottom: 32 }}>
           <span className="lbl">How It Works</span>
-          <h2 className="d" style={{ fontSize: "clamp(2.2rem,5.5vw,4.2rem)", lineHeight: .93, color: "#fff" }}>
+          <h2 className="d" style={{ fontSize: "clamp(2rem,4.5vw,3.4rem)", lineHeight: .93, color: "#fff" }}>
             FOUR STEPS TO<br /><span style={{ color: "#EF4444" }}>NEVER STARTING OVER AGAIN</span>
           </h2>
         </div>
         <div style={{ display: "flex", flexDirection: "column", position: "relative" }}>
           <div className="hide-m" style={{ position: "absolute", left: 33, top: 68, bottom: 68, width: 1, background: "linear-gradient(to bottom,#B91C1C,rgba(185,28,28,.08))", opacity: .25 }} />
           {steps.map(({ n, title, body }, i) => (
-            <div key={n} style={{ display: "flex", gap: 32, alignItems: "flex-start", padding: "30px 0", borderBottom: i < 3 ? "1px solid #1A1A1A" : "none" }}>
+            <div key={n} style={{ display: "flex", gap: 32, alignItems: "flex-start", padding: "22px 0", borderBottom: i < 3 ? "1px solid #1A1A1A" : "none" }}>
               <div className="step-num">{n}</div>
               <div style={{ paddingTop: 14 }}>
                 <h3 className="bc" style={{ fontWeight: 700, fontSize: "1.2rem", letterSpacing: ".1em", textTransform: "uppercase", color: "#fff", marginBottom: 10 }}>{title}</h3>
@@ -506,12 +506,12 @@ function WhyDifferent() {
     ["Shows you a feed",           "Builds you a real discipline system"],
   ];
   return (
-    <section style={{ padding: "112px 5%", background: "#000", position: "relative", overflow: "hidden" }}>
+    <section style={{ padding: "72px 5%", background: "#000", position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 50%,rgba(185,28,28,.07) 0%,transparent 60%)", pointerEvents: "none" }} />
       <W>
         <div style={{ textAlign: "center", marginBottom: 60 }}>
           <span className="lbl">Why AccountaFit</span>
-          <h2 className="d" style={{ fontSize: "clamp(2.2rem,5.5vw,4.2rem)", lineHeight: .93, color: "#fff" }}>
+          <h2 className="d" style={{ fontSize: "clamp(2rem,4.5vw,3.4rem)", lineHeight: .93, color: "#fff" }}>
             OTHER APPS TRACK YOU.<br /><span style={{ color: "#EF4444" }}>WE HOLD YOU.</span>
           </h2>
           <p className="body-t" style={{ maxWidth: 520, margin: "18px auto 0", textAlign: "center" }}>
@@ -549,15 +549,15 @@ function Features() {
     { icon: I.refresh, title: "Smart Rematch",       body: "Partnership not working? We find you a better fit before your momentum breaks." },
   ];
   return (
-    <section id="features" style={{ padding: "112px 5%", background: "#050505" }}>
+    <section id="features" style={{ padding: "72px 5%", background: "#050505" }}>
       <W>
-        <div style={{ marginBottom: 64 }}>
+        <div style={{ marginBottom: 40 }}>
           <span className="lbl">Features</span>
-          <h2 className="d" style={{ fontSize: "clamp(2.2rem,5.5vw,4.2rem)", lineHeight: .93, color: "#fff", maxWidth: 640 }}>
+          <h2 className="d" style={{ fontSize: "clamp(2rem,4.5vw,3.4rem)", lineHeight: .93, color: "#fff", maxWidth: 640 }}>
             BUILT FOR THE PEOPLE<br /><span style={{ color: "#EF4444" }}>WHO KEEP FALLING OFF</span>
           </h2>
         </div>
-        <div className="feat-3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }}>
+        <div className="feat-3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 12 }}>
           {feats.map(({ icon, title, body }) => (
             <div key={title} className="card">
               <span className="redbar" />
@@ -577,10 +577,10 @@ function Features() {
 ══════════════════════════════════════════════════════════════════ */
 function Stats() {
   return (
-    <section style={{ padding: "80px 5%", background: "linear-gradient(135deg,#0B0101,#110202,#0B0101)", borderTop: "1px solid #1C0303", borderBottom: "1px solid #1C0303", position: "relative", overflow: "hidden" }}>
+    <section style={{ padding: "56px 5%", background: "linear-gradient(135deg,#0B0101,#110202,#0B0101)", borderTop: "1px solid #1C0303", borderBottom: "1px solid #1C0303", position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 50%,rgba(185,28,28,.14) 0%,transparent 65%)", pointerEvents: "none" }} />
       <W>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 36 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 24 }}>
           {[
             ["3×",      "More likely to hit your goals with an accountability partner than going it alone"],
             ["94%",     "Of AccountaFit users report stronger consistency within the first 30 days"],
@@ -588,7 +588,7 @@ function Stats() {
             ["14 days", "Average time to lock in a lasting habit when someone is counting on you"],
           ].map(([v, l]) => (
             <div key={v} style={{ textAlign: "center" }}>
-              <div className="d" style={{ fontSize: "3.4rem", color: "#EF4444", lineHeight: 1, marginBottom: 12 }}>{v}</div>
+              <div className="d" style={{ fontSize: "3.4rem", color: "#EF4444", lineHeight: 1, marginBottom: 8 }}>{v}</div>
               <p className="body-t" style={{ fontSize: ".92rem" }}>{l}</p>
             </div>
           ))}
@@ -611,16 +611,16 @@ function Testimonials() {
     { ini: "JB", name: "Jordan B.",  role: "Beta tester · Back after 2-year gap",q: "I'm not motivated every day. I haven't quit because someone else's streak is on the line too. That's a completely different feeling." },
   ];
   return (
-    <section style={{ padding: "112px 5%", background: "#000" }}>
+    <section style={{ padding: "72px 5%", background: "#000" }}>
       <W>
-        <div style={{ textAlign: "center", marginBottom: 64 }}>
+        <div style={{ textAlign: "center", marginBottom: 40 }}>
           <span className="lbl">Early Feedback</span>
-          <h2 className="d" style={{ fontSize: "clamp(2.2rem,5.5vw,4.2rem)", lineHeight: .93, color: "#fff" }}>
+          <h2 className="d" style={{ fontSize: "clamp(2rem,4.5vw,3.4rem)", lineHeight: .93, color: "#fff" }}>
             THEY STOPPED<br /><span style={{ color: "#EF4444" }}>STARTING OVER.</span>
           </h2>
           <p className="body-t" style={{ maxWidth: 440, margin: "18px auto 0", textAlign: "center" }}>Feedback from our beta and early access community. Real people. Real results.</p>
         </div>
-        <div className="tgrid" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 16 }}>
+        <div className="tgrid" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 12 }}>
           {ts.map(({ ini, name, role, q }) => (
             <div key={ini} className="tcard">
               <div className="tcard-quote">"</div>
@@ -654,10 +654,10 @@ function FAQ() {
     { q: "What if I'm a beginner?",       a: "AccountaFit works for every fitness level. You'll be matched with someone at your level and intensity." },
   ];
   return (
-    <section id="faq" style={{ padding: "112px 5%", background: "#050505" }}>
+    <section id="faq" style={{ padding: "72px 5%", background: "#050505" }}>
       <W max={760}>
         <span className="lbl">FAQ</span>
-        <h2 className="d" style={{ fontSize: "clamp(2.2rem,5vw,3.8rem)", lineHeight: .93, color: "#fff", marginBottom: 48 }}>
+        <h2 className="d" style={{ fontSize: "clamp(2.2rem,5vw,3.8rem)", lineHeight: .93, color: "#fff", marginBottom: 32 }}>
           REAL <span style={{ color: "#EF4444" }}>QUESTIONS</span>
         </h2>
         {faqs.map(({ q, a }, i) => (
@@ -683,13 +683,13 @@ function FinalCTA({ onCTA }) {
   const submit = (e) => { e.preventDefault(); if (email.trim()) setDone(true); };
   return (
     <section id="contact" style={{
-      padding: "140px 5%", textAlign: "center", position: "relative", overflow: "hidden",
+      padding: "88px 5%", textAlign: "center", position: "relative", overflow: "hidden",
       background: "radial-gradient(ellipse at 50% 50%,rgba(185,28,28,.18) 0%,transparent 60%), linear-gradient(160deg,#070707,#100101,#070707)",
     }}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(185,28,28,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(185,28,28,.04) 1px,transparent 1px)", backgroundSize: "64px 64px", pointerEvents: "none" }} />
       <div style={{ position: "relative", zIndex: 2, maxWidth: 640, margin: "0 auto" }}>
         <span className="lbl" style={{ display: "inline-block" }}>This Is Your Moment</span>
-        <h2 className="d" style={{ fontSize: "clamp(3rem,8vw,6rem)", lineHeight: .9, color: "#fff", marginBottom: 12 }}>
+        <h2 className="d" style={{ fontSize: "clamp(3rem,8vw,6rem)", lineHeight: .9, color: "#fff", marginBottom: 8 }}>
           YOU'VE RESTARTED<br /><span style={{ color: "#EF4444" }}>ENOUGH.</span>
         </h2>
         <p style={{ fontSize: "1.2rem", color: "rgba(255,255,255,.55)", lineHeight: 1.65, fontStyle: "italic", marginBottom: 18 }}>This time, stay with it.</p>
@@ -698,7 +698,7 @@ function FinalCTA({ onCTA }) {
         </p>
         {done ? (
           <div style={{ background: "rgba(185,28,28,.1)", border: "1px solid rgba(185,28,28,.38)", borderRadius: 16, padding: "36px 40px" }}>
-            <div className="d" style={{ fontSize: "2.2rem", color: "#fff", marginBottom: 12 }}>YOU'RE IN.</div>
+            <div className="d" style={{ fontSize: "2.2rem", color: "#fff", marginBottom: 8 }}>YOU'RE IN.</div>
             <p className="body-t">We'll reach out when it's your turn. Stay consistent until then.</p>
           </div>
         ) : (
@@ -723,7 +723,7 @@ function FinalCTA({ onCTA }) {
 ══════════════════════════════════════════════════════════════════ */
 function Footer() {
   return (
-    <footer style={{ background: "#030303", borderTop: "1px solid #0F0F0F", padding: "60px 5% 36px" }}>
+    <footer style={{ background: "#030303", borderTop: "1px solid #0F0F0F", padding: "44px 5% 28px" }}>
       <W>
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-start", gap: 36, marginBottom: 44 }}>
           {/* Brand column */}
@@ -770,7 +770,7 @@ function Footer() {
               <div key={title}>
                 <div className="bc" style={{ fontWeight: 700, fontSize: ".7rem", letterSpacing: ".22em", textTransform: "uppercase", color: "#606060", marginBottom: 14 }}>{title}</div>
                 {links.map(l => (
-                  <a key={l} href="#" style={{ display: "block", color: "#606060", fontSize: ".9rem", marginBottom: 10, transition: "color .2s" }}
+                  <a key={l} href="#" style={{ display: "block", color: "#606060", fontSize: ".9rem", marginBottom: 7, transition: "color .2s" }}
                     onMouseEnter={e => e.target.style.color = "#fff"} onMouseLeave={e => e.target.style.color = "#606060"}>{l}</a>
                 ))}
               </div>
@@ -801,7 +801,7 @@ function Modal({ onClose }) {
         <button onClick={onClose} style={{ position: "absolute", top: 18, right: 20, background: "none", border: "none", color: "#555", cursor: "pointer", fontSize: "1.3rem" }}>✕</button>
         {done ? (
           <div style={{ textAlign: "center" }}>
-            <div className="d" style={{ fontSize: "2.2rem", color: "#fff", marginBottom: 12 }}>YOU'RE IN.</div>
+            <div className="d" style={{ fontSize: "2.2rem", color: "#fff", marginBottom: 8 }}>YOU'RE IN.</div>
             <p className="body-t">We'll reach out when it's your turn. Stay consistent until then.</p>
             <button className="btn-primary" onClick={onClose} style={{ marginTop: 26, width: "100%", justifyContent: "center" }}>Close</button>
           </div>
