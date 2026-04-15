@@ -245,7 +245,7 @@ const I = {
 /* ══════════════════════════════════════════════════════════════════
    1. HERO — three-panel cinematic + giant wordmark
 ══════════════════════════════════════════════════════════════════ */
-function Hero({ onCTA }) {
+function Hero({ onCTA, dark, onToggle }) {
   const FEATS = [
     { icon: I.partner, title: "FIND YOUR PARTNER",    body: "Match with driven people who share your goals, schedule, and training style." },
     { icon: I.shield,  title: "STAY ACCOUNTABLE",     body: "Check in, track progress, and keep each other on track every step of the way." },
@@ -301,6 +301,38 @@ function Hero({ onCTA }) {
             <a key={label} href={href} className="nav-link">{label}</a>
           ))}
           <a href="#contact" className="nav-join" style={{ fontFamily: "'DM Sans',sans-serif" }}>Join Waitlist</a>
+          {/* Dark / Light mode toggle */}
+          <button
+            onClick={onToggle}
+            aria-label="Toggle light/dark mode"
+            style={{
+              display: "flex", alignItems: "center", gap: 7,
+              background: dark ? "rgba(255,255,255,.1)" : "rgba(0,0,0,.08)",
+              border: `1px solid ${dark ? "rgba(255,255,255,.18)" : "rgba(0,0,0,.15)"}`,
+              borderRadius: 100, padding: "8px 14px", cursor: "pointer",
+              transition: "all .25s ease", color: dark ? "#fff" : "#0A0A0A",
+              fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 700,
+              fontSize: ".78rem", letterSpacing: ".12em", textTransform: "uppercase",
+            }}
+            onMouseEnter={e => e.currentTarget.style.borderColor = "#B91C1C"}
+            onMouseLeave={e => e.currentTarget.style.borderColor = dark ? "rgba(255,255,255,.18)" : "rgba(0,0,0,.15)"}
+          >
+            {/* Toggle track */}
+            <span style={{
+              position: "relative", width: 36, height: 20, borderRadius: 10,
+              background: dark ? "#1A1A1A" : "#E0E0E0",
+              border: `1px solid ${dark ? "#333" : "#C0C0C0"}`,
+              display: "inline-block", flexShrink: 0, transition: "background .25s",
+            }}>
+              <span style={{
+                position: "absolute", top: 2, left: dark ? 2 : 16,
+                width: 14, height: 14, borderRadius: "50%",
+                background: dark ? "#555" : "#B91C1C",
+                transition: "left .25s ease, background .25s ease",
+              }} />
+            </span>
+            {dark ? "☾ Dark" : "☀ Light"}
+          </button>
         </nav>
       </header>
 
@@ -363,9 +395,9 @@ function Hero({ onCTA }) {
 /* ══════════════════════════════════════════════════════════════════
    2. PROBLEM
 ══════════════════════════════════════════════════════════════════ */
-function Problem() {
+function Problem({ dark }) {
   return (
-    <section id="problem" style={{ padding: "72px 5%", background: "#050505" }}>
+    <section id="problem" style={{ padding: "72px 5%", background: dark ? "#050505" : "#EBEBEB" }}>
       <W>
         <span className="lbl">Sound Familiar?</span>
         <h2 className="d" style={{ fontSize: "clamp(2.2rem,5vw,3.8rem)", lineHeight: .92, color: "#fff", maxWidth: 900, marginBottom: 24 }}>
@@ -396,12 +428,12 @@ function Problem() {
 /* ══════════════════════════════════════════════════════════════════
    3. WHAT IT IS — match card + copy
 ══════════════════════════════════════════════════════════════════ */
-function WhatItIs({ onCTA }) {
+function WhatItIs({ onCTA, dark }) {
   const days = ["M","T","W","T","F","S","S"];
   const youD = [1,1,1,1,1,0,0];
   const parD = [1,1,1,1,0,0,0];
   return (
-    <section id="what-it-is" style={{ padding: "72px 5%", background: "#000" }}>
+    <section id="what-it-is" style={{ padding: "72px 5%", background: dark ? "#000" : "#F5F5F5" }}>
       <W>
         <div className="split-5-7" style={{ display: "grid", gridTemplateColumns: "5fr 7fr", gap: 80, alignItems: "center" }}>
           {/* Match card */}
@@ -475,7 +507,7 @@ function WhatItIs({ onCTA }) {
 /* ══════════════════════════════════════════════════════════════════
    4. HOW IT WORKS
 ══════════════════════════════════════════════════════════════════ */
-function HowItWorks() {
+function HowItWorks({ dark }) {
   const steps = [
     { n: "01", title: "Build Your Profile",       body: "Tell us your goals, your schedule, and how hard you need to be held accountable. Three minutes to set up. Lasts a lifetime." },
     { n: "02", title: "Get Matched in 48 Hours",  body: "Our system finds a partner with compatible goals, timing, and commitment level. Not random — precisely matched." },
@@ -483,7 +515,7 @@ function HowItWorks() {
     { n: "04", title: "Build the Streak Together",body: "Daily check-ins. Shared progress. Mutual accountability. The longer the streak, the harder it is to break. That's the whole design." },
   ];
   return (
-    <section id="how-it-works" style={{ padding: "72px 5%", background: "#030303" }}>
+    <section id="how-it-works" style={{ padding: "72px 5%", background: dark ? "#030303" : "#EBEBEB" }}>
       <W max={980}>
         <div style={{ textAlign: "center", marginBottom: 32 }}>
           <span className="lbl">How It Works</span>
@@ -511,7 +543,7 @@ function HowItWorks() {
 /* ══════════════════════════════════════════════════════════════════
    5. WHY DIFFERENT — comparison table
 ══════════════════════════════════════════════════════════════════ */
-function WhyDifferent() {
+function WhyDifferent({ dark }) {
   const rows = [
     ["Tracks your workouts",       "Holds you to your workouts"],
     ["Sends push notifications",   "Sends you a person who notices"],
@@ -520,7 +552,7 @@ function WhyDifferent() {
     ["Shows you a feed",           "Builds you a real discipline system"],
   ];
   return (
-    <section id="why-different" style={{ padding: "72px 5%", background: "#000", position: "relative", overflow: "hidden" }}>
+    <section id="why-different" style={{ padding: "72px 5%", background: dark ? "#000" : "#F5F5F5", position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 50%,rgba(185,28,28,.07) 0%,transparent 60%)", pointerEvents: "none" }} />
       <W>
         <div style={{ textAlign: "center", marginBottom: 60 }}>
@@ -553,7 +585,7 @@ function WhyDifferent() {
 /* ══════════════════════════════════════════════════════════════════
    6. FEATURES — 6-card grid (matches screenshot 6)
 ══════════════════════════════════════════════════════════════════ */
-function Features() {
+function Features({ dark }) {
   const feats = [
     { icon: I.target,  title: "Smart Matching",      body: "Paired by goals, schedule, fitness level, and how hard you need to be pushed. No random buddies." },
     { icon: I.flame,   title: "Shared Streaks",      body: "Both partners check in daily. The streak only survives if you both show up. That's the pressure that works." },
@@ -563,7 +595,7 @@ function Features() {
     { icon: I.refresh, title: "Smart Rematch",       body: "Partnership not working? We find you a better fit before your momentum breaks." },
   ];
   return (
-    <section id="features" style={{ padding: "72px 5%", background: "#050505" }}>
+    <section id="features" style={{ padding: "72px 5%", background: dark ? "#050505" : "#EBEBEB" }}>
       <W>
         <div style={{ marginBottom: 40 }}>
           <span className="lbl">Features</span>
@@ -615,7 +647,7 @@ function Stats() {
 /* ══════════════════════════════════════════════════════════════════
    8. TESTIMONIALS
 ══════════════════════════════════════════════════════════════════ */
-function Testimonials() {
+function Testimonials({ dark }) {
   const ts = [
     { ini: "MT", name: "Marcus T.",  role: "Beta tester · -28 lbs",          q: "I've tried every fitness app. The difference with AccountaFit is someone is actually waiting on my check-in. That's not something any app has ever done." },
     { ini: "PS", name: "Priya S.",   role: "Beta tester · Marathon finisher", q: "Eleven weeks. Me and my partner haven't missed one check-in. That streak starts to feel like part of your identity. You protect it." },
@@ -625,7 +657,7 @@ function Testimonials() {
     { ini: "JB", name: "Jordan B.",  role: "Beta tester · Back after 2-year gap",q: "I'm not motivated every day. I haven't quit because someone else's streak is on the line too. That's a completely different feeling." },
   ];
   return (
-    <section style={{ padding: "72px 5%", background: "#000" }}>
+    <section style={{ padding: "72px 5%", background: dark ? "#000" : "#F5F5F5" }}>
       <W>
         <div style={{ textAlign: "center", marginBottom: 40 }}>
           <span className="lbl">Early Feedback</span>
@@ -657,7 +689,7 @@ function Testimonials() {
 /* ══════════════════════════════════════════════════════════════════
    9. FAQ — accordion
 ══════════════════════════════════════════════════════════════════ */
-function FAQ() {
+function FAQ({ dark }) {
   const [open, setOpen] = useState(null);
   const faqs = [
     { q: "Is this a dating app?",         a: "Not even close. Every match is based entirely on fitness goals, schedule, and commitment level. This is accountability, not socializing." },
@@ -668,7 +700,7 @@ function FAQ() {
     { q: "What if I'm a beginner?",       a: "AccountaFit works for every fitness level. You'll be matched with someone at your level and intensity." },
   ];
   return (
-    <section id="faq" style={{ padding: "72px 5%", background: "#050505" }}>
+    <section id="faq" style={{ padding: "72px 5%", background: dark ? "#050505" : "#EBEBEB" }}>
       <W max={760}>
         <span className="lbl">FAQ</span>
         <h2 className="d" style={{ fontSize: "clamp(2.2rem,5vw,3.8rem)", lineHeight: .93, color: "#fff", marginBottom: 32 }}>
@@ -735,9 +767,9 @@ function FinalCTA({ onCTA }) {
 /* ══════════════════════════════════════════════════════════════════
    11. FOOTER
 ══════════════════════════════════════════════════════════════════ */
-function Footer() {
+function Footer({ dark }) {
   return (
-    <footer style={{ background: "#030303", borderTop: "1px solid #0F0F0F", padding: "44px 5% 28px" }}>
+    <footer style={{ background: dark ? "#030303" : "#E0E0E0", borderTop: dark ? "1px solid #0F0F0F" : "1px solid #C8C8C8", padding: "44px 5% 28px" }}>
       <W>
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-start", gap: 36, marginBottom: 44 }}>
           {/* Brand column */}
@@ -793,7 +825,7 @@ function Footer() {
               ]},
             ].map(({ title, links }) => (
               <div key={title}>
-                <div className="bc" style={{ fontWeight: 700, fontSize: ".7rem", letterSpacing: ".22em", textTransform: "uppercase", color: "#606060", marginBottom: 14 }}>{title}</div>
+                <div className="bc footer-col-title" style={{ fontWeight: 700, fontSize: ".7rem", letterSpacing: ".22em", textTransform: "uppercase", color: "#606060", marginBottom: 14 }}>{title}</div>
                 {links.map(({ label, href }) => (
                   <a key={label} href={href} style={{ display: "block", color: "#606060", fontSize: ".9rem", marginBottom: 7, transition: "color .2s" }}
                     onMouseEnter={e => e.target.style.color = "#fff"} onMouseLeave={e => e.target.style.color = "#606060"}>{label}</a>
@@ -802,10 +834,10 @@ function Footer() {
             ))}
           </div>
         </div>
-        <div style={{ height: 1, background: "linear-gradient(90deg,transparent,#1A1A1A,transparent)", marginBottom: 22 }} />
+        <div style={{ height: 1, background: "linear-gradient(90deg,transparent,#2A2A2A,transparent)", marginBottom: 22 }} />
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: 10 }}>
-          <p style={{ fontSize: ".78rem", color: "#1E1E1E" }}>© 2026 AccountaFit. All rights reserved.</p>
-          <p style={{ fontSize: ".78rem", color: "#1E1E1E" }}>Built for people who don't quit.</p>
+          <p style={{ fontSize: ".78rem", color: "rgba(255,255,255,.45)" }}>© 2026 AccountaFit. All rights reserved.</p>
+          <p style={{ fontSize: ".78rem", color: "rgba(255,255,255,.45)" }}>Built for people who don't quit.</p>
         </div>
       </W>
     </footer>
@@ -815,7 +847,7 @@ function Footer() {
 /* ══════════════════════════════════════════════════════════════════
    MODAL
 ══════════════════════════════════════════════════════════════════ */
-function Modal({ onClose }) {
+function Modal({ onClose, dark }) {
   const [email, setEmail] = useState("");
   const [done, setDone]   = useState(false);
   const submit = (e) => { e.preventDefault(); if (email.trim()) setDone(true); };
@@ -856,7 +888,42 @@ function Modal({ onClose }) {
 ══════════════════════════════════════════════════════════════════ */
 export default function AccountaFit() {
   const [modal, setModal] = useState(false);
+  const [dark, setDark]   = useState(true);
   const [showTop, setShowTop] = useState(false);
+
+  // Light mode CSS overrides injected when dark=false
+  const lightOverrides = dark ? "" : `
+    body { background: #F5F5F5 !important; color: #0A0A0A !important; }
+    .body-t { color: #444 !important; }
+    .lbl { color: #B91C1C !important; }
+    .d { color: #0A0A0A; }
+    .nav-link { color: rgba(10,10,10,.75) !important; }
+    .nav-link:hover { color: #0A0A0A !important; }
+    .nav-join { border-color: rgba(185,28,28,.6) !important; color: #0A0A0A !important; }
+    .card { background: #fff !important; border-color: #E0E0E0 !important; box-shadow: 0 2px 16px rgba(0,0,0,.07); }
+    .card h3, .card .bc { color: #0A0A0A !important; }
+    .card:hover { border-color: #B91C1C !important; box-shadow: 0 8px 32px rgba(185,28,28,.1) !important; }
+    .tcard { background: #fff !important; border-color: #E0E0E0 !important; }
+    .tcard p { color: #333 !important; }
+    .tcard:hover { border-color: rgba(185,28,28,.35) !important; }
+    .tcard-quote { color: rgba(185,28,28,.25) !important; }
+    .faq-item { background: #fff !important; border-color: #E0E0E0 !important; }
+    .faq-item.open { border-color: rgba(185,28,28,.4) !important; }
+    .faq-q { color: #0A0A0A !important; }
+    .faq-ans { color: #555 !important; }
+    .step-num { background: #F5F5F5 !important; color: #B91C1C !important; }
+    .cmp-left { background: #DCDCDC !important; color: rgba(10,10,10,.45) !important; text-decoration: line-through; text-decoration-color: rgba(10,10,10,.2) !important; }
+    .cmp-right { background: rgba(185,28,28,.07) !important; color: #0A0A0A !important; }
+    .email-in { background: rgba(0,0,0,.06) !important; border-color: rgba(0,0,0,.15) !important; color: #0A0A0A !important; }
+    .email-in::placeholder { color: #999 !important; }
+    .store-badge { background: #E8E8E8 !important; border-color: #D0D0D0 !important; }
+    .store-badge:hover { border-color: #B91C1C !important; }
+    .bc { color: inherit; }
+    footer a { color: #555 !important; }
+    footer a:hover { color: #0A0A0A !important; }
+    .footer-col-title { color: #888 !important; }
+    .scroll-top { background: #B91C1C !important; }
+  `;
 
   useEffect(() => {
     const h = () => setShowTop(window.scrollY > 400);
@@ -866,24 +933,25 @@ export default function AccountaFit() {
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
+  // Background colours per section in light mode
+  const bg = (darkBg, lightBg) => dark ? darkBg : lightBg;
+
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: G }} />
-      <div style={{ background: "#000", minHeight: "100vh" }}>
-        <Hero   onCTA={() => setModal(true)} />
-        <Problem />
-        <WhatItIs onCTA={() => setModal(true)} />
-        <HowItWorks />
-        <WhyDifferent />
-        <Features />
+      <style dangerouslySetInnerHTML={{ __html: G + lightOverrides }} />
+      <div style={{ background: dark ? "#000" : "#F5F5F5", minHeight: "100vh", transition: "background .3s ease" }}>
+        <Hero   onCTA={() => setModal(true)} dark={dark} onToggle={() => setDark(d => !d)} />
+        <Problem dark={dark} />
+        <WhatItIs onCTA={() => setModal(true)} dark={dark} />
+        <HowItWorks dark={dark} />
+        <WhyDifferent dark={dark} />
+        <Features dark={dark} />
         <Stats />
-        <Testimonials />
-        <FAQ />
+        <Testimonials dark={dark} />
+        <FAQ dark={dark} />
         <FinalCTA onCTA={() => setModal(true)} />
-        <Footer />
-        {modal && <Modal onClose={() => setModal(false)} />}
-
-        {/* Scroll to top button */}
+        <Footer dark={dark} />
+        {modal && <Modal onClose={() => setModal(false)} dark={dark} />}
         <button
           className={`scroll-top${showTop ? " visible" : ""}`}
           onClick={scrollToTop}
