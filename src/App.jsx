@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 /* ─────────────────────────────────────────────────────────────────
    ACCOUNTAFIT — Complete Production Landing Page
@@ -118,7 +118,17 @@ a { color: inherit; text-decoration: none; }
 }
 .feat-icon-ring:hover { border-color: rgba(220,38,38,.9); box-shadow: 0 0 50px rgba(185,28,28,.32); }
 
-/* ── Swash SVG ── */
+/* ── Scroll to top ── */
+.scroll-top {
+  position: fixed; bottom: 28px; right: 28px; z-index: 500;
+  width: 46px; height: 46px; border-radius: 50%;
+  background: var(--red); border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(185,28,28,.45);
+  transition: all .2s ease; opacity: 0; pointer-events: none;
+}
+.scroll-top.visible { opacity: 1; pointer-events: all; }
+.scroll-top:hover { background: var(--redhov); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(185,28,28,.55); }
 .swash { stroke-dasharray: 2000; animation: swashDraw 1.8s .6s ease forwards; opacity: 0; }
 
 /* ── Step circle ── */
@@ -131,7 +141,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ── Compare table ── */
-.cmp-left { background: var(--card); padding: 18px 22px; display: flex; align-items: center; gap: 12px; font-size: .96rem; color: rgba(255,255,255,.55); text-decoration: line-through; text-decoration-color: rgba(255,255,255,.2); }
+.cmp-left { background: var(--card); padding: 18px 22px; display: flex; align-items: center; gap: 12px; font-size: .96rem; color: rgba(255,255,255,.85); }
 .cmp-right { background: rgba(185,28,28,.08); border: 1px solid rgba(185,28,28,.18); padding: 18px 22px; display: flex; align-items: center; gap: 12px; font-size: .96rem; color: #E8E8E8; }
 
 /* ── Testimonial card ── */
@@ -283,10 +293,14 @@ function Hero({ onCTA }) {
       <header style={{ position: "relative", zIndex: 20, maxWidth: 1440, width: "100%", margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 48px 16px" }}>
         <Logo size="clamp(28px,3vw,40px)" />
         <nav className="hide-m" style={{ display: "flex", alignItems: "center", gap: 40 }}>
-          {["About", "Services", "Contact"].map(l => (
-            <a key={l} href={`#${l.toLowerCase()}`} className="nav-link">{l}</a>
+          {[
+            { label: "How It Works", href: "#how-it-works" },
+            { label: "Features",     href: "#features" },
+            { label: "FAQ",          href: "#faq" },
+          ].map(({ label, href }) => (
+            <a key={label} href={href} className="nav-link">{label}</a>
           ))}
-          <a href="#contact" className="nav-join" style={{ fontFamily: "'DM Sans',sans-serif" }}>Join Now</a>
+          <a href="#contact" className="nav-join" style={{ fontFamily: "'DM Sans',sans-serif" }}>Join Waitlist</a>
         </nav>
       </header>
 
@@ -351,9 +365,7 @@ function Hero({ onCTA }) {
 ══════════════════════════════════════════════════════════════════ */
 function Problem() {
   return (
-    <section style={{ padding: "72px 5%", background: "#050505" }}>
-      <W>
-        <span className="lbl">Sound Familiar?</span>
+    <section id="problem" style={{ padding: "72px 5%", background: "#050505" }}>
         <h2 className="d" style={{ fontSize: "clamp(2.2rem,5vw,3.8rem)", lineHeight: .92, color: "#fff", maxWidth: 900, marginBottom: 24 }}>
           YOU DON'T HAVE<br />A DISCIPLINE PROBLEM.<br /><span style={{ color: "#EF4444" }}>YOU HAVE A SUPPORT PROBLEM.</span>
         </h2>
@@ -387,7 +399,7 @@ function WhatItIs({ onCTA }) {
   const youD = [1,1,1,1,1,0,0];
   const parD = [1,1,1,1,0,0,0];
   return (
-    <section style={{ padding: "72px 5%", background: "#000" }}>
+    <section id="what-it-is" style={{ padding: "72px 5%", background: "#000" }}>
       <W>
         <div className="split-5-7" style={{ display: "grid", gridTemplateColumns: "5fr 7fr", gap: 80, alignItems: "center" }}>
           {/* Match card */}
@@ -506,7 +518,7 @@ function WhyDifferent() {
     ["Shows you a feed",           "Builds you a real discipline system"],
   ];
   return (
-    <section style={{ padding: "72px 5%", background: "#000", position: "relative", overflow: "hidden" }}>
+    <section id="why-different" style={{ padding: "72px 5%", background: "#000", position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 50%,rgba(185,28,28,.07) 0%,transparent 60%)", pointerEvents: "none" }} />
       <W>
         <div style={{ textAlign: "center", marginBottom: 60 }}>
@@ -763,15 +775,26 @@ function Footer() {
           {/* Link columns */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: 52 }}>
             {[
-              { title: "Product", links: ["Features", "How It Works", "Pricing", "FAQ"] },
-              { title: "Company", links: ["About", "Blog", "Careers", "Contact"] },
-              { title: "Legal",   links: ["Privacy Policy", "Terms of Service", "Cookies"] },
+              { title: "Product", links: [
+                { label: "Features",     href: "#features" },
+                { label: "How It Works", href: "#how-it-works" },
+                { label: "FAQ",          href: "#faq" },
+              ]},
+              { title: "Company", links: [
+                { label: "About",    href: "#what-it-is" },
+                { label: "Contact",  href: "#contact" },
+              ]},
+              { title: "Legal", links: [
+                { label: "Privacy Policy",  href: "#" },
+                { label: "Terms of Service",href: "#" },
+                { label: "Cookies",         href: "#" },
+              ]},
             ].map(({ title, links }) => (
               <div key={title}>
                 <div className="bc" style={{ fontWeight: 700, fontSize: ".7rem", letterSpacing: ".22em", textTransform: "uppercase", color: "#606060", marginBottom: 14 }}>{title}</div>
-                {links.map(l => (
-                  <a key={l} href="#" style={{ display: "block", color: "#606060", fontSize: ".9rem", marginBottom: 7, transition: "color .2s" }}
-                    onMouseEnter={e => e.target.style.color = "#fff"} onMouseLeave={e => e.target.style.color = "#606060"}>{l}</a>
+                {links.map(({ label, href }) => (
+                  <a key={label} href={href} style={{ display: "block", color: "#606060", fontSize: ".9rem", marginBottom: 7, transition: "color .2s" }}
+                    onMouseEnter={e => e.target.style.color = "#fff"} onMouseLeave={e => e.target.style.color = "#606060"}>{label}</a>
                 ))}
               </div>
             ))}
@@ -831,6 +854,16 @@ function Modal({ onClose }) {
 ══════════════════════════════════════════════════════════════════ */
 export default function AccountaFit() {
   const [modal, setModal] = useState(false);
+  const [showTop, setShowTop] = useState(false);
+
+  useEffect(() => {
+    const h = () => setShowTop(window.scrollY > 400);
+    window.addEventListener("scroll", h);
+    return () => window.removeEventListener("scroll", h);
+  }, []);
+
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: G }} />
@@ -847,6 +880,17 @@ export default function AccountaFit() {
         <FinalCTA onCTA={() => setModal(true)} />
         <Footer />
         {modal && <Modal onClose={() => setModal(false)} />}
+
+        {/* Scroll to top button */}
+        <button
+          className={`scroll-top${showTop ? " visible" : ""}`}
+          onClick={scrollToTop}
+          aria-label="Scroll to top"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="18 15 12 9 6 15"/>
+          </svg>
+        </button>
       </div>
     </>
   );
