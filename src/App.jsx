@@ -366,6 +366,8 @@ function Hero({ onCTA }) {
 function Problem() {
   return (
     <section id="problem" style={{ padding: "72px 5%", background: "#050505" }}>
+      <W>
+        <span className="lbl">Sound Familiar?</span>
         <h2 className="d" style={{ fontSize: "clamp(2.2rem,5vw,3.8rem)", lineHeight: .92, color: "#fff", maxWidth: 900, marginBottom: 24 }}>
           YOU DON'T HAVE<br />A DISCIPLINE PROBLEM.<br /><span style={{ color: "#EF4444" }}>YOU HAVE A SUPPORT PROBLEM.</span>
         </h2>
