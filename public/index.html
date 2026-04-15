@@ -7,9 +7,9 @@
     <title>AccountaFit — Stop Starting Over</title>
     <meta name="description" content="AccountaFit pairs you with a real accountability partner who matches your goals, schedule, and commitment level. Stop falling off. Start staying consistent." />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://accountafit.com" />
+    <link rel="canonical" href="https://www.accountafit.com/" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://accountafit.com" />
+    <meta property="og:url" content="https://www.accountafit.com/" />
     <meta property="og:title" content="AccountaFit — Stop Starting Over" />
     <meta property="og:description" content="Real accountability. Smart matching. Daily check-ins that keep you from falling off — again. Join the waitlist." />
     <meta property="og:site_name" content="AccountaFit" />
@@ -18,60 +18,354 @@
     <meta name="twitter:description" content="Real accountability. Smart matching. Daily check-ins that keep you from falling off — again." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
     <style>
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-      html { scroll-behavior: smooth; }
-      body { background: #050505; color: #F5F5F5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-      #initial-loader { position: fixed; inset: 0; background: #050505; display: flex; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.4s ease; }
+      html { scroll-behavior: smooth; font-size: 16px; }
+      body { background: #050505; color: #F5F5F5; font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; line-height: 1.6; }
+      a { color: inherit; text-decoration: none; }
+      :root {
+        --black: #050505; --dark: #0C0C0C; --dark2: #101010; --card: #131313;
+        --border: #242424; --red: #B91C1C; --redhov: #DC2626; --redhi: #EF4444;
+        --white: #F5F5F5; --offwhite: #E8E8E8; --gray: #B0B0B0; --muted: #606060;
+      }
+      #initial-loader { position: fixed; inset: 0; background: #050505; display: flex; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.35s ease; }
       #initial-loader.hidden { opacity: 0; pointer-events: none; }
-      .loader-logo { font-size: 1.8rem; font-weight: 900; letter-spacing: 0.02em; font-style: italic; }
+      .loader-logo { font-family: 'Anton', sans-serif; font-style: italic; font-size: 1.8rem; letter-spacing: .02em; }
       .loader-logo span { color: #EF4444; }
       .loader-bar { width: 120px; height: 2px; background: #1A1A1A; border-radius: 2px; margin: 16px auto 0; overflow: hidden; }
-      .loader-fill { height: 100%; background: linear-gradient(90deg, #B91C1C, #EF4444); border-radius: 2px; animation: loadbar 1.2s ease-in-out forwards; }
+      .loader-fill { height: 100%; background: linear-gradient(90deg, #B91C1C, #EF4444); animation: loadbar 1.2s ease-in-out forwards; }
       @keyframes loadbar { from { width: 0; } to { width: 100%; } }
       #root { min-height: 100vh; }
+      #static-home { display: block; }
+      #static-home.hidden { display: none !important; }
+      .wrap { max-width: 1160px; margin: 0 auto; padding: 0 5%; }
+      .wrap-sm { max-width: 760px; margin: 0 auto; padding: 0 5%; }
+      .sec { padding: 110px 0; }
+      .sec-sm { padding: 80px 0; }
+      .d { font-family: 'Anton', sans-serif; font-style: italic; }
+      .bc { font-family: 'Barlow Condensed', sans-serif; }
+      .lbl { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .78rem; letter-spacing: .28em; text-transform: uppercase; color: #EF4444; display: block; margin-bottom: 14px; }
+      .h2 { font-size: clamp(2.2rem, 5vw, 4rem); line-height: .95; }
+      .h2 .red { color: #EF4444; }
+      .body { font-size: 1.06rem; color: #B0B0B0; line-height: 1.82; }
+      .btn-red { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: #B91C1C; color: #F5F5F5; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: .16em; text-transform: uppercase; padding: 16px 40px; border: none; border-radius: 100px; cursor: pointer; box-shadow: 0 4px 24px rgba(185,28,28,.32); transition: all .2s ease; }
+      .btn-red:hover { background: #DC2626; transform: translateY(-2px); }
+      .btn-ghost { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: transparent; color: #F5F5F5; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: .95rem; letter-spacing: .14em; text-transform: uppercase; padding: 15px 36px; border: 1.5px solid rgba(245,245,245,.2); border-radius: 100px; transition: all .2s ease; }
+      .btn-ghost:hover { border-color: #EF4444; color: #EF4444; }
+      .card { background: #131313; border: 1px solid #242424; border-radius: 14px; padding: 28px; }
+      .redbar { display: block; width: 40px; height: 2px; background: #B91C1C; margin-bottom: 18px; }
+      .static-nav { position: sticky; top: 0; z-index: 100; background: rgba(5,5,5,.94); backdrop-filter: blur(18px); border-bottom: 1px solid rgba(36,36,36,.8); }
+      .nav-inner { max-width: 1160px; margin: 0 auto; padding: 16px 5%; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+      .logo { font-family: 'Anton', sans-serif; font-style: italic; font-size: 1.5rem; line-height: 1; user-select: none; }
+      .logo .red { color: #EF4444; }
+      .nav-links { display: flex; gap: 36px; align-items: center; }
+      .nav-links a { color: rgba(245,245,245,.72); font-size: .9rem; transition: color .2s; }
+      .nav-links a:hover { color: #F5F5F5; }
+      .btn-nav { background: transparent; color: #F5F5F5; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .85rem; letter-spacing: .14em; text-transform: uppercase; padding: 10px 24px; border: 1.5px solid rgba(225,29,46,.65); border-radius: 100px; cursor: pointer; transition: all .2s; }
+      .btn-nav:hover { background: #B91C1C; border-color: #B91C1C; }
+      .hero { position: relative; overflow: hidden; background: radial-gradient(ellipse at 72% 35%, rgba(185,28,28,.24) 0%, transparent 52%), radial-gradient(ellipse at 12% 80%, rgba(185,28,28,.1) 0%, transparent 48%), linear-gradient(150deg, #070707 0%, #0E0101 42%, #130203 68%, #060606 100%); }
+      .hero::before { content: ''; position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(185,28,28,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(185,28,28,.03) 1px, transparent 1px); background-size: 64px 64px; }
+      .hero-grid { display: grid; grid-template-columns: 7fr 5fr; gap: 60px; align-items: center; min-height: calc(100vh - 66px); padding: 100px 0 60px; position: relative; z-index: 2; }
+      .pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(185,28,28,.14); border: 1px solid rgba(185,28,28,.36); border-radius: 100px; padding: 7px 18px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .78rem; letter-spacing: .24em; text-transform: uppercase; color: #EF4444; margin-bottom: 22px; }
+      .pill-dot { width: 6px; height: 6px; border-radius: 50%; background: #EF4444; flex-shrink: 0; }
+      .hero-h1 { font-size: clamp(3.4rem, 7.5vw, 7rem); line-height: .9; letter-spacing: .02em; margin-bottom: 22px; }
+      .hero-h1 .red { color: #EF4444; }
+      .hero-sub { font-size: clamp(1.05rem, 1.7vw, 1.2rem); color: rgba(245,245,245,.75); line-height: 1.78; max-width: 540px; }
+      .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 38px; }
+      .hero-stats { display: flex; flex-wrap: wrap; gap: 40px; margin-top: 50px; }
+      .stat-num { font-size: 2.3rem; line-height: 1; }
+      .stat-lbl { font-family: 'Barlow Condensed', sans-serif; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(245,245,245,.38); margin-top: 4px; }
+      .mockup { background: linear-gradient(160deg, #191919, #0D0D0D); border: 1px solid #2A2A2A; border-radius: 28px; padding: 22px 20px; box-shadow: 0 48px 100px rgba(0,0,0,.75), 0 0 0 1px rgba(255,255,255,.04), 0 0 80px rgba(185,28,28,.12); max-width: 300px; margin-left: auto; }
+      .mockup-label { font-family: 'Barlow Condensed', sans-serif; font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; color: #EF4444; margin-bottom: 6px; }
+      .mockup-streak { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
+      .mockup-streak .big { font-size: 3.2rem; line-height: 1; }
+      .mockup-streak .unit { font-family: 'Barlow Condensed', sans-serif; font-size: .78rem; color: #555; letter-spacing: .1em; text-transform: uppercase; }
+      .progress-bar { height: 4px; background: #1A1A1A; border-radius: 4px; overflow: hidden; margin-bottom: 16px; }
+      .progress-fill { display: block; width: 78%; height: 100%; background: linear-gradient(90deg, #B91C1C, #EF4444); }
+      .week-grid { display: flex; gap: 4px; margin-bottom: 14px; }
+      .week-day { flex: 1; text-align: center; }
+      .week-day-label { font-family: 'Barlow Condensed', sans-serif; font-size: .5rem; color: #2E2E2E; margin-bottom: 4px; }
+      .week-day-box { height: 28px; border-radius: 5px; border: 1px solid #222; }
+      .week-day-box.checked { background: #B91C1C; border-color: transparent; }
+      .partner-card { background: #0D0D0D; border: 1px solid #1E1E1E; border-radius: 12px; padding: 12px 14px; }
+      .partner-name { font-weight: 600; color: #F5F5F5; font-size: .85rem; margin-bottom: 4px; }
+      .partner-meta { font-size: .72rem; color: #555; margin-bottom: 8px; }
+      .partner-status { background: rgba(185,28,28,.08); border: 1px solid rgba(185,28,28,.2); border-radius: 8px; padding: 7px 10px; font-size: .82rem; color: rgba(245,245,245,.6); }
+      .bg-dark2 { background: #101010; }
+      .bg-black { background: #050505; }
+      .bg-dark { background: #0C0C0C; }
+      .bg-red-band { background: linear-gradient(135deg, #0B0101, #110202, #0B0101); border-top: 1px solid #1C0303; border-bottom: 1px solid #1C0303; position: relative; overflow: hidden; }
+      .bg-red-band::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(185,28,28,.13) 0%, transparent 65%); pointer-events: none; }
+      .bg-cta { background: radial-gradient(ellipse at 50% 50%, rgba(185,28,28,.16) 0%, transparent 60%), linear-gradient(160deg, #070707, #100101, #070707); position: relative; overflow: hidden; }
+      .bg-cta::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(185,28,28,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(185,28,28,.04) 1px, transparent 1px); background-size: 64px 64px; pointer-events: none; }
+      .grid-2 { display: grid; grid-template-columns: 5fr 7fr; gap: 80px; align-items: center; }
+      .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+      .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 36px; }
+      .grid-test { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+      .steps { display: flex; flex-direction: column; }
+      .step-row { display: flex; gap: 32px; align-items: flex-start; padding: 30px 0; border-bottom: 1px solid #242424; }
+      .step-row:last-child { border-bottom: none; }
+      .step-circle { width: 68px; height: 68px; border-radius: 50%; background: #0C0C0C; border: 2px solid #B91C1C; display: flex; align-items: center; justify-content: center; font-family: 'Anton', sans-serif; font-style: italic; font-size: 1.4rem; color: #B91C1C; flex-shrink: 0; }
+      .step-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: .1em; text-transform: uppercase; color: #F5F5F5; margin-bottom: 8px; }
+      .compare { max-width: 820px; }
+      .compare-header { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-bottom: 3px; }
+      .compare-left-head { background: #171717; padding: 14px 22px; text-align: center; font-family: 'Barlow Condensed', sans-serif; font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; color: #606060; font-weight: 700; border-radius: 10px 10px 0 0; }
+      .compare-right-head { background: rgba(185,28,28,.14); border: 1px solid rgba(185,28,28,.3); padding: 14px 22px; text-align: center; font-family: 'Barlow Condensed', sans-serif; font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; color: #EF4444; font-weight: 700; border-radius: 10px 10px 0 0; }
+      .compare-row { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-bottom: 3px; }
+      .compare-them { background: #131313; padding: 18px 22px; display: flex; align-items: center; gap: 10px; font-size: .96rem; color: #606060; }
+      .compare-us { background: rgba(185,28,28,.08); border: 1px solid rgba(185,28,28,.18); padding: 18px 22px; display: flex; align-items: center; gap: 10px; font-size: .96rem; color: #E8E8E8; }
+      .stat-block { text-align: center; }
+      .stat-big { font-size: 3.4rem; line-height: 1; color: #EF4444; margin-bottom: 12px; }
+      .quote-mark { font-size: 2.2rem; color: rgba(185,28,28,.28); font-family: Georgia, serif; line-height: 1; margin-bottom: 14px; }
+      .quote-name { font-weight: 600; color: #F5F5F5; font-size: .9rem; }
+      .quote-role { font-family: 'Barlow Condensed', sans-serif; font-size: .72rem; letter-spacing: .1em; color: #B91C1C; margin-top: 2px; }
+      .avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #B91C1C, #7f1d1d); display: flex; align-items: center; justify-content: center; font-family: 'Anton', sans-serif; font-style: italic; color: #F5F5F5; font-size: .82rem; flex-shrink: 0; }
+      .faq-item { background: #131313; border: 1px solid #242424; border-radius: 14px; padding: 24px 28px; margin-bottom: 6px; }
+      .faq-q { font-weight: 600; color: #F5F5F5; font-size: 1.05rem; margin-bottom: 10px; }
+      .faq-a { font-size: 1rem; color: #B0B0B0; line-height: 1.78; }
+      .cta-subline { font-size: 1.2rem; color: rgba(245,245,245,.55); line-height: 1.7; font-style: italic; }
+      .cta-form { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 40px; }
+      .cta-input { flex: 1 1 260px; max-width: 340px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: 100px; color: #F5F5F5; font-family: 'DM Sans', sans-serif; font-size: 1rem; padding: 15px 22px; outline: none; }
+      .cta-input::placeholder { color: #606060; }
+      .cta-note { font-size: .8rem; color: rgba(245,245,245,.24); margin-top: 14px; }
+      .footer { background: #030303; border-top: 1px solid #0F0F0F; padding: 60px 0 32px; }
+      .footer-links a { color: #606060; font-size: .9rem; display: block; margin-bottom: 10px; transition: color .2s; }
+      .footer-links a:hover { color: #F5F5F5; }
+      .footer-col-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .7rem; letter-spacing: .22em; text-transform: uppercase; color: #606060; margin-bottom: 14px; }
+      .footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; font-size: .8rem; color: #1E1E1E; border-top: 1px solid #111; margin-top: 40px; padding-top: 20px; }
+      @media (max-width: 900px) {
+        .hide-m { display: none !important; }
+        .hero-grid, .grid-2 { grid-template-columns: 1fr !important; gap: 48px !important; }
+        .grid-3 { grid-template-columns: 1fr 1fr !important; }
+        .sec { padding: 84px 0 !important; }
+        .hero-grid { min-height: auto; padding-top: 72px; }
+        .mockup { max-width: 100%; margin: 0; }
+        .compare-header, .compare-row { grid-template-columns: 1fr !important; }
+        .compare-left-head, .compare-them { display: none; }
+      }
+      @media (max-width: 600px) { .grid-3 { grid-template-columns: 1fr !important; } }
     </style>
   </head>
   <body>
     <div id="initial-loader">
-      <div style="text-align: center;">
+      <div style="text-align:center">
         <div class="loader-logo">Accounta<span>Fit</span></div>
         <div class="loader-bar"><div class="loader-fill"></div></div>
       </div>
     </div>
     <div id="root"></div>
+    <div id="static-home">
+      <header class="static-nav">
+        <div class="nav-inner">
+          <div class="logo d">Accounta<span class="red">Fit</span></div>
+          <nav class="nav-links hide-m">
+            <a href="#how-it-works-s">How It Works</a>
+            <a href="#features-s">Features</a>
+            <a href="#faq-s">FAQ</a>
+          </nav>
+          <a class="btn-nav" href="#waitlist-s">Join Waitlist</a>
+        </div>
+      </header>
+      <main>
+        <section class="hero">
+          <div class="wrap">
+            <div class="hero-grid">
+              <div>
+                <div class="pill"><span class="pill-dot"></span>Early Access Open</div>
+                <h1 class="hero-h1 d">STOP<br /><span class="red">STARTING</span><br />OVER.</h1>
+                <p class="hero-sub">AccountaFit pairs you with a real accountability partner — matched to your goals, your schedule, and your commitment level. Daily check-ins. Shared streaks. No falling off quietly.</p>
+                <div class="hero-actions">
+                  <a class="btn-red" href="#waitlist-s">Join the Waitlist &#8594;</a>
+                  <a class="btn-ghost" href="#how-it-works-s">See How It Works</a>
+                </div>
+                <div class="hero-stats">
+                  <div><div class="stat-num d">2,400+</div><div class="stat-lbl">On the waitlist</div></div>
+                  <div><div class="stat-num d">94%</div><div class="stat-lbl">Report better consistency</div></div>
+                  <div><div class="stat-num d">48 hrs</div><div class="stat-lbl">To get matched</div></div>
+                </div>
+              </div>
+              <div>
+                <div class="mockup">
+                  <div class="mockup-label">Active Streak</div>
+                  <div class="mockup-streak"><span class="big d">47</span><span class="unit">days</span></div>
+                  <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="font-size:.72rem;color:#444;">Next milestone</span><span style="font-family:'Barlow Condensed';font-size:.7rem;color:#EF4444;font-weight:700;">60 days</span></div>
+                  <div class="progress-bar"><span class="progress-fill"></span></div>
+                  <div style="margin-bottom:10px;">
+                    <div style="font-family:'Barlow Condensed';font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:#3A3A3A;margin-bottom:8px;">This week</div>
+                    <div class="week-grid">
+                      <div class="week-day"><div class="week-day-label">M</div><div class="week-day-box checked"></div></div>
+                      <div class="week-day"><div class="week-day-label">T</div><div class="week-day-box checked"></div></div>
+                      <div class="week-day"><div class="week-day-label">W</div><div class="week-day-box checked"></div></div>
+                      <div class="week-day"><div class="week-day-label">T</div><div class="week-day-box checked"></div></div>
+                      <div class="week-day"><div class="week-day-label">F</div><div class="week-day-box checked"></div></div>
+                      <div class="week-day"><div class="week-day-label">S</div><div class="week-day-box"></div></div>
+                      <div class="week-day"><div class="week-day-label">S</div><div class="week-day-box"></div></div>
+                    </div>
+                  </div>
+                  <div class="partner-card">
+                    <div class="partner-name">Keisha L.</div>
+                    <div class="partner-meta">6am · Strength · 5x/week</div>
+                    <div class="partner-status">Both checked in today. Streak alive.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="sec bg-dark2">
+          <div class="wrap">
+            <span class="lbl">Sound Familiar?</span>
+            <h2 class="h2 d" style="max-width:800px;margin-bottom:20px;">YOU DON'T HAVE A DISCIPLINE PROBLEM.<br /><span class="red">YOU HAVE A SUPPORT PROBLEM.</span></h2>
+            <p class="body" style="max-width:620px;margin-bottom:44px;">The cycle is the same every time. You start strong. Life picks up. The streak breaks. And then you're staring at day one — again. That's not a character flaw. That's what happens when you're trying to do it alone.</p>
+            <div class="grid-3">
+              <div class="card"><div class="redbar"></div><h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:1.05rem;letter-spacing:.08em;text-transform:uppercase;color:#F5F5F5;margin-bottom:10px;">The January Effect</h3><p class="body" style="font-size:1rem;">You go all-in the first week. Then life happens and you disappear until next year.</p></div>
+              <div class="card"><div class="redbar"></div><h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:1.05rem;letter-spacing:.08em;text-transform:uppercase;color:#F5F5F5;margin-bottom:10px;">No One Is Watching</h3><p class="body" style="font-size:1rem;">When there's no one counting on you, skipping is the path of least resistance. Every time.</p></div>
+              <div class="card"><div class="redbar"></div><h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:1.05rem;letter-spacing:.08em;text-transform:uppercase;color:#F5F5F5;margin-bottom:10px;">Always Back at Day One</h3><p class="body" style="font-size:1rem;">You know how to start. The problem is staying long enough for it to actually stick.</p></div>
+              <div class="card"><div class="redbar"></div><h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:1.05rem;letter-spacing:.08em;text-transform:uppercase;color:#F5F5F5;margin-bottom:10px;">Motivation Isn't Reliable</h3><p class="body" style="font-size:1rem;">Motivation is a mood. Accountability is a system. Only one of them works long term.</p></div>
+            </div>
+          </div>
+        </section>
+        <section class="sec bg-black">
+          <div class="wrap">
+            <div class="grid-2">
+              <div>
+                <span class="lbl">What AccountaFit Is</span>
+                <h2 class="h2 d" style="margin-bottom:20px;">YOUR PARTNER IN<br /><span class="red">STAYING CONSISTENT.</span></h2>
+                <p class="body" style="margin-bottom:16px;">AccountaFit isn't a workout tracker. It's a direct accountability system built around one simple truth: you are far more likely to follow through when someone real is counting on you.</p>
+                <p class="body">We match you with a partner based on your goals, your schedule, and how hard you need to be pushed. Then you both hold the line — every single day.</p>
+              </div>
+              <div>
+                <ul style="list-style:none;display:flex;flex-direction:column;gap:14px;margin-bottom:32px;">
+                  <li style="display:flex;align-items:flex-start;gap:12px;"><span style="width:22px;height:22px;border-radius:50%;background:rgba(185,28,28,.14);border:1px solid rgba(185,28,28,.38);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:.8rem;color:#EF4444;">&#10003;</span><span style="color:#E8E8E8;font-size:1.02rem;line-height:1.6;">Matched by goals, schedule, and commitment energy</span></li>
+                  <li style="display:flex;align-items:flex-start;gap:12px;"><span style="width:22px;height:22px;border-radius:50%;background:rgba(185,28,28,.14);border:1px solid rgba(185,28,28,.38);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:.8rem;color:#EF4444;">&#10003;</span><span style="color:#E8E8E8;font-size:1.02rem;line-height:1.6;">Daily 60-second check-ins that build real habits</span></li>
+                  <li style="display:flex;align-items:flex-start;gap:12px;"><span style="width:22px;height:22px;border-radius:50%;background:rgba(185,28,28,.14);border:1px solid rgba(185,28,28,.38);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:.8rem;color:#EF4444;">&#10003;</span><span style="color:#E8E8E8;font-size:1.02rem;line-height:1.6;">Shared streaks that make quitting feel personal</span></li>
+                  <li style="display:flex;align-items:flex-start;gap:12px;"><span style="width:22px;height:22px;border-radius:50%;background:rgba(185,28,28,.14);border:1px solid rgba(185,28,28,.38);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:.8rem;color:#EF4444;">&#10003;</span><span style="color:#E8E8E8;font-size:1.02rem;line-height:1.6;">Both partners see progress — full transparency</span></li>
+                </ul>
+                <a class="btn-red" href="#waitlist-s">Join the Waitlist &#8594;</a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="how-it-works-s" class="sec bg-dark">
+          <div class="wrap" style="max-width:980px;">
+            <div style="text-align:center;margin-bottom:72px;"><span class="lbl">How It Works</span><h2 class="h2 d">FOUR STEPS TO <span class="red">NEVER STARTING OVER AGAIN</span></h2></div>
+            <div class="steps">
+              <div class="step-row"><div class="step-circle">01</div><div style="padding-top:14px;"><div class="step-title">Build Your Profile</div><p class="body">Tell us your goals, your schedule, and how hard you need to be held accountable. Three minutes to set up. Lasts a lifetime.</p></div></div>
+              <div class="step-row"><div class="step-circle">02</div><div style="padding-top:14px;"><div class="step-title">Get Matched in 48 Hours</div><p class="body">Our system finds a partner with compatible goals, timing, and commitment level. Not random — precisely matched.</p></div></div>
+              <div class="step-row"><div class="step-circle">03</div><div style="padding-top:14px;"><div class="step-title">Make the Commitment</div><p class="body">Meet your partner, set expectations, and make a real commitment. Not a loose agreement — a pact with consequences.</p></div></div>
+              <div class="step-row"><div class="step-circle">04</div><div style="padding-top:14px;"><div class="step-title">Build the Streak Together</div><p class="body">Daily check-ins. Shared progress. Mutual accountability. The longer the streak, the harder it is to break. That's the design.</p></div></div>
+            </div>
+          </div>
+        </section>
+        <section class="sec bg-black">
+          <div class="wrap">
+            <div style="text-align:center;margin-bottom:64px;"><span class="lbl">Why AccountaFit</span><h2 class="h2 d">OTHER APPS TRACK YOU.<br /><span class="red">WE HOLD YOU.</span></h2><p class="body" style="max-width:480px;margin:18px auto 0;">The difference between an app you forget about and one that changes your consistency is real accountability with a real person.</p></div>
+            <div class="compare">
+              <div class="compare-header"><div class="compare-left-head">Every Other App</div><div class="compare-right-head">AccountaFit</div></div>
+              <div class="compare-row"><div class="compare-them">Tracks your workouts</div><div class="compare-us">Holds you accountable to your workouts</div></div>
+              <div class="compare-row"><div class="compare-them">Sends you notifications</div><div class="compare-us">Sends you a person who actually notices</div></div>
+              <div class="compare-row"><div class="compare-them">Works when you're motivated</div><div class="compare-us">Still works when you don't feel like it</div></div>
+              <div class="compare-row"><div class="compare-them">You use it alone</div><div class="compare-us">You're never doing it alone</div></div>
+              <div class="compare-row"><div class="compare-them">Shows you a feed</div><div class="compare-us">Builds you a real discipline system</div></div>
+            </div>
+          </div>
+        </section>
+        <section id="features-s" class="sec bg-dark2">
+          <div class="wrap">
+            <div style="margin-bottom:64px;"><span class="lbl">Features</span><h2 class="h2 d" style="max-width:680px;">BUILT FOR THE PEOPLE<br /><span class="red">WHO KEEP FALLING OFF</span></h2></div>
+            <div class="grid-3">
+              <div class="card"><div class="redbar"></div><h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:1.05rem;letter-spacing:.1em;text-transform:uppercase;color:#F5F5F5;margin-bottom:10px;">Smart Matching</h3><p class="body" style="font-size:1rem;">Paired by goals, schedule, fitness level, and how hard you need to be pushed.</p></div>
+              <div class="card"><div class="redbar"></div><h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:1.05rem;letter-spacing:.1em;text-transform:uppercase;color:#F5F5F5;margin-bottom:10px;">Shared Streaks</h3><p class="body" style="font-size:1rem;">Both partners check in daily. The streak only survives if you both show up.</p></div>
+              <div class="card"><div class="redbar"></div><h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:1.05rem;letter-spacing:.1em;text-transform:uppercase;color:#F5F5F5;margin-bottom:10px;">Daily Check-Ins</h3><p class="body" style="font-size:1rem;">60-second habit that builds consistency no motivation ever could.</p></div>
+              <div class="card"><div class="redbar"></div><h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:1.05rem;letter-spacing:.1em;text-transform:uppercase;color:#F5F5F5;margin-bottom:10px;">Progress Visibility</h3><p class="body" style="font-size:1rem;">No quietly falling off. No disappearing. Full transparency.</p></div>
+              <div class="card"><div class="redbar"></div><h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:1.05rem;letter-spacing:.1em;text-transform:uppercase;color:#F5F5F5;margin-bottom:10px;">Schedule Sync</h3><p class="body" style="font-size:1rem;">Matched to your actual life — mornings, evenings, weekdays, weekends.</p></div>
+              <div class="card"><div class="redbar"></div><h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:1.05rem;letter-spacing:.1em;text-transform:uppercase;color:#F5F5F5;margin-bottom:10px;">Smart Rematch</h3><p class="body" style="font-size:1rem;">Partnership not clicking? We find you a better fit before your momentum breaks.</p></div>
+            </div>
+          </div>
+        </section>
+        <section class="sec-sm bg-red-band">
+          <div class="wrap">
+            <div class="grid-4">
+              <div class="stat-block"><div class="stat-big d">3x</div><p class="body" style="font-size:.95rem;">More likely to hit your goals with an accountability partner than going solo</p></div>
+              <div class="stat-block"><div class="stat-big d">94%</div><p class="body" style="font-size:.95rem;">Of users report stronger consistency within the first 30 days</p></div>
+              <div class="stat-block"><div class="stat-big d">65%</div><p class="body" style="font-size:.95rem;">Higher goal completion rate compared to solo training</p></div>
+              <div class="stat-block"><div class="stat-big d">14 days</div><p class="body" style="font-size:.95rem;">Average time to lock in a lasting habit when someone is counting on you</p></div>
+            </div>
+          </div>
+        </section>
+        <section class="sec bg-black">
+          <div class="wrap">
+            <div style="text-align:center;margin-bottom:64px;"><span class="lbl">Early Feedback</span><h2 class="h2 d">THEY STOPPED <span class="red">STARTING OVER.</span></h2><p class="body" style="max-width:440px;margin:18px auto 0;">Feedback from our beta and early access community. Real people. Real results.</p></div>
+            <div class="grid-test">
+              <div class="card"><div class="quote-mark">"</div><p class="body" style="font-size:1rem;color:#E8E8E8;margin-bottom:20px;line-height:1.78;">I've tried every fitness app. The difference with AccountaFit is someone is actually waiting on my check-in. That's not something any app has ever done.</p><div style="display:flex;align-items:center;gap:12px;border-top:1px solid #242424;padding-top:16px;"><div class="avatar">MT</div><div><div class="quote-name">Marcus T.</div><div class="quote-role">Beta tester · -28 lbs</div></div></div></div>
+              <div class="card"><div class="quote-mark">"</div><p class="body" style="font-size:1rem;color:#E8E8E8;margin-bottom:20px;line-height:1.78;">Eleven weeks. Me and my partner haven't missed one check-in. That streak starts to feel like part of your identity. You protect it.</p><div style="display:flex;align-items:center;gap:12px;border-top:1px solid #242424;padding-top:16px;"><div class="avatar">PS</div><div><div class="quote-name">Priya S.</div><div class="quote-role">Beta tester · Marathon finisher</div></div></div></div>
+              <div class="card"><div class="quote-mark">"</div><p class="body" style="font-size:1rem;color:#E8E8E8;margin-bottom:20px;line-height:1.78;">I stopped trying to stay motivated. I just made sure my partner knew I was showing up. That's the whole system. Deceptively simple.</p><div style="display:flex;align-items:center;gap:12px;border-top:1px solid #242424;padding-top:16px;"><div class="avatar">DK</div><div><div class="quote-name">Devon K.</div><div class="quote-role">Early access · +15 lbs muscle</div></div></div></div>
+              <div class="card"><div class="quote-mark">"</div><p class="body" style="font-size:1rem;color:#E8E8E8;margin-bottom:20px;line-height:1.78;">I didn't need a trainer. I needed someone who would notice if I went quiet. AccountaFit gave me exactly that.</p><div style="display:flex;align-items:center;gap:12px;border-top:1px solid #242424;padding-top:16px;"><div class="avatar">AW</div><div><div class="quote-name">Aaliyah W.</div><div class="quote-role">Beta tester · Goal weight reached</div></div></div></div>
+              <div class="card"><div class="quote-mark">"</div><p class="body" style="font-size:1rem;color:#E8E8E8;margin-bottom:20px;line-height:1.78;">We've never met in person. But I show up at 5am every day because he does too. That's accountability. That's what this product creates.</p><div style="display:flex;align-items:center;gap:12px;border-top:1px solid #242424;padding-top:16px;"><div class="avatar">CM</div><div><div class="quote-name">Carlos M.</div><div class="quote-role">Early access · 6 months consistent</div></div></div></div>
+              <div class="card"><div class="quote-mark">"</div><p class="body" style="font-size:1rem;color:#E8E8E8;margin-bottom:20px;line-height:1.78;">I'm not motivated every day. I haven't quit because someone else's streak is on the line too. That's a completely different feeling.</p><div style="display:flex;align-items:center;gap:12px;border-top:1px solid #242424;padding-top:16px;"><div class="avatar">JB</div><div><div class="quote-name">Jordan B.</div><div class="quote-role">Beta tester · Back after 2-year gap</div></div></div></div>
+            </div>
+          </div>
+        </section>
+        <section id="faq-s" class="sec bg-dark2">
+          <div class="wrap-sm">
+            <span class="lbl">FAQ</span><h2 class="h2 d" style="margin-bottom:40px;">REAL <span class="red">QUESTIONS</span></h2>
+            <div class="faq-item"><div class="faq-q">Is this a dating app?</div><div class="faq-a">Not even close. Every match is based entirely on fitness goals, schedule, and commitment level.</div></div>
+            <div class="faq-item"><div class="faq-q">What if my partner ghosts me?</div><div class="faq-a">Our Smart Rematch system detects disengaged partnerships early and finds you a better match before your momentum breaks.</div></div>
+            <div class="faq-item"><div class="faq-q">How long does matching take?</div><div class="faq-a">Most people are matched within 48 hours. We prioritize fit over speed.</div></div>
+            <div class="faq-item"><div class="faq-q">Is there a cost?</div><div class="faq-a">Early access is free. Members who join the waitlist now will get priority matching and a free trial when we launch.</div></div>
+            <div class="faq-item"><div class="faq-q">How much time does it take daily?</div><div class="faq-a">About 60 seconds for a check-in. The point is consistency, not complexity.</div></div>
+            <div class="faq-item"><div class="faq-q">What if I'm a beginner?</div><div class="faq-a">AccountaFit works for every fitness level. You'll be matched with someone at your level and intensity.</div></div>
+          </div>
+        </section>
+        <section id="waitlist-s" class="sec bg-cta" style="text-align:center;">
+          <div class="wrap" style="max-width:640px;position:relative;z-index:2;">
+            <span class="lbl" style="display:inline-block;">This Is Your Moment</span>
+            <h2 class="h2 d" style="font-size:clamp(3rem,8vw,6rem);margin-bottom:12px;">YOU'VE RESTARTED<br /><span class="red">ENOUGH.</span></h2>
+            <p class="cta-subline" style="margin-bottom:16px;">This time, stay with it.</p>
+            <p class="body" style="max-width:500px;margin:0 auto 0;">Join the waitlist and be among the first people matched when we launch. Your partner is already out there — they just need you to show up.</p>
+            <div class="cta-form">
+              <input class="cta-input" type="email" placeholder="Enter your email address" />
+              <a class="btn-red" href="mailto:hello@accountafit.com?subject=AccountaFit Waitlist">Join the Waitlist &#8594;</a>
+            </div>
+            <p class="cta-note">No credit card. No spam. Just early access.</p>
+          </div>
+        </section>
+      </main>
+      <footer class="footer">
+        <div class="wrap">
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:36px;margin-bottom:8px;">
+            <div><div class="logo d" style="margin-bottom:12px;">Accounta<span class="red">Fit</span></div><p class="body" style="max-width:240px;font-size:.95rem;">Consistency over motivation. Accountability over intention.</p></div>
+            <div style="display:flex;flex-wrap:wrap;gap:48px;">
+              <div><div class="footer-col-title">Product</div><div class="footer-links"><a href="#features-s">Features</a><a href="#how-it-works-s">How It Works</a><a href="#faq-s">FAQ</a></div></div>
+              <div><div class="footer-col-title">Company</div><div class="footer-links"><a href="#">About</a><a href="#">Blog</a><a href="#">Contact</a></div></div>
+              <div><div class="footer-col-title">Legal</div><div class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div></div>
+            </div>
+          </div>
+          <div class="footer-bottom"><span>© 2026 AccountaFit. All rights reserved.</span><span>Built for people who don't quit.</span></div>
+        </div>
+      </footer>
+    </div>
     <script>
       (function() {
         var observer = new MutationObserver(function() {
           var root = document.getElementById('root');
           if (root && root.children.length > 0) {
-            var loader = document.getElementById('initial-loader');
-            if (loader) { loader.classList.add('hidden'); setTimeout(function() { loader.remove(); }, 500); }
+            var s = document.getElementById('static-home');
+            var l = document.getElementById('initial-loader');
+            if (s) s.classList.add('hidden');
+            if (l) { l.classList.add('hidden'); setTimeout(function(){ if(l.parentNode) l.parentNode.removeChild(l); }, 400); }
             observer.disconnect();
           }
         });
-        var root = document.getElementById('root');
-        if (root) observer.observe(root, { childList: true });
+        var r = document.getElementById('root');
+        if (r) observer.observe(r, { childList: true });
         setTimeout(function() {
-          var loader = document.getElementById('initial-loader');
-          if (loader) { loader.classList.add('hidden'); setTimeout(function() { loader.remove(); }, 500); }
-        }, 4000);
+          var l = document.getElementById('initial-loader');
+          if (l) { l.classList.add('hidden'); setTimeout(function(){ if(l.parentNode) l.parentNode.removeChild(l); }, 400); }
+        }, 5000);
       })();
     </script>
-    <noscript>
-      <style>
-        body { display: flex; align-items: center; justify-content: center; min-height: 100vh; text-align: center; padding: 40px; }
-        .ns-logo { font-size: 2.5rem; font-style: italic; margin-bottom: 16px; }
-        .ns-logo span { color: #EF4444; }
-        .ns-p { color: #A3A3A3; font-size: 1.1rem; line-height: 1.7; max-width: 480px; margin: 0 auto 24px; }
-        .ns-cta { display: inline-block; background: #B91C1C; color: #F5F5F5; padding: 14px 36px; border-radius: 100px; text-decoration: none; font-size: 0.9rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; }
-      </style>
-      <div>
-        <div class="ns-logo">Accounta<span>Fit</span></div>
-        <p class="ns-p">Stop Starting Over. AccountaFit pairs you with a real accountability partner to keep you consistent — for real this time.</p>
-        <p class="ns-p" style="font-size:0.85rem; color:#555;">Please enable JavaScript to use AccountaFit.</p>
-        <a class="ns-cta" href="mailto:hello@accountafit.com">Get In Touch</a>
-      </div>
-    </noscript>
+    <noscript><style>#initial-loader { display: none !important; }</style></noscript>
   </body>
 </html>
