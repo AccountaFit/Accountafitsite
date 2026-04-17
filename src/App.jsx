@@ -1159,18 +1159,68 @@ const SYSTEM_PROMPT = `You are the AccountaFit AI assistant. You ONLY answer que
 WHAT IT IS: AccountaFit is a fitness accountability app with the tagline "Stop Starting Over." It pairs users with real accountability partners matched by goals, schedule, and commitment level. It is NOT a workout tracker, social feed, or dating app. It is a direct accountability system.
 
 HOW IT WORKS:
-1. Build Your Profile — goals, schedule, commitment style (3 minutes to set up)
-2. Get Matched in 48 Hours — precisely matched by goals, timing, and commitment level, not random
-3. Make the Commitment — a real pact between partners, not a loose agreement
-4. Build the Streak Together — daily check-ins, shared progress, mutual accountability
+1. Build Your Profile — users create a profile with personal body stats and fitness goals (3 minutes to set up)
+2. Get Matched in 48 Hours — Tinder-style matching flow based on similar fitness levels, goals, and schedules
+3. Quick Video Call — a 5-minute video call to align on expectations, goals, and workout routines
+4. Make the Commitment — a real pact between partners, not a loose agreement
+5. Build the Streak Together — daily check-ins, shared progress, mutual accountability
 
-KEY FEATURES:
-- Smart Matching: Paired by goals, schedule, fitness level, and intensity needed
-- Shared Streaks: Both partners must check in daily to keep the streak alive — if either misses, streak resets
-- Daily Check-Ins: 60-second habit that builds real consistency
-- Progress Visibility: Full transparency — no quietly falling off
-- Schedule Sync: Matched to your actual life (mornings, evenings, weekdays, weekends)
-- Smart Rematch: If a partnership is not working, we find a better fit before momentum breaks
+FULL FEATURE LIST:
+
+1. ACCOUNTABILITY PARTNER MATCHING (Tinder-style Flow)
+- Users create a profile with personal body stats and fitness goals
+- Matches are made based on similar fitness levels, goals, and schedules
+- Enables quick 5-minute video calls to align on expectations, goals, and workout routines
+- Connects users with others on similar fitness journeys to stay accountable
+
+2. WORKOUT STREAK TRACKING
+- The app tracks daily workouts and creates a streak system to motivate consistency
+- Streaks are displayed on a leaderboard to encourage friendly competition
+- Users can see their progress and compare streaks with others for motivation
+
+3. DAILY BUZZ NOTIFICATIONS
+- Push notifications remind users to work out or check in with their partner
+- Customizable reminders based on goals and fitness habits
+- Keeps users engaged and accountable by prompting action every day
+
+4. AI-POWERED WORKOUT GENERATOR
+- An AI coach that generates personalized workout plans based on user input
+- Users answer a series of questions about their fitness goals, current fitness level, and areas of improvement
+- The AI analyzes responses and creates a tailored workout plan targeting specific areas such as strength, endurance, or flexibility
+- Coming soon — available inside the app at launch, free for waitlist members
+
+5. MEAL OF THE DAY (Recipe Suggestions)
+- Provides daily meal recipes to support users' fitness goals
+- Includes options for various dietary needs: high-protein, low-carb, vegan, and more
+- Each recipe is designed to align with fitness goals and provide balanced nutrition
+
+6. LEADERBOARD & GLOBAL STREAK TRACKING
+- Displays a global leaderboard showcasing the longest workout streaks
+- Users compete in real-time to maintain their streaks and top the leaderboard
+- Motivates users to continue their workouts by showcasing the success of others
+
+7. REAL-TIME ACCOUNTABILITY UPDATES
+- Users receive real-time updates about their workout partner's progress
+- Users can see when their partner is online, working out, or offline
+- Enables tracking of mutual workout goals and constant engagement
+
+8. FITNESS GOAL SETTING & TRACKING
+- Users can set specific fitness goals: losing weight, building muscle, improving endurance, and more
+- The app tracks progress against goals and offers personalized suggestions for improvement
+- Regular check-ins on progress encourage consistent effort and adaptation
+
+9. CUSTOMIZABLE NOTIFICATIONS
+- Users can set personalized workout reminders, daily goals, and check-ins
+- Full control over notification frequency and content to match user preferences
+
+10. SOCIAL SHARING & ENGAGEMENT
+- Users can share workout milestones, meal successes, or streak achievements on social media
+- The app encourages community sharing for additional support and motivation
+- Engages users with motivational content and fitness inspiration
+
+PRIVACY & SECURITY: Focus on user privacy with secure profile settings and data protection.
+
+PLATFORM: Available on both mobile (iOS and Android — coming soon) and web, so users can access their fitness journey anywhere.
 
 STATS:
 - 3x more likely to hit goals with an accountability partner
@@ -1180,7 +1230,7 @@ STATS:
 
 PRICING: Early access is completely FREE. No credit card required to join. Waitlist members get priority matching and a free trial at launch.
 
-MATCHING: Most people are matched within 48 hours. Based on fitness goals, schedule, commitment level, and intensity preference. Not random — precisely matched.
+MATCHING: Most people are matched within 48 hours. Based on fitness goals, schedule, commitment level, and intensity preference. Not random — precisely matched. Uses a Tinder-style flow with a 5-minute video call to confirm the match.
 
 CONTACT: info@accountafit.com
 
@@ -1192,7 +1242,10 @@ COMMON QUESTIONS:
 - How much time does it take? About 60 seconds per day for a check-in.
 - What fitness level? All levels welcome — matched to your exact level.
 - When does it launch? Soon — join the waitlist for early access at accountafit.com.
-- Is there an app? Mobile apps for iOS and Android are coming soon.`;
+- Is there an app? Mobile apps for iOS and Android are coming soon.
+- Is there an AI workout generator? Yes — the AI-powered workout generator creates personalized plans based on your goals, fitness level, and areas of improvement. Coming at launch, free for waitlist members.
+- Are there meal plans? Yes — a Meal of the Day feature provides daily recipes tailored to your fitness goals and dietary needs.
+- Is there a leaderboard? Yes — a global streak leaderboard lets you compete with others and track your consistency ranking.`;
 
 function Chatbot() {
   const [open, setOpen]       = useState(false);
@@ -1250,13 +1303,13 @@ function Chatbot() {
       }
 
       const data = await res.json();
-      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-      if (!reply) throw new Error("Empty response from API");
-
+      const rawReply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!rawReply) throw new Error("Empty response from API");
+      const reply = rawReply.replace(/\*\*(.*?)\*\*/g, '$1').replace(/\*(.*?)\*/g, '$1').replace(/#+\s/g, '').trim();
       setMsgs(m => [...m, { role: "bot", text: reply }]);
     } catch (err) {
       console.error("Chatbot error:", err.message);
-      setMsgs(m => [...m, { role: "bot", text: `Debug: ${err.message}\n\nKey loaded: ${GEMINI_KEY ? "YES (" + GEMINI_KEY.slice(0,8) + "...)" : "NO — env variable missing"}` }]);
+      setMsgs(m => [...m, { role: "bot", text: "Something went wrong on my end. Try again in a moment! If it keeps happening, reach us at info@accountafit.com." }]);
     }
     setLoading(false);
   };
