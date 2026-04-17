@@ -1232,7 +1232,7 @@ function Chatbot() {
         }));
 
       const res = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_KEY}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -1256,8 +1256,7 @@ function Chatbot() {
       setMsgs(m => [...m, { role: "bot", text: reply }]);
     } catch (err) {
       console.error("Chatbot error:", err.message);
-      setError(err.message);
-      setMsgs(m => [...m, { role: "bot", text: `Debug: ${err.message}\n\nKey loaded: ${GEMINI_KEY ? "YES (" + GEMINI_KEY.slice(0,8) + "...)" : "NO — env variable missing"}` }]);
+      setMsgs(m => [...m, { role: "bot", text: "Something went wrong on my end. Try again in a moment! If it keeps happening, reach us at info@accountafit.com." }]);
     }
     setLoading(false);
   };
