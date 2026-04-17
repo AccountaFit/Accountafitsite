@@ -1147,39 +1147,59 @@ const T = {
 };
 
 /* ══════════════════════════════════════════════════════════════════
-   ACCOUNTAFIT AI CHATBOT — Powered by Google Gemini (free tier)
-   Replace YOUR_GEMINI_KEY_HERE with your actual key from
-   https://aistudio.google.com → Get API Key → Create API Key
+   ACCOUNTAFIT AI CHATBOT — Powered by Google Gemini
+   API key is stored in Vercel Environment Variables.
+   In Vercel: Settings → Environment Variables → REACT_APP_GEMINI_KEY
 ══════════════════════════════════════════════════════════════════ */
-const GEMINI_KEY = "AQ.Ab8RN6IzZweduf2PzkzwsfJc0yWsDkna4krYhal56oBsYyVyOQ";
 
-const SYSTEM_PROMPT = `You are the AccountaFit AI assistant. You only answer questions about AccountaFit. If asked anything unrelated, politely redirect back to AccountaFit.
+const GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY;
 
-WHAT IT IS: AccountaFit is a fitness accountability app with the tagline "Stop Starting Over." It pairs users with real accountability partners matched by goals, schedule, and commitment level. It is NOT a workout tracker, social feed, or dating app.
+const SYSTEM_PROMPT = `You are the AccountaFit AI assistant. You ONLY answer questions about AccountaFit. If asked anything unrelated, politely redirect back to AccountaFit. Keep answers concise, friendly, bold and direct — max 3 sentences unless a list is genuinely needed.
+
+WHAT IT IS: AccountaFit is a fitness accountability app with the tagline "Stop Starting Over." It pairs users with real accountability partners matched by goals, schedule, and commitment level. It is NOT a workout tracker, social feed, or dating app. It is a direct accountability system.
 
 HOW IT WORKS:
-1. Build Your Profile — goals, schedule, commitment style (3 minutes)
-2. Get Matched in 48 Hours — precisely matched, not random
-3. Make the Commitment — a real pact between partners
-4. Build the Streak Together — daily check-ins, shared progress
+1. Build Your Profile — goals, schedule, commitment style (3 minutes to set up)
+2. Get Matched in 48 Hours — precisely matched by goals, timing, and commitment level, not random
+3. Make the Commitment — a real pact between partners, not a loose agreement
+4. Build the Streak Together — daily check-ins, shared progress, mutual accountability
 
-KEY FEATURES: Smart Matching, Shared Streaks (both must check in daily), Daily Check-Ins (60 seconds), Progress Visibility (full transparency), Schedule Sync (matched to your life), Smart Rematch (if partnership isn't working).
+KEY FEATURES:
+- Smart Matching: Paired by goals, schedule, fitness level, and intensity needed
+- Shared Streaks: Both partners must check in daily to keep the streak alive — if either misses, streak resets
+- Daily Check-Ins: 60-second habit that builds real consistency
+- Progress Visibility: Full transparency — no quietly falling off
+- Schedule Sync: Matched to your actual life (mornings, evenings, weekdays, weekends)
+- Smart Rematch: If a partnership is not working, we find a better fit before momentum breaks
 
-STATS: 3x more likely to hit goals with a partner. 94% report stronger consistency in 30 days. 65% higher goal completion vs solo. 14 days average to lock in a lasting habit.
+STATS:
+- 3x more likely to hit goals with an accountability partner
+- 94% of users report stronger consistency within 30 days
+- 65% higher goal completion rate vs solo training
+- 14 days average time to lock in a lasting habit
 
-PRICING: Early access is FREE. Waitlist members get priority matching and a free trial at launch. No credit card required.
+PRICING: Early access is completely FREE. No credit card required to join. Waitlist members get priority matching and a free trial at launch.
 
-MATCHING: Matched within 48 hours based on fitness goals, schedule, commitment level, and intensity preference.
+MATCHING: Most people are matched within 48 hours. Based on fitness goals, schedule, commitment level, and intensity preference. Not random — precisely matched.
 
-FAQ: Not a dating app. Smart Rematch handles ghosting. 60 seconds per day. All fitness levels welcome. Join at accountafit.com.
+CONTACT: info@accountafit.com
 
-Keep answers concise, friendly, bold, and direct. Max 3 sentences unless a list is needed.`;
+SOCIAL: Instagram @accountafitcorp | X (Twitter) @accountafit | TikTok @accountafit
+
+COMMON QUESTIONS:
+- Is this a dating app? No. Matching is 100% based on fitness goals and schedule only.
+- What if my partner ghosts? Smart Rematch detects disengagement early and finds a better fit.
+- How much time does it take? About 60 seconds per day for a check-in.
+- What fitness level? All levels welcome — matched to your exact level.
+- When does it launch? Soon — join the waitlist for early access at accountafit.com.
+- Is there an app? Mobile apps for iOS and Android are coming soon.`;
 
 function Chatbot() {
   const [open, setOpen]       = useState(false);
   const [msgs, setMsgs]       = useState([{ role: "bot", text: "Hey! I'm the AccountaFit AI. Ask me anything about the app, matching, pricing, or how it works. 💪" }]);
   const [input, setInput]     = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError]     = useState(null);
   const [tooltip, setTooltip] = useState(true);
   const msgsRef               = useRef(null);
 
@@ -1196,16 +1216,23 @@ function Chatbot() {
     const text = (overrideText || input).trim();
     if (!text || loading) return;
     setInput("");
+    setError(null);
     setTooltip(false);
     setMsgs(m => [...m, { role: "user", text }]);
     setLoading(true);
+
     try {
-      const history = msgs.map(m => ({
-        role: m.role === "bot" ? "model" : "user",
-        parts: [{ text: m.text }],
-      }));
+      if (!GEMINI_KEY) throw new Error("API key not configured");
+
+      const history = msgs
+        .filter(m => m.role !== "error")
+        .map(m => ({
+          role: m.role === "bot" ? "model" : "user",
+          parts: [{ text: m.text }],
+        }));
+
       const res = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -1216,17 +1243,26 @@ function Chatbot() {
           }),
         }
       );
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData?.error?.message || `API error ${res.status}`);
+      }
+
       const data = await res.json();
-      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I didn't catch that. Try asking again!";
+      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!reply) throw new Error("Empty response from API");
+
       setMsgs(m => [...m, { role: "bot", text: reply }]);
-    } catch {
-      setMsgs(m => [...m, { role: "bot", text: "Something went wrong. Please try again in a moment!" }]);
+    } catch (err) {
+      console.error("Chatbot error:", err.message);
+      setError(err.message);
+      setMsgs(m => [...m, { role: "bot", text: "Something went wrong on my end. Try again in a moment! If it keeps happening, reach us at info@accountafit.com." }]);
     }
     setLoading(false);
   };
 
   const onKey = e => { if (e.key === "Enter") send(); };
-
   const QUICK = ["How does matching work?", "Is it free?", "How long does it take?"];
 
   return (
@@ -1259,7 +1295,7 @@ function Chatbot() {
               m.role === "bot" ? (
                 <div key={i} className="af-msg-bot">
                   <div className="af-avatar">AF</div>
-                  <div className="af-bubble-bot">{m.text}</div>
+                  <div className="af-bubble-bot" style={{ whiteSpace: "pre-line" }}>{m.text}</div>
                 </div>
               ) : (
                 <div key={i} className="af-msg-user">
@@ -1318,6 +1354,7 @@ function Chatbot() {
     </>
   );
 }
+
 
 export default function AccountaFit() {
   const [modal, setModal] = useState(false);
