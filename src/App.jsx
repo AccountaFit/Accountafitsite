@@ -1253,24 +1253,17 @@ function Chatbot() {
   const [input, setInput]     = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError]     = useState(null);
-  const [tooltip, setTooltip] = useState(true);
   const msgsRef               = useRef(null);
 
   useEffect(() => {
     if (msgsRef.current) msgsRef.current.scrollTop = msgsRef.current.scrollHeight;
   }, [msgs, loading]);
 
-  useEffect(() => {
-    const t = setTimeout(() => setTooltip(false), 4000);
-    return () => clearTimeout(t);
-  }, []);
-
   const send = async (overrideText) => {
     const text = (overrideText || input).trim();
     if (!text || loading) return;
     setInput("");
     setError(null);
-    setTooltip(false);
     setMsgs(m => [...m, { role: "user", text }]);
     setLoading(true);
 
@@ -1319,13 +1312,6 @@ function Chatbot() {
 
   return (
     <>
-      {tooltip && !open && (
-        <div className="af-tooltip">
-          <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#22c55e" }} />
-          <span style={{ fontSize: ".82rem", color: "#B0B0B0", fontFamily: "'DM Sans',sans-serif" }}>Ask AccountaFit AI</span>
-        </div>
-      )}
-
       {open && (
         <div className="af-chat-win">
           <div className="af-chat-hd">
@@ -1390,7 +1376,7 @@ function Chatbot() {
         </div>
       )}
 
-      <button className={`af-chat-btn${open ? " open" : ""}`} onClick={() => { setOpen(o => !o); setTooltip(false); }} aria-label="Open AccountaFit AI chat">
+      <button className={`af-chat-btn${open ? " open" : ""}`} onClick={() => setOpen(o => !o)} aria-label="Open AccountaFit AI chat">
         {open ? (
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         ) : (
