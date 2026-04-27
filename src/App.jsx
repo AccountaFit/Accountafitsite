@@ -294,32 +294,32 @@ function Hero({ onCTA, dark, onToggle, t, lang, setLang }) {
   ];
 
   return (
-    <section style={{ position: "relative", minHeight: "100vh", overflow: "hidden", background: "#000", display: "flex", flexDirection: "column" }}>
+    <section style={{ position: "relative", minHeight: "100vh", overflow: "hidden", background: dark ? "#000" : "#F0F0F0", display: "flex", flexDirection: "column" }}>
 
       {/* ── Three-panel photo background ── */}
       <div style={{ position: "absolute", inset: 0, display: "flex", zIndex: 0 }}>
         {/* Left panel — woman lifting */}
         <div style={{ flex: "0 0 27%", position: "relative", overflow: "hidden" }}>
-          <img src={IMG_L} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 20%", filter: "brightness(.62) saturate(.7) contrast(1.1)" }} />
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(160deg,rgba(120,5,5,.38) 0%,rgba(0,0,0,.2) 60%,transparent 100%)" }} />
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right,transparent 55%,rgba(0,0,0,.88) 100%)" }} />
+          <img src={IMG_L} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 20%", filter: dark ? "brightness(.62) saturate(.7) contrast(1.1)" : "brightness(.85) saturate(.5) contrast(1.05)" }} />
+          <div style={{ position: "absolute", inset: 0, background: dark ? "linear-gradient(160deg,rgba(120,5,5,.38) 0%,rgba(0,0,0,.2) 60%,transparent 100%)" : "linear-gradient(160deg,rgba(240,240,240,.4) 0%,transparent 100%)" }} />
+          <div style={{ position: "absolute", inset: 0, background: dark ? "linear-gradient(to right,transparent 55%,rgba(0,0,0,.88) 100%)" : "linear-gradient(to right,transparent 55%,rgba(240,240,240,.95) 100%)" }} />
         </div>
         {/* Center panel — high-five */}
         <div style={{ flex: "0 0 46%", position: "relative", overflow: "hidden" }}>
-          <img src={IMG_C} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 18%", filter: "brightness(.55) saturate(.65) contrast(1.15)" }} />
-          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 115%,rgba(200,20,20,.52) 0%,rgba(140,10,10,.22) 35%,transparent 60%)" }} />
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right,rgba(0,0,0,.78) 0%,transparent 20%,transparent 80%,rgba(0,0,0,.78) 100%)" }} />
+          <img src={IMG_C} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 18%", filter: dark ? "brightness(.55) saturate(.65) contrast(1.15)" : "brightness(.82) saturate(.45) contrast(1.05)" }} />
+          <div style={{ position: "absolute", inset: 0, background: dark ? "radial-gradient(ellipse at 50% 115%,rgba(200,20,20,.52) 0%,rgba(140,10,10,.22) 35%,transparent 60%)" : "radial-gradient(ellipse at 50% 115%,rgba(185,28,28,.22) 0%,transparent 60%)" }} />
+          <div style={{ position: "absolute", inset: 0, background: dark ? "linear-gradient(to right,rgba(0,0,0,.78) 0%,transparent 20%,transparent 80%,rgba(0,0,0,.78) 100%)" : "linear-gradient(to right,rgba(240,240,240,.92) 0%,transparent 20%,transparent 80%,rgba(240,240,240,.92) 100%)" }} />
         </div>
         {/* Right panel — man training */}
         <div style={{ flex: "0 0 27%", position: "relative", overflow: "hidden" }}>
-          <img src={IMG_R} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 25%", filter: "brightness(.6) saturate(.65) contrast(1.12)" }} />
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(200deg,rgba(100,5,5,.35) 0%,rgba(0,0,0,.2) 60%,transparent 100%)" }} />
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to left,transparent 55%,rgba(0,0,0,.88) 100%)" }} />
+          <img src={IMG_R} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 25%", filter: dark ? "brightness(.6) saturate(.65) contrast(1.12)" : "brightness(.85) saturate(.5) contrast(1.05)" }} />
+          <div style={{ position: "absolute", inset: 0, background: dark ? "linear-gradient(200deg,rgba(100,5,5,.35) 0%,rgba(0,0,0,.2) 60%,transparent 100%)" : "linear-gradient(200deg,rgba(240,240,240,.4) 0%,transparent 100%)" }} />
+          <div style={{ position: "absolute", inset: 0, background: dark ? "linear-gradient(to left,transparent 55%,rgba(0,0,0,.88) 100%)" : "linear-gradient(to left,transparent 55%,rgba(240,240,240,.95) 100%)" }} />
         </div>
         {/* Global unifying overlays */}
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom,rgba(0,0,0,.32) 0%,rgba(0,0,0,.52) 45%,rgba(0,0,0,.92) 100%)" }} />
+        <div style={{ position: "absolute", inset: 0, background: dark ? "linear-gradient(to bottom,rgba(0,0,0,.32) 0%,rgba(0,0,0,.52) 45%,rgba(0,0,0,.92) 100%)" : "linear-gradient(to bottom,rgba(240,240,240,.25) 0%,rgba(240,240,240,.55) 45%,rgba(240,240,240,.94) 100%)" }} />
         <div style={{ position: "absolute", inset: 0, opacity: .16, background: "linear-gradient(to right,transparent 0%,transparent 32.5%,rgba(155,0,0,.42) 33%,transparent 33.5%,transparent 66%,rgba(155,0,0,.42) 66.5%,transparent 67%,transparent 100%)" }} />
-        <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,.44)" }} />
+        <div style={{ position: "absolute", inset: 0, background: dark ? "rgba(0,0,0,.44)" : "rgba(240,240,240,.35)" }} />
       </div>
 
       {/* Animated red swash curves */}
@@ -948,19 +948,21 @@ function Footer({ dark }) {
               ]},
               { title: "Company", links: [
                 { label: "About",    href: "#what-it-is" },
-                { label: "Contact",  href: "#contact" },
+                { label: "Contact",  href: "mailto:info@accountafit.com" },
               ]},
               { title: "Legal", links: [
-                { label: "Privacy Policy",  href: "#" },
-                { label: "Terms of Service",href: "#" },
-                { label: "Cookies",         href: "#" },
+                { label: "Terms of Service",      href: "/terms" },
+                { label: "Privacy Policy",        href: "/privacy" },
+                { label: "Community Guidelines",  href: "/guidelines" },
+                { label: "Safety Policy",         href: "/safety" },
               ]},
             ].map(({ title, links }) => (
               <div key={title}>
                 <div className="bc footer-col-title" style={{ fontWeight: 700, fontSize: ".7rem", letterSpacing: ".22em", textTransform: "uppercase", color: "#606060", marginBottom: 14 }}>{title}</div>
                 {links.map(({ label, href }) => (
-                  <a key={label} href={href} style={{ display: "block", color: "#606060", fontSize: ".9rem", marginBottom: 7, transition: "color .2s" }}
-                    onMouseEnter={e => e.target.style.color = "#fff"} onMouseLeave={e => e.target.style.color = "#606060"}>{label}</a>
+                  <a key={label} href={href} style={{ display: "block", color: dark ? "#606060" : "#111", fontWeight: dark ? 400 : 600, fontSize: ".9rem", marginBottom: 7, transition: "color .2s" }}
+                    onMouseEnter={e => e.target.style.color = "#B91C1C"}
+                    onMouseLeave={e => e.target.style.color = dark ? "#606060" : "#111"}>{label}</a>
                 ))}
               </div>
             ))}
@@ -1411,14 +1413,14 @@ export default function AccountaFit() {
     .bc { color: inherit !important; }
 
     /* ── FIX: Hero in light mode — nav links + hero text readable ── */
-    .nav-link { color: rgba(255,255,255,.9) !important; }
-    .nav-link:hover { color: #fff !important; }
-    .nav-join { color: #fff !important; border-color: rgba(220,38,38,.7) !important; }
-    .hero-wordmark-white { color: #fff !important; }
-    .hero-tagline { color: rgba(255,255,255,.95) !important; }
-    .hero-sub-copy { color: rgba(255,255,255,.88) !important; }
-    .hero-feat-title { color: #fff !important; }
-    .hero-feat-body { color: rgba(255,255,255,.72) !important; }
+    .nav-link { color: rgba(10,10,10,.8) !important; }
+    .nav-link:hover { color: #0A0A0A !important; }
+    .nav-join { color: #0A0A0A !important; border-color: rgba(185,28,28,.7) !important; }
+    .hero-wordmark-white { color: #0A0A0A !important; }
+    .hero-tagline { color: rgba(10,10,10,.85) !important; }
+    .hero-sub-copy { color: rgba(10,10,10,.7) !important; }
+    .hero-feat-title { color: #0A0A0A !important; }
+    .hero-feat-body { color: rgba(10,10,10,.6) !important; }
 
     /* ── FIX 1: WhatItIs section — checklist text and h2 ── */
     #what-it-is .d { color: #0A0A0A !important; }
