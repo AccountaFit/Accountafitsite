@@ -19,7 +19,7 @@ const T = {
     heroH1b: "Starting",
     heroH1c: "Over.",
     heroSub: "Most people don't fail fitness because they're lazy. They fail because they do it alone. AccountaFit matches you with a real partner who keeps you accountable — every day.",
-    heroCTA1: "Find Your Partner",
+    heroCTA1: "Join the Waitlist",
     heroCTA2: "Join the Waitlist",
     problemEyebrow: "THE REAL PROBLEM",
     problemH: "You don't need more motivation.",
@@ -68,7 +68,7 @@ const T = {
     ctaH1: "Your next restart",
     ctaH2: "doesn't have to happen.",
     ctaSub: "Find someone who won't let you quit.",
-    ctaBtn: "Find Your Partner",
+    ctaBtn: "Join the Waitlist",
     ctaNote: "Free to join. No credit card required.",
     faqEyebrow: "FAQ",
     faqH: "Real questions.",
@@ -107,7 +107,6 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ── Light mode overrides ── */
-body.light {
   background: #F2F2F2;
   color: #0A0A0A;
   --surface: #FFFFFF;
@@ -118,30 +117,6 @@ body.light {
   --gray2: #888888;
   --white: #0A0A0A;
 }
-body.light .hero-section { background: #0A0A0A !important; }
-body.light .hero-section * { color: inherit; }
-body.light .noise-bg { opacity: .04; }
-body.light .section-dark { background: #0A0A0A !important; color: #fff !important; }
-body.light .section-dark * { color: inherit !important; }
-body.light .pricing-grid > div:first-child { background: #fff !important; border-color: #E0E0E0 !important; }
-body.light .pricing-grid > div:first-child span, body.light .pricing-grid > div:first-child p, body.light .pricing-grid > div:first-child div { color: inherit; }
-body.light .steps-grid > div { background: #fff !important; border-color: #E0E0E0 !important; }
-body.light .proof-grid > div { background: #fff !important; border-color: #E0E0E0 !important; }
-body.light .feat-grid > div { background: #fff !important; border-color: #E0E0E0 !important; }
-body.light .faq-item { background: #fff !important; border-color: #E0E0E0 !important; }
-body.light .faq-q { color: #0A0A0A !important; }
-body.light .faq-a { color: #555 !important; }
-body.light .faq-plus { color: #DC2626 !important; }
-body.light .card { background: #fff; border-color: #E0E0E0; }
-body.light .card:hover { border-color: var(--red); }
-body.light .eyebrow { color: var(--red) !important; }
-body.light .body-text { color: #444 !important; }
-body.light .t-card { background: #fff; border-color: #E0E0E0; }
-body.light .t-card:hover { border-color: rgba(220,38,38,.3); }
-body.light .step-body { color: #555 !important; }
-body.light .faq-item { background: #fff; border-color: #E0E0E0; }
-body.light .faq-q { color: #0A0A0A !important; }
-body.light .faq-a { color: #555 !important; }
 
 /* ── Typography ── */
 .bebas { font-family: 'Bebas Neue', sans-serif; letter-spacing: .04em; }
@@ -267,6 +242,8 @@ body.light .faq-a { color: #555 !important; }
   .hide-m { display: none !important; }
   .sec { padding: 72px 0; }
   .hero-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .phone-row { flex-direction: row !important; gap: 10px !important; justify-content: center !important; }
+  .phone-frame { width: 115px !important; border-radius: 22px !important; }
   .feat-grid { grid-template-columns: 1fr 1fr !important; }
   .proof-grid { grid-template-columns: 1fr !important; }
   .steps-grid { grid-template-columns: 1fr !important; }
@@ -552,7 +529,7 @@ function Logo({ size = "1.6rem" }) {
 }
 
 /* ── NAV ─────────────────────────────────────────────────────── */
-function Nav({ dark, onToggle, lang, setLang, t, onCTA }) {
+function Nav({ lang, setLang, t, onCTA }) {
   const [langOpen, setLangOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -567,11 +544,6 @@ function Nav({ dark, onToggle, lang, setLang, t, onCTA }) {
             return <a key={i} href={hrefs[i]} className="nav-link" style={{ color: dark ? undefined : "#444" }}>{label}</a>;
           })}
           <button className="btn-red" onClick={onCTA} style={{ padding: "10px 24px", fontSize: ".78rem" }}>{t.joinWaitlist}</button>
-          {/* Toggle */}
-          <button onClick={onToggle} style={{ background: "none", border: "none", cursor: "pointer", padding: 4, display: "flex", alignItems: "center" }}>
-            {dark ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-              : <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B91C1C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>}
-          </button>
           {/* Lang */}
           <div style={{ position: "relative" }}>
             <button onClick={() => setLangOpen(o => !o)} style={{ display: "flex", alignItems: "center", gap: 5, background: "none", border: "none", cursor: "pointer", color: "#EF4444", fontFamily: "'JetBrains Mono',monospace", fontWeight: 500, fontSize: ".72rem", letterSpacing: ".1em" }}>
@@ -591,10 +563,6 @@ function Nav({ dark, onToggle, lang, setLang, t, onCTA }) {
         </div>
         {/* Mobile */}
         <div className="hide-d" style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <button onClick={onToggle} style={{ background: "none", border: "none", cursor: "pointer", padding: 4, display: "flex" }}>
-            {dark ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2" strokeLinecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-              : <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B91C1C" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>}
-          </button>
           <button onClick={() => setMenuOpen(o => !o)} style={{ background: "none", border: "none", color: dark ? "#fff" : "#0A0A0A", fontSize: "1.4rem", cursor: "pointer", lineHeight: 1, padding: 4 }}>{menuOpen ? "✕" : "☰"}</button>
         </div>
       </div>
@@ -641,8 +609,7 @@ function Hero({ onCTA, t }) {
             </h1>
             <p className="anim-fade-up-2" style={{ fontSize: "clamp(1rem,1.5vw,1.15rem)", color: "#A0A0A0", lineHeight: 1.75, maxWidth: 480, marginBottom: 40 }}>{t.heroSub}</p>
             <div className="hero-btns anim-fade-up-3" style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
-              <button className="btn-red" onClick={onCTA}>{t.heroCTA1} →</button>
-              <button className="btn-ghost" onClick={onCTA}>{t.heroCTA2}</button>
+              <button className="btn-red" onClick={onCTA}>{t.heroCTA2} →</button>
             </div>
             {/* Stats strip */}
             <div className="anim-fade-up-4" style={{ display: "flex", gap: 32, marginTop: 48, paddingTop: 32, borderTop: "1px solid rgba(255,255,255,.06)" }}>
@@ -655,21 +622,102 @@ function Hero({ onCTA, t }) {
             </div>
           </div>
           {/* Right — phone mockups */}
-          <div className="anim-fade-up-2" style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 20, position: "relative", flexWrap: "wrap" }}>
-            <div style={{ display: "flex", flexDirection: "column", gap: 20, alignItems: "flex-end", transform: "translateY(20px)" }}>
+          <div className="anim-fade-up-2 phone-row" style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 20, position: "relative" }}>
+            <div className="hide-m" style={{ display: "flex", flexDirection: "column", gap: 20, alignItems: "flex-end", transform: "translateY(20px)" }}>
               <StreakPhone />
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 20, alignItems: "flex-start", transform: "translateY(-20px)" }}>
+            <div className="hide-m" style={{ display: "flex", flexDirection: "column", gap: 20, alignItems: "flex-start", transform: "translateY(-20px)" }}>
               <ChatPhone />
               <AIPhone />
             </div>
-            {/* Connecting glow lines */}
+            {/* Mobile: all 3 side by side */}
+            <div className="hide-d" style={{ display: "flex", flexDirection: "row", gap: 10, justifyContent: "center", alignItems: "center", width: "100%" }}>
+              <StreakPhone />
+              <ChatPhone />
+              <AIPhone />
+            </div>
             <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 50%, rgba(220,38,38,.08) 0%, transparent 70%)", pointerEvents: "none" }} />
           </div>
         </div>
       </div>
       {/* Bottom fade */}
       <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 120, background: "linear-gradient(to bottom, transparent, #080808)", zIndex: 3 }} />
+    </section>
+  );
+}
+
+
+/* ── WHAT IS ACCOUNTAFIT ─────────────────────────────────────── */
+function WhatIsIt({ t, onCTA }) {
+  const steps = [
+    {
+      n: "01",
+      icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#DC2626" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
+      title: "Build Your Profile",
+      body: "Set your fitness goals, upload photos, define your schedule and commitment level. Tell us what you're working toward and how hard you're willing to push."
+    },
+    {
+      n: "02",
+      icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#DC2626" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>,
+      title: "Set Your Preferences",
+      body: "Choose your training style, intensity level, and what you need from a partner. Someone to push you? Someone to match your pace? You decide."
+    },
+    {
+      n: "03",
+      icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#DC2626" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>,
+      title: "Get Matched",
+      body: "Think Tinder, but for fitness accountability. Swipe through profiles, connect with someone who has the same fire — and make a commitment that neither of you will break."
+    },
+  ];
+
+  return (
+    <section style={{ background: "#000", padding: "100px 0", position: "relative", overflow: "hidden" }}>
+      <div className="noise-bg" />
+      {/* Red glow */}
+      <div style={{ position: "absolute", bottom: 0, left: "50%", transform: "translateX(-50%)", width: 700, height: 400, background: "radial-gradient(ellipse, rgba(220,38,38,.12) 0%, transparent 70%)", pointerEvents: "none" }} />
+      <div className="wrap" style={{ position: "relative", zIndex: 2 }}>
+        {/* Eyebrow + headline */}
+        <div style={{ textAlign: "center", marginBottom: 72 }}>
+          <span className="mono" style={{ fontSize: ".72rem", letterSpacing: ".22em", textTransform: "uppercase", color: "#DC2626", border: "1px solid rgba(220,38,38,.25)", borderRadius: 3, padding: "6px 12px", display: "inline-block", marginBottom: 24 }}>INTRODUCING ACCOUNTAFIT</span>
+          <h2 className="bebas" style={{ fontSize: "clamp(3rem,6vw,5.5rem)", lineHeight: .9, color: "#fff", maxWidth: 800, margin: "0 auto 24px" }}>
+            The World's First<br /><span style={{ color: "#DC2626" }}>Fitness Accountability</span><br />Matching Platform
+          </h2>
+          <p style={{ fontSize: "1.05rem", color: "#606060", lineHeight: 1.85, maxWidth: 580, margin: "0 auto" }}>
+            We didn't build another workout tracker. We built something the fitness world has never seen — a partner-matching system designed around the one thing that actually determines whether you succeed: <span style={{ color: "#A0A0A0", fontStyle: "italic" }}>who's with you.</span>
+          </p>
+        </div>
+
+        {/* 3-step cards */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 2, marginBottom: 80 }} className="steps-grid">
+          {steps.map((s, i) => (
+            <div key={i} style={{ background: "#0A0A0A", border: "1px solid #1A1A1A", padding: "40px 32px", position: "relative", overflow: "hidden", transition: "border-color .3s" }}
+              onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(220,38,38,.4)"}
+              onMouseLeave={e => e.currentTarget.style.borderColor = "#1A1A1A"}>
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: i === 0 ? "linear-gradient(90deg, #DC2626, transparent)" : "transparent" }} />
+              <div className="bebas" style={{ fontSize: "4rem", color: "rgba(220,38,38,.06)", lineHeight: 1, marginBottom: 16, letterSpacing: ".04em" }}>{s.n}</div>
+              <div style={{ marginBottom: 20 }}>{s.icon}</div>
+              <h3 className="bebas" style={{ fontSize: "1.5rem", color: "#fff", marginBottom: 12, letterSpacing: ".04em" }}>{s.title}</h3>
+              <p style={{ fontSize: ".88rem", color: "#606060", lineHeight: 1.75 }}>{s.body}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Coming soon banner */}
+        <div style={{ border: "1px solid #1A1A1A", borderRadius: 8, padding: "36px 40px", background: "#080808", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 24, position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg, transparent, rgba(220,38,38,.4), transparent)" }} />
+          <div>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+              <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#DC2626", animation: "pulse 2s ease-in-out infinite" }} />
+              <span className="mono" style={{ fontSize: ".68rem", color: "#DC2626", letterSpacing: ".18em" }}>MORE FEATURES COMING SOON</span>
+            </div>
+            <h3 className="bebas" style={{ fontSize: "clamp(1.6rem,3vw,2.4rem)", color: "#fff", letterSpacing: ".04em", marginBottom: 8 }}>We're just getting started.</h3>
+            <p style={{ fontSize: ".9rem", color: "#505050", maxWidth: 480, lineHeight: 1.7 }}>
+              Leaderboards. AI-powered workout programs. Meal planning. Real-time partner updates. Video check-ins. We're building the complete accountability ecosystem — and waitlist members get everything first.
+            </p>
+          </div>
+          <button className="btn-red" onClick={onCTA} style={{ flexShrink: 0 }}>Join the Waitlist →</button>
+        </div>
+      </div>
     </section>
   );
 }
@@ -953,12 +1001,17 @@ function FAQ({ dark, t }) {
 function FinalCTA({ onCTA, t }) {
   const [email, setEmail] = useState("");
   const [done, setDone] = useState(false);
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    if (email.trim()) {
-      window.location.href = `mailto:info@accountafit.com?subject=AccountaFit Waitlist&body=Please add me to the waitlist: ${encodeURIComponent(email)}`;
-      setDone(true);
-    }
+    if (!email.trim()) return;
+    try {
+      await fetch("https://formspree.io/f/REPLACE_WITH_FORMSPREE_ID", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({ email, _subject: "New AccountaFit Waitlist Signup", message: `New waitlist signup: ${email}` }),
+      });
+    } catch {}
+    setDone(true);
   };
   return (
     <section className="sec section-dark" style={{ background: "#000", textAlign: "center", position: "relative", overflow: "hidden" }}>
@@ -1059,12 +1112,17 @@ function Footer({ dark, t }) {
 function Modal({ onClose, t }) {
   const [email, setEmail] = useState("");
   const [done, setDone] = useState(false);
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    if (email.trim()) {
-      window.location.href = `mailto:info@accountafit.com?subject=AccountaFit Waitlist&body=Please add me to the waitlist: ${encodeURIComponent(email)}`;
-      setDone(true);
-    }
+    if (!email.trim()) return;
+    try {
+      await fetch("https://formspree.io/f/REPLACE_WITH_FORMSPREE_ID", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({ email, _subject: "New AccountaFit Waitlist Signup", message: `New waitlist signup: ${email}` }),
+      });
+    } catch {}
+    setDone(true);
   };
   return (
     <div style={{ position: "fixed", inset: 0, zIndex: 999, display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }} onClick={onClose}>
@@ -1087,7 +1145,7 @@ function Modal({ onClose, t }) {
               <input type="email" placeholder="your@email.com" value={email} onChange={e => setEmail(e.target.value)} required
                 style={{ background: "#111", border: "1px solid #222", borderRadius: 4, color: "#fff", fontFamily: "'DM Sans',sans-serif", fontSize: ".95rem", padding: "14px 16px", outline: "none", transition: "border-color .2s" }}
                 onFocus={e => e.target.style.borderColor = "#DC2626"} onBlur={e => e.target.style.borderColor = "#222"} />
-              <button type="submit" className="btn-red" style={{ justifyContent: "center", padding: "14px 0" }}>Find My Partner →</button>
+              <button type="submit" className="btn-red" style={{ justifyContent: "center", padding: "14px 0" }}>{t.heroCTA2} →</button>
             </form>
             <p className="mono" style={{ marginTop: 10, fontSize: ".62rem", color: "#333", textAlign: "center", letterSpacing: ".08em" }}>NO SPAM. UNSUBSCRIBE ANYTIME.</p>
           </>
@@ -1099,20 +1157,17 @@ function Modal({ onClose, t }) {
 
 /* ── ROOT APP ────────────────────────────────────────────────── */
 export default function AccountaFit() {
-  const [dark, setDark] = useState(true);
+  const dark = true;
   const [lang, setLang] = useState("en");
   const [modal, setModal] = useState(false);
   const t = T[lang] || T.en;
 
-  useEffect(() => {
-    document.body.classList.toggle("light", !dark);
-  }, [dark]);
-
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: G }} />
-      <Nav dark={dark} onToggle={() => setDark(d => !d)} lang={lang} setLang={setLang} t={t} onCTA={() => setModal(true)} />
+      <Nav lang={lang} setLang={setLang} t={t} onCTA={() => setModal(true)} />
       <Hero onCTA={() => setModal(true)} t={t} />
+      <WhatIsIt t={t} onCTA={() => setModal(true)} />
       <Problem dark={dark} t={t} />
       <Solution dark={dark} t={t} />
       <HowItWorks dark={dark} t={t} />
