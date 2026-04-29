@@ -2012,7 +2012,7 @@ function FinalCTA({ onCTA, t }) {
     e.preventDefault();
     if (!email.trim()) return;
     try {
-      await fetch("https://formspree.io/f/https://formspree.io/f/mnjwagoo", {
+      await fetch("https://formspree.io/f/mnjwagoo", {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify({ email, _subject: "New AccountaFit Waitlist Signup", message: `New waitlist signup: ${email}` }),
@@ -2123,7 +2123,7 @@ function Modal({ onClose, t }) {
     e.preventDefault();
     if (!email.trim()) return;
     try {
-      await fetch("https://formspree.io/f/https://formspree.io/f/mnjwagoo", {
+      await fetch("https://formspree.io/f/mnjwagoo", {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify({ email, _subject: "New AccountaFit Waitlist Signup", message: `New waitlist signup: ${email}` }),
@@ -2301,7 +2301,7 @@ function Modal({ onClose, t }) {
     e.preventDefault();
     if (!email.trim()) return;
     try {
-      await fetch("https://formspree.io/f/https://formspree.io/f/mnjwagoo", {
+      await fetch("https://formspree.io/f/mnjwagoo", {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify({ email, _subject: "New AccountaFit Waitlist Signup", message: `New waitlist signup: ${email}` }),
