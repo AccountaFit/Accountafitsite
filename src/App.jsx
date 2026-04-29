@@ -38,12 +38,12 @@ const T = {
     featEyebrow: "FEATURES",
     featH: "Built different. Because the problem is different.",
     features: [
-      { icon: "⚡", title: "Smart Matching", body: "Paired by goals, schedule, and intensity — not randomly. Your match is your mirror." },
-      { icon: "🔥", title: "Streak Tracking", body: "Shared streaks between partners. Both check in or both lose it. Social pressure that actually works." },
-      { icon: "💬", title: "Accountability Chat", body: "Direct line to your partner. No feed. No noise. Just the two of you, every day." },
-      { icon: "🤖", title: "AI Workout Generator", body: "Personalized plans built around your goals, level, and available time. No guesswork." },
-      { icon: "🥗", title: "Daily Meal Guidance", body: "A new meal every day tailored to your fitness goals. High-protein, low-carb, vegan — your choice." },
-      { icon: "📊", title: "Real-Time Progress", body: "See your partner's activity in real time. When they're online, you know. When they skip, you know." },
+      { icon: "match", title: "Smart Matching", body: "Paired by goals, schedule, and intensity — not randomly. Your match is your mirror." },
+      { icon: "streak", title: "Streak Tracking", body: "Shared streaks between partners. Both check in or both lose it. Social pressure that actually works." },
+      { icon: "chat", title: "Accountability Chat", body: "Direct line to your partner. No feed. No noise. Just the two of you, every day." },
+      { icon: "ai", title: "AI Workout Generator", body: "Personalized plans built around your goals, level, and available time. No guesswork." },
+      { icon: "meal", title: "Daily Meal Guidance", body: "A new meal every day tailored to your fitness goals. High-protein, low-carb, vegan — your choice." },
+      { icon: "progress", title: "Real-Time Progress", body: "See your partner's activity in real time. When they're online, you know. When they skip, you know." },
     ],
     loopEyebrow: "THE SYSTEM",
     loopH: "The loop that changes everything.",
@@ -123,6 +123,15 @@ body.light .hero-section * { color: inherit; }
 body.light .noise-bg { opacity: .04; }
 body.light .section-dark { background: #0A0A0A !important; color: #fff !important; }
 body.light .section-dark * { color: inherit !important; }
+body.light .pricing-grid > div:first-child { background: #fff !important; border-color: #E0E0E0 !important; }
+body.light .pricing-grid > div:first-child span, body.light .pricing-grid > div:first-child p, body.light .pricing-grid > div:first-child div { color: inherit; }
+body.light .steps-grid > div { background: #fff !important; border-color: #E0E0E0 !important; }
+body.light .proof-grid > div { background: #fff !important; border-color: #E0E0E0 !important; }
+body.light .feat-grid > div { background: #fff !important; border-color: #E0E0E0 !important; }
+body.light .faq-item { background: #fff !important; border-color: #E0E0E0 !important; }
+body.light .faq-q { color: #0A0A0A !important; }
+body.light .faq-a { color: #555 !important; }
+body.light .faq-plus { color: #DC2626 !important; }
 body.light .card { background: #fff; border-color: #E0E0E0; }
 body.light .card:hover { border-color: var(--red); }
 body.light .eyebrow { color: var(--red) !important; }
@@ -257,7 +266,7 @@ body.light .faq-a { color: #555 !important; }
 @media (max-width: 900px) {
   .hide-m { display: none !important; }
   .sec { padding: 72px 0; }
-  .hero-grid { grid-template-columns: 1fr !important; }
+  .hero-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
   .feat-grid { grid-template-columns: 1fr 1fr !important; }
   .proof-grid { grid-template-columns: 1fr !important; }
   .steps-grid { grid-template-columns: 1fr !important; }
@@ -646,7 +655,7 @@ function Hero({ onCTA, t }) {
             </div>
           </div>
           {/* Right — phone mockups */}
-          <div className="hide-m anim-fade-up-2" style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 20, position: "relative" }}>
+          <div className="anim-fade-up-2" style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 20, position: "relative", flexWrap: "wrap" }}>
             <div style={{ display: "flex", flexDirection: "column", gap: 20, alignItems: "flex-end", transform: "translateY(20px)" }}>
               <StreakPhone />
             </div>
@@ -770,7 +779,14 @@ function HowItWorks({ dark, t }) {
 
 /* ── FEATURES ────────────────────────────────────────────────── */
 function Features({ dark, t }) {
-  const icons = { "⚡": "⚡", "🔥": "🔥", "💬": "💬", "🤖": "🤖", "🥗": "🥗", "📊": "📊" };
+  const ICONS = {
+    match:    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="3.2"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a3.2 3.2 0 0 1 0 6.2"/></svg>,
+    streak:   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2c2.8 3 4.5 5.6 4.5 8.2A4.5 4.5 0 0 1 12 14.7a4.5 4.5 0 0 1-4.5-4.5C7.5 7.6 9.2 5 12 2Z"/><path d="M7 15.5A5 5 0 0 0 12 21a5 5 0 0 0 5-5.5"/></svg>,
+    chat:     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
+    ai:       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 12h6M9 15h4"/><circle cx="17" cy="15" r="1.5" fill="currentColor" stroke="none"/></svg>,
+    meal:     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>,
+    progress: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>,
+  };
   return (
     <section className="sec" id="features" style={{ background: dark ? "#050505" : "#EBEBEB" }}>
       <div className="noise-bg" style={{ opacity: .03 }} />
@@ -784,7 +800,7 @@ function Features({ dark, t }) {
         <div className="feat-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 2 }}>
           {t.features.map(({ icon, title, body }, i) => (
             <div key={i} className="card" style={{ borderRadius: 0, border: `1px solid ${dark ? "#1A1A1A" : "#E0E0E0"}`, background: dark ? "#080808" : "#fff", padding: "36px 28px" }}>
-              <div style={{ fontSize: "2rem", marginBottom: 20 }}>{icon}</div>
+              <div style={{ color: "#DC2626", marginBottom: 20, display: "flex" }}>{ICONS[icon]}</div>
               <h3 className="bebas" style={{ fontSize: "1.4rem", color: dark ? "#fff" : "#0A0A0A", marginBottom: 12, letterSpacing: ".04em" }}>{title}</h3>
               <p style={{ fontSize: ".88rem", color: dark ? "#606060" : "#666", lineHeight: 1.72 }} className="body-text">{body}</p>
             </div>
@@ -883,8 +899,13 @@ function Pricing({ dark, onCTA, t }) {
               <span className="mono" style={{ fontSize: ".62rem", background: "#DC2626", color: "#fff", padding: "4px 10px", borderRadius: 3, letterSpacing: ".1em" }}>POPULAR</span>
             </div>
             <div className="mono" style={{ fontSize: ".7rem", letterSpacing: ".16em", color: "#DC2626", textTransform: "uppercase", marginBottom: 12 }}>{t.pricingPro}</div>
-            <div className="bebas" style={{ fontSize: "3.5rem", color: "#fff", letterSpacing: ".04em", marginBottom: 4 }}>$9<span style={{ fontSize: "1.5rem", color: "#606060" }}>.99</span></div>
-            <div className="mono" style={{ fontSize: ".7rem", color: "#404040", marginBottom: 24 }}>/ month</div>
+            <div style={{ marginBottom: 24 }}>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "rgba(220,38,38,.08)", border: "1px solid rgba(220,38,38,.25)", borderRadius: 4, padding: "12px 18px" }}>
+                <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#DC2626", animation: "pulse 2s ease-in-out infinite" }} />
+                <span className="mono" style={{ fontSize: ".75rem", color: "#EF4444", letterSpacing: ".14em" }}>PRICING COMING SOON</span>
+              </div>
+              <p className="mono" style={{ fontSize: ".65rem", color: "#333", letterSpacing: ".08em", marginTop: 8 }}>Join the waitlist for early access pricing</p>
+            </div>
             <p style={{ fontSize: ".85rem", color: "#808080", lineHeight: 1.7, marginBottom: 28 }}>{t.pricingProDesc}</p>
             {t.proFeatures.map(f => (
               <div key={f} style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
