@@ -228,23 +228,21 @@ a { color: inherit; text-decoration: none; }
 /* ── Mobile ── */
 @media (max-width: 900px) {
   .hide-m { display: none !important; }
-  .sec { padding: 72px 0; }
+  .sec { padding: 60px 0; }
   .feat-grid { grid-template-columns: 1fr 1fr !important; }
   .proof-grid { grid-template-columns: 1fr !important; }
   .steps-grid { grid-template-columns: 1fr !important; }
   .pricing-grid { grid-template-columns: 1fr !important; }
   .faq-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
-}
-@media (max-width: 480px) {
-  .feat-grid { grid-template-columns: 1fr !important; }
+  .wrap { padding: 0 6% !important; }
+  /* Marquee smaller on mobile */
+  .marquee-item { font-size: 1.4rem !important; padding: 0 20px !important; gap: 16px !important; }
 }
 @media (max-width: 600px) {
-  .hero-btns { flex-direction: column !important; align-items: stretch !important; }
-  .hero-btns .btn-red, .hero-btns .btn-ghost { justify-content: center; }
+  .feat-grid { grid-template-columns: 1fr !important; }
+  .pricing-grid { grid-template-columns: 1fr !important; }
 }
 @media (min-width: 901px) { .hide-d { display: none !important; } }
-
-/* ── Mobile phone content scaling — desktop only, phones removed from mobile ── */
 
 /* ── FAQ ── */
 .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 4px; transition: border-color .2s; }
@@ -625,23 +623,28 @@ function Hero({ onCTA, t }) {
           </div>
         </div>
 
-        {/* ── MOBILE layout — clean, no phones ── */}
-        <div className="hide-d" style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "48px 0 56px", minHeight: "calc(100vh - 64px)" }}>
-          <div style={{ marginBottom: 20 }}>
-            <span className="mono" style={{ fontSize: ".62rem", letterSpacing: ".18em", textTransform: "uppercase", color: "#DC2626", border: "1px solid rgba(220,38,38,.25)", borderRadius: 3, padding: "5px 10px" }}>{t.heroEyebrow}</span>
+        {/* ── MOBILE layout — full width, bold, clean ── */}
+        <div className="hide-d" style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "40px 0 52px", minHeight: "calc(100vh - 64px)" }}>
+          {/* Eyebrow tag */}
+          <div style={{ marginBottom: 18 }}>
+            <span className="mono" style={{ fontSize: ".6rem", letterSpacing: ".16em", textTransform: "uppercase", color: "#DC2626", border: "1px solid rgba(220,38,38,.3)", borderRadius: 3, padding: "5px 10px" }}>{t.heroEyebrow}</span>
           </div>
-          <h1 className="bebas" style={{ fontSize: "clamp(4rem,18vw,6rem)", lineHeight: .88, color: "#fff", marginBottom: 24, letterSpacing: ".04em" }}>
+          {/* Big headline */}
+          <h1 className="bebas" style={{ fontSize: "clamp(4.2rem,20vw,6.5rem)", lineHeight: .88, color: "#fff", marginBottom: 20, letterSpacing: ".04em" }}>
             {t.heroH1a}<br />
             <span style={{ color: "#DC2626" }}>{t.heroH1b}</span><br />
             {t.heroH1c}
           </h1>
-          <p style={{ fontSize: "1rem", color: "#C0C0C0", lineHeight: 1.75, marginBottom: 32 }}>{t.heroSub}</p>
-          <button className="btn-red" onClick={onCTA} style={{ width: "100%", justifyContent: "center", padding: "16px 0", fontSize: ".82rem", marginBottom: 36 }}>{t.heroCTA2} →</button>
-          <div style={{ display: "flex", paddingTop: 28, borderTop: "1px solid rgba(255,255,255,.07)", justifyContent: "space-between" }}>
-            {[["3×", "More likely to hit goals"], ["48h", "Avg match time"], ["94%", "Stronger consistency"]].map(([v, l]) => (
+          {/* Subheading */}
+          <p style={{ fontSize: ".98rem", color: "#C0C0C0", lineHeight: 1.75, marginBottom: 28 }}>{t.heroSub}</p>
+          {/* CTA */}
+          <button className="btn-red" onClick={onCTA} style={{ width: "100%", justifyContent: "center", padding: "17px 0", fontSize: ".8rem", marginBottom: 32 }}>{t.heroCTA2} →</button>
+          {/* Stats strip */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, paddingTop: 24, borderTop: "1px solid rgba(255,255,255,.07)" }}>
+            {[["3×", "More likely to hit goals"], ["48H", "Avg match time"], ["94%", "Stronger consistency"]].map(([v, l]) => (
               <div key={v}>
-                <div className="bebas" style={{ fontSize: "1.8rem", color: "#DC2626", letterSpacing: ".04em" }}>{v}</div>
-                <div className="mono" style={{ fontSize: ".58rem", color: "#909090", letterSpacing: ".08em", textTransform: "uppercase", lineHeight: 1.4 }}>{l}</div>
+                <div className="bebas" style={{ fontSize: "1.9rem", color: "#DC2626", letterSpacing: ".04em" }}>{v}</div>
+                <div className="mono" style={{ fontSize: ".52rem", color: "#A0A0A0", letterSpacing: ".06em", textTransform: "uppercase", lineHeight: 1.4 }}>{l}</div>
               </div>
             ))}
           </div>
@@ -678,7 +681,7 @@ function WhatIsIt({ t, onCTA }) {
   ];
 
   return (
-    <section style={{ background: "#000", padding: "100px 0", position: "relative", overflow: "hidden" }}>
+    <section style={{ background: "#000", padding: "72px 0", position: "relative", overflow: "hidden" }}>
       <div className="noise-bg" />
       {/* Red glow */}
       <div style={{ position: "absolute", bottom: 0, left: "50%", transform: "translateX(-50%)", width: 700, height: 400, background: "radial-gradient(ellipse, rgba(220,38,38,.12) 0%, transparent 70%)", pointerEvents: "none" }} />
@@ -710,7 +713,7 @@ function WhatIsIt({ t, onCTA }) {
         </div>
 
         {/* Coming soon banner */}
-        <div style={{ border: "1px solid #1A1A1A", borderRadius: 8, padding: "36px 40px", background: "#080808", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 24, position: "relative", overflow: "hidden" }}>
+        <div style={{ border: "1px solid #1A1A1A", borderRadius: 8, padding: "28px 24px", background: "#080808", display: "flex", flexDirection: "column", gap: 20, position: "relative", overflow: "hidden" }}>
           <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg, transparent, rgba(220,38,38,.4), transparent)" }} />
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
@@ -823,7 +826,7 @@ function HowItWorks({ t }) {
         </div>
         <div className="steps-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 2 }}>
           {t.steps.map((s, i) => (
-            <div key={i} style={{ background: dark ? "#0A0A0A" : "#fff", border: `1px solid ${dark ? "#1A1A1A" : "#E0E0E0"}`, padding: "36px 28px", position: "relative", overflow: "hidden", transition: "all .3s ease" }}
+            <div key={i} style={{ background: dark ? "#0A0A0A" : "#fff", border: `1px solid ${dark ? "#1A1A1A" : "#E0E0E0"}`, padding: "28px 22px", position: "relative", overflow: "hidden", transition: "all .3s ease" }}
               onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(220,38,38,.5)"; e.currentTarget.style.background = dark ? "#0F0F0F" : "#FAFAFA"; }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = dark ? "#1A1A1A" : "#E0E0E0"; e.currentTarget.style.background = dark ? "#0A0A0A" : "#fff"; }}>
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: i === 0 ? "linear-gradient(90deg, #DC2626, transparent)" : "transparent", transition: "background .3s" }} />
@@ -945,7 +948,7 @@ function Pricing({ onCTA, t }) {
         </div>
         <div className="pricing-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2, maxWidth: 800, margin: "0 auto" }}>
           {/* Free */}
-          <div style={{ background: "#0A0A0A", border: "1px solid #1A1A1A", padding: "40px 32px" }}>
+          <div style={{ background: "#0A0A0A", border: "1px solid #1A1A1A", padding: "32px 24px" }}>
             <div className="mono" style={{ fontSize: ".7rem", letterSpacing: ".16em", color: "#909090", textTransform: "uppercase", marginBottom: 12 }}>{t.pricingFree}</div>
             <div className="bebas" style={{ fontSize: "3.5rem", color: "#fff", letterSpacing: ".04em", marginBottom: 4 }}>$0</div>
             <div className="mono" style={{ fontSize: ".7rem", color: "#707070", marginBottom: 24 }}>/ forever</div>
@@ -959,7 +962,7 @@ function Pricing({ onCTA, t }) {
             <button className="btn-ghost" onClick={onCTA} style={{ width: "100%", justifyContent: "center", marginTop: 24 }}>Get Started</button>
           </div>
           {/* Pro */}
-          <div style={{ background: "#0F0707", border: "1px solid rgba(220,38,38,.35)", padding: "40px 32px", position: "relative", overflow: "hidden" }}>
+          <div style={{ background: "#0F0707", border: "1px solid rgba(220,38,38,.35)", padding: "32px 24px", position: "relative", overflow: "hidden" }}>
             <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg, #DC2626, #EF4444, #DC2626)" }} />
             <div style={{ position: "absolute", top: 16, right: 16 }}>
               <span className="mono" style={{ fontSize: ".62rem", background: "#DC2626", color: "#fff", padding: "4px 10px", borderRadius: 3, letterSpacing: ".1em" }}>POPULAR</span>
@@ -994,7 +997,7 @@ function FAQ({ t }) {
   return (
     <section className="sec" id="faq" style={{ background: dark ? "#080808" : "#F2F2F2" }}>
       <div className="wrap">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: 80, alignItems: "start" }} className="faq-grid">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: 80, alignItems: "start" }} className="hero-grid faq-grid">
           <div>
             <span className="eyebrow">{t.faqEyebrow}</span>
             <h2 className="bebas" style={{ fontSize: "clamp(2.8rem,5vw,4.5rem)", lineHeight: .92, color: dark ? "#fff" : "#0A0A0A" }}>{t.faqH}</h2>
@@ -1050,11 +1053,11 @@ function FinalCTA({ onCTA, t }) {
           </div>
         ) : (
           <>
-            <form onSubmit={submit} style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", maxWidth: 520, margin: "0 auto 16px" }}>
+            <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: 12, alignItems: "center", maxWidth: 480, margin: "0 auto 16px" }}>
               <input type="email" placeholder={t.emailPH || "Enter your email"} value={email} onChange={e => setEmail(e.target.value)} required
-                style={{ flex: "1 1 260px", height: 52, background: "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.1)", borderRadius: 4, color: "#fff", fontFamily: "'DM Sans',sans-serif", fontSize: ".95rem", padding: "0 18px", outline: "none", transition: "border-color .2s" }}
+                style={{ width: "100%", height: 52, background: "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.1)", borderRadius: 4, color: "#fff", fontFamily: "'DM Sans',sans-serif", fontSize: ".95rem", padding: "0 18px", outline: "none", transition: "border-color .2s" }}
                 onFocus={e => e.target.style.borderColor = "rgba(220,38,38,.5)"} onBlur={e => e.target.style.borderColor = "rgba(255,255,255,.1)"} />
-              <button type="submit" className="btn-red" style={{ height: 52, padding: "0 32px", borderRadius: 4 }}>{t.ctaBtn}</button>
+              <button type="submit" className="btn-red" style={{ width: "100%", height: 52, justifyContent: "center", borderRadius: 4 }}>{t.ctaBtn}</button>
             </form>
             <p className="mono" style={{ fontSize: ".65rem", color: "#555", letterSpacing: ".1em" }}>{t.ctaNote}</p>
           </>
@@ -1068,12 +1071,12 @@ function FinalCTA({ onCTA, t }) {
 function Footer({ t }) {
   const dark = true;
   return (
-    <footer style={{ background: "#050505", borderTop: "1px solid #0F0F0F", padding: "48px 5% 32px" }}>
+    <footer style={{ background: "#050505", borderTop: "1px solid #0F0F0F", padding: "48px 6% 32px" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 40, marginBottom: 48 }}>
           <div style={{ maxWidth: 280 }}>
             <Logo size="1.8rem" />
-            <p style={{ marginTop: 14, fontSize: ".88rem", color: "#707070", lineHeight: 1.7 }}>Consistency over motivation. Accountability over intention. Stop starting over.</p>
+            <p style={{ marginTop: 14, fontSize: ".88rem", color: "#909090", lineHeight: 1.7 }}>Consistency over motivation. Accountability over intention. Stop starting over.</p>
             {/* Socials */}
             <div style={{ display: "flex", gap: 10, marginTop: 20 }}>
               {[
@@ -1108,11 +1111,11 @@ function Footer({ t }) {
               { title: "Legal", links: [{ label: "Terms of Service", href: "/terms" }, { label: "Privacy Policy", href: "/privacy" }, { label: "Community Guidelines", href: "/guidelines" }, { label: "Safety Policy", href: "/safety" }] },
             ].map(({ title, links }) => (
               <div key={title}>
-                <div className="mono" style={{ fontSize: ".62rem", letterSpacing: ".18em", textTransform: "uppercase", color: "#555", marginBottom: 16 }}>{title}</div>
+                <div className="mono" style={{ fontSize: ".62rem", letterSpacing: ".18em", textTransform: "uppercase", color: "#888", marginBottom: 16 }}>{title}</div>
                 {links.map(({ label, href }) => (
-                  <a key={label} href={href} style={{ display: "block", color: "#707070", fontSize: ".85rem", marginBottom: 10, transition: "color .2s" }}
+                  <a key={label} href={href} style={{ display: "block", color: "#A0A0A0", fontSize: ".85rem", marginBottom: 10, transition: "color .2s" }}
                     onMouseEnter={e => e.target.style.color = "#DC2626"}
-                    onMouseLeave={e => e.target.style.color = "#707070"}>{label}</a>
+                    onMouseLeave={e => e.target.style.color = "#A0A0A0"}>{label}</a>
                 ))}
               </div>
             ))}
