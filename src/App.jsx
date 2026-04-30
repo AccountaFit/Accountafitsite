@@ -233,12 +233,9 @@ a { color: inherit; text-decoration: none; }
   .proof-grid { grid-template-columns: 1fr !important; }
   .steps-grid { grid-template-columns: 1fr !important; }
   .pricing-grid { grid-template-columns: 1fr !important; }
-  .phone-frame { width: 108px !important; border-radius: 20px !important; }
-  .phone-notch { width: 44px !important; height: 14px !important; }
-  .streak-badge { padding: 3px 8px !important; font-size: .58rem !important; }
+  .faq-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
 }
 @media (max-width: 480px) {
-  .phone-frame { width: 90px !important; border-radius: 16px !important; }
   .feat-grid { grid-template-columns: 1fr !important; }
 }
 @media (max-width: 600px) {
@@ -247,27 +244,7 @@ a { color: inherit; text-decoration: none; }
 }
 @media (min-width: 901px) { .hide-d { display: none !important; } }
 
-/* ── Mobile phone content scaling ── */
-@media (max-width: 900px) {
-  .phone-frame { width: 108px !important; border-radius: 20px !important; }
-  .phone-frame > div:last-child {
-    transform: scale(0.54);
-    transform-origin: top left;
-    width: 185%;
-    margin-bottom: -46%;
-  }
-  .phone-notch { width: 44px !important; height: 12px !important; border-radius: 0 0 8px 8px !important; }
-  .streak-badge { padding: 2px 6px !important; font-size: .52rem !important; }
-}
-@media (max-width: 480px) {
-  .phone-frame { width: 90px !important; border-radius: 16px !important; }
-  .phone-frame > div:last-child {
-    transform: scale(0.45);
-    transform-origin: top left;
-    width: 222%;
-    margin-bottom: -55%;
-  }
-}
+/* ── Mobile phone content scaling — desktop only, phones removed from mobile ── */
 
 /* ── FAQ ── */
 .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 4px; transition: border-color .2s; }
@@ -648,39 +625,25 @@ function Hero({ onCTA, t }) {
           </div>
         </div>
 
-        {/* ── MOBILE layout — two columns like desktop, scaled to fit ── */}
-        <div className="hide-d" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, alignItems: "center", padding: "28px 0 40px", minHeight: "calc(100vh - 64px)" }}>
-          {/* Left — copy */}
-          <div>
-            <div style={{ marginBottom: 12 }}>
-              <span className="mono" style={{ fontSize: ".55rem", letterSpacing: ".16em", textTransform: "uppercase", color: "#DC2626", border: "1px solid rgba(220,38,38,.25)", borderRadius: 3, padding: "4px 8px" }}>{t.heroEyebrow}</span>
-            </div>
-            <h1 className="bebas" style={{ fontSize: "clamp(2.6rem,10vw,3.8rem)", lineHeight: .88, color: "#fff", marginBottom: 14, letterSpacing: ".04em" }}>
-              {t.heroH1a}<br />
-              <span style={{ color: "#DC2626" }}>{t.heroH1b}</span><br />
-              {t.heroH1c}
-            </h1>
-            <p style={{ fontSize: ".78rem", color: "#999999", lineHeight: 1.65, marginBottom: 18 }}>{t.heroSub}</p>
-            <button className="btn-red" onClick={onCTA} style={{ width: "100%", justifyContent: "center", padding: "12px 0", fontSize: ".68rem", marginBottom: 20 }}>{t.heroCTA2} →</button>
-            {/* Stats */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 10, paddingTop: 16, borderTop: "1px solid rgba(255,255,255,.06)" }}>
-              {[["3×", "More likely to hit goals"], ["48h", "Avg match time"], ["94%", "Stronger consistency"]].map(([v, l]) => (
-                <div key={v} style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <div className="bebas" style={{ fontSize: "1.3rem", color: "#DC2626", letterSpacing: ".04em", minWidth: 36 }}>{v}</div>
-                  <div className="mono" style={{ fontSize: ".52rem", color: "#888888", letterSpacing: ".08em", textTransform: "uppercase", lineHeight: 1.3 }}>{l}</div>
-                </div>
-              ))}
-            </div>
+        {/* ── MOBILE layout — clean, no phones ── */}
+        <div className="hide-d" style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "48px 0 56px", minHeight: "calc(100vh - 64px)" }}>
+          <div style={{ marginBottom: 20 }}>
+            <span className="mono" style={{ fontSize: ".62rem", letterSpacing: ".18em", textTransform: "uppercase", color: "#DC2626", border: "1px solid rgba(220,38,38,.25)", borderRadius: 3, padding: "5px 10px" }}>{t.heroEyebrow}</span>
           </div>
-          {/* Right — phones, same offset layout as desktop */}
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 8, position: "relative" }}>
-            <div style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "flex-end", transform: "translateY(16px)" }}>
-              <StreakPhone />
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "flex-start", transform: "translateY(-16px)" }}>
-              <ChatPhone />
-              <AIPhone />
-            </div>
+          <h1 className="bebas" style={{ fontSize: "clamp(4rem,18vw,6rem)", lineHeight: .88, color: "#fff", marginBottom: 24, letterSpacing: ".04em" }}>
+            {t.heroH1a}<br />
+            <span style={{ color: "#DC2626" }}>{t.heroH1b}</span><br />
+            {t.heroH1c}
+          </h1>
+          <p style={{ fontSize: "1rem", color: "#C0C0C0", lineHeight: 1.75, marginBottom: 32 }}>{t.heroSub}</p>
+          <button className="btn-red" onClick={onCTA} style={{ width: "100%", justifyContent: "center", padding: "16px 0", fontSize: ".82rem", marginBottom: 36 }}>{t.heroCTA2} →</button>
+          <div style={{ display: "flex", paddingTop: 28, borderTop: "1px solid rgba(255,255,255,.07)", justifyContent: "space-between" }}>
+            {[["3×", "More likely to hit goals"], ["48h", "Avg match time"], ["94%", "Stronger consistency"]].map(([v, l]) => (
+              <div key={v}>
+                <div className="bebas" style={{ fontSize: "1.8rem", color: "#DC2626", letterSpacing: ".04em" }}>{v}</div>
+                <div className="mono" style={{ fontSize: ".58rem", color: "#909090", letterSpacing: ".08em", textTransform: "uppercase", lineHeight: 1.4 }}>{l}</div>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -1031,7 +994,7 @@ function FAQ({ t }) {
   return (
     <section className="sec" id="faq" style={{ background: dark ? "#080808" : "#F2F2F2" }}>
       <div className="wrap">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: 80, alignItems: "start" }} className="hero-grid">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: 80, alignItems: "start" }} className="faq-grid">
           <div>
             <span className="eyebrow">{t.faqEyebrow}</span>
             <h2 className="bebas" style={{ fontSize: "clamp(2.8rem,5vw,4.5rem)", lineHeight: .92, color: dark ? "#fff" : "#0A0A0A" }}>{t.faqH}</h2>
