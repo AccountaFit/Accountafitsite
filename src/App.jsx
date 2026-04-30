@@ -229,30 +229,31 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 900px) {
   .hide-m { display: none !important; }
   .sec { padding: 72px 0; }
-  .hero-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
-  .hero-section { min-height: auto !important; padding-top: 80px !important; padding-bottom: 48px !important; }
-  .hero-inner { padding: 32px 0 !important; min-height: auto !important; }
   .feat-grid { grid-template-columns: 1fr 1fr !important; }
   .proof-grid { grid-template-columns: 1fr !important; }
   .steps-grid { grid-template-columns: 1fr !important; }
   .pricing-grid { grid-template-columns: 1fr !important; }
-  .phone-mobile-wrap {
-    transform: scale(0.65);
-    transform-origin: top center;
-    margin-bottom: -280px;
-  }
+  .phone-frame { width: 108px !important; border-radius: 20px !important; }
+  .phone-notch { width: 44px !important; height: 14px !important; }
+  .streak-badge { padding: 3px 8px !important; font-size: .58rem !important; }
+}
+@media (max-width: 480px) {
+  .phone-frame { width: 90px !important; border-radius: 16px !important; }
+  .feat-grid { grid-template-columns: 1fr !important; }
 }
 @media (max-width: 600px) {
-  .feat-grid { grid-template-columns: 1fr !important; }
   .hero-btns { flex-direction: column !important; align-items: stretch !important; }
   .hero-btns .btn-red, .hero-btns .btn-ghost { justify-content: center; }
-  .phone-mobile-wrap {
-    transform: scale(0.52);
-    transform-origin: top center;
-    margin-bottom: -360px;
-  }
 }
 @media (min-width: 901px) { .hide-d { display: none !important; } }
+
+/* ── Mobile phone content scaling ── */
+@media (max-width: 900px) {
+  .phone-frame > div:last-child { transform: scale(0.55); transform-origin: top left; width: 182%; margin-bottom: -45%; }
+}
+@media (max-width: 480px) {
+  .phone-frame > div:last-child { transform: scale(0.46); transform-origin: top left; width: 218%; margin-bottom: -54%; }
+}
 
 /* ── FAQ ── */
 .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 4px; transition: border-color .2s; }
@@ -592,26 +593,26 @@ function Hero({ onCTA, t }) {
     <section className="hero-section" style={{ background: "#080808", minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", overflow: "hidden", paddingTop: 64 }}>
       <div className="noise-bg" />
       <div className="grid-bg" />
-      {/* Red glow orb */}
       <div style={{ position: "absolute", top: "20%", left: "50%", transform: "translateX(-50%)", width: 600, height: 600, background: "radial-gradient(circle, rgba(220,38,38,.18) 0%, transparent 70%)", pointerEvents: "none", zIndex: 1 }} />
       <div className="wrap" style={{ position: "relative", zIndex: 2, width: "100%" }}>
-        <div className="hero-grid hero-inner" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center", minHeight: "calc(100vh - 64px)", padding: "60px 0" }}>
-          {/* Left — copy */}
+
+        {/* ── DESKTOP layout (two columns) ── */}
+        <div className="hide-m" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center", minHeight: "calc(100vh - 64px)", padding: "60px 0" }}>
+          {/* Left */}
           <div>
-            <div className="anim-fade-up" style={{ marginBottom: 24 }}>
+            <div style={{ marginBottom: 24 }}>
               <span className="mono" style={{ fontSize: ".72rem", letterSpacing: ".22em", textTransform: "uppercase", color: "#DC2626", border: "1px solid rgba(220,38,38,.25)", borderRadius: 3, padding: "6px 12px" }}>{t.heroEyebrow}</span>
             </div>
-            <h1 className="bebas anim-fade-up-1" style={{ fontSize: "clamp(4.5rem,9vw,8rem)", lineHeight: .88, color: "#fff", marginBottom: 28, letterSpacing: ".04em" }}>
+            <h1 className="bebas" style={{ fontSize: "clamp(4.5rem,9vw,8rem)", lineHeight: .88, color: "#fff", marginBottom: 28, letterSpacing: ".04em" }}>
               {t.heroH1a}<br />
               <span style={{ color: "#DC2626", WebkitTextStroke: "2px #DC2626" }}>{t.heroH1b}</span><br />
               {t.heroH1c}
             </h1>
-            <p className="anim-fade-up-2" style={{ fontSize: "clamp(1rem,1.5vw,1.15rem)", color: "#A0A0A0", lineHeight: 1.75, maxWidth: 480, marginBottom: 40 }}>{t.heroSub}</p>
-            <div className="hero-btns anim-fade-up-3" style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+            <p style={{ fontSize: "clamp(1rem,1.5vw,1.15rem)", color: "#A0A0A0", lineHeight: 1.75, maxWidth: 480, marginBottom: 40 }}>{t.heroSub}</p>
+            <div style={{ display: "flex", gap: 14 }}>
               <button className="btn-red" onClick={onCTA}>{t.heroCTA2} →</button>
             </div>
-            {/* Stats strip — hidden on mobile */}
-            <div className="hide-m anim-fade-up-4" style={{ display: "flex", gap: 32, marginTop: 48, paddingTop: 32, borderTop: "1px solid rgba(255,255,255,.06)" }}>
+            <div style={{ display: "flex", gap: 32, marginTop: 48, paddingTop: 32, borderTop: "1px solid rgba(255,255,255,.06)" }}>
               {[["3×", "More likely to hit goals"], ["48h", "Average match time"], ["94%", "Report stronger consistency"]].map(([v, l]) => (
                 <div key={v}>
                   <div className="bebas" style={{ fontSize: "1.8rem", color: "#DC2626", letterSpacing: ".04em" }}>{v}</div>
@@ -620,31 +621,56 @@ function Hero({ onCTA, t }) {
               ))}
             </div>
           </div>
-          {/* Right — phone mockups */}
-          <div className="anim-fade-up-2" style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 20, position: "relative" }}>
-            {/* Desktop layout */}
-            <div className="hide-m" style={{ display: "flex", flexDirection: "column", gap: 20, alignItems: "flex-end", transform: "translateY(20px)" }}>
+          {/* Right — phones */}
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 20, position: "relative" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 20, alignItems: "flex-end", transform: "translateY(20px)" }}>
               <StreakPhone />
             </div>
-            <div className="hide-m" style={{ display: "flex", flexDirection: "column", gap: 20, alignItems: "flex-start", transform: "translateY(-20px)" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 20, alignItems: "flex-start", transform: "translateY(-20px)" }}>
               <ChatPhone />
               <AIPhone />
-            </div>
-            {/* Mobile: same desktop offset layout, scaled down via CSS */}
-            <div className="hide-d phone-mobile-wrap" style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 20 }}>
-              <div style={{ display: "flex", flexDirection: "column", gap: 20, alignItems: "flex-end", transform: "translateY(20px)" }}>
-                <StreakPhone />
-              </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 20, alignItems: "flex-start", transform: "translateY(-20px)" }}>
-                <ChatPhone />
-                <AIPhone />
-              </div>
             </div>
             <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 50%, rgba(220,38,38,.08) 0%, transparent 70%)", pointerEvents: "none" }} />
           </div>
         </div>
+
+        {/* ── MOBILE layout — two columns like desktop, scaled to fit ── */}
+        <div className="hide-d" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, alignItems: "center", padding: "28px 0 40px", minHeight: "calc(100vh - 64px)" }}>
+          {/* Left — copy */}
+          <div>
+            <div style={{ marginBottom: 12 }}>
+              <span className="mono" style={{ fontSize: ".55rem", letterSpacing: ".16em", textTransform: "uppercase", color: "#DC2626", border: "1px solid rgba(220,38,38,.25)", borderRadius: 3, padding: "4px 8px" }}>{t.heroEyebrow}</span>
+            </div>
+            <h1 className="bebas" style={{ fontSize: "clamp(2.6rem,10vw,3.8rem)", lineHeight: .88, color: "#fff", marginBottom: 14, letterSpacing: ".04em" }}>
+              {t.heroH1a}<br />
+              <span style={{ color: "#DC2626" }}>{t.heroH1b}</span><br />
+              {t.heroH1c}
+            </h1>
+            <p style={{ fontSize: ".78rem", color: "#707070", lineHeight: 1.65, marginBottom: 18 }}>{t.heroSub}</p>
+            <button className="btn-red" onClick={onCTA} style={{ width: "100%", justifyContent: "center", padding: "12px 0", fontSize: ".68rem", marginBottom: 20 }}>{t.heroCTA2} →</button>
+            {/* Stats */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 10, paddingTop: 16, borderTop: "1px solid rgba(255,255,255,.06)" }}>
+              {[["3×", "More likely to hit goals"], ["48h", "Avg match time"], ["94%", "Stronger consistency"]].map(([v, l]) => (
+                <div key={v} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <div className="bebas" style={{ fontSize: "1.3rem", color: "#DC2626", letterSpacing: ".04em", minWidth: 36 }}>{v}</div>
+                  <div className="mono" style={{ fontSize: ".52rem", color: "#505050", letterSpacing: ".08em", textTransform: "uppercase", lineHeight: 1.3 }}>{l}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* Right — phones, same offset layout as desktop */}
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 8, position: "relative" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "flex-end", transform: "translateY(16px)" }}>
+              <StreakPhone />
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "flex-start", transform: "translateY(-16px)" }}>
+              <ChatPhone />
+              <AIPhone />
+            </div>
+          </div>
+        </div>
+
       </div>
-      {/* Bottom fade */}
       <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 120, background: "linear-gradient(to bottom, transparent, #080808)", zIndex: 3 }} />
     </section>
   );
