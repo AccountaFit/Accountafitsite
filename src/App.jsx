@@ -518,6 +518,7 @@ function Logo({ size = "1.6rem" }) {
 
 /* ── NAV ─────────────────────────────────────────────────────── */
 function Nav({ lang, setLang, t, onCTA }) {
+  const dark = true;
   const [langOpen, setLangOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -711,7 +712,8 @@ function WhatIsIt({ t, onCTA }) {
 }
 
 /* ── PROBLEM ─────────────────────────────────────────────────── */
-function Problem({ dark, t }) {
+function Problem({ t }) {
+  const dark = true;
   return (
     <section className="sec" style={{ background: dark ? "#050505" : "#EBEBEB" }}>
       <div className="noise-bg" style={{ opacity: .03 }} />
@@ -751,7 +753,8 @@ function Problem({ dark, t }) {
 }
 
 /* ── SOLUTION ────────────────────────────────────────────────── */
-function Solution({ dark, t }) {
+function Solution({ t }) {
+  const dark = true;
   return (
     <section className="sec section-dark" style={{ background: "#0A0A0A", position: "relative", overflow: "hidden" }}>
       <div className="noise-bg" />
@@ -786,7 +789,8 @@ function Solution({ dark, t }) {
 }
 
 /* ── HOW IT WORKS ────────────────────────────────────────────── */
-function HowItWorks({ dark, t }) {
+function HowItWorks({ t }) {
+  const dark = true;
   return (
     <section className="sec" id="how-it-works" style={{ background: dark ? "#080808" : "#F2F2F2" }}>
       <div className="grid-bg" style={{ opacity: .5 }} />
@@ -814,7 +818,8 @@ function HowItWorks({ dark, t }) {
 }
 
 /* ── FEATURES ────────────────────────────────────────────────── */
-function Features({ dark, t }) {
+function Features({ t }) {
+  const dark = true;
   const ICONS = {
     match:    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="3.2"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a3.2 3.2 0 0 1 0 6.2"/></svg>,
     streak:   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2c2.8 3 4.5 5.6 4.5 8.2A4.5 4.5 0 0 1 12 14.7a4.5 4.5 0 0 1-4.5-4.5C7.5 7.6 9.2 5 12 2Z"/><path d="M7 15.5A5 5 0 0 0 12 21a5 5 0 0 0 5-5.5"/></svg>,
@@ -848,7 +853,8 @@ function Features({ dark, t }) {
 }
 
 /* ── ADDICTION LOOP ──────────────────────────────────────────── */
-function AddictionLoop({ dark, t }) {
+function AddictionLoop({ t }) {
+  const dark = true;
   return (
     <section className="sec section-dark" style={{ background: "#000", overflow: "hidden", padding: "80px 0" }}>
       <div style={{ marginBottom: 48, textAlign: "center" }}>
@@ -871,7 +877,8 @@ function AddictionLoop({ dark, t }) {
 }
 
 /* ── SOCIAL PROOF ────────────────────────────────────────────── */
-function SocialProof({ dark, t }) {
+function SocialProof({ t }) {
+  const dark = true;
   return (
     <section className="sec" style={{ background: dark ? "#080808" : "#F2F2F2" }}>
       <div className="noise-bg" style={{ opacity: .03 }} />
@@ -904,7 +911,8 @@ function SocialProof({ dark, t }) {
 }
 
 /* ── PRICING ─────────────────────────────────────────────────── */
-function Pricing({ dark, onCTA, t }) {
+function Pricing({ onCTA, t }) {
+  const dark = true;
   return (
     <section className="sec section-dark" style={{ background: "#050505" }}>
       <div className="noise-bg" />
@@ -958,7 +966,8 @@ function Pricing({ dark, onCTA, t }) {
 }
 
 /* ── FAQ ─────────────────────────────────────────────────────── */
-function FAQ({ dark, t }) {
+function FAQ({ t }) {
+  const dark = true;
   const [open, setOpen] = useState(null);
   return (
     <section className="sec" id="faq" style={{ background: dark ? "#080808" : "#F2F2F2" }}>
@@ -1034,7 +1043,8 @@ function FinalCTA({ onCTA, t }) {
 }
 
 /* ── FOOTER ──────────────────────────────────────────────────── */
-function Footer({ dark, t }) {
+function Footer({ t }) {
+  const dark = true;
   return (
     <footer style={{ background: "#050505", borderTop: "1px solid #0F0F0F", padding: "48px 5% 32px" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
@@ -1145,7 +1155,6 @@ function Modal({ onClose, t }) {
 
 /* ── ROOT APP ────────────────────────────────────────────────── */
 export default function AccountaFit() {
-  const dark = true;
   const [lang, setLang] = useState("en");
   const [modal, setModal] = useState(false);
   const t = T[lang] || T.en;
@@ -1156,16 +1165,16 @@ export default function AccountaFit() {
       <Nav lang={lang} setLang={setLang} t={t} onCTA={() => setModal(true)} />
       <Hero onCTA={() => setModal(true)} t={t} />
       <WhatIsIt t={t} onCTA={() => setModal(true)} />
-      <Problem dark={dark} t={t} />
-      <Solution dark={dark} t={t} />
-      <HowItWorks dark={dark} t={t} />
-      <Features dark={dark} t={t} />
-      <AddictionLoop dark={dark} t={t} />
-      <SocialProof dark={dark} t={t} />
-      <Pricing dark={dark} onCTA={() => setModal(true)} t={t} />
-      <FAQ dark={dark} t={t} />
+      <Problem t={t} />
+      <Solution t={t} />
+      <HowItWorks t={t} />
+      <Features t={t} />
+      <AddictionLoop t={t} />
+      <SocialProof t={t} />
+      <Pricing onCTA={() => setModal(true)} t={t} />
+      <FAQ t={t} />
       <FinalCTA onCTA={() => setModal(true)} t={t} />
-      <Footer dark={dark} t={t} />
+      <Footer t={t} />
       {modal && <Modal onClose={() => setModal(false)} t={t} />}
       <Chatbot />
     </>
