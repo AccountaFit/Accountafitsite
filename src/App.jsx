@@ -229,18 +229,28 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 900px) {
   .hide-m { display: none !important; }
   .sec { padding: 72px 0; }
-  .hero-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+  .hero-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .hero-section { min-height: auto !important; padding-top: 80px !important; padding-bottom: 48px !important; }
+  .hero-inner { padding: 32px 0 !important; min-height: auto !important; }
   .feat-grid { grid-template-columns: 1fr 1fr !important; }
   .proof-grid { grid-template-columns: 1fr !important; }
   .steps-grid { grid-template-columns: 1fr !important; }
   .pricing-grid { grid-template-columns: 1fr !important; }
-  .phone-mobile-wrap { transform: scale(0.72); transform-origin: top center; height: 560px; overflow: visible; }
+  .phone-mobile-wrap {
+    transform: scale(0.65);
+    transform-origin: top center;
+    margin-bottom: -280px;
+  }
 }
 @media (max-width: 600px) {
   .feat-grid { grid-template-columns: 1fr !important; }
   .hero-btns { flex-direction: column !important; align-items: stretch !important; }
   .hero-btns .btn-red, .hero-btns .btn-ghost { justify-content: center; }
-  .phone-mobile-wrap { transform: scale(0.58); transform-origin: top center; height: 450px; overflow: visible; }
+  .phone-mobile-wrap {
+    transform: scale(0.52);
+    transform-origin: top center;
+    margin-bottom: -360px;
+  }
 }
 @media (min-width: 901px) { .hide-d { display: none !important; } }
 
@@ -585,7 +595,7 @@ function Hero({ onCTA, t }) {
       {/* Red glow orb */}
       <div style={{ position: "absolute", top: "20%", left: "50%", transform: "translateX(-50%)", width: 600, height: 600, background: "radial-gradient(circle, rgba(220,38,38,.18) 0%, transparent 70%)", pointerEvents: "none", zIndex: 1 }} />
       <div className="wrap" style={{ position: "relative", zIndex: 2, width: "100%" }}>
-        <div className="hero-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center", minHeight: "calc(100vh - 64px)", padding: "60px 0" }}>
+        <div className="hero-grid hero-inner" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center", minHeight: "calc(100vh - 64px)", padding: "60px 0" }}>
           {/* Left — copy */}
           <div>
             <div className="anim-fade-up" style={{ marginBottom: 24 }}>
@@ -600,8 +610,8 @@ function Hero({ onCTA, t }) {
             <div className="hero-btns anim-fade-up-3" style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
               <button className="btn-red" onClick={onCTA}>{t.heroCTA2} →</button>
             </div>
-            {/* Stats strip */}
-            <div className="anim-fade-up-4" style={{ display: "flex", gap: 32, marginTop: 48, paddingTop: 32, borderTop: "1px solid rgba(255,255,255,.06)" }}>
+            {/* Stats strip — hidden on mobile */}
+            <div className="hide-m anim-fade-up-4" style={{ display: "flex", gap: 32, marginTop: 48, paddingTop: 32, borderTop: "1px solid rgba(255,255,255,.06)" }}>
               {[["3×", "More likely to hit goals"], ["48h", "Average match time"], ["94%", "Report stronger consistency"]].map(([v, l]) => (
                 <div key={v}>
                   <div className="bebas" style={{ fontSize: "1.8rem", color: "#DC2626", letterSpacing: ".04em" }}>{v}</div>
