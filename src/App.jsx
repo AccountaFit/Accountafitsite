@@ -249,10 +249,24 @@ a { color: inherit; text-decoration: none; }
 
 /* ── Mobile phone content scaling ── */
 @media (max-width: 900px) {
-  .phone-frame > div:last-child { transform: scale(0.55); transform-origin: top left; width: 182%; margin-bottom: -45%; }
+  .phone-frame { width: 108px !important; border-radius: 20px !important; }
+  .phone-frame > div:last-child {
+    transform: scale(0.54);
+    transform-origin: top left;
+    width: 185%;
+    margin-bottom: -46%;
+  }
+  .phone-notch { width: 44px !important; height: 12px !important; border-radius: 0 0 8px 8px !important; }
+  .streak-badge { padding: 2px 6px !important; font-size: .52rem !important; }
 }
 @media (max-width: 480px) {
-  .phone-frame > div:last-child { transform: scale(0.46); transform-origin: top left; width: 218%; margin-bottom: -54%; }
+  .phone-frame { width: 90px !important; border-radius: 16px !important; }
+  .phone-frame > div:last-child {
+    transform: scale(0.45);
+    transform-origin: top left;
+    width: 222%;
+    margin-bottom: -55%;
+  }
 }
 
 /* ── FAQ ── */
@@ -373,7 +387,7 @@ function Chatbot() {
                 </div>
               </div>
             </div>
-            <button onClick={() => setOpen(false)} style={{ background: "none", border: "none", color: "#555", cursor: "pointer", fontSize: "1.2rem", lineHeight: 1, padding: 4 }}>✕</button>
+            <button onClick={() => setOpen(false)} style={{ background: "none", border: "none", color: "#888", cursor: "pointer", fontSize: "1.2rem", lineHeight: 1, padding: 4 }}>✕</button>
           </div>
           <div className="af-chat-msgs" ref={msgsRef}>
             {msgs.map((m, i) => m.role === "bot" ? (
@@ -414,7 +428,7 @@ function StreakPhone() {
       <div className="phone-notch" />
       <div style={{ padding: "16px 14px 20px", background: "#080808" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
-          <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: ".6rem", color: "#555", letterSpacing: ".1em" }}>ACCOUNTAFIT</span>
+          <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: ".6rem", color: "#888", letterSpacing: ".1em" }}>ACCOUNTAFIT</span>
           <div style={{ width: 24, height: 24, borderRadius: "50%", background: "rgba(220,38,38,.2)", border: "1px solid rgba(220,38,38,.4)", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#DC2626" }} />
           </div>
@@ -432,7 +446,7 @@ function StreakPhone() {
             <div style={{ width: 28, height: 28, borderRadius: "50%", background: "linear-gradient(135deg,#DC2626,#7f1d1d)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: ".6rem", fontWeight: 700, color: "#fff", fontFamily: "'JetBrains Mono',monospace" }}>KL</div>
             <div>
               <div style={{ fontSize: ".72rem", color: "#fff", fontWeight: 600 }}>Keisha L.</div>
-              <div style={{ fontSize: ".6rem", color: "#555" }}>Checked in 2m ago ✓</div>
+              <div style={{ fontSize: ".6rem", color: "#888" }}>Checked in 2m ago ✓</div>
             </div>
             <div style={{ marginLeft: "auto", width: 8, height: 8, borderRadius: "50%", background: "#22c55e" }} />
           </div>
@@ -440,7 +454,7 @@ function StreakPhone() {
             <div style={{ width: "78%", height: "100%", background: "linear-gradient(90deg,#DC2626,#EF4444)", borderRadius: 2 }} />
           </div>
           <div style={{ display: "flex", justifyContent: "space-between", marginTop: 4 }}>
-            <span style={{ fontSize: ".58rem", color: "#555" }}>Compatibility</span>
+            <span style={{ fontSize: ".58rem", color: "#888" }}>Compatibility</span>
             <span style={{ fontSize: ".58rem", color: "#EF4444", fontFamily: "'JetBrains Mono',monospace" }}>97%</span>
           </div>
         </div>
@@ -471,7 +485,7 @@ function ChatPhone() {
           <div className="chat-bubble left" style={{ fontSize: ".72rem" }}>Already hit my morning run. You up? 💪</div>
         </div>
         <div className="chat-msg right" style={{ marginBottom: 8 }}>
-          <div className="chat-avatar" style={{ background: "#1E1E1E", color: "#A0A0A0" }}>ME</div>
+          <div className="chat-avatar" style={{ background: "#1E1E1E", color: "#C0C0C0" }}>ME</div>
           <div className="chat-bubble right" style={{ fontSize: ".72rem" }}>5am gym. Just checked in. Streak safe 🔥</div>
         </div>
         <div className="chat-msg" style={{ marginBottom: 12 }}>
@@ -479,7 +493,7 @@ function ChatPhone() {
           <div className="chat-bubble left" style={{ fontSize: ".72rem" }}>Let's go! Day 21 🎯</div>
         </div>
         <div style={{ background: "#0F0F0F", borderRadius: 20, padding: "7px 12px", display: "flex", alignItems: "center", gap: 6 }}>
-          <span style={{ fontSize: ".65rem", color: "#404040", flex: 1 }}>Reply...</span>
+          <span style={{ fontSize: ".65rem", color: "#707070", flex: 1 }}>Reply...</span>
           <div style={{ width: 20, height: 20, borderRadius: "50%", background: "#DC2626", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
           </div>
@@ -504,10 +518,10 @@ function AIPhone() {
         ].map((ex, i) => (
           <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, padding: "8px 0", borderBottom: "1px solid #0F0F0F" }}>
             <div style={{ width: 22, height: 22, borderRadius: 4, background: i === 0 ? "rgba(220,38,38,.2)" : "#0F0F0F", border: `1px solid ${i === 0 ? "rgba(220,38,38,.4)" : "#1E1E1E"}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-              <div style={{ width: 6, height: 6, borderRadius: "50%", background: i === 0 ? "#DC2626" : "#333" }} />
+              <div style={{ width: 6, height: 6, borderRadius: "50%", background: i === 0 ? "#DC2626" : "#555" }} />
             </div>
             <span style={{ fontSize: ".7rem", color: i === 0 ? "#fff" : "#666", flex: 1 }}>{ex.name}</span>
-            <span style={{ fontSize: ".65rem", fontFamily: "'JetBrains Mono',monospace", color: i === 0 ? "#EF4444" : "#404040" }}>{ex.sets}</span>
+            <span style={{ fontSize: ".65rem", fontFamily: "'JetBrains Mono',monospace", color: i === 0 ? "#EF4444" : "#707070" }}>{ex.sets}</span>
           </div>
         ))}
         <div style={{ marginTop: 12, background: "rgba(220,38,38,.1)", borderRadius: 6, padding: "8px 10px", display: "flex", alignItems: "center", gap: 6 }}>
@@ -608,7 +622,7 @@ function Hero({ onCTA, t }) {
               <span style={{ color: "#DC2626", WebkitTextStroke: "2px #DC2626" }}>{t.heroH1b}</span><br />
               {t.heroH1c}
             </h1>
-            <p style={{ fontSize: "clamp(1rem,1.5vw,1.15rem)", color: "#A0A0A0", lineHeight: 1.75, maxWidth: 480, marginBottom: 40 }}>{t.heroSub}</p>
+            <p style={{ fontSize: "clamp(1rem,1.5vw,1.15rem)", color: "#C0C0C0", lineHeight: 1.75, maxWidth: 480, marginBottom: 40 }}>{t.heroSub}</p>
             <div style={{ display: "flex", gap: 14 }}>
               <button className="btn-red" onClick={onCTA}>{t.heroCTA2} →</button>
             </div>
@@ -616,7 +630,7 @@ function Hero({ onCTA, t }) {
               {[["3×", "More likely to hit goals"], ["48h", "Average match time"], ["94%", "Report stronger consistency"]].map(([v, l]) => (
                 <div key={v}>
                   <div className="bebas" style={{ fontSize: "1.8rem", color: "#DC2626", letterSpacing: ".04em" }}>{v}</div>
-                  <div className="mono" style={{ fontSize: ".62rem", color: "#606060", letterSpacing: ".1em", textTransform: "uppercase", lineHeight: 1.4 }}>{l}</div>
+                  <div className="mono" style={{ fontSize: ".62rem", color: "#909090", letterSpacing: ".1em", textTransform: "uppercase", lineHeight: 1.4 }}>{l}</div>
                 </div>
               ))}
             </div>
@@ -646,14 +660,14 @@ function Hero({ onCTA, t }) {
               <span style={{ color: "#DC2626" }}>{t.heroH1b}</span><br />
               {t.heroH1c}
             </h1>
-            <p style={{ fontSize: ".78rem", color: "#707070", lineHeight: 1.65, marginBottom: 18 }}>{t.heroSub}</p>
+            <p style={{ fontSize: ".78rem", color: "#999999", lineHeight: 1.65, marginBottom: 18 }}>{t.heroSub}</p>
             <button className="btn-red" onClick={onCTA} style={{ width: "100%", justifyContent: "center", padding: "12px 0", fontSize: ".68rem", marginBottom: 20 }}>{t.heroCTA2} →</button>
             {/* Stats */}
             <div style={{ display: "flex", flexDirection: "column", gap: 10, paddingTop: 16, borderTop: "1px solid rgba(255,255,255,.06)" }}>
               {[["3×", "More likely to hit goals"], ["48h", "Avg match time"], ["94%", "Stronger consistency"]].map(([v, l]) => (
                 <div key={v} style={{ display: "flex", alignItems: "center", gap: 8 }}>
                   <div className="bebas" style={{ fontSize: "1.3rem", color: "#DC2626", letterSpacing: ".04em", minWidth: 36 }}>{v}</div>
-                  <div className="mono" style={{ fontSize: ".52rem", color: "#505050", letterSpacing: ".08em", textTransform: "uppercase", lineHeight: 1.3 }}>{l}</div>
+                  <div className="mono" style={{ fontSize: ".52rem", color: "#888888", letterSpacing: ".08em", textTransform: "uppercase", lineHeight: 1.3 }}>{l}</div>
                 </div>
               ))}
             </div>
@@ -712,8 +726,8 @@ function WhatIsIt({ t, onCTA }) {
           <h2 className="bebas" style={{ fontSize: "clamp(3rem,6vw,5.5rem)", lineHeight: .9, color: "#fff", maxWidth: 800, margin: "0 auto 24px" }}>
             The World's First<br /><span style={{ color: "#DC2626" }}>Fitness Accountability</span><br />Matching Platform
           </h2>
-          <p style={{ fontSize: "1.05rem", color: "#606060", lineHeight: 1.85, maxWidth: 580, margin: "0 auto" }}>
-            We didn't build another workout tracker. We built something the fitness world has never seen — a partner-matching system designed around the one thing that actually determines whether you succeed: <span style={{ color: "#A0A0A0", fontStyle: "italic" }}>who's with you.</span>
+          <p style={{ fontSize: "1.05rem", color: "#909090", lineHeight: 1.85, maxWidth: 580, margin: "0 auto" }}>
+            We didn't build another workout tracker. We built something the fitness world has never seen — a partner-matching system designed around the one thing that actually determines whether you succeed: <span style={{ color: "#C0C0C0", fontStyle: "italic" }}>who's with you.</span>
           </p>
         </div>
 
@@ -727,7 +741,7 @@ function WhatIsIt({ t, onCTA }) {
               <div className="bebas" style={{ fontSize: "4rem", color: "rgba(220,38,38,.06)", lineHeight: 1, marginBottom: 16, letterSpacing: ".04em" }}>{s.n}</div>
               <div style={{ marginBottom: 20 }}>{s.icon}</div>
               <h3 className="bebas" style={{ fontSize: "1.5rem", color: "#fff", marginBottom: 12, letterSpacing: ".04em" }}>{s.title}</h3>
-              <p style={{ fontSize: ".88rem", color: "#606060", lineHeight: 1.75 }}>{s.body}</p>
+              <p style={{ fontSize: ".88rem", color: "#909090", lineHeight: 1.75 }}>{s.body}</p>
             </div>
           ))}
         </div>
@@ -741,7 +755,7 @@ function WhatIsIt({ t, onCTA }) {
               <span className="mono" style={{ fontSize: ".68rem", color: "#DC2626", letterSpacing: ".18em" }}>MORE FEATURES COMING SOON</span>
             </div>
             <h3 className="bebas" style={{ fontSize: "clamp(1.6rem,3vw,2.4rem)", color: "#fff", letterSpacing: ".04em", marginBottom: 8 }}>We're just getting started.</h3>
-            <p style={{ fontSize: ".9rem", color: "#505050", maxWidth: 480, lineHeight: 1.7 }}>
+            <p style={{ fontSize: ".9rem", color: "#888888", maxWidth: 480, lineHeight: 1.7 }}>
               Leaderboards. AI-powered workout programs. Meal planning. Real-time partner updates. Video check-ins. We're building the complete accountability ecosystem — and waitlist members get everything first.
             </p>
           </div>
@@ -769,7 +783,7 @@ function Problem({ t }) {
                   <div style={{ width: 22, height: 22, borderRadius: 4, border: "1px solid #333", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#DC2626" strokeWidth="3" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                   </div>
-                  <span style={{ color: dark ? "#505050" : "#888", fontSize: ".9rem", textDecoration: "line-through", textDecorationColor: dark ? "#333" : "#CCC" }}>{item}</span>
+                  <span style={{ color: dark ? "#888888" : "#888", fontSize: ".9rem", textDecoration: "line-through", textDecorationColor: dark ? "#555" : "#CCC" }}>{item}</span>
                 </div>
               ))}
               <div style={{ marginTop: 20, padding: "16px", background: "rgba(220,38,38,.08)", border: "1px solid rgba(220,38,38,.2)", borderRadius: 8 }}>
@@ -781,7 +795,7 @@ function Problem({ t }) {
           <div>
             <span className="eyebrow">{t.problemEyebrow}</span>
             <h2 className="bebas" style={{ fontSize: "clamp(2.8rem,5vw,4.5rem)", lineHeight: .92, color: dark ? "#fff" : "#0A0A0A", marginBottom: 28 }}>{t.problemH}</h2>
-            <p style={{ fontSize: "1.05rem", color: dark ? "#A0A0A0" : "#555", lineHeight: 1.85, marginBottom: 20 }} className="body-text">{t.problemBody}</p>
+            <p style={{ fontSize: "1.05rem", color: dark ? "#C0C0C0" : "#888", lineHeight: 1.85, marginBottom: 20 }} className="body-text">{t.problemBody}</p>
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 32 }}>
               <div style={{ width: 36, height: 1, background: "#DC2626" }} />
               <span className="mono" style={{ fontSize: ".68rem", color: "#DC2626", letterSpacing: ".14em", textTransform: "uppercase" }}>The pattern is the problem</span>
@@ -807,13 +821,13 @@ function Solution({ t }) {
         <h2 className="bebas" style={{ fontSize: "clamp(3rem,6vw,5.5rem)", lineHeight: .92, color: "#fff", marginBottom: 28, maxWidth: 700, margin: "0 auto 28px" }}>
           {t.solutionH}
         </h2>
-        <p style={{ fontSize: "1.1rem", color: "#808080", lineHeight: 1.8, maxWidth: 560, margin: "0 auto 60px" }}>{t.solutionBody}</p>
+        <p style={{ fontSize: "1.1rem", color: "#A8A8A8", lineHeight: 1.8, maxWidth: 560, margin: "0 auto 60px" }}>{t.solutionBody}</p>
         {/* The system diagram */}
         <div style={{ overflowX: "auto", paddingBottom: 4 }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 0, minWidth: "max-content", margin: "0 auto" }}>
             {["ALONE", "→", "STRUGGLING", "→", "RESTART"].map((item, i) => (
               <div key={i} style={{ padding: i % 2 === 0 ? "14px 24px" : "0 8px", background: i % 2 === 0 ? "rgba(220,38,38,.08)" : "transparent", border: i % 2 === 0 ? "1px solid rgba(220,38,38,.2)" : "none", borderRadius: 4, display: "flex", alignItems: "center" }}>
-                <span className="mono" style={{ fontSize: i % 2 === 1 ? "1.2rem" : ".72rem", color: i % 2 === 1 ? "#333" : "#DC2626", letterSpacing: ".1em" }}>{item}</span>
+                <span className="mono" style={{ fontSize: i % 2 === 1 ? "1.2rem" : ".72rem", color: i % 2 === 1 ? "#555" : "#DC2626", letterSpacing: ".1em" }}>{item}</span>
               </div>
             ))}
           </div>
@@ -823,7 +837,7 @@ function Solution({ t }) {
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 0, minWidth: "max-content", margin: "0 auto" }}>
             {["MATCHED", "→", "ACCOUNTABLE", "→", "CONSISTENT"].map((item, i) => (
               <div key={i} style={{ padding: i % 2 === 0 ? "14px 24px" : "0 8px", background: i % 2 === 0 ? "rgba(220,38,38,.15)" : "transparent", border: i % 2 === 0 ? "1px solid rgba(220,38,38,.4)" : "none", borderRadius: 4, display: "flex", alignItems: "center" }}>
-                <span className="mono" style={{ fontSize: i % 2 === 1 ? "1.2rem" : ".72rem", color: i % 2 === 1 ? "#555" : "#EF4444", letterSpacing: ".1em" }}>{item}</span>
+                <span className="mono" style={{ fontSize: i % 2 === 1 ? "1.2rem" : ".72rem", color: i % 2 === 1 ? "#888" : "#EF4444", letterSpacing: ".1em" }}>{item}</span>
               </div>
             ))}
           </div>
@@ -853,7 +867,7 @@ function HowItWorks({ t }) {
               <div className="bebas" style={{ fontSize: "5rem", color: "rgba(220,38,38,.08)", lineHeight: 1, marginBottom: 8, letterSpacing: ".04em" }}>{s.n}</div>
               <div className="mono" style={{ fontSize: ".7rem", color: "#DC2626", letterSpacing: ".15em", textTransform: "uppercase", marginBottom: 10 }}>Step {s.n}</div>
               <h3 className="bebas" style={{ fontSize: "1.6rem", color: dark ? "#fff" : "#0A0A0A", marginBottom: 14, letterSpacing: ".04em" }}>{s.title}</h3>
-              <p className="step-body" style={{ fontSize: ".9rem", color: dark ? "#606060" : "#666", lineHeight: 1.72 }}>{s.body}</p>
+              <p className="step-body" style={{ fontSize: ".9rem", color: dark ? "#909090" : "#666", lineHeight: 1.72 }}>{s.body}</p>
             </div>
           ))}
         </div>
@@ -888,7 +902,7 @@ function Features({ t }) {
             <div key={i} className="card" style={{ borderRadius: 0, border: `1px solid ${dark ? "#1A1A1A" : "#E0E0E0"}`, background: dark ? "#080808" : "#fff", padding: "36px 28px" }}>
               <div style={{ color: "#DC2626", marginBottom: 20, display: "flex" }}>{ICONS[icon]}</div>
               <h3 className="bebas" style={{ fontSize: "1.4rem", color: dark ? "#fff" : "#0A0A0A", marginBottom: 12, letterSpacing: ".04em" }}>{title}</h3>
-              <p style={{ fontSize: ".88rem", color: dark ? "#606060" : "#666", lineHeight: 1.72 }} className="body-text">{body}</p>
+              <p style={{ fontSize: ".88rem", color: dark ? "#909090" : "#666", lineHeight: 1.72 }} className="body-text">{body}</p>
             </div>
           ))}
         </div>
@@ -939,7 +953,7 @@ function SocialProof({ t }) {
               onMouseLeave={e => e.currentTarget.style.borderColor = dark ? "#1A1A1A" : "#E0E0E0"}>
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: i < 2 ? "linear-gradient(90deg, rgba(220,38,38,.5), transparent)" : "transparent" }} />
               <div className="bebas" style={{ fontSize: "3.5rem", color: "rgba(220,38,38,.2)", lineHeight: 1, marginBottom: 12, letterSpacing: ".04em" }}>"</div>
-              <p style={{ fontSize: ".95rem", color: dark ? "#C8C8C8" : "#333", lineHeight: 1.8, marginBottom: 24 }}>{q}</p>
+              <p style={{ fontSize: ".95rem", color: dark ? "#C8C8C8" : "#555", lineHeight: 1.8, marginBottom: 24 }}>{q}</p>
               <div style={{ display: "flex", alignItems: "center", gap: 14, borderTop: `1px solid ${dark ? "#111" : "#EEE"}`, paddingTop: 20 }}>
                 <div style={{ width: 40, height: 40, borderRadius: "50%", background: "linear-gradient(135deg,#DC2626,#7f1d1d)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'JetBrains Mono',monospace", fontSize: ".75rem", fontWeight: 700, color: "#fff", flexShrink: 0 }}>{ini}</div>
                 <div>
@@ -969,14 +983,14 @@ function Pricing({ onCTA, t }) {
         <div className="pricing-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2, maxWidth: 800, margin: "0 auto" }}>
           {/* Free */}
           <div style={{ background: "#0A0A0A", border: "1px solid #1A1A1A", padding: "40px 32px" }}>
-            <div className="mono" style={{ fontSize: ".7rem", letterSpacing: ".16em", color: "#606060", textTransform: "uppercase", marginBottom: 12 }}>{t.pricingFree}</div>
+            <div className="mono" style={{ fontSize: ".7rem", letterSpacing: ".16em", color: "#909090", textTransform: "uppercase", marginBottom: 12 }}>{t.pricingFree}</div>
             <div className="bebas" style={{ fontSize: "3.5rem", color: "#fff", letterSpacing: ".04em", marginBottom: 4 }}>$0</div>
-            <div className="mono" style={{ fontSize: ".7rem", color: "#404040", marginBottom: 24 }}>/ forever</div>
-            <p style={{ fontSize: ".85rem", color: "#606060", lineHeight: 1.7, marginBottom: 28 }}>{t.pricingFreeDesc}</p>
+            <div className="mono" style={{ fontSize: ".7rem", color: "#707070", marginBottom: 24 }}>/ forever</div>
+            <p style={{ fontSize: ".85rem", color: "#909090", lineHeight: 1.7, marginBottom: 28 }}>{t.pricingFreeDesc}</p>
             {t.freeFeatures.map(f => (
               <div key={f} style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#DC2626" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span style={{ fontSize: ".85rem", color: "#A0A0A0" }}>{f}</span>
+                <span style={{ fontSize: ".85rem", color: "#C0C0C0" }}>{f}</span>
               </div>
             ))}
             <button className="btn-ghost" onClick={onCTA} style={{ width: "100%", justifyContent: "center", marginTop: 24 }}>Get Started</button>
@@ -993,13 +1007,13 @@ function Pricing({ onCTA, t }) {
                 <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#DC2626", animation: "pulse 2s ease-in-out infinite" }} />
                 <span className="mono" style={{ fontSize: ".75rem", color: "#EF4444", letterSpacing: ".14em" }}>PRICING COMING SOON</span>
               </div>
-              <p className="mono" style={{ fontSize: ".65rem", color: "#333", letterSpacing: ".08em", marginTop: 8 }}>Join the waitlist for early access pricing</p>
+              <p className="mono" style={{ fontSize: ".65rem", color: "#555", letterSpacing: ".08em", marginTop: 8 }}>Join the waitlist for early access pricing</p>
             </div>
-            <p style={{ fontSize: ".85rem", color: "#808080", lineHeight: 1.7, marginBottom: 28 }}>{t.pricingProDesc}</p>
+            <p style={{ fontSize: ".85rem", color: "#A8A8A8", lineHeight: 1.7, marginBottom: 28 }}>{t.pricingProDesc}</p>
             {t.proFeatures.map(f => (
               <div key={f} style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span style={{ fontSize: ".85rem", color: f.includes("Everything") ? "#EF4444" : "#A0A0A0" }}>{f}</span>
+                <span style={{ fontSize: ".85rem", color: f.includes("Everything") ? "#EF4444" : "#C0C0C0" }}>{f}</span>
               </div>
             ))}
             <button className="btn-red" onClick={onCTA} style={{ width: "100%", justifyContent: "center", marginTop: 24 }}>Get Pro Access</button>
@@ -1029,7 +1043,7 @@ function FAQ({ t }) {
                   <span className="faq-q" style={{ color: dark ? "#fff" : "#0A0A0A", fontFamily: "'DM Sans',sans-serif" }}>{q}</span>
                   <span className="faq-plus" style={{ transform: open === i ? "rotate(45deg)" : "none", display: "inline-block", transition: "transform .25s" }}>+</span>
                 </button>
-                {open === i && <div className="faq-a" style={{ color: dark ? "#707070" : "#555" }}>{a}</div>}
+                {open === i && <div className="faq-a" style={{ color: dark ? "#999999" : "#888" }}>{a}</div>}
               </div>
             ))}
           </div>
@@ -1065,11 +1079,11 @@ function FinalCTA({ onCTA, t }) {
         <h2 className="bebas" style={{ fontSize: "clamp(3.5rem,8vw,7rem)", lineHeight: .88, color: "#fff", marginBottom: 12 }}>
           {t.ctaH1}<br /><span style={{ color: "#DC2626" }}>{t.ctaH2}</span>
         </h2>
-        <p style={{ fontSize: "1.15rem", color: "#606060", marginBottom: 48, fontStyle: "italic" }}>{t.ctaSub}</p>
+        <p style={{ fontSize: "1.15rem", color: "#909090", marginBottom: 48, fontStyle: "italic" }}>{t.ctaSub}</p>
         {done ? (
           <div style={{ background: "rgba(220,38,38,.08)", border: "1px solid rgba(220,38,38,.25)", borderRadius: 8, padding: "40px", maxWidth: 480, margin: "0 auto" }}>
             <div className="bebas" style={{ fontSize: "2.5rem", color: "#fff", marginBottom: 8 }}>YOU'RE IN.</div>
-            <p style={{ color: "#606060" }}>We'll reach out when it's your turn. Stay consistent until then.</p>
+            <p style={{ color: "#909090" }}>We'll reach out when it's your turn. Stay consistent until then.</p>
           </div>
         ) : (
           <>
@@ -1079,7 +1093,7 @@ function FinalCTA({ onCTA, t }) {
                 onFocus={e => e.target.style.borderColor = "rgba(220,38,38,.5)"} onBlur={e => e.target.style.borderColor = "rgba(255,255,255,.1)"} />
               <button type="submit" className="btn-red" style={{ height: 52, padding: "0 32px", borderRadius: 4 }}>{t.ctaBtn}</button>
             </form>
-            <p className="mono" style={{ fontSize: ".65rem", color: "#333", letterSpacing: ".1em" }}>{t.ctaNote}</p>
+            <p className="mono" style={{ fontSize: ".65rem", color: "#555", letterSpacing: ".1em" }}>{t.ctaNote}</p>
           </>
         )}
       </div>
@@ -1096,7 +1110,7 @@ function Footer({ t }) {
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 40, marginBottom: 48 }}>
           <div style={{ maxWidth: 280 }}>
             <Logo size="1.8rem" />
-            <p style={{ marginTop: 14, fontSize: ".88rem", color: "#404040", lineHeight: 1.7 }}>Consistency over motivation. Accountability over intention. Stop starting over.</p>
+            <p style={{ marginTop: 14, fontSize: ".88rem", color: "#707070", lineHeight: 1.7 }}>Consistency over motivation. Accountability over intention. Stop starting over.</p>
             {/* Socials */}
             <div style={{ display: "flex", gap: 10, marginTop: 20 }}>
               {[
@@ -1131,11 +1145,11 @@ function Footer({ t }) {
               { title: "Legal", links: [{ label: "Terms of Service", href: "/terms" }, { label: "Privacy Policy", href: "/privacy" }, { label: "Community Guidelines", href: "/guidelines" }, { label: "Safety Policy", href: "/safety" }] },
             ].map(({ title, links }) => (
               <div key={title}>
-                <div className="mono" style={{ fontSize: ".62rem", letterSpacing: ".18em", textTransform: "uppercase", color: "#333", marginBottom: 16 }}>{title}</div>
+                <div className="mono" style={{ fontSize: ".62rem", letterSpacing: ".18em", textTransform: "uppercase", color: "#555", marginBottom: 16 }}>{title}</div>
                 {links.map(({ label, href }) => (
-                  <a key={label} href={href} style={{ display: "block", color: "#404040", fontSize: ".85rem", marginBottom: 10, transition: "color .2s" }}
+                  <a key={label} href={href} style={{ display: "block", color: "#707070", fontSize: ".85rem", marginBottom: 10, transition: "color .2s" }}
                     onMouseEnter={e => e.target.style.color = "#DC2626"}
-                    onMouseLeave={e => e.target.style.color = "#404040"}>{label}</a>
+                    onMouseLeave={e => e.target.style.color = "#707070"}>{label}</a>
                 ))}
               </div>
             ))}
@@ -1176,21 +1190,21 @@ function Modal({ onClose, t }) {
         {done ? (
           <div style={{ textAlign: "center" }}>
             <div className="bebas" style={{ fontSize: "2.5rem", color: "#fff", marginBottom: 10 }}>YOU'RE IN.</div>
-            <p style={{ color: "#606060" }}>We'll reach out when it's your turn. Stay consistent.</p>
+            <p style={{ color: "#909090" }}>We'll reach out when it's your turn. Stay consistent.</p>
             <button className="btn-red" onClick={onClose} style={{ marginTop: 24, width: "100%", justifyContent: "center" }}>Close</button>
           </div>
         ) : (
           <>
             <span className="mono" style={{ fontSize: ".65rem", color: "#DC2626", letterSpacing: ".2em", textTransform: "uppercase" }}>Early Access</span>
             <h3 className="bebas" style={{ fontSize: "2.8rem", color: "#fff", marginTop: 8, marginBottom: 12, lineHeight: .95 }}>FIND YOUR<br /><span style={{ color: "#DC2626" }}>PARTNER</span></h3>
-            <p style={{ fontSize: ".88rem", color: "#606060", marginBottom: 24, lineHeight: 1.7 }}>Priority matching and free access to all features at launch. No credit card required.</p>
+            <p style={{ fontSize: ".88rem", color: "#909090", marginBottom: 24, lineHeight: 1.7 }}>Priority matching and free access to all features at launch. No credit card required.</p>
             <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: 10 }}>
               <input type="email" placeholder="your@email.com" value={email} onChange={e => setEmail(e.target.value)} required
                 style={{ background: "#111", border: "1px solid #222", borderRadius: 4, color: "#fff", fontFamily: "'DM Sans',sans-serif", fontSize: ".95rem", padding: "14px 16px", outline: "none", transition: "border-color .2s" }}
                 onFocus={e => e.target.style.borderColor = "#DC2626"} onBlur={e => e.target.style.borderColor = "#222"} />
               <button type="submit" className="btn-red" style={{ justifyContent: "center", padding: "14px 0" }}>{t.heroCTA2} →</button>
             </form>
-            <p className="mono" style={{ marginTop: 10, fontSize: ".62rem", color: "#333", textAlign: "center", letterSpacing: ".08em" }}>NO SPAM. UNSUBSCRIBE ANYTIME.</p>
+            <p className="mono" style={{ marginTop: 10, fontSize: ".62rem", color: "#555", textAlign: "center", letterSpacing: ".08em" }}>NO SPAM. UNSUBSCRIBE ANYTIME.</p>
           </>
         )}
       </div>
