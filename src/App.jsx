@@ -229,18 +229,18 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 900px) {
   .hide-m { display: none !important; }
   .sec { padding: 72px 0; }
-  .hero-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
-  .phone-row { flex-direction: row !important; gap: 10px !important; justify-content: center !important; }
-  .phone-frame { width: 115px !important; border-radius: 22px !important; }
+  .hero-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
   .feat-grid { grid-template-columns: 1fr 1fr !important; }
   .proof-grid { grid-template-columns: 1fr !important; }
   .steps-grid { grid-template-columns: 1fr !important; }
   .pricing-grid { grid-template-columns: 1fr !important; }
+  .phone-mobile-wrap { transform: scale(0.72); transform-origin: top center; height: 560px; overflow: visible; }
 }
 @media (max-width: 600px) {
   .feat-grid { grid-template-columns: 1fr !important; }
   .hero-btns { flex-direction: column !important; align-items: stretch !important; }
   .hero-btns .btn-red, .hero-btns .btn-ghost { justify-content: center; }
+  .phone-mobile-wrap { transform: scale(0.58); transform-origin: top center; height: 450px; overflow: visible; }
 }
 @media (min-width: 901px) { .hide-d { display: none !important; } }
 
@@ -611,7 +611,8 @@ function Hero({ onCTA, t }) {
             </div>
           </div>
           {/* Right — phone mockups */}
-          <div className="anim-fade-up-2 phone-row" style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 20, position: "relative" }}>
+          <div className="anim-fade-up-2" style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 20, position: "relative" }}>
+            {/* Desktop layout */}
             <div className="hide-m" style={{ display: "flex", flexDirection: "column", gap: 20, alignItems: "flex-end", transform: "translateY(20px)" }}>
               <StreakPhone />
             </div>
@@ -619,11 +620,15 @@ function Hero({ onCTA, t }) {
               <ChatPhone />
               <AIPhone />
             </div>
-            {/* Mobile: all 3 side by side */}
-            <div className="hide-d" style={{ display: "flex", flexDirection: "row", gap: 10, justifyContent: "center", alignItems: "center", width: "100%" }}>
-              <StreakPhone />
-              <ChatPhone />
-              <AIPhone />
+            {/* Mobile: same desktop offset layout, scaled down via CSS */}
+            <div className="hide-d phone-mobile-wrap" style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 20 }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 20, alignItems: "flex-end", transform: "translateY(20px)" }}>
+                <StreakPhone />
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 20, alignItems: "flex-start", transform: "translateY(-20px)" }}>
+                <ChatPhone />
+                <AIPhone />
+              </div>
             </div>
             <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 50%, rgba(220,38,38,.08) 0%, transparent 70%)", pointerEvents: "none" }} />
           </div>
@@ -768,20 +773,24 @@ function Solution({ t }) {
         </h2>
         <p style={{ fontSize: "1.1rem", color: "#808080", lineHeight: 1.8, maxWidth: 560, margin: "0 auto 60px" }}>{t.solutionBody}</p>
         {/* The system diagram */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 0, flexWrap: "wrap" }}>
-          {["ALONE", "→", "STRUGGLING", "→", "RESTART"].map((item, i) => (
-            <div key={i} style={{ padding: i % 2 === 0 ? "14px 24px" : "0 8px", background: i % 2 === 0 ? "rgba(220,38,38,.08)" : "transparent", border: i % 2 === 0 ? "1px solid rgba(220,38,38,.2)" : "none", borderRadius: 4, display: "flex", alignItems: "center" }}>
-              <span className="mono" style={{ fontSize: i % 2 === 1 ? "1.2rem" : ".72rem", color: i % 2 === 1 ? "#333" : "#DC2626", letterSpacing: ".1em" }}>{item}</span>
-            </div>
-          ))}
+        <div style={{ overflowX: "auto", paddingBottom: 4 }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 0, minWidth: "max-content", margin: "0 auto" }}>
+            {["ALONE", "→", "STRUGGLING", "→", "RESTART"].map((item, i) => (
+              <div key={i} style={{ padding: i % 2 === 0 ? "14px 24px" : "0 8px", background: i % 2 === 0 ? "rgba(220,38,38,.08)" : "transparent", border: i % 2 === 0 ? "1px solid rgba(220,38,38,.2)" : "none", borderRadius: 4, display: "flex", alignItems: "center" }}>
+                <span className="mono" style={{ fontSize: i % 2 === 1 ? "1.2rem" : ".72rem", color: i % 2 === 1 ? "#333" : "#DC2626", letterSpacing: ".1em" }}>{item}</span>
+              </div>
+            ))}
+          </div>
         </div>
         <div style={{ margin: "20px auto", width: 2, height: 40, background: "linear-gradient(to bottom, rgba(220,38,38,.5), rgba(220,38,38,.1))" }} />
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 0, flexWrap: "wrap" }}>
-          {["MATCHED", "→", "ACCOUNTABLE", "→", "CONSISTENT"].map((item, i) => (
-            <div key={i} style={{ padding: i % 2 === 0 ? "14px 24px" : "0 8px", background: i % 2 === 0 ? "rgba(220,38,38,.15)" : "transparent", border: i % 2 === 0 ? "1px solid rgba(220,38,38,.4)" : "none", borderRadius: 4, display: "flex", alignItems: "center" }}>
-              <span className="mono" style={{ fontSize: i % 2 === 1 ? "1.2rem" : ".72rem", color: i % 2 === 1 ? "#555" : "#EF4444", letterSpacing: ".1em" }}>{item}</span>
-            </div>
-          ))}
+        <div style={{ overflowX: "auto", paddingBottom: 4 }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 0, minWidth: "max-content", margin: "0 auto" }}>
+            {["MATCHED", "→", "ACCOUNTABLE", "→", "CONSISTENT"].map((item, i) => (
+              <div key={i} style={{ padding: i % 2 === 0 ? "14px 24px" : "0 8px", background: i % 2 === 0 ? "rgba(220,38,38,.15)" : "transparent", border: i % 2 === 0 ? "1px solid rgba(220,38,38,.4)" : "none", borderRadius: 4, display: "flex", alignItems: "center" }}>
+                <span className="mono" style={{ fontSize: i % 2 === 1 ? "1.2rem" : ".72rem", color: i % 2 === 1 ? "#555" : "#EF4444", letterSpacing: ".1em" }}>{item}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
