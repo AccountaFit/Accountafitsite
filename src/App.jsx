@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 
-/* ── LANGUAGE DATA ───────────────────────────────────────────── */
 const LANGS = {
   en: { name: "English", flag: "🇺🇸" }, fr: { name: "Français", flag: "🇫🇷" },
   es: { name: "Español", flag: "🇪🇸" }, de: { name: "Deutsch", flag: "🇩🇪" },
@@ -14,13 +13,13 @@ const T = {
   en: {
     nav: ["How It Works", "Features", "FAQ"],
     joinWaitlist: "Join Waitlist",
-    heroEyebrow: "THE FITNESS ACCOUNTABILITY PLATFORM",
-    heroH1a: "Stop",
-    heroH1b: "Starting",
-    heroH1c: "Over.",
+    eyebrow: "STRONGER TOGETHER. ACCOUNTABLE ALWAYS.",
+    heroH1: ["STOP", "STARTING", "OVER."],
     heroSub: "Most people don't fail fitness because they're lazy. They fail because they do it alone. AccountaFit matches you with a real partner who keeps you accountable — every day.",
-    heroCTA1: "Join the Waitlist",
-    heroCTA2: "Join the Waitlist",
+    heroCTA: "Join the Waitlist",
+    stat1v: "3×", stat1l: "More likely to hit goals",
+    stat2v: "48H", stat2l: "Average match time",
+    stat3v: "94%", stat3l: "Report stronger consistency",
     problemEyebrow: "THE REAL PROBLEM",
     problemH: "You don't need more motivation.",
     problemBody: "You've downloaded the apps. You've started the routines. You've told yourself \"this time is different.\" And somehow… it always resets. Not because you're incapable. Because you're doing it alone.",
@@ -58,18 +57,8 @@ const T = {
     ],
     pricingEyebrow: "PRICING",
     pricingH: "Free to start. Built to scale.",
-    pricingFree: "Free",
-    pricingPro: "Pro",
-    pricingFreeDesc: "Everything you need to get started and build your first streak.",
-    pricingProDesc: "For people serious about never starting over again.",
     freeFeatures: ["Partner matching", "Daily check-ins", "Shared streaks", "Basic chat", "AI workout (3/week)"],
     proFeatures: ["Everything in Free", "Unlimited AI workouts", "Daily meal plans", "Priority matching", "Advanced analytics", "Smart Rematch"],
-    ctaEyebrow: "YOUR MOVE",
-    ctaH1: "Your next restart",
-    ctaH2: "doesn't have to happen.",
-    ctaSub: "Find someone who won't let you quit.",
-    ctaBtn: "Join the Waitlist",
-    ctaNote: "Free to join. No credit card required.",
     faqEyebrow: "FAQ",
     faqH: "Real questions.",
     faqs: [
@@ -79,239 +68,157 @@ const T = {
       { q: "Is it really free?", a: "Yes. Core features are free forever. Pro upgrades are available for power users." },
       { q: "How much time does it take daily?", a: "About 60 seconds for a check-in. Consistency over complexity." },
     ],
+    ctaEyebrow: "YOUR MOVE",
+    ctaH1: "Your next restart",
+    ctaH2: "doesn't have to happen.",
+    ctaSub: "Find someone who won't let you quit.",
+    ctaBtn: "Join the Waitlist",
+    ctaNote: "Free to join. No credit card required.",
+    emailPH: "Enter your email",
   },
 };
 
-/* ── GLOBAL CSS ──────────────────────────────────────────────── */
 const G = `
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; }
-body { background: #080808; color: #fff; font-family: 'DM Sans', sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; line-height: 1.6; }
+body { background: #0D1526; color: #F6F8FB; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; line-height: 1.6; }
 a { color: inherit; text-decoration: none; }
-::selection { background: rgba(220,38,38,.35); color: #fff; }
+::selection { background: rgba(255,77,87,.25); color: #fff; }
 
 :root {
-  --red: #DC2626;
-  --red-dim: #991B1B;
-  --red-glow: rgba(220,38,38,.15);
-  --red-hi: #EF4444;
-  --surface: #0F0F0F;
-  --surface2: #141414;
-  --border: #1E1E1E;
-  --border2: #2A2A2A;
-  --gray: #A0A0A0;
-  --gray2: #606060;
-  --white: #F5F5F5;
+  --navy: #0D1526;
+  --navy2: #111D33;
+  --navy3: #162040;
+  --coral: #FF4D57;
+  --coral2: #FF6B74;
+  --frost: #F6F8FB;
+  --gray: #B7C1D3;
+  --gray2: #8A97AD;
+  --glass-bg: rgba(255,255,255,.06);
+  --glass-border: rgba(255,255,255,.10);
+  --glass-border-strong: rgba(255,255,255,.18);
+  --section-light: #F0F4FA;
+  --section-light2: #E8EDF7;
+  --navy-light-text: #1A2540;
+  --navy-light-sub: #4A5568;
 }
 
-/* ── Typography ── */
 .bebas { font-family: 'Bebas Neue', sans-serif; letter-spacing: .04em; }
 .mono { font-family: 'JetBrains Mono', monospace; }
-.eyebrow { font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--red); display: block; margin-bottom: 16px; }
+.eyebrow { font-family: 'JetBrains Mono', monospace; font-size: .68rem; letter-spacing: .24em; text-transform: uppercase; color: var(--coral); display: block; margin-bottom: 16px; }
 
-/* ── Animations ── */
-@keyframes fadeUp { from { opacity:0; transform:translateY(32px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.5} }
-@keyframes spin { to { transform: rotate(360deg); } }
-@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
-@keyframes streakGlow { 0%,100%{box-shadow:0 0 20px rgba(220,38,38,.3)} 50%{box-shadow:0 0 40px rgba(220,38,38,.6)} }
-@keyframes slideIn { from{transform:translateX(-20px);opacity:0} to{transform:translateX(0);opacity:1} }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+@keyframes floatB { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+@keyframes glowPulse { 0%,100%{opacity:.5} 50%{opacity:1} }
 @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-@keyframes scan { 0%{top:0} 100%{top:100%} }
+@keyframes afDot { 0%,100%{background:rgba(255,255,255,.2)} 50%{background:#FF4D57} }
 
-.anim-fade-up { animation: fadeUp .8s ease both; }
-.anim-fade-up-1 { animation: fadeUp .8s .1s ease both; }
-.anim-fade-up-2 { animation: fadeUp .8s .2s ease both; }
-.anim-fade-up-3 { animation: fadeUp .8s .3s ease both; }
-.anim-fade-up-4 { animation: fadeUp .8s .4s ease both; }
-.anim-fade-up-5 { animation: fadeUp .8s .5s ease both; }
+.glass { background: var(--glass-bg); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid var(--glass-border); border-radius: 20px; }
+.glass-strong { background: rgba(255,255,255,.09); backdrop-filter: blur(32px); -webkit-backdrop-filter: blur(32px); border: 1px solid var(--glass-border-strong); border-radius: 20px; }
+.glass-card { background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 16px; transition: all .3s ease; position: relative; overflow: hidden; }
+.glass-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent); }
+.glass-card:hover { background: rgba(255,255,255,.1); border-color: rgba(255,77,87,.35); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,.4), 0 0 30px rgba(255,77,87,.08); }
 
-/* ── Buttons ── */
-.btn-red {
-  display: inline-flex; align-items: center; gap: 10px;
-  background: var(--red); color: #fff;
-  font-family: 'JetBrains Mono', monospace; font-size: .82rem;
-  font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
-  padding: 16px 36px; border: none; border-radius: 4px; cursor: pointer;
-  transition: all .2s ease; position: relative; overflow: hidden;
-}
-.btn-red::before {
-  content:''; position:absolute; inset:0;
-  background: linear-gradient(135deg, rgba(255,255,255,.12) 0%, transparent 60%);
-  opacity: 0; transition: opacity .2s;
-}
-.btn-red:hover { background: #EF4444; transform: translateY(-2px); box-shadow: 0 12px 40px rgba(220,38,38,.4); }
-.btn-red:hover::before { opacity: 1; }
+.light-card { background: #fff; border: 1px solid rgba(0,0,0,.07); border-radius: 16px; transition: all .3s ease; position: relative; overflow: hidden; box-shadow: 0 4px 24px rgba(13,21,38,.06); }
+.light-card:hover { border-color: rgba(255,77,87,.25); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(13,21,38,.12); }
 
-.btn-ghost {
-  display: inline-flex; align-items: center; gap: 10px;
-  background: transparent; color: var(--white);
-  font-family: 'JetBrains Mono', monospace; font-size: .82rem;
-  font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
-  padding: 15px 36px; border: 1px solid var(--border2); border-radius: 4px; cursor: pointer;
-  transition: all .2s ease;
-}
-.btn-ghost:hover { border-color: var(--red); color: var(--red-hi); transform: translateY(-2px); }
+.btn-coral { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(135deg, #FF4D57, #FF2D3A); color: #fff; font-family: 'JetBrains Mono', monospace; font-size: .8rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; padding: 16px 36px; border: none; border-radius: 100px; cursor: pointer; transition: all .25s ease; box-shadow: 0 8px 32px rgba(255,77,87,.35), inset 0 1px 0 rgba(255,255,255,.2); }
+.btn-coral:hover { background: linear-gradient(135deg, #FF6B74, #FF4D57); transform: translateY(-2px); box-shadow: 0 14px 48px rgba(255,77,87,.45); }
 
-/* ── Cards ── */
-.card {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 8px; padding: 28px; transition: all .3s ease;
-  position: relative; overflow: hidden;
-}
-.card::after {
-  content:''; position:absolute; top:0; left:0; right:0; height:1px;
-  background: linear-gradient(90deg, transparent, var(--red), transparent);
-  opacity: 0; transition: opacity .3s;
-}
-.card:hover { border-color: rgba(220,38,38,.4); transform: translateY(-4px); box-shadow: 0 24px 60px rgba(0,0,0,.5), 0 0 40px rgba(220,38,38,.08); }
-.card:hover::after { opacity: 1; }
+.btn-ghost-dark { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: transparent; color: var(--frost); font-family: 'JetBrains Mono', monospace; font-size: .8rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; padding: 15px 36px; border: 1px solid var(--glass-border-strong); border-radius: 100px; cursor: pointer; transition: all .25s ease; }
+.btn-ghost-dark:hover { border-color: var(--coral); color: var(--coral); transform: translateY(-2px); }
 
-/* ── Nav ── */
-.nav-link { color: var(--gray); font-size: .9rem; font-weight: 400; transition: color .2s; cursor: pointer; }
-.nav-link:hover { color: #fff; }
+.nav-link { color: var(--gray); font-size: .88rem; font-weight: 400; transition: color .2s; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; }
+.nav-link:hover { color: var(--frost); }
 
-/* ── Noise texture ── */
-.noise-bg {
-  position: absolute; inset: 0; pointer-events: none; z-index: 1; opacity: .06;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-  background-size: 128px;
-}
-
-/* ── Grid line bg ── */
-.grid-bg {
-  position: absolute; inset: 0; pointer-events: none;
-  background-image: linear-gradient(rgba(220,38,38,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(220,38,38,.04) 1px, transparent 1px);
-  background-size: 60px 60px;
-}
-
-/* ── Section ── */
 .sec { padding: 100px 0; position: relative; overflow: hidden; }
+.sec-light { background: var(--section-light); }
+.sec-light2 { background: var(--section-light2); }
 .wrap { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
 
-/* ── Loop marquee ── */
-.marquee-track { display: flex; gap: 0; width: max-content; animation: marquee 18s linear infinite; }
-.marquee-item {
-  display: flex; align-items: center; gap: 32px; padding: 0 40px;
-  font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: .06em;
-  white-space: nowrap; color: rgba(255,255,255,.12);
-  border-right: 1px solid rgba(220,38,38,.15);
-}
-.marquee-item.active { color: var(--red); }
+.noise { position: absolute; inset: 0; pointer-events: none; z-index: 0; opacity: .025; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 128px; }
+.glow-coral { position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(255,77,87,.18) 0%, transparent 70%); pointer-events: none; }
+.glow-blue { position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(99,143,255,.1) 0%, transparent 70%); pointer-events: none; }
 
-/* ── Phone mockup ── */
-.phone-frame {
-  width: 220px; border-radius: 36px;
-  border: 2px solid #2A2A2A;
-  background: #0A0A0A;
-  overflow: hidden; position: relative;
-  box-shadow: 0 40px 80px rgba(0,0,0,.8), 0 0 0 1px rgba(255,255,255,.05);
-}
-.phone-notch {
-  width: 80px; height: 24px; background: #0A0A0A;
-  border-radius: 0 0 16px 16px; margin: 0 auto;
-  border: 1px solid #1A1A1A; border-top: none;
-}
+.marquee-track { display: flex; width: max-content; animation: marquee 20s linear infinite; }
+.marquee-item { display: flex; align-items: center; gap: 28px; padding: 0 36px; font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: .06em; white-space: nowrap; color: rgba(182,193,211,.15); border-right: 1px solid rgba(255,255,255,.06); }
+.marquee-item.hi { color: #FF4D57; }
 
-/* ── Streak badge ── */
-.streak-badge {
-  display: flex; align-items: center; gap: 6px;
-  background: rgba(220,38,38,.12); border: 1px solid rgba(220,38,38,.3);
-  border-radius: 100px; padding: 6px 14px;
-  font-family: 'JetBrains Mono', monospace; font-size: .78rem; color: var(--red-hi);
-  animation: streakGlow 2s ease-in-out infinite;
-}
+.phone-wrap { width: 220px; border-radius: 40px; border: 1.5px solid rgba(255,255,255,.15); background: rgba(13,21,38,.85); backdrop-filter: blur(40px); overflow: hidden; position: relative; box-shadow: 0 40px 80px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.06), inset 0 1px 0 rgba(255,255,255,.12); }
+.phone-notch { width: 72px; height: 22px; background: rgba(13,21,38,.95); border-radius: 0 0 14px 14px; margin: 0 auto; border: 1px solid rgba(255,255,255,.08); border-top: none; }
 
-/* ── Mobile ── */
+.af-chat-btn { position:fixed; bottom:28px; right:28px; z-index:800; height:48px; border-radius:100px; cursor:pointer; background:rgba(255,77,87,.15); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid rgba(255,77,87,.3); display:flex; align-items:center; justify-content:center; gap:9px; box-shadow:0 4px 24px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.1); transition:all .25s ease; padding:0 20px; white-space:nowrap; }
+.af-chat-btn:hover { background:rgba(255,77,87,.28); border-color:rgba(255,77,87,.55); transform:translateY(-2px); }
+.af-chat-btn.open { width:48px; height:48px; padding:0; border-radius:50%; }
+.af-chat-win { position:fixed; bottom:88px; right:28px; z-index:800; width:350px; background:rgba(17,29,51,.96); border:1px solid rgba(255,255,255,.1); border-radius:20px; overflow:hidden; box-shadow:0 28px 72px rgba(0,0,0,.7); display:flex; flex-direction:column; animation:fadeIn .25s ease; max-height:520px; backdrop-filter:blur(40px); }
+.af-chat-hd { background:rgba(255,255,255,.04); border-bottom:1px solid rgba(255,255,255,.08); padding:14px 16px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0; }
+.af-chat-msgs { flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:12px; scroll-behavior:smooth; }
+.af-chat-msgs::-webkit-scrollbar { width:3px; }
+.af-chat-msgs::-webkit-scrollbar-thumb { background:rgba(255,255,255,.1); border-radius:2px; }
+.af-chat-inp { border-top:1px solid rgba(255,255,255,.08); padding:12px 14px; background:rgba(255,255,255,.03); display:flex; gap:8px; align-items:center; flex-shrink:0; }
+.af-msg-bot { display:flex; gap:8px; align-items:flex-start; }
+.af-msg-user { display:flex; justify-content:flex-end; }
+.af-bubble-bot { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.08); border-radius:12px 12px 12px 4px; padding:10px 13px; max-width:260px; font-size:13px; color:#F6F8FB; line-height:1.55; white-space:pre-line; }
+.af-bubble-user { background:linear-gradient(135deg,#FF4D57,#FF2D3A); border-radius:12px 12px 4px 12px; padding:10px 13px; max-width:240px; font-size:13px; color:#fff; line-height:1.55; }
+.af-av { width:26px; height:26px; border-radius:50%; background:linear-gradient(135deg,#FF4D57,#B91C1C); display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#fff; flex-shrink:0; font-family:'JetBrains Mono',monospace; }
+.af-inp { flex:1; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:100px; color:#F6F8FB; font-family:'Plus Jakarta Sans',sans-serif; font-size:12.5px; padding:9px 14px; outline:none; transition:border-color .2s; }
+.af-inp::placeholder { color:rgba(183,193,211,.4); }
+.af-inp:focus { border-color:rgba(255,77,87,.5); }
+.af-send { width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,#FF4D57,#FF2D3A); border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:opacity .2s; }
+.af-send:hover { opacity:.85; }
+.af-dot { width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,.3); animation:afDot .9s ease-in-out infinite; }
+.af-dot:nth-child(2){animation-delay:.2s}
+.af-dot:nth-child(3){animation-delay:.4s}
+
 @media (max-width: 900px) {
   .hide-m { display: none !important; }
-  .sec { padding: 60px 0; }
+  .sec { padding: 72px 0; }
   .feat-grid { grid-template-columns: 1fr 1fr !important; }
   .proof-grid { grid-template-columns: 1fr !important; }
-  .steps-grid { grid-template-columns: 1fr !important; }
+  .steps-grid { grid-template-columns: 1fr 1fr !important; }
   .pricing-grid { grid-template-columns: 1fr !important; }
   .faq-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
-  .wrap { padding: 0 6% !important; }
-  /* Marquee smaller on mobile */
-  .marquee-item { font-size: 1.4rem !important; padding: 0 20px !important; gap: 16px !important; }
+  .two-col { grid-template-columns: 1fr !important; gap: 48px !important; }
+  .solution-row { overflow-x: auto; justify-content: flex-start !important; }
 }
 @media (max-width: 600px) {
   .feat-grid { grid-template-columns: 1fr !important; }
-  .pricing-grid { grid-template-columns: 1fr !important; }
+  .steps-grid { grid-template-columns: 1fr !important; }
+  .af-chat-win { width: calc(100vw - 32px); right: 16px; bottom: 80px; }
+  .af-chat-btn { right: 16px; bottom: 16px; }
 }
 @media (min-width: 901px) { .hide-d { display: none !important; } }
-
-/* ── FAQ ── */
-.faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 4px; transition: border-color .2s; }
-.faq-item.open { border-color: rgba(220,38,38,.35); }
-.faq-btn { width:100%; background:none; border:none; cursor:pointer; padding:20px 24px; display:flex; justify-content:space-between; align-items:center; gap:16px; }
-.faq-q { font-family:'DM Sans',sans-serif; font-weight:600; color:#fff; font-size:1rem; flex:1; text-align:left; }
-.faq-plus { color:var(--red); font-size:1.4rem; line-height:1; transition:transform .25s; flex-shrink:0; }
-.faq-a { padding:0 24px 20px; color:var(--gray); line-height:1.78; font-size:.95rem; }
-
-/* ── Chat bubble ── */
-.chat-msg { display:flex; gap:8px; align-items:flex-end; margin-bottom:10px; }
-.chat-msg.right { flex-direction:row-reverse; }
-.chat-avatar { width:28px; height:28px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:.65rem; font-weight:700; font-family:'JetBrains Mono',monospace; }
-.chat-bubble { max-width:180px; padding:10px 13px; border-radius:16px; font-size:.8rem; line-height:1.45; }
-.chat-bubble.left { background:#1E1E1E; color:#E0E0E0; border-radius:4px 16px 16px 16px; }
-.chat-bubble.right { background:var(--red); color:#fff; border-radius:16px 4px 16px 16px; }
-
-/* ── AI card ── */
-.ai-tag { display:inline-flex; align-items:center; gap:6px; background:rgba(220,38,38,.1); border:1px solid rgba(220,38,38,.25); border-radius:4px; padding:4px 10px; font-family:'JetBrains Mono',monospace; font-size:.68rem; letter-spacing:.1em; color:var(--red-hi); margin-bottom:12px; }
-
-/* ── Chatbot ── */
-.af-chat-btn {
-  position:fixed; bottom:28px; right:28px; z-index:800;
-  height:48px; border-radius:100px; cursor:pointer;
-  background:rgba(220,38,38,.18);
-  backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
-  border:1px solid rgba(239,68,68,.35);
-  display:flex; align-items:center; justify-content:center; gap:9px;
-  box-shadow:0 4px 24px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.1);
-  transition:all .25s ease; padding:0 20px; white-space:nowrap;
-}
-.af-chat-btn:hover { background:rgba(220,38,38,.32); border-color:rgba(239,68,68,.6); transform:translateY(-2px); box-shadow:0 10px 32px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.15); }
-.af-chat-btn.open { width:48px; height:48px; padding:0; border-radius:50%; }
-.af-chat-win { position:fixed; bottom:88px; right:28px; z-index:800; width:350px; background:#111; border:1px solid #2A2A2A; border-radius:16px; overflow:hidden; box-shadow:0 28px 72px rgba(0,0,0,.85); display:flex; flex-direction:column; animation:fadeIn .25s ease; max-height:520px; }
-.af-chat-hd { background:#0D0D0D; border-bottom:1px solid #1E1E1E; padding:14px 16px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0; }
-.af-chat-msgs { flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:12px; scroll-behavior:smooth; }
-.af-chat-msgs::-webkit-scrollbar { width:3px; } .af-chat-msgs::-webkit-scrollbar-thumb { background:#333; border-radius:2px; }
-.af-chat-inp { border-top:1px solid #1E1E1E; padding:12px 14px; background:#0D0D0D; display:flex; gap:8px; align-items:center; flex-shrink:0; }
-.af-msg-bot { display:flex; gap:8px; align-items:flex-start; } .af-msg-user { display:flex; justify-content:flex-end; }
-.af-bubble-bot { background:#1A1A1A; border-radius:12px 12px 12px 4px; padding:10px 13px; max-width:260px; font-size:13px; color:#E0E0E0; line-height:1.55; white-space:pre-line; }
-.af-bubble-user { background:var(--red); border-radius:12px 12px 4px 12px; padding:10px 13px; max-width:240px; font-size:13px; color:#fff; line-height:1.55; }
-.af-av { width:26px; height:26px; border-radius:50%; background:linear-gradient(135deg,#B91C1C,#7f1d1d); display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#fff; flex-shrink:0; font-family:'JetBrains Mono',monospace; }
-.af-inp { flex:1; background:#1A1A1A; border:1px solid #2A2A2A; border-radius:100px; color:#fff; font-family:'DM Sans',sans-serif; font-size:12.5px; padding:9px 14px; outline:none; transition:border-color .2s; }
-.af-inp::placeholder { color:#555; } .af-inp:focus { border-color:rgba(220,38,38,.55); }
-.af-send { width:34px; height:34px; border-radius:50%; background:var(--red); border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background .2s; }
-.af-send:hover { background:#EF4444; }
-.af-dot { width:6px; height:6px; border-radius:50%; background:#555; animation:afDot .9s ease-in-out infinite; }
-.af-dot:nth-child(2){animation-delay:.2s} .af-dot:nth-child(3){animation-delay:.4s}
-@keyframes afDot { 0%,100%{background:#444} 50%{background:#EF4444} }
-@media(max-width:600px){ .af-chat-win{width:calc(100vw - 32px);right:16px;bottom:80px;} .af-chat-btn{right:16px;bottom:16px;} }
 `;
 
-/* ── GEMINI CHATBOT ──────────────────────────────────────────── */
+function AFMark({ size = 48 }) {
+  const s = size;
+  return (
+    <svg width={s} height={s} viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 72L34 12L60 72" stroke="rgba(246,248,251,0.88)" strokeWidth="7.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+      <path d="M18 52H50" stroke="rgba(246,248,251,0.88)" strokeWidth="7.5" strokeLinecap="round"/>
+      <rect x="68" y="16" width="26" height="9" rx="4.5" fill="#FF4D57"/>
+      <rect x="68" y="32" width="20" height="9" rx="4.5" fill="#FF4D57" opacity=".85"/>
+    </svg>
+  );
+}
+
+function Wordmark({ size = "1.5rem", dark = false }) {
+  return (
+    <span style={{ fontSize: size, fontFamily: "'Plus Jakarta Sans',sans-serif", fontWeight: 700, letterSpacing: "-.02em", lineHeight: 1, userSelect: "none" }}>
+      <span style={{ color: dark ? "#1A2540" : "#F6F8FB" }}>Accounta</span>
+      <span style={{ color: "#FF4D57" }}>Fit</span>
+    </span>
+  );
+}
+
 const GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY;
-const SYSTEM_PROMPT = `You are the AccountaFit AI assistant. You ONLY answer questions about AccountaFit. If asked anything unrelated, politely redirect back to AccountaFit. Keep answers concise, friendly, bold and direct — max 3 sentences unless a list is genuinely needed.
+const SYSTEM_PROMPT = `You are the AccountaFit AI assistant. Only answer questions about AccountaFit. Keep answers concise, warm, and direct — max 3 sentences.
 
-WHAT IT IS: AccountaFit is a fitness accountability app with the tagline "Stop Starting Over." It pairs users with real accountability partners matched by goals, schedule, and commitment level. It is NOT a workout tracker, social feed, or dating app.
-
-HOW IT WORKS: 1. Get Matched (48hrs) 2. Check In Daily (60 seconds) 3. Build Your Streak (shared with partner) 4. Get Results
-
-KEY FEATURES: Smart Matching, Shared Streaks, Accountability Chat, AI Workout Generator, Daily Meal Guidance, Real-Time Progress, Leaderboard, Customizable Notifications, Social Sharing.
-
-PRICING: Free tier (partner matching, check-ins, streaks, basic chat, 3 AI workouts/week). Pro tier (unlimited AI workouts, daily meal plans, priority matching, advanced analytics, Smart Rematch). Early access is FREE, no credit card required.
-
-MATCHING: 48 hours. Based on fitness goals, schedule, commitment level, intensity. Not random. Tinder-style flow with optional 5-min video call.
-
-CONTACT: info@accountafit.com | Instagram @accountafitcorp | X @accountafit | TikTok @accountafit
-
-FAQ: Not a dating app. Smart Rematch handles ghosting. 60 sec/day. All levels welcome. Mobile apps coming soon (iOS & Android). Delaware corporation.`;
+AccountaFit is a fitness accountability platform matching users with real partners based on goals, schedule, and commitment level. Tagline: "Stop Starting Over." Features: Smart Matching, Shared Streaks, Accountability Chat, AI Workout Generator, Daily Meal Guidance, Real-Time Progress, Tinder-style matching with optional 5-min video call. Free tier available. Pro pricing coming soon. Contact: info@accountafit.com | @accountafitcorp on Instagram. Delaware corporation. Mobile apps coming soon.`;
 
 function Chatbot() {
   const [open, setOpen] = useState(false);
@@ -319,34 +226,30 @@ function Chatbot() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const msgsRef = useRef(null);
-
   useEffect(() => { if (msgsRef.current) msgsRef.current.scrollTop = msgsRef.current.scrollHeight; }, [msgs, loading]);
 
-  const send = async (overrideText) => {
-    const text = (overrideText || input).trim();
+  const send = async (override) => {
+    const text = (override || input).trim();
     if (!text || loading) return;
     setInput("");
     setMsgs(m => [...m, { role: "user", text }]);
     setLoading(true);
     try {
-      if (!GEMINI_KEY) throw new Error("API key not configured");
-      const history = msgs.filter(m => m.role !== "error").map(m => ({ role: m.role === "bot" ? "model" : "user", parts: [{ text: m.text }] }));
+      if (!GEMINI_KEY) throw new Error("no key");
+      const history = msgs.map(m => ({ role: m.role === "bot" ? "model" : "user", parts: [{ text: m.text }] }));
       const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`, {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ system_instruction: { parts: [{ text: SYSTEM_PROMPT }] }, contents: [...history, { role: "user", parts: [{ text }] }], generationConfig: { maxOutputTokens: 300, temperature: 0.7 } }),
       });
-      if (!res.ok) throw new Error(`API error ${res.status}`);
       const data = await res.json();
-      const rawReply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-      if (!rawReply) throw new Error("Empty response");
-      const reply = rawReply.replace(/\*\*(.*?)\*\*/g, '$1').replace(/\*(.*?)\*/g, '$1').replace(/#+\s/g, '').trim();
-      setMsgs(m => [...m, { role: "bot", text: reply }]);
-    } catch { setMsgs(m => [...m, { role: "bot", text: "Something went wrong. Try again or reach us at info@accountafit.com." }]); }
+      const raw = data?.candidates?.[0]?.content?.parts?.[0]?.text || "";
+      const reply = raw.replace(/\*\*(.*?)\*\*/g, '$1').replace(/\*(.*?)\*/g, '$1').trim();
+      setMsgs(m => [...m, { role: "bot", text: reply || "Something went wrong. Try again!" }]);
+    } catch { setMsgs(m => [...m, { role: "bot", text: "Something went wrong. Reach us at info@accountafit.com." }]); }
     setLoading(false);
   };
 
   const QUICK = ["How does matching work?", "Is it free?", "What features does it have?"];
-
   return (
     <>
       {open && (
@@ -355,26 +258,25 @@ function Chatbot() {
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
               <div className="af-av" style={{ width: 34, height: 34, fontSize: 11 }}>AF</div>
               <div>
-                <div style={{ fontWeight: 600, fontSize: 13, color: "#fff", fontFamily: "'DM Sans',sans-serif" }}>AccountaFit AI</div>
+                <div style={{ fontWeight: 600, fontSize: 13, color: "#F6F8FB", fontFamily: "'Plus Jakarta Sans',sans-serif" }}>AccountaFit AI</div>
                 <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 2 }}>
                   <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#22c55e" }} />
-                  <span style={{ fontSize: ".65rem", color: "#22c55e", letterSpacing: ".08em", fontFamily: "'JetBrains Mono',monospace" }}>ONLINE</span>
+                  <span style={{ fontSize: ".62rem", color: "#22c55e", letterSpacing: ".08em", fontFamily: "'JetBrains Mono',monospace" }}>ONLINE</span>
                 </div>
               </div>
             </div>
-            <button onClick={() => setOpen(false)} style={{ background: "none", border: "none", color: "#888", cursor: "pointer", fontSize: "1.2rem", lineHeight: 1, padding: 4 }}>✕</button>
+            <button onClick={() => setOpen(false)} style={{ background: "none", border: "none", color: "rgba(255,255,255,.35)", cursor: "pointer", fontSize: "1.2rem", lineHeight: 1, padding: 4 }}>✕</button>
           </div>
           <div className="af-chat-msgs" ref={msgsRef}>
-            {msgs.map((m, i) => m.role === "bot" ? (
-              <div key={i} className="af-msg-bot"><div className="af-av">AF</div><div className="af-bubble-bot">{m.text}</div></div>
-            ) : (
-              <div key={i} className="af-msg-user"><div className="af-bubble-user">{m.text}</div></div>
-            ))}
-            {loading && <div className="af-msg-bot"><div className="af-av">AF</div><div style={{ background: "#1A1A1A", borderRadius: 12, padding: "10px 16px", display: "flex", gap: 4 }}><div className="af-dot" /><div className="af-dot" /><div className="af-dot" /></div></div>}
+            {msgs.map((m, i) => m.role === "bot"
+              ? <div key={i} className="af-msg-bot"><div className="af-av">AF</div><div className="af-bubble-bot">{m.text}</div></div>
+              : <div key={i} className="af-msg-user"><div className="af-bubble-user">{m.text}</div></div>
+            )}
+            {loading && <div className="af-msg-bot"><div className="af-av">AF</div><div style={{ background: "rgba(255,255,255,.07)", border: "1px solid rgba(255,255,255,.08)", borderRadius: 12, padding: "10px 16px", display: "flex", gap: 4 }}><div className="af-dot"/><div className="af-dot"/><div className="af-dot"/></div></div>}
           </div>
           {msgs.length === 1 && (
             <div style={{ padding: "0 14px 10px", display: "flex", flexWrap: "wrap", gap: 6 }}>
-              {QUICK.map(q => <button key={q} onClick={() => send(q)} style={{ background: "rgba(220,38,38,.12)", border: "1px solid rgba(220,38,38,.3)", borderRadius: 100, color: "#EF4444", fontSize: 11, padding: "5px 10px", cursor: "pointer", fontFamily: "'DM Sans',sans-serif" }}>{q}</button>)}
+              {QUICK.map(q => <button key={q} onClick={() => send(q)} style={{ background: "rgba(255,77,87,.1)", border: "1px solid rgba(255,77,87,.25)", borderRadius: 100, color: "#FF6B74", fontSize: 11, padding: "5px 10px", cursor: "pointer", fontFamily: "'Plus Jakarta Sans',sans-serif" }}>{q}</button>)}
             </div>
           )}
           <div className="af-chat-inp">
@@ -386,163 +288,80 @@ function Chatbot() {
         </div>
       )}
       <button className={`af-chat-btn${open ? " open" : ""}`} onClick={() => setOpen(o => !o)}>
-        {open ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> : <>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          <span style={{ color: "rgba(255,255,255,.95)", fontFamily: "'JetBrains Mono',monospace", fontWeight: 500, fontSize: ".82rem", letterSpacing: ".12em", textTransform: "uppercase" }}>Ask AI</span>
-          <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#22c55e", boxShadow: "0 0 6px rgba(34,197,94,.6)" }} />
-        </>}
+        {open
+          ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          : <>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" strokeWidth="2" strokeLinecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span style={{ color: "rgba(255,255,255,.9)", fontFamily: "'JetBrains Mono',monospace", fontWeight: 500, fontSize: ".78rem", letterSpacing: ".1em", textTransform: "uppercase" }}>Ask AI</span>
+            <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#22c55e", boxShadow: "0 0 6px rgba(34,197,94,.6)" }} />
+          </>
+        }
       </button>
     </>
   );
 }
 
-/* ── PHONE MOCKUP COMPONENTS ─────────────────────────────────── */
-function StreakPhone() {
+function PhoneGlass({ delay = "0s", offsetY = 0 }) {
   return (
-    <div className="phone-frame" style={{ width: 200, animation: "float 4s ease-in-out infinite" }}>
+    <div className="phone-wrap" style={{ animation: `float 5s ${delay} ease-in-out infinite`, transform: `translateY(${offsetY}px)` }}>
       <div className="phone-notch" />
-      <div style={{ padding: "16px 14px 20px", background: "#080808" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
-          <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: ".6rem", color: "#888", letterSpacing: ".1em" }}>ACCOUNTAFIT</span>
-          <div style={{ width: 24, height: 24, borderRadius: "50%", background: "rgba(220,38,38,.2)", border: "1px solid rgba(220,38,38,.4)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#DC2626" }} />
-          </div>
+      <div style={{ padding: "20px 16px 28px", minHeight: 340, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative" }}>
+        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: 150, height: 150, background: "radial-gradient(circle, rgba(255,77,87,.2) 0%, transparent 70%)", borderRadius: "50%", animation: "glowPulse 3s ease-in-out infinite" }} />
+        <div style={{ width: 110, height: 110, background: "rgba(255,255,255,.08)", border: "1px solid rgba(255,255,255,.16)", borderRadius: 28, display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(20px)", boxShadow: "0 20px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.18)", position: "relative", zIndex: 2 }}>
+          <AFMark size={52} />
         </div>
-        {/* Streak counter */}
-        <div style={{ textAlign: "center", marginBottom: 20 }}>
-          <div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "4.5rem", lineHeight: 1, color: "#fff", letterSpacing: ".04em" }}>34</div>
-          <div className="streak-badge" style={{ justifyContent: "center", margin: "8px auto 0", width: "fit-content" }}>
-            <span>🔥</span><span>DAY STREAK</span>
-          </div>
+        <div style={{ marginTop: 18, position: "relative", zIndex: 2 }}><Wordmark size="1rem" /></div>
+        <div style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 6, background: "rgba(255,77,87,.12)", border: "1px solid rgba(255,77,87,.25)", borderRadius: 100, padding: "4px 12px", position: "relative", zIndex: 2 }}>
+          <div style={{ width: 5, height: 5, borderRadius: "50%", background: "#22c55e" }} />
+          <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: ".58rem", color: "#FF6B74", letterSpacing: ".1em" }}>COMING SOON</span>
         </div>
-        {/* Partner */}
-        <div style={{ background: "#0F0F0F", borderRadius: 10, padding: "10px 12px", border: "1px solid #1E1E1E", marginBottom: 10 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-            <div style={{ width: 28, height: 28, borderRadius: "50%", background: "linear-gradient(135deg,#DC2626,#7f1d1d)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: ".6rem", fontWeight: 700, color: "#fff", fontFamily: "'JetBrains Mono',monospace" }}>KL</div>
-            <div>
-              <div style={{ fontSize: ".72rem", color: "#fff", fontWeight: 600 }}>Keisha L.</div>
-              <div style={{ fontSize: ".6rem", color: "#888" }}>Checked in 2m ago ✓</div>
-            </div>
-            <div style={{ marginLeft: "auto", width: 8, height: 8, borderRadius: "50%", background: "#22c55e" }} />
-          </div>
-          <div style={{ height: 3, background: "#1A1A1A", borderRadius: 2 }}>
-            <div style={{ width: "78%", height: "100%", background: "linear-gradient(90deg,#DC2626,#EF4444)", borderRadius: 2 }} />
-          </div>
-          <div style={{ display: "flex", justifyContent: "space-between", marginTop: 4 }}>
-            <span style={{ fontSize: ".58rem", color: "#888" }}>Compatibility</span>
-            <span style={{ fontSize: ".58rem", color: "#EF4444", fontFamily: "'JetBrains Mono',monospace" }}>97%</span>
-          </div>
-        </div>
-        {/* Check in button */}
-        <div style={{ background: "#DC2626", borderRadius: 8, padding: "10px", textAlign: "center", cursor: "pointer" }}>
-          <span style={{ fontSize: ".72rem", fontFamily: "'JetBrains Mono',monospace", fontWeight: 500, letterSpacing: ".1em", color: "#fff" }}>CHECK IN →</span>
-        </div>
+        <div style={{ position: "absolute", bottom: 16, left: 16, right: 16, height: 60, backgroundImage: "linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px)", backgroundSize: "20px 20px" }} />
       </div>
     </div>
   );
 }
 
-function ChatPhone() {
-  return (
-    <div className="phone-frame" style={{ width: 200, animation: "float 4s 1.5s ease-in-out infinite" }}>
-      <div className="phone-notch" />
-      <div style={{ padding: "14px 12px 16px", background: "#080808" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 8, paddingBottom: 12, borderBottom: "1px solid #1A1A1A", marginBottom: 12 }}>
-          <div style={{ width: 28, height: 28, borderRadius: "50%", background: "linear-gradient(135deg,#DC2626,#7f1d1d)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: ".6rem", fontWeight: 700, color: "#fff", fontFamily: "'JetBrains Mono',monospace" }}>MR</div>
-          <div>
-            <div style={{ fontSize: ".72rem", color: "#fff", fontWeight: 600 }}>Marcus R.</div>
-            <div style={{ fontSize: ".6rem", color: "#22c55e" }}>● Online now</div>
-          </div>
-          <div className="streak-badge" style={{ marginLeft: "auto", padding: "3px 8px", fontSize: ".58rem" }}>🔥 21</div>
-        </div>
-        <div className="chat-msg" style={{ marginBottom: 8 }}>
-          <div className="chat-avatar" style={{ background: "linear-gradient(135deg,#DC2626,#7f1d1d)", color: "#fff" }}>MR</div>
-          <div className="chat-bubble left" style={{ fontSize: ".72rem" }}>Already hit my morning run. You up? 💪</div>
-        </div>
-        <div className="chat-msg right" style={{ marginBottom: 8 }}>
-          <div className="chat-avatar" style={{ background: "#1E1E1E", color: "#C0C0C0" }}>ME</div>
-          <div className="chat-bubble right" style={{ fontSize: ".72rem" }}>5am gym. Just checked in. Streak safe 🔥</div>
-        </div>
-        <div className="chat-msg" style={{ marginBottom: 12 }}>
-          <div className="chat-avatar" style={{ background: "linear-gradient(135deg,#DC2626,#7f1d1d)", color: "#fff" }}>MR</div>
-          <div className="chat-bubble left" style={{ fontSize: ".72rem" }}>Let's go! Day 21 🎯</div>
-        </div>
-        <div style={{ background: "#0F0F0F", borderRadius: 20, padding: "7px 12px", display: "flex", alignItems: "center", gap: 6 }}>
-          <span style={{ fontSize: ".65rem", color: "#707070", flex: 1 }}>Reply...</span>
-          <div style={{ width: 20, height: 20, borderRadius: "50%", background: "#DC2626", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+const ICONS = {
+  match:    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="3.2"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a3.2 3.2 0 0 1 0 6.2"/></svg>,
+  streak:   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2c2.8 3 4.5 5.6 4.5 8.2A4.5 4.5 0 0 1 12 14.7a4.5 4.5 0 0 1-4.5-4.5C7.5 7.6 9.2 5 12 2Z"/><path d="M7 15.5A5 5 0 0 0 12 21a5 5 0 0 0 5-5.5"/></svg>,
+  chat:     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
+  ai:       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>,
+  meal:     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>,
+  progress: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>,
+};
 
-function AIPhone() {
-  return (
-    <div className="phone-frame" style={{ width: 200, animation: "float 4s 3s ease-in-out infinite" }}>
-      <div className="phone-notch" />
-      <div style={{ padding: "14px 12px 16px", background: "#080808" }}>
-        <div className="ai-tag">⚡ AI WORKOUT</div>
-        <div style={{ fontSize: ".78rem", fontWeight: 700, color: "#fff", marginBottom: 14 }}>Today's Plan</div>
-        {[
-          { name: "Deadlift", sets: "4×6", load: "85%" },
-          { name: "Romanian DL", sets: "3×10", load: "70%" },
-          { name: "Hip Thrust", sets: "3×12", load: "75%" },
-          { name: "Leg Curl", sets: "3×12", load: "65%" },
-        ].map((ex, i) => (
-          <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, padding: "8px 0", borderBottom: "1px solid #0F0F0F" }}>
-            <div style={{ width: 22, height: 22, borderRadius: 4, background: i === 0 ? "rgba(220,38,38,.2)" : "#0F0F0F", border: `1px solid ${i === 0 ? "rgba(220,38,38,.4)" : "#1E1E1E"}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-              <div style={{ width: 6, height: 6, borderRadius: "50%", background: i === 0 ? "#DC2626" : "#555" }} />
-            </div>
-            <span style={{ fontSize: ".7rem", color: i === 0 ? "#fff" : "#666", flex: 1 }}>{ex.name}</span>
-            <span style={{ fontSize: ".65rem", fontFamily: "'JetBrains Mono',monospace", color: i === 0 ? "#EF4444" : "#707070" }}>{ex.sets}</span>
-          </div>
-        ))}
-        <div style={{ marginTop: 12, background: "rgba(220,38,38,.1)", borderRadius: 6, padding: "8px 10px", display: "flex", alignItems: "center", gap: 6 }}>
-          <span style={{ fontSize: ".62rem", color: "#DC2626", fontFamily: "'JetBrains Mono',monospace" }}>⚡ GENERATED FOR YOUR GOALS</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ── LOGO ────────────────────────────────────────────────────── */
-function Logo({ size = "1.6rem" }) {
-  return (
-    <span className="bebas" style={{ fontSize: size, letterSpacing: ".04em", lineHeight: 1, userSelect: "none" }}>
-      <span style={{ color: "#fff" }}>Accounta</span><span style={{ color: "#DC2626" }}>Fit</span>
-    </span>
-  );
-}
-
-/* ── NAV ─────────────────────────────────────────────────────── */
 function Nav({ lang, setLang, t, onCTA }) {
-  const dark = true;
   const [langOpen, setLangOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const h = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", h);
+    return () => window.removeEventListener("scroll", h);
+  }, []);
 
   return (
-    <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 500, padding: "0 5%", background: dark ? "rgba(8,8,8,.85)" : "rgba(242,242,242,.85)", backdropFilter: "blur(20px)", borderBottom: `1px solid ${dark ? "rgba(255,255,255,.06)" : "rgba(0,0,0,.08)"}` }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", height: 64 }}>
-        <Logo />
-        {/* Desktop */}
+    <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 500, padding: "0 5%", background: scrolled ? "rgba(13,21,38,.93)" : "transparent", backdropFilter: scrolled ? "blur(24px)" : "none", borderBottom: scrolled ? "1px solid rgba(255,255,255,.07)" : "none", transition: "all .3s ease" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <AFMark size={28} />
+          <Wordmark size="1.15rem" />
+        </div>
         <div className="hide-m" style={{ display: "flex", alignItems: "center", gap: 32 }}>
           {t.nav.map((label, i) => {
             const hrefs = ["#how-it-works", "#features", "#faq"];
-            return <a key={i} href={hrefs[i]} className="nav-link" style={{ color: dark ? undefined : "#444" }}>{label}</a>;
+            return <a key={i} href={hrefs[i]} className="nav-link">{label}</a>;
           })}
-          <button className="btn-red" onClick={onCTA} style={{ padding: "10px 24px", fontSize: ".78rem" }}>{t.joinWaitlist}</button>
-          {/* Lang */}
+          <button className="btn-coral" onClick={onCTA} style={{ padding: "10px 24px", fontSize: ".75rem" }}>{t.joinWaitlist}</button>
           <div style={{ position: "relative" }}>
-            <button onClick={() => setLangOpen(o => !o)} style={{ display: "flex", alignItems: "center", gap: 5, background: "none", border: "none", cursor: "pointer", color: "#EF4444", fontFamily: "'JetBrains Mono',monospace", fontWeight: 500, fontSize: ".72rem", letterSpacing: ".1em" }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <button onClick={() => setLangOpen(o => !o)} style={{ display: "flex", alignItems: "center", gap: 5, background: "none", border: "none", cursor: "pointer", color: "#FF4D57", fontFamily: "'JetBrains Mono',monospace", fontSize: ".7rem", letterSpacing: ".1em" }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF4D57" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
               {LANGS[lang]?.name}
             </button>
             {langOpen && (
-              <div style={{ position: "absolute", top: "calc(100% + 12px)", right: 0, background: "#0D0D0D", border: "1px solid #2A2A2A", borderRadius: 8, padding: "6px 0", minWidth: 150, zIndex: 999, boxShadow: "0 20px 48px rgba(0,0,0,.7)" }}>
+              <div style={{ position: "absolute", top: "calc(100% + 12px)", right: 0, background: "rgba(13,21,38,.97)", border: "1px solid rgba(255,255,255,.1)", borderRadius: 12, padding: "6px 0", minWidth: 150, zIndex: 999, boxShadow: "0 20px 48px rgba(0,0,0,.6)", backdropFilter: "blur(24px)" }}>
                 {Object.entries(LANGS).map(([code, { name, flag }]) => (
-                  <button key={code} onClick={() => { setLang(code); setLangOpen(false); }} style={{ display: "flex", alignItems: "center", gap: 8, width: "100%", background: code === lang ? "rgba(220,38,38,.1)" : "none", border: "none", cursor: "pointer", padding: "8px 14px", color: code === lang ? "#EF4444" : "rgba(255,255,255,.75)", fontFamily: "'DM Sans',sans-serif", fontSize: ".85rem" }}>
+                  <button key={code} onClick={() => { setLang(code); setLangOpen(false); }} style={{ display: "flex", alignItems: "center", gap: 8, width: "100%", background: code === lang ? "rgba(255,77,87,.1)" : "none", border: "none", cursor: "pointer", padding: "8px 14px", color: code === lang ? "#FF4D57" : "#B7C1D3", fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: ".85rem" }}>
                     <span>{flag}</span>{name}
                   </button>
                 ))}
@@ -550,22 +369,20 @@ function Nav({ lang, setLang, t, onCTA }) {
             )}
           </div>
         </div>
-        {/* Mobile */}
         <div className="hide-d" style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <button onClick={() => setMenuOpen(o => !o)} style={{ background: "none", border: "none", color: dark ? "#fff" : "#0A0A0A", fontSize: "1.4rem", cursor: "pointer", lineHeight: 1, padding: 4 }}>{menuOpen ? "✕" : "☰"}</button>
+          <button onClick={() => setMenuOpen(o => !o)} style={{ background: "none", border: "none", color: "#F6F8FB", fontSize: "1.4rem", cursor: "pointer", lineHeight: 1, padding: 4 }}>{menuOpen ? "✕" : "☰"}</button>
         </div>
       </div>
-      {/* Mobile menu */}
       {menuOpen && (
-        <div className="hide-d" style={{ background: dark ? "rgba(8,8,8,.98)" : "rgba(242,242,242,.98)", borderTop: `1px solid ${dark ? "#1A1A1A" : "#E0E0E0"}`, padding: "20px 5% 28px", display: "flex", flexDirection: "column", gap: 16 }}>
+        <div className="hide-d" style={{ background: "rgba(13,21,38,.98)", backdropFilter: "blur(24px)", borderTop: "1px solid rgba(255,255,255,.07)", padding: "20px 5% 28px", display: "flex", flexDirection: "column", gap: 16 }}>
           {t.nav.map((label, i) => {
             const hrefs = ["#how-it-works", "#features", "#faq"];
-            return <a key={i} href={hrefs[i]} onClick={() => setMenuOpen(false)} style={{ color: dark ? "#fff" : "#0A0A0A", fontFamily: "'DM Sans',sans-serif", fontSize: "1.1rem" }}>{label}</a>;
+            return <a key={i} href={hrefs[i]} onClick={() => setMenuOpen(false)} style={{ color: "#F6F8FB", fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: "1.1rem" }}>{label}</a>;
           })}
-          <button className="btn-red" onClick={() => { onCTA(); setMenuOpen(false); }} style={{ textAlign: "center", justifyContent: "center" }}>{t.joinWaitlist}</button>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+          <button className="btn-coral" onClick={() => { onCTA(); setMenuOpen(false); }} style={{ width: "100%" }}>{t.joinWaitlist}</button>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 4 }}>
             {Object.entries(LANGS).map(([code, { name, flag }]) => (
-              <button key={code} onClick={() => { setLang(code); setMenuOpen(false); }} style={{ display: "flex", alignItems: "center", gap: 8, background: code === lang ? "rgba(220,38,38,.1)" : "rgba(255,255,255,.04)", border: `1px solid ${code === lang ? "rgba(220,38,38,.3)" : "rgba(255,255,255,.08)"}`, borderRadius: 6, padding: "8px 10px", cursor: "pointer", color: code === lang ? "#EF4444" : dark ? "rgba(255,255,255,.7)" : "#444", fontFamily: "'DM Sans',sans-serif", fontSize: ".82rem" }}>
+              <button key={code} onClick={() => { setLang(code); setMenuOpen(false); }} style={{ display: "flex", alignItems: "center", gap: 8, background: code === lang ? "rgba(255,77,87,.1)" : "rgba(255,255,255,.04)", border: `1px solid ${code === lang ? "rgba(255,77,87,.3)" : "rgba(255,255,255,.07)"}`, borderRadius: 8, padding: "8px 10px", cursor: "pointer", color: code === lang ? "#FF4D57" : "#B7C1D3", fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: ".82rem" }}>
                 <span>{flag}</span>{name}
               </button>
             ))}
@@ -576,264 +393,209 @@ function Nav({ lang, setLang, t, onCTA }) {
   );
 }
 
-/* ── HERO ────────────────────────────────────────────────────── */
 function Hero({ onCTA, t }) {
   return (
-    <section className="hero-section" style={{ background: "#080808", minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", overflow: "hidden", paddingTop: 64 }}>
-      <div className="noise-bg" />
-      <div className="grid-bg" />
-      <div style={{ position: "absolute", top: "20%", left: "50%", transform: "translateX(-50%)", width: 600, height: 600, background: "radial-gradient(circle, rgba(220,38,38,.18) 0%, transparent 70%)", pointerEvents: "none", zIndex: 1 }} />
-      <div className="wrap" style={{ position: "relative", zIndex: 2, width: "100%" }}>
+    <section style={{ background: "#0D1526", minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", overflow: "hidden", paddingTop: 68 }}>
+      <div className="noise" />
+      <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px)", backgroundSize: "64px 64px", pointerEvents: "none" }} />
+      <div className="glow-coral" style={{ width: 700, height: 700, top: "-10%", right: "-5%", opacity: .55 }} />
+      <div className="glow-blue" style={{ width: 500, height: 500, bottom: "-5%", left: "0%", opacity: .7 }} />
 
-        {/* ── DESKTOP layout (two columns) ── */}
-        <div className="hide-m" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center", minHeight: "calc(100vh - 64px)", padding: "60px 0" }}>
-          {/* Left */}
+      <div className="wrap" style={{ position: "relative", zIndex: 2, width: "100%" }}>
+        {/* Desktop */}
+        <div className="hide-m" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center", minHeight: "calc(100vh - 68px)", padding: "60px 0" }}>
           <div>
-            <div style={{ marginBottom: 24 }}>
-              <span className="mono" style={{ fontSize: ".72rem", letterSpacing: ".22em", textTransform: "uppercase", color: "#DC2626", border: "1px solid rgba(220,38,38,.25)", borderRadius: 3, padding: "6px 12px" }}>{t.heroEyebrow}</span>
+            <div style={{ marginBottom: 20 }}>
+              <span className="mono" style={{ fontSize: ".66rem", letterSpacing: ".22em", textTransform: "uppercase", color: "#FF4D57", border: "1px solid rgba(255,77,87,.22)", borderRadius: 4, padding: "6px 14px" }}>{t.eyebrow}</span>
             </div>
-            <h1 className="bebas" style={{ fontSize: "clamp(4.5rem,9vw,8rem)", lineHeight: .88, color: "#fff", marginBottom: 28, letterSpacing: ".04em" }}>
-              {t.heroH1a}<br />
-              <span style={{ color: "#DC2626", WebkitTextStroke: "2px #DC2626" }}>{t.heroH1b}</span><br />
-              {t.heroH1c}
+            <h1 className="bebas" style={{ fontSize: "clamp(5rem,10vw,9rem)", lineHeight: .86, color: "#F6F8FB", marginBottom: 28, letterSpacing: ".04em" }}>
+              {t.heroH1[0]}<br/>
+              <span style={{ color: "#FF4D57" }}>{t.heroH1[1]}</span><br/>
+              {t.heroH1[2]}
             </h1>
-            <p style={{ fontSize: "clamp(1rem,1.5vw,1.15rem)", color: "#C0C0C0", lineHeight: 1.75, maxWidth: 480, marginBottom: 40 }}>{t.heroSub}</p>
+            <p style={{ fontSize: "1.05rem", color: "#B7C1D3", lineHeight: 1.82, maxWidth: 460, marginBottom: 40 }}>{t.heroSub}</p>
             <div style={{ display: "flex", gap: 14 }}>
-              <button className="btn-red" onClick={onCTA}>{t.heroCTA2} →</button>
+              <button className="btn-coral" onClick={onCTA}>{t.heroCTA} →</button>
             </div>
-            <div style={{ display: "flex", gap: 32, marginTop: 48, paddingTop: 32, borderTop: "1px solid rgba(255,255,255,.06)" }}>
-              {[["3×", "More likely to hit goals"], ["48h", "Average match time"], ["94%", "Report stronger consistency"]].map(([v, l]) => (
-                <div key={v}>
-                  <div className="bebas" style={{ fontSize: "1.8rem", color: "#DC2626", letterSpacing: ".04em" }}>{v}</div>
-                  <div className="mono" style={{ fontSize: ".62rem", color: "#909090", letterSpacing: ".1em", textTransform: "uppercase", lineHeight: 1.4 }}>{l}</div>
+            <div style={{ display: "flex", gap: 0, marginTop: 52, paddingTop: 36, borderTop: "1px solid rgba(255,255,255,.07)" }}>
+              {[[t.stat1v, t.stat1l], [t.stat2v, t.stat2l], [t.stat3v, t.stat3l]].map(([v, l], i) => (
+                <div key={v} style={{ flex: 1, paddingRight: i < 2 ? 24 : 0, borderRight: i < 2 ? "1px solid rgba(255,255,255,.07)" : "none", paddingLeft: i > 0 ? 24 : 0 }}>
+                  <div className="bebas" style={{ fontSize: "2.2rem", color: "#FF4D57", letterSpacing: ".04em", lineHeight: 1 }}>{v}</div>
+                  <div className="mono" style={{ fontSize: ".6rem", color: "#8A97AD", letterSpacing: ".1em", textTransform: "uppercase", marginTop: 6, lineHeight: 1.4 }}>{l}</div>
                 </div>
               ))}
             </div>
           </div>
-          {/* Right — phones */}
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 20, position: "relative" }}>
-            <div style={{ display: "flex", flexDirection: "column", gap: 20, alignItems: "flex-end", transform: "translateY(20px)" }}>
-              <StreakPhone />
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 24, position: "relative" }}>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", transform: "translateY(24px)" }}>
+              <PhoneGlass delay="0s" />
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 20, alignItems: "flex-start", transform: "translateY(-20px)" }}>
-              <ChatPhone />
-              <AIPhone />
+            <div style={{ display: "flex", flexDirection: "column", gap: 20, alignItems: "flex-start", transform: "translateY(-24px)" }}>
+              <PhoneGlass delay="1.5s" />
+              <PhoneGlass delay="3s" />
             </div>
-            <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 50%, rgba(220,38,38,.08) 0%, transparent 70%)", pointerEvents: "none" }} />
+            <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 50%, rgba(255,77,87,.06) 0%, transparent 65%)", pointerEvents: "none" }} />
           </div>
         </div>
 
-        {/* ── MOBILE layout — full width, bold, clean ── */}
-        <div className="hide-d" style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "40px 0 52px", minHeight: "calc(100vh - 64px)" }}>
-          {/* Eyebrow tag */}
-          <div style={{ marginBottom: 18 }}>
-            <span className="mono" style={{ fontSize: ".6rem", letterSpacing: ".16em", textTransform: "uppercase", color: "#DC2626", border: "1px solid rgba(220,38,38,.3)", borderRadius: 3, padding: "5px 10px" }}>{t.heroEyebrow}</span>
+        {/* Mobile */}
+        <div className="hide-d" style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "48px 0 56px", minHeight: "calc(100vh - 68px)" }}>
+          <div style={{ marginBottom: 20 }}>
+            <span className="mono" style={{ fontSize: ".58rem", letterSpacing: ".16em", textTransform: "uppercase", color: "#FF4D57", border: "1px solid rgba(255,77,87,.22)", borderRadius: 4, padding: "5px 10px" }}>{t.eyebrow}</span>
           </div>
-          {/* Big headline */}
-          <h1 className="bebas" style={{ fontSize: "clamp(4.2rem,20vw,6.5rem)", lineHeight: .88, color: "#fff", marginBottom: 20, letterSpacing: ".04em" }}>
-            {t.heroH1a}<br />
-            <span style={{ color: "#DC2626" }}>{t.heroH1b}</span><br />
-            {t.heroH1c}
+          <h1 className="bebas" style={{ fontSize: "clamp(4rem,18vw,6rem)", lineHeight: .86, color: "#F6F8FB", marginBottom: 24, letterSpacing: ".04em" }}>
+            {t.heroH1[0]}<br/>
+            <span style={{ color: "#FF4D57" }}>{t.heroH1[1]}</span><br/>
+            {t.heroH1[2]}
           </h1>
-          {/* Subheading */}
-          <p style={{ fontSize: ".98rem", color: "#C0C0C0", lineHeight: 1.75, marginBottom: 28 }}>{t.heroSub}</p>
-          {/* CTA */}
-          <button className="btn-red" onClick={onCTA} style={{ width: "100%", justifyContent: "center", padding: "17px 0", fontSize: ".8rem", marginBottom: 32 }}>{t.heroCTA2} →</button>
-          {/* Stats strip */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, paddingTop: 24, borderTop: "1px solid rgba(255,255,255,.07)" }}>
-            {[["3×", "More likely to hit goals"], ["48H", "Avg match time"], ["94%", "Stronger consistency"]].map(([v, l]) => (
-              <div key={v}>
-                <div className="bebas" style={{ fontSize: "1.9rem", color: "#DC2626", letterSpacing: ".04em" }}>{v}</div>
-                <div className="mono" style={{ fontSize: ".52rem", color: "#A0A0A0", letterSpacing: ".06em", textTransform: "uppercase", lineHeight: 1.4 }}>{l}</div>
+          <p style={{ fontSize: "1rem", color: "#B7C1D3", lineHeight: 1.78, marginBottom: 32 }}>{t.heroSub}</p>
+          <button className="btn-coral" onClick={onCTA} style={{ width: "100%", marginBottom: 36, padding: "16px 0" }}>{t.heroCTA} →</button>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", paddingTop: 28, borderTop: "1px solid rgba(255,255,255,.07)" }}>
+            {[[t.stat1v, t.stat1l], [t.stat2v, t.stat2l], [t.stat3v, t.stat3l]].map(([v, l], i) => (
+              <div key={v} style={{ paddingRight: i < 2 ? 12 : 0, borderRight: i < 2 ? "1px solid rgba(255,255,255,.07)" : "none", paddingLeft: i > 0 ? 12 : 0 }}>
+                <div className="bebas" style={{ fontSize: "1.8rem", color: "#FF4D57", letterSpacing: ".04em" }}>{v}</div>
+                <div className="mono" style={{ fontSize: ".5rem", color: "#8A97AD", letterSpacing: ".07em", textTransform: "uppercase", lineHeight: 1.4 }}>{l}</div>
               </div>
             ))}
           </div>
         </div>
-
       </div>
-      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 120, background: "linear-gradient(to bottom, transparent, #080808)", zIndex: 3 }} />
+
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 120, background: "linear-gradient(to bottom, transparent, #0D1526)", zIndex: 3, pointerEvents: "none" }} />
     </section>
   );
 }
 
-
-/* ── WHAT IS ACCOUNTAFIT ─────────────────────────────────────── */
-function WhatIsIt({ t, onCTA }) {
-  const steps = [
-    {
-      n: "01",
-      icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#DC2626" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
-      title: "Build Your Profile",
-      body: "Set your fitness goals, upload photos, define your schedule and commitment level. Tell us what you're working toward and how hard you're willing to push."
-    },
-    {
-      n: "02",
-      icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#DC2626" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>,
-      title: "Set Your Preferences",
-      body: "Choose your training style, intensity level, and what you need from a partner. Someone to push you? Someone to match your pace? You decide."
-    },
-    {
-      n: "03",
-      icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#DC2626" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>,
-      title: "Get Matched",
-      body: "Think Tinder, but for fitness accountability. Swipe through profiles, connect with someone who has the same fire — and make a commitment that neither of you will break."
-    },
-  ];
-
+function Problem({ t }) {
+  const items = ["Downloaded the apps", "Started the routines", "Bought the gear", "Told yourself 'this time'", "Back to day one. Again."];
   return (
-    <section style={{ background: "#000", padding: "72px 0", position: "relative", overflow: "hidden" }}>
-      <div className="noise-bg" />
-      {/* Red glow */}
-      <div style={{ position: "absolute", bottom: 0, left: "50%", transform: "translateX(-50%)", width: 700, height: 400, background: "radial-gradient(ellipse, rgba(220,38,38,.12) 0%, transparent 70%)", pointerEvents: "none" }} />
+    <section className="sec sec-light">
       <div className="wrap" style={{ position: "relative", zIndex: 2 }}>
-        {/* Eyebrow + headline */}
+        <div className="two-col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
+          <div>
+            <div style={{ background: "#fff", border: "1px solid rgba(0,0,0,.07)", borderRadius: 20, padding: 32, boxShadow: "0 8px 40px rgba(13,21,38,.08)", position: "relative", overflow: "hidden" }}>
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: "linear-gradient(90deg, #FF4D57, transparent)" }} />
+              <div className="mono" style={{ fontSize: ".62rem", letterSpacing: ".18em", color: "#FF4D57", marginBottom: 20 }}>THE PATTERN</div>
+              {items.map((item, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 0", borderBottom: i < 4 ? "1px solid rgba(0,0,0,.05)" : "none" }}>
+                  <div style={{ width: 24, height: 24, borderRadius: 6, border: "1px solid rgba(0,0,0,.1)", background: i === 4 ? "rgba(255,77,87,.08)" : "#F8F9FC", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                    {i < 4
+                      ? <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#B0BAC9" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                      : <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#FF4D57" }} />}
+                  </div>
+                  <span style={{ fontSize: ".9rem", color: i === 4 ? "#FF4D57" : "#8A97AD", textDecoration: i < 4 ? "line-through" : "none", textDecorationColor: "rgba(0,0,0,.15)" }}>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <span className="eyebrow" style={{ color: "#FF4D57" }}>{t.problemEyebrow}</span>
+            <h2 className="bebas" style={{ fontSize: "clamp(2.8rem,5vw,4.2rem)", lineHeight: .92, color: "#1A2540", marginBottom: 24 }}>{t.problemH}</h2>
+            <p style={{ fontSize: "1rem", color: "#4A5568", lineHeight: 1.85, marginBottom: 32 }}>{t.problemBody}</p>
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <div style={{ width: 32, height: 2, background: "#FF4D57" }} />
+              <span className="mono" style={{ fontSize: ".65rem", color: "#FF4D57", letterSpacing: ".14em", textTransform: "uppercase" }}>The pattern is the problem</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Solution({ t }) {
+  return (
+    <section className="sec" style={{ background: "#0D1526", position: "relative", overflow: "hidden" }}>
+      <div className="noise" />
+      <div className="glow-coral" style={{ width: 600, height: 600, top: "50%", left: "50%", transform: "translate(-50%,-50%)", opacity: .35 }} />
+      <div className="wrap" style={{ position: "relative", zIndex: 2, textAlign: "center" }}>
+        <span className="eyebrow" style={{ display: "block" }}>{t.solutionEyebrow}</span>
+        <h2 className="bebas" style={{ fontSize: "clamp(2.8rem,6vw,5rem)", lineHeight: .92, color: "#F6F8FB", maxWidth: 680, margin: "0 auto 24px" }}>{t.solutionH}</h2>
+        <p style={{ fontSize: "1.05rem", color: "#B7C1D3", lineHeight: 1.82, maxWidth: 520, margin: "0 auto 56px" }}>{t.solutionBody}</p>
+        <div className="solution-row" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, flexWrap: "wrap", marginBottom: 20 }}>
+          {["ALONE", "→", "STRUGGLING", "→", "RESTART"].map((item, i) => (
+            <div key={i} style={{ padding: i % 2 === 0 ? "12px 20px" : "0 4px", background: i % 2 === 0 ? "rgba(255,255,255,.04)" : "transparent", border: i % 2 === 0 ? "1px solid rgba(255,255,255,.08)" : "none", borderRadius: 6, flexShrink: 0 }}>
+              <span className="mono" style={{ fontSize: i % 2 === 1 ? "1.1rem" : ".68rem", color: i % 2 === 1 ? "rgba(255,255,255,.2)" : "#8A97AD", letterSpacing: ".1em" }}>{item}</span>
+            </div>
+          ))}
+        </div>
+        <div style={{ display: "flex", justifyContent: "center", marginBottom: 20 }}>
+          <div style={{ width: 1, height: 36, background: "linear-gradient(to bottom, rgba(255,77,87,.4), rgba(255,77,87,.1))" }} />
+        </div>
+        <div className="solution-row" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, flexWrap: "wrap" }}>
+          {["MATCHED", "→", "ACCOUNTABLE", "→", "CONSISTENT"].map((item, i) => (
+            <div key={i} style={{ padding: i % 2 === 0 ? "12px 20px" : "0 4px", background: i % 2 === 0 ? "rgba(255,77,87,.1)" : "transparent", border: i % 2 === 0 ? "1px solid rgba(255,77,87,.25)" : "none", borderRadius: 6, flexShrink: 0 }}>
+              <span className="mono" style={{ fontSize: i % 2 === 1 ? "1.1rem" : ".68rem", color: i % 2 === 1 ? "rgba(255,255,255,.22)" : "#FF6B74", letterSpacing: ".1em" }}>{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function WhatIsIt({ onCTA }) {
+  const steps = [
+    { n: "01", icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FF4D57" strokeWidth="1.6" strokeLinecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>, title: "Build Your Profile", body: "Set your fitness goals, upload photos, define your schedule and commitment level. Tell us what you're working toward and how hard you're willing to push." },
+    { n: "02", icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FF4D57" strokeWidth="1.6" strokeLinecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>, title: "Set Your Preferences", body: "Choose your training style, intensity level, and what you need from a partner. Someone to push you? Someone to match your pace? You decide." },
+    { n: "03", icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FF4D57" strokeWidth="1.6" strokeLinecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>, title: "Get Matched", body: "Think Tinder, but for fitness accountability. Swipe through profiles, connect with someone who has the same fire — and make a commitment that neither of you will break." },
+  ];
+  return (
+    <section className="sec" style={{ background: "#0D1526" }}>
+      <div className="noise" />
+      <div className="glow-coral" style={{ width: 500, height: 400, bottom: 0, left: "50%", transform: "translateX(-50%)", opacity: .22 }} />
+      <div className="wrap" style={{ position: "relative", zIndex: 2 }}>
         <div style={{ textAlign: "center", marginBottom: 72 }}>
-          <span className="mono" style={{ fontSize: ".72rem", letterSpacing: ".22em", textTransform: "uppercase", color: "#DC2626", border: "1px solid rgba(220,38,38,.25)", borderRadius: 3, padding: "6px 12px", display: "inline-block", marginBottom: 24 }}>INTRODUCING ACCOUNTAFIT</span>
-          <h2 className="bebas" style={{ fontSize: "clamp(3rem,6vw,5.5rem)", lineHeight: .9, color: "#fff", maxWidth: 800, margin: "0 auto 24px" }}>
-            The World's First<br /><span style={{ color: "#DC2626" }}>Fitness Accountability</span><br />Matching Platform
+          <span className="mono" style={{ fontSize: ".68rem", letterSpacing: ".22em", textTransform: "uppercase", color: "#FF4D57", border: "1px solid rgba(255,77,87,.22)", borderRadius: 4, padding: "6px 14px", display: "inline-block", marginBottom: 24 }}>INTRODUCING ACCOUNTAFIT</span>
+          <h2 className="bebas" style={{ fontSize: "clamp(2.8rem,6vw,5rem)", lineHeight: .9, color: "#F6F8FB", maxWidth: 780, margin: "0 auto 24px" }}>
+            The World's First<br /><span style={{ color: "#FF4D57" }}>Fitness Accountability</span><br />Matching Platform
           </h2>
-          <p style={{ fontSize: "1.05rem", color: "#909090", lineHeight: 1.85, maxWidth: 580, margin: "0 auto" }}>
-            We didn't build another workout tracker. We built something the fitness world has never seen — a partner-matching system designed around the one thing that actually determines whether you succeed: <span style={{ color: "#C0C0C0", fontStyle: "italic" }}>who's with you.</span>
+          <p style={{ fontSize: "1.05rem", color: "#B7C1D3", lineHeight: 1.82, maxWidth: 560, margin: "0 auto" }}>
+            We didn't build another workout tracker. We built something the fitness world has never seen — a partner-matching system designed around the one thing that determines whether you succeed: <em style={{ color: "#F6F8FB" }}>who's with you.</em>
           </p>
         </div>
-
-        {/* 3-step cards */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 2, marginBottom: 80 }} className="steps-grid">
+        <div className="steps-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 3, marginBottom: 64 }}>
           {steps.map((s, i) => (
-            <div key={i} style={{ background: "#0A0A0A", border: "1px solid #1A1A1A", padding: "40px 32px", position: "relative", overflow: "hidden", transition: "border-color .3s" }}
-              onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(220,38,38,.4)"}
-              onMouseLeave={e => e.currentTarget.style.borderColor = "#1A1A1A"}>
-              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: i === 0 ? "linear-gradient(90deg, #DC2626, transparent)" : "transparent" }} />
-              <div className="bebas" style={{ fontSize: "4rem", color: "rgba(220,38,38,.06)", lineHeight: 1, marginBottom: 16, letterSpacing: ".04em" }}>{s.n}</div>
-              <div style={{ marginBottom: 20 }}>{s.icon}</div>
-              <h3 className="bebas" style={{ fontSize: "1.5rem", color: "#fff", marginBottom: 12, letterSpacing: ".04em" }}>{s.title}</h3>
-              <p style={{ fontSize: ".88rem", color: "#909090", lineHeight: 1.75 }}>{s.body}</p>
+            <div key={i} className="glass-card" style={{ padding: "40px 32px", borderRadius: i === 0 ? "16px 4px 4px 16px" : i === 2 ? "4px 16px 16px 4px" : "4px" }}>
+              <div className="bebas" style={{ fontSize: "4rem", color: "rgba(255,77,87,.08)", lineHeight: 1, marginBottom: 16 }}>{s.n}</div>
+              <div style={{ marginBottom: 18 }}>{s.icon}</div>
+              <h3 className="bebas" style={{ fontSize: "1.5rem", color: "#F6F8FB", marginBottom: 12, letterSpacing: ".04em" }}>{s.title}</h3>
+              <p style={{ fontSize: ".88rem", color: "#B7C1D3", lineHeight: 1.75 }}>{s.body}</p>
             </div>
           ))}
         </div>
-
-        {/* Coming soon banner */}
-        <div style={{ border: "1px solid #1A1A1A", borderRadius: 8, padding: "28px 24px", background: "#080808", display: "flex", flexDirection: "column", gap: 20, position: "relative", overflow: "hidden" }}>
-          <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg, transparent, rgba(220,38,38,.4), transparent)" }} />
+        <div className="glass" style={{ padding: "36px 40px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 24, position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg, transparent, rgba(255,77,87,.4), transparent)" }} />
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
-              <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#DC2626", animation: "pulse 2s ease-in-out infinite" }} />
-              <span className="mono" style={{ fontSize: ".68rem", color: "#DC2626", letterSpacing: ".18em" }}>MORE FEATURES COMING SOON</span>
+              <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#FF4D57", animation: "glowPulse 2s ease-in-out infinite" }} />
+              <span className="mono" style={{ fontSize: ".65rem", color: "#FF4D57", letterSpacing: ".18em" }}>MORE FEATURES COMING SOON</span>
             </div>
-            <h3 className="bebas" style={{ fontSize: "clamp(1.6rem,3vw,2.4rem)", color: "#fff", letterSpacing: ".04em", marginBottom: 8 }}>We're just getting started.</h3>
-            <p style={{ fontSize: ".9rem", color: "#888888", maxWidth: 480, lineHeight: 1.7 }}>
-              Leaderboards. AI-powered workout programs. Meal planning. Real-time partner updates. Video check-ins. We're building the complete accountability ecosystem — and waitlist members get everything first.
-            </p>
+            <h3 className="bebas" style={{ fontSize: "clamp(1.6rem,3vw,2.2rem)", color: "#F6F8FB", letterSpacing: ".04em", marginBottom: 8 }}>We're just getting started.</h3>
+            <p style={{ fontSize: ".9rem", color: "#B7C1D3", maxWidth: 460, lineHeight: 1.72 }}>Leaderboards. AI workout programs. Meal planning. Real-time partner updates. Video check-ins. Waitlist members get everything first.</p>
           </div>
-          <button className="btn-red" onClick={onCTA} style={{ flexShrink: 0 }}>Join the Waitlist →</button>
+          <button className="btn-coral" onClick={onCTA} style={{ flexShrink: 0 }}>Join the Waitlist →</button>
         </div>
       </div>
     </section>
   );
 }
 
-/* ── PROBLEM ─────────────────────────────────────────────────── */
-function Problem({ t }) {
-  const dark = true;
-  return (
-    <section className="sec" style={{ background: dark ? "#050505" : "#EBEBEB" }}>
-      <div className="noise-bg" style={{ opacity: .03 }} />
-      <div className="wrap" style={{ position: "relative", zIndex: 2 }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }} className="hero-grid">
-          {/* Left — visual */}
-          <div className="hide-m" style={{ position: "relative" }}>
-            <div style={{ border: "1px solid rgba(220,38,38,.15)", borderRadius: 12, padding: 32, background: dark ? "rgba(220,38,38,.03)" : "rgba(220,38,38,.04)", position: "relative", overflow: "hidden" }}>
-              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg, transparent, rgba(220,38,38,.5), transparent)" }} />
-              {["Downloaded 6 apps", "Started 3 routines", "Joined 2 gyms", "Bought new gear", "Told yourself 'this time'"].map((item, i) => (
-                <div key={i} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 0", borderBottom: i < 4 ? `1px solid ${dark ? "#0F0F0F" : "#DDD"}` : "none", opacity: 1 - i * 0.08 }}>
-                  <div style={{ width: 22, height: 22, borderRadius: 4, border: "1px solid #333", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#DC2626" strokeWidth="3" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                  </div>
-                  <span style={{ color: dark ? "#888888" : "#888", fontSize: ".9rem", textDecoration: "line-through", textDecorationColor: dark ? "#555" : "#CCC" }}>{item}</span>
-                </div>
-              ))}
-              <div style={{ marginTop: 20, padding: "16px", background: "rgba(220,38,38,.08)", border: "1px solid rgba(220,38,38,.2)", borderRadius: 8 }}>
-                <span className="mono" style={{ fontSize: ".72rem", color: "#DC2626", letterSpacing: ".1em" }}>RESULT: BACK TO DAY ONE. AGAIN.</span>
-              </div>
-            </div>
-          </div>
-          {/* Right — copy */}
-          <div>
-            <span className="eyebrow">{t.problemEyebrow}</span>
-            <h2 className="bebas" style={{ fontSize: "clamp(2.8rem,5vw,4.5rem)", lineHeight: .92, color: dark ? "#fff" : "#0A0A0A", marginBottom: 28 }}>{t.problemH}</h2>
-            <p style={{ fontSize: "1.05rem", color: dark ? "#C0C0C0" : "#888", lineHeight: 1.85, marginBottom: 20 }} className="body-text">{t.problemBody}</p>
-            <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 32 }}>
-              <div style={{ width: 36, height: 1, background: "#DC2626" }} />
-              <span className="mono" style={{ fontSize: ".68rem", color: "#DC2626", letterSpacing: ".14em", textTransform: "uppercase" }}>The pattern is the problem</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ── SOLUTION ────────────────────────────────────────────────── */
-function Solution({ t }) {
-  const dark = true;
-  return (
-    <section className="sec section-dark" style={{ background: "#0A0A0A", position: "relative", overflow: "hidden" }}>
-      <div className="noise-bg" />
-      {/* Red line accent */}
-      <div style={{ position: "absolute", left: 0, top: "50%", width: "35%", height: 1, background: "linear-gradient(90deg, transparent, rgba(220,38,38,.5))", transform: "translateY(-50%)" }} />
-      <div style={{ position: "absolute", right: 0, top: "50%", width: "35%", height: 1, background: "linear-gradient(270deg, transparent, rgba(220,38,38,.5))", transform: "translateY(-50%)" }} />
-      <div className="wrap" style={{ position: "relative", zIndex: 2, textAlign: "center" }}>
-        <span className="eyebrow" style={{ justifyContent: "center", display: "block" }}>{t.solutionEyebrow}</span>
-        <h2 className="bebas" style={{ fontSize: "clamp(3rem,6vw,5.5rem)", lineHeight: .92, color: "#fff", marginBottom: 28, maxWidth: 700, margin: "0 auto 28px" }}>
-          {t.solutionH}
-        </h2>
-        <p style={{ fontSize: "1.1rem", color: "#A8A8A8", lineHeight: 1.8, maxWidth: 560, margin: "0 auto 60px" }}>{t.solutionBody}</p>
-        {/* The system diagram */}
-        <div style={{ overflowX: "auto", paddingBottom: 4 }}>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 0, minWidth: "max-content", margin: "0 auto" }}>
-            {["ALONE", "→", "STRUGGLING", "→", "RESTART"].map((item, i) => (
-              <div key={i} style={{ padding: i % 2 === 0 ? "14px 24px" : "0 8px", background: i % 2 === 0 ? "rgba(220,38,38,.08)" : "transparent", border: i % 2 === 0 ? "1px solid rgba(220,38,38,.2)" : "none", borderRadius: 4, display: "flex", alignItems: "center" }}>
-                <span className="mono" style={{ fontSize: i % 2 === 1 ? "1.2rem" : ".72rem", color: i % 2 === 1 ? "#555" : "#DC2626", letterSpacing: ".1em" }}>{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div style={{ margin: "20px auto", width: 2, height: 40, background: "linear-gradient(to bottom, rgba(220,38,38,.5), rgba(220,38,38,.1))" }} />
-        <div style={{ overflowX: "auto", paddingBottom: 4 }}>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 0, minWidth: "max-content", margin: "0 auto" }}>
-            {["MATCHED", "→", "ACCOUNTABLE", "→", "CONSISTENT"].map((item, i) => (
-              <div key={i} style={{ padding: i % 2 === 0 ? "14px 24px" : "0 8px", background: i % 2 === 0 ? "rgba(220,38,38,.15)" : "transparent", border: i % 2 === 0 ? "1px solid rgba(220,38,38,.4)" : "none", borderRadius: 4, display: "flex", alignItems: "center" }}>
-                <span className="mono" style={{ fontSize: i % 2 === 1 ? "1.2rem" : ".72rem", color: i % 2 === 1 ? "#888" : "#EF4444", letterSpacing: ".1em" }}>{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ── HOW IT WORKS ────────────────────────────────────────────── */
 function HowItWorks({ t }) {
-  const dark = true;
   return (
-    <section className="sec" id="how-it-works" style={{ background: dark ? "#080808" : "#F2F2F2" }}>
-      <div className="grid-bg" style={{ opacity: .5 }} />
-      <div className="wrap" style={{ position: "relative", zIndex: 2 }}>
-        <div style={{ marginBottom: 64 }}>
-          <span className="eyebrow">{t.howEyebrow}</span>
-          <h2 className="bebas" style={{ fontSize: "clamp(2.8rem,5vw,4.5rem)", lineHeight: .92, color: dark ? "#fff" : "#0A0A0A", maxWidth: 600 }}>{t.howH}</h2>
+    <section className="sec sec-light" id="how-it-works">
+      <div className="wrap">
+        <div style={{ marginBottom: 60 }}>
+          <span className="eyebrow" style={{ color: "#FF4D57" }}>{t.howEyebrow}</span>
+          <h2 className="bebas" style={{ fontSize: "clamp(2.8rem,5vw,4.2rem)", lineHeight: .92, color: "#1A2540", maxWidth: 580 }}>{t.howH}</h2>
         </div>
-        <div className="steps-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 2 }}>
+        <div className="steps-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 3 }}>
           {t.steps.map((s, i) => (
-            <div key={i} style={{ background: dark ? "#0A0A0A" : "#fff", border: `1px solid ${dark ? "#1A1A1A" : "#E0E0E0"}`, padding: "28px 22px", position: "relative", overflow: "hidden", transition: "all .3s ease" }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(220,38,38,.5)"; e.currentTarget.style.background = dark ? "#0F0F0F" : "#FAFAFA"; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = dark ? "#1A1A1A" : "#E0E0E0"; e.currentTarget.style.background = dark ? "#0A0A0A" : "#fff"; }}>
-              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: i === 0 ? "linear-gradient(90deg, #DC2626, transparent)" : "transparent", transition: "background .3s" }} />
-              <div className="bebas" style={{ fontSize: "5rem", color: "rgba(220,38,38,.08)", lineHeight: 1, marginBottom: 8, letterSpacing: ".04em" }}>{s.n}</div>
-              <div className="mono" style={{ fontSize: ".7rem", color: "#DC2626", letterSpacing: ".15em", textTransform: "uppercase", marginBottom: 10 }}>Step {s.n}</div>
-              <h3 className="bebas" style={{ fontSize: "1.6rem", color: dark ? "#fff" : "#0A0A0A", marginBottom: 14, letterSpacing: ".04em" }}>{s.title}</h3>
-              <p className="step-body" style={{ fontSize: ".9rem", color: dark ? "#909090" : "#666", lineHeight: 1.72 }}>{s.body}</p>
+            <div key={i} className="light-card" style={{ padding: "36px 28px", borderRadius: i === 0 ? "16px 4px 4px 16px" : i === 3 ? "4px 16px 16px 4px" : "4px", cursor: "default" }}>
+              <div className="bebas" style={{ fontSize: "4.5rem", color: "rgba(255,77,87,.09)", lineHeight: 1, marginBottom: 8 }}>{s.n}</div>
+              <div className="mono" style={{ fontSize: ".62rem", color: "#FF4D57", letterSpacing: ".15em", textTransform: "uppercase", marginBottom: 10 }}>Step {s.n}</div>
+              <h3 className="bebas" style={{ fontSize: "1.5rem", color: "#1A2540", marginBottom: 12, letterSpacing: ".04em" }}>{s.title}</h3>
+              <p style={{ fontSize: ".88rem", color: "#4A5568", lineHeight: 1.75 }}>{s.body}</p>
             </div>
           ))}
         </div>
@@ -842,89 +604,69 @@ function HowItWorks({ t }) {
   );
 }
 
-/* ── FEATURES ────────────────────────────────────────────────── */
 function Features({ t }) {
-  const dark = true;
-  const ICONS = {
-    match:    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="3.2"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a3.2 3.2 0 0 1 0 6.2"/></svg>,
-    streak:   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2c2.8 3 4.5 5.6 4.5 8.2A4.5 4.5 0 0 1 12 14.7a4.5 4.5 0 0 1-4.5-4.5C7.5 7.6 9.2 5 12 2Z"/><path d="M7 15.5A5 5 0 0 0 12 21a5 5 0 0 0 5-5.5"/></svg>,
-    chat:     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
-    ai:       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 12h6M9 15h4"/><circle cx="17" cy="15" r="1.5" fill="currentColor" stroke="none"/></svg>,
-    meal:     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>,
-    progress: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>,
-  };
   return (
-    <section className="sec" id="features" style={{ background: dark ? "#050505" : "#EBEBEB" }}>
-      <div className="noise-bg" style={{ opacity: .03 }} />
-      <div className="wrap" style={{ position: "relative", zIndex: 2 }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 56, flexWrap: "wrap", gap: 24 }}>
-          <div>
-            <span className="eyebrow">{t.featEyebrow}</span>
-            <h2 className="bebas" style={{ fontSize: "clamp(2.8rem,5vw,4.5rem)", lineHeight: .92, color: dark ? "#fff" : "#0A0A0A" }}>{t.featH}</h2>
-          </div>
-        </div>
-        <div className="feat-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 2 }}>
-          {t.features.map(({ icon, title, body }, i) => (
-            <div key={i} className="card" style={{ borderRadius: 0, border: `1px solid ${dark ? "#1A1A1A" : "#E0E0E0"}`, background: dark ? "#080808" : "#fff", padding: "36px 28px" }}>
-              <div style={{ color: "#DC2626", marginBottom: 20, display: "flex" }}>{ICONS[icon]}</div>
-              <h3 className="bebas" style={{ fontSize: "1.4rem", color: dark ? "#fff" : "#0A0A0A", marginBottom: 12, letterSpacing: ".04em" }}>{title}</h3>
-              <p style={{ fontSize: ".88rem", color: dark ? "#909090" : "#666", lineHeight: 1.72 }} className="body-text">{body}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ── ADDICTION LOOP ──────────────────────────────────────────── */
-function AddictionLoop({ t }) {
-  const dark = true;
-  return (
-    <section className="sec section-dark" style={{ background: "#000", overflow: "hidden", padding: "80px 0" }}>
-      <div style={{ marginBottom: 48, textAlign: "center" }}>
-        <span className="eyebrow" style={{ display: "block" }}>{t.loopEyebrow}</span>
-        <h2 className="bebas" style={{ fontSize: "clamp(2.5rem,5vw,4rem)", color: "#fff" }}>{t.loopH}</h2>
-      </div>
-      {/* Infinite marquee */}
-      <div style={{ overflow: "hidden", borderTop: "1px solid #1A1A1A", borderBottom: "1px solid #1A1A1A", padding: "28px 0" }}>
-        <div className="marquee-track">
-          {[...t.loopItems, ...t.loopItems].map((item, i) => (
-            <div key={i} className={`marquee-item${item === "Build Streak" || item === "Get Results" ? " active" : ""}`}>
-              <span>{item}</span>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ── SOCIAL PROOF ────────────────────────────────────────────── */
-function SocialProof({ t }) {
-  const dark = true;
-  return (
-    <section className="sec" style={{ background: dark ? "#080808" : "#F2F2F2" }}>
-      <div className="noise-bg" style={{ opacity: .03 }} />
+    <section className="sec" id="features" style={{ background: "#111D33" }}>
+      <div className="noise" />
+      <div className="glow-coral" style={{ width: 500, height: 500, top: 0, right: "-10%", opacity: .3 }} />
       <div className="wrap" style={{ position: "relative", zIndex: 2 }}>
         <div style={{ marginBottom: 56 }}>
-          <span className="eyebrow">{t.proofEyebrow}</span>
-          <h2 className="bebas" style={{ fontSize: "clamp(2.8rem,5vw,4.5rem)", lineHeight: .92, color: dark ? "#fff" : "#0A0A0A" }}>{t.proofH}</h2>
+          <span className="eyebrow">{t.featEyebrow}</span>
+          <h2 className="bebas" style={{ fontSize: "clamp(2.8rem,5vw,4.2rem)", lineHeight: .92, color: "#F6F8FB" }}>{t.featH}</h2>
         </div>
-        <div className="proof-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 2 }}>
+        <div className="feat-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 3 }}>
+          {t.features.map(({ icon, title, body }, i) => (
+            <div key={i} className="glass-card" style={{ padding: "36px 28px", borderRadius: i === 0 ? "16px 4px 4px 16px" : i === 2 ? "4px 16px 4px 4px" : i === 3 ? "4px 4px 4px 16px" : i === 5 ? "4px 4px 16px 4px" : "4px" }}>
+              <div style={{ color: "#FF4D57", marginBottom: 20 }}>{ICONS[icon]}</div>
+              <h3 className="bebas" style={{ fontSize: "1.4rem", color: "#F6F8FB", marginBottom: 12, letterSpacing: ".04em" }}>{title}</h3>
+              <p style={{ fontSize: ".88rem", color: "#B7C1D3", lineHeight: 1.75 }}>{body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function AddictionLoop({ t }) {
+  return (
+    <section style={{ background: "#0D1526", padding: "80px 0", overflow: "hidden" }}>
+      <div style={{ textAlign: "center", marginBottom: 48 }}>
+        <span className="eyebrow" style={{ display: "block" }}>{t.loopEyebrow}</span>
+        <h2 className="bebas" style={{ fontSize: "clamp(2.5rem,5vw,4rem)", color: "#F6F8FB" }}>{t.loopH}</h2>
+      </div>
+      <div style={{ overflow: "hidden", borderTop: "1px solid rgba(255,255,255,.06)", borderBottom: "1px solid rgba(255,255,255,.06)", padding: "28px 0" }}>
+        <div className="marquee-track">
+          {[...t.loopItems, ...t.loopItems].map((item, i) => (
+            <div key={i} className={`marquee-item${["Build Streak", "Get Results"].includes(item) ? " hi" : ""}`}>
+              <span>{item}</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SocialProof({ t }) {
+  return (
+    <section className="sec sec-light2">
+      <div className="wrap">
+        <div style={{ marginBottom: 56 }}>
+          <span className="eyebrow" style={{ color: "#FF4D57" }}>{t.proofEyebrow}</span>
+          <h2 className="bebas" style={{ fontSize: "clamp(2.8rem,5vw,4.2rem)", lineHeight: .92, color: "#1A2540" }}>{t.proofH}</h2>
+        </div>
+        <div className="proof-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 16 }}>
           {t.testimonials.map(({ q, name, role, ini }, i) => (
-            <div key={i} className="t-card" style={{ background: dark ? "#0A0A0A" : "#fff", border: `1px solid ${dark ? "#1A1A1A" : "#E0E0E0"}`, padding: "32px 28px", transition: "border-color .3s", position: "relative", overflow: "hidden" }}
-              onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(220,38,38,.3)"}
-              onMouseLeave={e => e.currentTarget.style.borderColor = dark ? "#1A1A1A" : "#E0E0E0"}>
-              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: i < 2 ? "linear-gradient(90deg, rgba(220,38,38,.5), transparent)" : "transparent" }} />
-              <div className="bebas" style={{ fontSize: "3.5rem", color: "rgba(220,38,38,.2)", lineHeight: 1, marginBottom: 12, letterSpacing: ".04em" }}>"</div>
-              <p style={{ fontSize: ".95rem", color: dark ? "#C8C8C8" : "#555", lineHeight: 1.8, marginBottom: 24 }}>{q}</p>
-              <div style={{ display: "flex", alignItems: "center", gap: 14, borderTop: `1px solid ${dark ? "#111" : "#EEE"}`, paddingTop: 20 }}>
-                <div style={{ width: 40, height: 40, borderRadius: "50%", background: "linear-gradient(135deg,#DC2626,#7f1d1d)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'JetBrains Mono',monospace", fontSize: ".75rem", fontWeight: 700, color: "#fff", flexShrink: 0 }}>{ini}</div>
+            <div key={i} className="light-card" style={{ padding: "32px 28px" }}>
+              <div className="bebas" style={{ fontSize: "3rem", color: "rgba(255,77,87,.14)", lineHeight: 1, marginBottom: 12 }}>"</div>
+              <p style={{ fontSize: ".95rem", color: "#4A5568", lineHeight: 1.82, marginBottom: 24 }}>{q}</p>
+              <div style={{ display: "flex", alignItems: "center", gap: 14, borderTop: "1px solid rgba(0,0,0,.06)", paddingTop: 20 }}>
+                <div style={{ width: 40, height: 40, borderRadius: "50%", background: "linear-gradient(135deg,#FF4D57,rgba(255,77,87,.35))", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'JetBrains Mono',monospace", fontSize: ".72rem", fontWeight: 700, color: "#fff", flexShrink: 0 }}>{ini}</div>
                 <div>
-                  <div style={{ fontWeight: 600, color: dark ? "#fff" : "#0A0A0A", fontSize: ".9rem" }}>{name}</div>
-                  <div className="mono" style={{ fontSize: ".62rem", color: "#DC2626", letterSpacing: ".08em" }}>{role}</div>
+                  <div style={{ fontWeight: 600, color: "#1A2540", fontSize: ".9rem" }}>{name}</div>
+                  <div className="mono" style={{ fontSize: ".6rem", color: "#FF4D57", letterSpacing: ".08em" }}>{role}</div>
                 </div>
               </div>
             </div>
@@ -935,54 +677,49 @@ function SocialProof({ t }) {
   );
 }
 
-/* ── PRICING ─────────────────────────────────────────────────── */
 function Pricing({ onCTA, t }) {
-  const dark = true;
   return (
-    <section className="sec section-dark" style={{ background: "#050505" }}>
-      <div className="noise-bg" />
+    <section className="sec" style={{ background: "#162040" }}>
+      <div className="noise" />
+      <div className="glow-coral" style={{ width: 500, height: 500, bottom: "-10%", left: "50%", transform: "translateX(-50%)", opacity: .28 }} />
       <div className="wrap" style={{ position: "relative", zIndex: 2 }}>
-        <div style={{ marginBottom: 56, textAlign: "center" }}>
+        <div style={{ textAlign: "center", marginBottom: 56 }}>
           <span className="eyebrow" style={{ display: "block" }}>{t.pricingEyebrow}</span>
-          <h2 className="bebas" style={{ fontSize: "clamp(2.8rem,5vw,4.5rem)", color: "#fff" }}>{t.pricingH}</h2>
+          <h2 className="bebas" style={{ fontSize: "clamp(2.8rem,5vw,4.2rem)", color: "#F6F8FB" }}>{t.pricingH}</h2>
         </div>
-        <div className="pricing-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2, maxWidth: 800, margin: "0 auto" }}>
-          {/* Free */}
-          <div style={{ background: "#0A0A0A", border: "1px solid #1A1A1A", padding: "32px 24px" }}>
-            <div className="mono" style={{ fontSize: ".7rem", letterSpacing: ".16em", color: "#909090", textTransform: "uppercase", marginBottom: 12 }}>{t.pricingFree}</div>
-            <div className="bebas" style={{ fontSize: "3.5rem", color: "#fff", letterSpacing: ".04em", marginBottom: 4 }}>$0</div>
-            <div className="mono" style={{ fontSize: ".7rem", color: "#707070", marginBottom: 24 }}>/ forever</div>
-            <p style={{ fontSize: ".85rem", color: "#909090", lineHeight: 1.7, marginBottom: 28 }}>{t.pricingFreeDesc}</p>
+        <div className="pricing-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, maxWidth: 820, margin: "0 auto" }}>
+          <div className="glass" style={{ padding: "40px 36px" }}>
+            <div className="mono" style={{ fontSize: ".65rem", letterSpacing: ".16em", color: "#8A97AD", textTransform: "uppercase", marginBottom: 10 }}>Free</div>
+            <div className="bebas" style={{ fontSize: "3.5rem", color: "#F6F8FB", letterSpacing: ".04em", lineHeight: 1, marginBottom: 6 }}>$0</div>
+            <div className="mono" style={{ fontSize: ".65rem", color: "#8A97AD", marginBottom: 28 }}>/ forever</div>
             {t.freeFeatures.map(f => (
               <div key={f} style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#DC2626" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span style={{ fontSize: ".85rem", color: "#C0C0C0" }}>{f}</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FF4D57" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span style={{ fontSize: ".88rem", color: "#B7C1D3" }}>{f}</span>
               </div>
             ))}
-            <button className="btn-ghost" onClick={onCTA} style={{ width: "100%", justifyContent: "center", marginTop: 24 }}>Get Started</button>
+            <button className="btn-ghost-dark" onClick={onCTA} style={{ width: "100%", marginTop: 28 }}>Get Started</button>
           </div>
-          {/* Pro */}
-          <div style={{ background: "#0F0707", border: "1px solid rgba(220,38,38,.35)", padding: "32px 24px", position: "relative", overflow: "hidden" }}>
-            <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg, #DC2626, #EF4444, #DC2626)" }} />
+          <div className="glass-strong" style={{ padding: "40px 36px", position: "relative", overflow: "hidden" }}>
+            <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg, #FF4D57, #FF6B74, #FF4D57)" }} />
             <div style={{ position: "absolute", top: 16, right: 16 }}>
-              <span className="mono" style={{ fontSize: ".62rem", background: "#DC2626", color: "#fff", padding: "4px 10px", borderRadius: 3, letterSpacing: ".1em" }}>POPULAR</span>
+              <span className="mono" style={{ fontSize: ".6rem", background: "#FF4D57", color: "#fff", padding: "4px 10px", borderRadius: 4, letterSpacing: ".1em" }}>POPULAR</span>
             </div>
-            <div className="mono" style={{ fontSize: ".7rem", letterSpacing: ".16em", color: "#DC2626", textTransform: "uppercase", marginBottom: 12 }}>{t.pricingPro}</div>
-            <div style={{ marginBottom: 24 }}>
-              <div style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "rgba(220,38,38,.08)", border: "1px solid rgba(220,38,38,.25)", borderRadius: 4, padding: "12px 18px" }}>
-                <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#DC2626", animation: "pulse 2s ease-in-out infinite" }} />
-                <span className="mono" style={{ fontSize: ".75rem", color: "#EF4444", letterSpacing: ".14em" }}>PRICING COMING SOON</span>
+            <div className="mono" style={{ fontSize: ".65rem", letterSpacing: ".16em", color: "#FF4D57", textTransform: "uppercase", marginBottom: 10 }}>Pro</div>
+            <div style={{ marginBottom: 28 }}>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(255,77,87,.1)", border: "1px solid rgba(255,77,87,.22)", borderRadius: 8, padding: "12px 16px" }}>
+                <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#FF4D57", animation: "glowPulse 2s ease-in-out infinite" }} />
+                <span className="mono" style={{ fontSize: ".7rem", color: "#FF6B74", letterSpacing: ".12em" }}>PRICING COMING SOON</span>
               </div>
-              <p className="mono" style={{ fontSize: ".65rem", color: "#555", letterSpacing: ".08em", marginTop: 8 }}>Join the waitlist for early access pricing</p>
+              <p className="mono" style={{ fontSize: ".6rem", color: "#8A97AD", letterSpacing: ".07em", marginTop: 8 }}>Join waitlist for early access pricing</p>
             </div>
-            <p style={{ fontSize: ".85rem", color: "#A8A8A8", lineHeight: 1.7, marginBottom: 28 }}>{t.pricingProDesc}</p>
             {t.proFeatures.map(f => (
               <div key={f} style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-                <span style={{ fontSize: ".85rem", color: f.includes("Everything") ? "#EF4444" : "#C0C0C0" }}>{f}</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FF6B74" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span style={{ fontSize: ".88rem", color: f.includes("Everything") ? "#FF6B74" : "#B7C1D3" }}>{f}</span>
               </div>
             ))}
-            <button className="btn-red" onClick={onCTA} style={{ width: "100%", justifyContent: "center", marginTop: 24 }}>Get Pro Access</button>
+            <button className="btn-coral" onClick={onCTA} style={{ width: "100%", marginTop: 28 }}>Get Early Access</button>
           </div>
         </div>
       </div>
@@ -990,26 +727,24 @@ function Pricing({ onCTA, t }) {
   );
 }
 
-/* ── FAQ ─────────────────────────────────────────────────────── */
 function FAQ({ t }) {
-  const dark = true;
   const [open, setOpen] = useState(null);
   return (
-    <section className="sec" id="faq" style={{ background: dark ? "#080808" : "#F2F2F2" }}>
+    <section className="sec sec-light" id="faq">
       <div className="wrap">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: 80, alignItems: "start" }} className="hero-grid faq-grid">
+        <div className="faq-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1.6fr", gap: 80, alignItems: "start" }}>
           <div>
-            <span className="eyebrow">{t.faqEyebrow}</span>
-            <h2 className="bebas" style={{ fontSize: "clamp(2.8rem,5vw,4.5rem)", lineHeight: .92, color: dark ? "#fff" : "#0A0A0A" }}>{t.faqH}</h2>
+            <span className="eyebrow" style={{ color: "#FF4D57" }}>{t.faqEyebrow}</span>
+            <h2 className="bebas" style={{ fontSize: "clamp(2.8rem,5vw,4.2rem)", lineHeight: .92, color: "#1A2540" }}>{t.faqH}</h2>
           </div>
           <div>
             {t.faqs.map(({ q, a }, i) => (
-              <div key={i} className={`faq-item${open === i ? " open" : ""}`} style={{ marginBottom: 4 }}>
-                <button className="faq-btn" onClick={() => setOpen(open === i ? null : i)}>
-                  <span className="faq-q" style={{ color: dark ? "#fff" : "#0A0A0A", fontFamily: "'DM Sans',sans-serif" }}>{q}</span>
-                  <span className="faq-plus" style={{ transform: open === i ? "rotate(45deg)" : "none", display: "inline-block", transition: "transform .25s" }}>+</span>
+              <div key={i} style={{ background: "#fff", border: `1px solid ${open === i ? "rgba(255,77,87,.25)" : "rgba(0,0,0,.07)"}`, borderRadius: 10, overflow: "hidden", marginBottom: 6, transition: "all .2s", boxShadow: open === i ? "0 4px 20px rgba(255,77,87,.07)" : "none" }}>
+                <button style={{ width: "100%", background: "none", border: "none", cursor: "pointer", padding: "20px 24px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16 }} onClick={() => setOpen(open === i ? null : i)}>
+                  <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontWeight: 600, color: "#1A2540", fontSize: ".95rem", flex: 1, textAlign: "left" }}>{q}</span>
+                  <span style={{ color: "#FF4D57", fontSize: "1.3rem", lineHeight: 1, transition: "transform .25s", transform: open === i ? "rotate(45deg)" : "none", display: "inline-block", flexShrink: 0 }}>+</span>
                 </button>
-                {open === i && <div className="faq-a" style={{ color: dark ? "#999999" : "#888" }}>{a}</div>}
+                {open === i && <div style={{ padding: "0 24px 20px", color: "#4A5568", lineHeight: 1.78, fontSize: ".9rem" }}>{a}</div>}
               </div>
             ))}
           </div>
@@ -1019,7 +754,6 @@ function FAQ({ t }) {
   );
 }
 
-/* ── FINAL CTA ───────────────────────────────────────────────── */
 function FinalCTA({ onCTA, t }) {
   const [email, setEmail] = useState("");
   const [done, setDone] = useState(false);
@@ -1028,38 +762,42 @@ function FinalCTA({ onCTA, t }) {
     if (!email.trim()) return;
     try {
       await fetch("https://formspree.io/f/mnjwagoo", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify({ email, _subject: "New AccountaFit Waitlist Signup", message: `New waitlist signup: ${email}` }),
       });
     } catch {}
     setDone(true);
   };
   return (
-    <section className="sec section-dark" style={{ background: "#000", textAlign: "center", position: "relative", overflow: "hidden" }}>
-      <div className="noise-bg" />
-      <div className="grid-bg" />
-      <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: 800, height: 800, background: "radial-gradient(circle, rgba(220,38,38,.15) 0%, transparent 60%)", pointerEvents: "none" }} />
+    <section className="sec" style={{ background: "#0D1526", textAlign: "center", position: "relative", overflow: "hidden" }}>
+      <div className="noise" />
+      <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px)", backgroundSize: "64px 64px", pointerEvents: "none" }} />
+      <div className="glow-coral" style={{ width: 800, height: 800, top: "50%", left: "50%", transform: "translate(-50%,-50%)", opacity: .35 }} />
       <div className="wrap" style={{ position: "relative", zIndex: 2 }}>
+        <div style={{ display: "flex", justifyContent: "center", marginBottom: 32 }}>
+          <div style={{ width: 72, height: 72, background: "rgba(255,255,255,.07)", border: "1px solid rgba(255,255,255,.13)", borderRadius: 20, display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(20px)", boxShadow: "0 20px 40px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.14)" }}>
+            <AFMark size={38} />
+          </div>
+        </div>
         <span className="eyebrow" style={{ display: "block" }}>{t.ctaEyebrow}</span>
-        <h2 className="bebas" style={{ fontSize: "clamp(3.5rem,8vw,7rem)", lineHeight: .88, color: "#fff", marginBottom: 12 }}>
-          {t.ctaH1}<br /><span style={{ color: "#DC2626" }}>{t.ctaH2}</span>
+        <h2 className="bebas" style={{ fontSize: "clamp(3.5rem,8vw,7rem)", lineHeight: .88, color: "#F6F8FB", marginBottom: 12 }}>
+          {t.ctaH1}<br /><span style={{ color: "#FF4D57" }}>{t.ctaH2}</span>
         </h2>
-        <p style={{ fontSize: "1.15rem", color: "#909090", marginBottom: 48, fontStyle: "italic" }}>{t.ctaSub}</p>
+        <p style={{ fontSize: "1.1rem", color: "#B7C1D3", marginBottom: 48, fontStyle: "italic" }}>{t.ctaSub}</p>
         {done ? (
-          <div style={{ background: "rgba(220,38,38,.08)", border: "1px solid rgba(220,38,38,.25)", borderRadius: 8, padding: "40px", maxWidth: 480, margin: "0 auto" }}>
-            <div className="bebas" style={{ fontSize: "2.5rem", color: "#fff", marginBottom: 8 }}>YOU'RE IN.</div>
-            <p style={{ color: "#909090" }}>We'll reach out when it's your turn. Stay consistent until then.</p>
+          <div className="glass" style={{ padding: "40px", maxWidth: 480, margin: "0 auto", borderRadius: 20 }}>
+            <div className="bebas" style={{ fontSize: "2.5rem", color: "#F6F8FB", marginBottom: 8 }}>YOU'RE IN.</div>
+            <p style={{ color: "#B7C1D3" }}>We'll reach out when it's your turn. Stay consistent until then.</p>
           </div>
         ) : (
           <>
-            <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: 12, alignItems: "center", maxWidth: 480, margin: "0 auto 16px" }}>
-              <input type="email" placeholder={t.emailPH || "Enter your email"} value={email} onChange={e => setEmail(e.target.value)} required
-                style={{ width: "100%", height: 52, background: "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.1)", borderRadius: 4, color: "#fff", fontFamily: "'DM Sans',sans-serif", fontSize: ".95rem", padding: "0 18px", outline: "none", transition: "border-color .2s" }}
-                onFocus={e => e.target.style.borderColor = "rgba(220,38,38,.5)"} onBlur={e => e.target.style.borderColor = "rgba(255,255,255,.1)"} />
-              <button type="submit" className="btn-red" style={{ width: "100%", height: 52, justifyContent: "center", borderRadius: 4 }}>{t.ctaBtn}</button>
+            <form onSubmit={submit} style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", maxWidth: 520, margin: "0 auto 16px" }}>
+              <input type="email" placeholder={t.emailPH} value={email} onChange={e => setEmail(e.target.value)} required
+                style={{ flex: "1 1 260px", height: 52, background: "rgba(255,255,255,.07)", border: "1px solid rgba(255,255,255,.12)", borderRadius: 100, color: "#F6F8FB", fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: ".95rem", padding: "0 20px", outline: "none", transition: "border-color .2s" }}
+                onFocus={e => e.target.style.borderColor = "rgba(255,77,87,.5)"} onBlur={e => e.target.style.borderColor = "rgba(255,255,255,.12)"} />
+              <button type="submit" className="btn-coral" style={{ height: 52, padding: "0 32px", borderRadius: 100 }}>{t.ctaBtn}</button>
             </form>
-            <p className="mono" style={{ fontSize: ".65rem", color: "#555", letterSpacing: ".1em" }}>{t.ctaNote}</p>
+            <p className="mono" style={{ fontSize: ".62rem", color: "#8A97AD", letterSpacing: ".1em" }}>{t.ctaNote}</p>
           </>
         )}
       </div>
@@ -1067,38 +805,37 @@ function FinalCTA({ onCTA, t }) {
   );
 }
 
-/* ── FOOTER ──────────────────────────────────────────────────── */
 function Footer({ t }) {
-  const dark = true;
   return (
-    <footer style={{ background: "#050505", borderTop: "1px solid #0F0F0F", padding: "48px 6% 32px" }}>
+    <footer style={{ background: "#0A1020", borderTop: "1px solid rgba(255,255,255,.06)", padding: "52px 5% 32px" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 40, marginBottom: 48 }}>
           <div style={{ maxWidth: 280 }}>
-            <Logo size="1.8rem" />
-            <p style={{ marginTop: 14, fontSize: ".88rem", color: "#909090", lineHeight: 1.7 }}>Consistency over motivation. Accountability over intention. Stop starting over.</p>
-            {/* Socials */}
-            <div style={{ display: "flex", gap: 10, marginTop: 20 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
+              <AFMark size={32} />
+              <Wordmark size="1.2rem" />
+            </div>
+            <p style={{ fontSize: ".88rem", color: "#8A97AD", lineHeight: 1.72, marginBottom: 20 }}>Consistency over motivation. Accountability over intention. Stop starting over.</p>
+            <div style={{ display: "flex", gap: 10 }}>
               {[
-                { href: "https://x.com/accountafit", icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.633 5.905-5.633Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> },
-                { href: "https://instagram.com/accountafitcorp", icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="#fff" stroke="none"/></svg> },
-                { href: "https://tiktok.com/@accountafit", icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.69a8.24 8.24 0 0 0 4.84 1.56V6.79a4.85 4.85 0 0 1-1.08-.1z"/></svg> },
-              ].map(({ href, icon }, i) => (
-                <a key={i} href={href} target="_blank" rel="noopener noreferrer" style={{ width: 34, height: 34, borderRadius: "50%", background: "#111", border: "1px solid #1E1E1E", display: "flex", alignItems: "center", justifyContent: "center", transition: "border-color .2s" }}
-                  onMouseEnter={e => e.currentTarget.style.borderColor = "#DC2626"}
-                  onMouseLeave={e => e.currentTarget.style.borderColor = "#1E1E1E"}>{icon}</a>
+                { href: "https://x.com/accountafit", svg: <svg width="14" height="14" viewBox="0 0 24 24" fill="#8A97AD"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.633 5.905-5.633Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> },
+                { href: "https://instagram.com/accountafitcorp", svg: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8A97AD" strokeWidth="2" strokeLinecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="#8A97AD" stroke="none"/></svg> },
+                { href: "https://tiktok.com/@accountafit", svg: <svg width="14" height="14" viewBox="0 0 24 24" fill="#8A97AD"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.69a8.24 8.24 0 0 0 4.84 1.56V6.79a4.85 4.85 0 0 1-1.08-.1z"/></svg> },
+              ].map(({ href, svg }, i) => (
+                <a key={i} href={href} target="_blank" rel="noopener noreferrer" style={{ width: 34, height: 34, borderRadius: "50%", background: "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.08)", display: "flex", alignItems: "center", justifyContent: "center", transition: "border-color .2s" }}
+                  onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(255,77,87,.4)"}
+                  onMouseLeave={e => e.currentTarget.style.borderColor = "rgba(255,255,255,.08)"}>{svg}</a>
               ))}
             </div>
-            {/* Store badges */}
             <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 20 }}>
               {[
                 { src: "https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg", alt: "App Store" },
                 { src: "https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png", alt: "Google Play" },
               ].map(({ src, alt }) => (
                 <div key={alt} style={{ position: "relative", width: 140, cursor: "not-allowed" }}>
-                  <img src={src} alt={alt} style={{ width: "100%", height: "auto", display: "block", filter: "blur(2px) grayscale(.3)", opacity: .55 }} />
-                  <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(0,0,0,.4)", borderRadius: 7 }}>
-                    <span className="mono" style={{ fontSize: ".58rem", letterSpacing: ".14em", color: "#fff" }}>COMING SOON</span>
+                  <img src={src} alt={alt} style={{ width: "100%", height: "auto", display: "block", filter: "blur(2px) grayscale(.5) brightness(.6)", opacity: .5 }} />
+                  <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(10,16,32,.5)", borderRadius: 7 }}>
+                    <span className="mono" style={{ fontSize: ".56rem", letterSpacing: ".12em", color: "#8A97AD" }}>COMING SOON</span>
                   </div>
                 </div>
               ))}
@@ -1111,27 +848,26 @@ function Footer({ t }) {
               { title: "Legal", links: [{ label: "Terms of Service", href: "/terms" }, { label: "Privacy Policy", href: "/privacy" }, { label: "Community Guidelines", href: "/guidelines" }, { label: "Safety Policy", href: "/safety" }] },
             ].map(({ title, links }) => (
               <div key={title}>
-                <div className="mono" style={{ fontSize: ".62rem", letterSpacing: ".18em", textTransform: "uppercase", color: "#888", marginBottom: 16 }}>{title}</div>
+                <div className="mono" style={{ fontSize: ".6rem", letterSpacing: ".18em", textTransform: "uppercase", color: "rgba(255,255,255,.22)", marginBottom: 16 }}>{title}</div>
                 {links.map(({ label, href }) => (
-                  <a key={label} href={href} style={{ display: "block", color: "#A0A0A0", fontSize: ".85rem", marginBottom: 10, transition: "color .2s" }}
-                    onMouseEnter={e => e.target.style.color = "#DC2626"}
-                    onMouseLeave={e => e.target.style.color = "#A0A0A0"}>{label}</a>
+                  <a key={label} href={href} style={{ display: "block", color: "#8A97AD", fontSize: ".85rem", marginBottom: 10, transition: "color .2s" }}
+                    onMouseEnter={e => e.target.style.color = "#FF4D57"}
+                    onMouseLeave={e => e.target.style.color = "#8A97AD"}>{label}</a>
                 ))}
               </div>
             ))}
           </div>
         </div>
-        <div style={{ height: 1, background: "linear-gradient(90deg, transparent, #1A1A1A, transparent)", marginBottom: 24 }} />
+        <div style={{ height: 1, background: "linear-gradient(90deg, transparent, rgba(255,255,255,.07), transparent)", marginBottom: 24 }} />
         <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 10 }}>
-          <p className="mono" style={{ fontSize: ".62rem", color: "#2A2A2A", letterSpacing: ".08em" }}>© 2026 ACCOUNTAFIT CORP. ALL RIGHTS RESERVED. INCORPORATED IN DELAWARE.</p>
-          <p className="mono" style={{ fontSize: ".62rem", color: "#2A2A2A", letterSpacing: ".08em" }}>BUILT FOR PEOPLE WHO DON'T QUIT.</p>
+          <p className="mono" style={{ fontSize: ".6rem", color: "rgba(255,255,255,.18)", letterSpacing: ".07em" }}>© 2026 ACCOUNTAFIT CORP. ALL RIGHTS RESERVED. INCORPORATED IN DELAWARE.</p>
+          <p className="mono" style={{ fontSize: ".6rem", color: "rgba(255,255,255,.18)", letterSpacing: ".07em" }}>STRONGER TOGETHER. ACCOUNTABLE ALWAYS.</p>
         </div>
       </div>
     </footer>
   );
 }
 
-/* ── MODAL ───────────────────────────────────────────────────── */
 function Modal({ onClose, t }) {
   const [email, setEmail] = useState("");
   const [done, setDone] = useState(false);
@@ -1140,8 +876,7 @@ function Modal({ onClose, t }) {
     if (!email.trim()) return;
     try {
       await fetch("https://formspree.io/f/mnjwagoo", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify({ email, _subject: "New AccountaFit Waitlist Signup", message: `New waitlist signup: ${email}` }),
       });
     } catch {}
@@ -1149,28 +884,33 @@ function Modal({ onClose, t }) {
   };
   return (
     <div style={{ position: "fixed", inset: 0, zIndex: 999, display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }} onClick={onClose}>
-      <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,.92)", backdropFilter: "blur(20px)" }} />
-      <div style={{ position: "relative", background: "#0A0A0A", border: "1px solid #1E1E1E", borderRadius: 8, padding: "48px 40px", maxWidth: 440, width: "100%", animation: "fadeUp .3s ease" }} onClick={e => e.stopPropagation()}>
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg, #DC2626, #EF4444, #DC2626)", borderRadius: "8px 8px 0 0" }} />
-        <button onClick={onClose} style={{ position: "absolute", top: 16, right: 18, background: "none", border: "none", color: "#444", cursor: "pointer", fontSize: "1.2rem" }}>✕</button>
+      <div style={{ position: "absolute", inset: 0, background: "rgba(9,14,28,.93)", backdropFilter: "blur(24px)" }} />
+      <div className="glass-strong" style={{ position: "relative", padding: "48px 40px", maxWidth: 440, width: "100%", animation: "fadeUp .3s ease", borderRadius: 24 }} onClick={e => e.stopPropagation()}>
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg, #FF4D57, #FF6B74, #FF4D57)", borderRadius: "24px 24px 0 0" }} />
+        <button onClick={onClose} style={{ position: "absolute", top: 16, right: 20, background: "none", border: "none", color: "rgba(255,255,255,.3)", cursor: "pointer", fontSize: "1.2rem" }}>✕</button>
         {done ? (
           <div style={{ textAlign: "center" }}>
-            <div className="bebas" style={{ fontSize: "2.5rem", color: "#fff", marginBottom: 10 }}>YOU'RE IN.</div>
-            <p style={{ color: "#909090" }}>We'll reach out when it's your turn. Stay consistent.</p>
-            <button className="btn-red" onClick={onClose} style={{ marginTop: 24, width: "100%", justifyContent: "center" }}>Close</button>
+            <div style={{ display: "flex", justifyContent: "center", marginBottom: 20 }}><AFMark size={48} /></div>
+            <div className="bebas" style={{ fontSize: "2.5rem", color: "#F6F8FB", marginBottom: 8 }}>YOU'RE IN.</div>
+            <p style={{ color: "#B7C1D3" }}>We'll reach out when it's your turn. Stay consistent.</p>
+            <button className="btn-coral" onClick={onClose} style={{ marginTop: 24, width: "100%" }}>Close</button>
           </div>
         ) : (
           <>
-            <span className="mono" style={{ fontSize: ".65rem", color: "#DC2626", letterSpacing: ".2em", textTransform: "uppercase" }}>Early Access</span>
-            <h3 className="bebas" style={{ fontSize: "2.8rem", color: "#fff", marginTop: 8, marginBottom: 12, lineHeight: .95 }}>FIND YOUR<br /><span style={{ color: "#DC2626" }}>PARTNER</span></h3>
-            <p style={{ fontSize: ".88rem", color: "#909090", marginBottom: 24, lineHeight: 1.7 }}>Priority matching and free access to all features at launch. No credit card required.</p>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
+              <AFMark size={32} />
+              <Wordmark size="1.1rem" />
+            </div>
+            <span className="mono" style={{ fontSize: ".62rem", color: "#FF4D57", letterSpacing: ".2em", textTransform: "uppercase" }}>Early Access</span>
+            <h3 className="bebas" style={{ fontSize: "2.8rem", color: "#F6F8FB", marginTop: 8, marginBottom: 12, lineHeight: .95 }}>JOIN THE<br /><span style={{ color: "#FF4D57" }}>WAITLIST</span></h3>
+            <p style={{ fontSize: ".88rem", color: "#B7C1D3", marginBottom: 24, lineHeight: 1.72 }}>Priority matching and free access to all features at launch. No credit card required.</p>
             <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: 10 }}>
               <input type="email" placeholder="your@email.com" value={email} onChange={e => setEmail(e.target.value)} required
-                style={{ background: "#111", border: "1px solid #222", borderRadius: 4, color: "#fff", fontFamily: "'DM Sans',sans-serif", fontSize: ".95rem", padding: "14px 16px", outline: "none", transition: "border-color .2s" }}
-                onFocus={e => e.target.style.borderColor = "#DC2626"} onBlur={e => e.target.style.borderColor = "#222"} />
-              <button type="submit" className="btn-red" style={{ justifyContent: "center", padding: "14px 0" }}>{t.heroCTA2} →</button>
+                style={{ background: "rgba(255,255,255,.07)", border: "1px solid rgba(255,255,255,.1)", borderRadius: 10, color: "#F6F8FB", fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: ".95rem", padding: "14px 16px", outline: "none", transition: "border-color .2s" }}
+                onFocus={e => e.target.style.borderColor = "rgba(255,77,87,.5)"} onBlur={e => e.target.style.borderColor = "rgba(255,255,255,.1)"} />
+              <button type="submit" className="btn-coral" style={{ justifyContent: "center", padding: "14px 0" }}>Claim My Spot →</button>
             </form>
-            <p className="mono" style={{ marginTop: 10, fontSize: ".62rem", color: "#555", textAlign: "center", letterSpacing: ".08em" }}>NO SPAM. UNSUBSCRIBE ANYTIME.</p>
+            <p className="mono" style={{ marginTop: 10, fontSize: ".6rem", color: "#8A97AD", textAlign: "center", letterSpacing: ".08em" }}>NO SPAM. UNSUBSCRIBE ANYTIME.</p>
           </>
         )}
       </div>
@@ -1178,20 +918,18 @@ function Modal({ onClose, t }) {
   );
 }
 
-/* ── ROOT APP ────────────────────────────────────────────────── */
 export default function AccountaFit() {
   const [lang, setLang] = useState("en");
   const [modal, setModal] = useState(false);
   const t = T[lang] || T.en;
-
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: G }} />
       <Nav lang={lang} setLang={setLang} t={t} onCTA={() => setModal(true)} />
       <Hero onCTA={() => setModal(true)} t={t} />
-      <WhatIsIt t={t} onCTA={() => setModal(true)} />
       <Problem t={t} />
       <Solution t={t} />
+      <WhatIsIt onCTA={() => setModal(true)} />
       <HowItWorks t={t} />
       <Features t={t} />
       <AddictionLoop t={t} />
