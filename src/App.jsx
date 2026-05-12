@@ -534,8 +534,7 @@ function Nav({ lang, setLang, t, onCTA }) {
       <div style={{ maxWidth:1200, margin:"0 auto", display:"flex", alignItems:"center", justifyContent:"space-between", height:70 }}>
         {/* Logo */}
         <a href="/" style={{ display:"flex", alignItems:"center", gap:10, flexShrink:0 }}>
-          <img src="/af-mark.png" alt="AccountaFit mark" style={{ height:28, width:"auto", objectFit:"contain" }} />
-          <img src="/wordmark.png" alt="AccountaFit" style={{ height:20, width:"auto", objectFit:"contain" }} />
+          <img src="/af-mark.png" alt="AccountaFit mark" style={{ height:32, width:"auto", objectFit:"contain" }} />
         </a>
 
         {/* Desktop links */}
@@ -612,15 +611,9 @@ function Hero({ onCTA, t }) {
           </div>
         </div>
 
-        {/* Main headline + wordmark block */}
+        {/* Main headline */}
         <div style={{ marginBottom:32 }}>
-          {/* Big logo above headline */}
-          <div style={{ marginBottom:28 }}>
-            <img src="/wordmark.png" alt="AccountaFit" style={{ height: 52, width:"auto", objectFit:"contain" }} className="hide-m"/>
-            <img src="/wordmark.png" alt="AccountaFit" style={{ height: 36, width:"auto", objectFit:"contain" }} className="hide-d"/>
-          </div>
-
-          <h1 className="bebas" style={{ fontSize:"clamp(5.5rem,13vw,11rem)", lineHeight:.85, letterSpacing:".04em", color:"var(--frost)", maxWidth:900 }}>
+          <h1 className="bebas" style={{ fontSize:"clamp(3.8rem,8vw,6.5rem)", lineHeight:.88, letterSpacing:".04em", color:"var(--frost)", maxWidth:680 }}>
             {t.heroH1a}<br/>
             <span style={{ color:"var(--coral)" }}>{t.heroH1b}</span><br/>
             {t.heroH1c}
@@ -631,11 +624,12 @@ function Hero({ onCTA, t }) {
         <div className="hero-grid" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:56, alignItems:"flex-start" }}>
           {/* Left: copy + CTA */}
           <div>
-            <p style={{ fontSize:"1.08rem", color:"var(--gray)", lineHeight:1.82, marginBottom:36, maxWidth:440 }}>{t.heroSub}</p>
-            <div className="hero-btns" style={{ display:"flex", gap:14, flexWrap:"wrap", marginBottom:20 }}>
-              <button className="btn-primary" onClick={onCTA} style={{ fontSize:".82rem" }}>{t.heroCTA} →</button>
+            <p style={{ fontSize:"1.05rem", color:"var(--gray)", lineHeight:1.82, marginBottom:28, maxWidth:440 }}>{t.heroSub}</p>
+            {/* Mobile-only CTA — desktop users use glass panel button */}
+            <div className="hide-d" style={{ marginBottom:24 }}>
+              <button className="btn-primary" onClick={onCTA} style={{ fontSize:".82rem", width:"100%" }}>{t.heroCTA} →</button>
             </div>
-            <p className="mono" style={{ fontSize:".62rem", color:"var(--gray3)", letterSpacing:".1em" }}>{t.heroSub2}</p>
+            <p className="mono" style={{ fontSize:".62rem", color:"var(--gray3)", letterSpacing:".1em", marginBottom:32 }}>{t.heroSub2}</p>
 
             {/* Stats */}
             <div style={{ display:"flex", gap:0, marginTop:48, paddingTop:36, borderTop:"1px solid rgba(255,255,255,.07)" }}>
@@ -655,7 +649,7 @@ function Hero({ onCTA, t }) {
               <div style={{ display:"flex", alignItems:"center", gap:14, marginBottom:28, paddingBottom:24, borderBottom:"1px solid rgba(255,255,255,.07)" }}>
                 <img src="/app-icon.png" alt="AccountaFit" style={{ width:48, height:48, borderRadius:12, objectFit:"contain" }}/>
                 <div>
-                  <div style={{ fontWeight:700, fontSize:"1rem", color:"var(--frost)", marginBottom:2 }}>AccountaFit</div>
+                  <div style={{ fontWeight:700, fontSize:"1rem", color:"var(--frost)", marginBottom:2, fontFamily:"'Plus Jakarta Sans',sans-serif" }}>AccountaFit</div>
                   <div className="mono" style={{ fontSize:".62rem", color:"var(--coral)", letterSpacing:".1em" }}>COMING SOON · iOS & ANDROID</div>
                 </div>
                 <div style={{ marginLeft:"auto", display:"flex", alignItems:"center", gap:6, background:"rgba(34,197,94,.1)", border:"1px solid rgba(34,197,94,.2)", borderRadius:100, padding:"5px 12px" }}>
@@ -683,16 +677,18 @@ function Hero({ onCTA, t }) {
                 </div>
               ))}
 
-              {/* Bottom CTA teaser */}
-              <div style={{ marginTop:24, padding:"16px 20px", background:"rgba(255,77,87,.08)", border:"1px solid rgba(255,77,87,.16)", borderRadius:12, display:"flex", alignItems:"center", justifyContent:"space-between" }}>
+              {/* Bottom CTA — functional button */}
+              <button onClick={onCTA} style={{ marginTop:24, padding:"16px 20px", background:"rgba(255,77,87,.08)", border:"1px solid rgba(255,77,87,.16)", borderRadius:12, display:"flex", alignItems:"center", justifyContent:"space-between", width:"100%", cursor:"pointer", transition:"background .2s" }}
+                onMouseEnter={e => e.currentTarget.style.background="rgba(255,77,87,.16)"}
+                onMouseLeave={e => e.currentTarget.style.background="rgba(255,77,87,.08)"}>
                 <div>
-                  <div style={{ fontWeight:700, fontSize:".88rem", color:"var(--frost)" }}>Join the Waitlist</div>
-                  <div style={{ fontSize:".75rem", color:"var(--gray2)" }}>Priority access at launch</div>
+                  <div style={{ fontWeight:700, fontSize:".88rem", color:"var(--frost)", textAlign:"left" }}>Join the Waitlist</div>
+                  <div style={{ fontSize:".75rem", color:"var(--gray2)", textAlign:"left" }}>Priority access at launch</div>
                 </div>
                 <div style={{ width:32, height:32, borderRadius:"50%", background:"var(--coral)", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </div>
-              </div>
+              </button>
             </div>
           </div>
         </div>
@@ -726,7 +722,7 @@ function WhatIsIt({ t, onCTA }) {
           <div className="three-col" style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:3, marginBottom:56 }}>
             {t.whatSteps.map((s, i) => (
               <div key={i} className="glass-card" style={{ padding:"40px 32px", borderRadius: i===0 ? "20px 4px 4px 20px" : i===2 ? "4px 20px 20px 4px" : "4px" }}>
-                <div className="bebas" style={{ fontSize:"4rem", color:"rgba(255,77,87,.08)", lineHeight:1, marginBottom:16, letterSpacing:".04em" }}>{s.n}</div>
+                <div className="bebas" style={{ fontSize:"4rem", color:"rgba(255,77,87,.45)", lineHeight:1, marginBottom:16, letterSpacing:".04em" }}>{s.n}</div>
                 <h3 className="bebas" style={{ fontSize:"1.6rem", color:"var(--frost)", marginBottom:14, letterSpacing:".04em" }}>{s.title}</h3>
                 <p style={{ fontSize:".9rem", color:"var(--gray)", lineHeight:1.78 }}>{s.body}</p>
               </div>
@@ -765,29 +761,29 @@ function Problem({ t }) {
             {/* Visual */}
             <div>
               <div className="glass-panel" style={{ padding:"36px", borderRadius:24 }}>
-                <div className="mono" style={{ fontSize:".62rem", letterSpacing:".2em", color:"var(--coral)", marginBottom:24 }}>THE PATTERN</div>
+                <div className="mono" style={{ fontSize:".62rem", letterSpacing:".2em", color:"var(--coral)", marginBottom:24, fontWeight:600 }}>THE PATTERN</div>
                 {items.map((item, i) => (
                   <div key={i} style={{ display:"flex", alignItems:"center", gap:14, padding:"16px 0", borderBottom:"1px solid rgba(255,255,255,.05)" }}>
                     <div style={{ width:26, height:26, borderRadius:7, border:"1px solid rgba(255,255,255,.1)", background:"rgba(255,255,255,.04)", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
                       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.25)" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                     </div>
-                    <span style={{ fontSize:".92rem", color:"rgba(183,193,211,.4)", textDecoration:"line-through", textDecorationColor:"rgba(255,255,255,.12)" }}>{item}</span>
+                    <span style={{ fontSize:".92rem", color:"rgba(183,193,211,.75)", textDecoration:"line-through", textDecorationColor:"rgba(255,255,255,.3)" }}>{item}</span>
                   </div>
                 ))}
                 <div style={{ marginTop:20, padding:"16px 20px", background:"rgba(255,77,87,.1)", border:"1px solid rgba(255,77,87,.22)", borderRadius:10, display:"flex", alignItems:"center", gap:12 }}>
                   <div style={{ width:8, height:8, borderRadius:"50%", background:"var(--coral)", flexShrink:0 }}/>
-                  <span className="mono" style={{ fontSize:".68rem", color:"var(--coral)", letterSpacing:".1em" }}>BACK TO DAY ONE. AGAIN.</span>
+                  <span className="mono" style={{ fontSize:".72rem", color:"var(--coral)", letterSpacing:".1em", fontWeight:600 }}>BACK TO DAY ONE. AGAIN.</span>
                 </div>
               </div>
             </div>
             {/* Copy */}
             <div>
               <div className="eyebrow">{t.problemEyebrow}</div>
-              <h2 className="bebas" style={{ fontSize:"clamp(2.6rem,5vw,4.2rem)", lineHeight:.92, color:"var(--frost)", marginBottom:24 }}>{t.problemH}</h2>
-              <p style={{ fontSize:"1rem", color:"var(--gray)", lineHeight:1.85, marginBottom:28 }}>{t.problemBody}</p>
+              <h2 className="bebas" style={{ fontSize:"clamp(2.6rem,5vw,4.2rem)", lineHeight:.92, color:"#F6F8FB", marginBottom:24 }}>{t.problemH}</h2>
+              <p style={{ fontSize:"1rem", color:"var(--frost)", lineHeight:1.85, marginBottom:28, opacity:.82 }}>{t.problemBody}</p>
               <div style={{ display:"flex", alignItems:"center", gap:14 }}>
                 <div style={{ width:36, height:1.5, background:"var(--coral)", flexShrink:0 }}/>
-                <span className="mono" style={{ fontSize:".64rem", color:"var(--coral)", letterSpacing:".14em", textTransform:"uppercase" }}>The pattern is the problem</span>
+                <span className="mono" style={{ fontSize:".68rem", color:"var(--coral)", letterSpacing:".14em", textTransform:"uppercase", fontWeight:600 }}>The pattern is the problem</span>
               </div>
             </div>
           </div>
@@ -814,16 +810,16 @@ function Solution({ t }) {
           <div style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:16 }}>
             <div style={{ display:"flex", alignItems:"center", gap:10, flexWrap:"wrap", justifyContent:"center" }}>
               {["ALONE","→","STRUGGLING","→","RESTART"].map((item,i) => (
-                <div key={i} style={{ padding: i%2===0 ? "12px 22px":"0 6px", background: i%2===0 ? "rgba(255,255,255,.04)":"transparent", border: i%2===0 ? "1px solid rgba(255,255,255,.08)":"none", borderRadius:8 }}>
-                  <span className="mono" style={{ fontSize: i%2===1 ? "1.2rem":".7rem", color: i%2===1 ? "rgba(255,255,255,.18)":"var(--gray2)", letterSpacing:".1em" }}>{item}</span>
+                <div key={i} style={{ padding: i%2===0 ? "12px 22px":"0 6px", background: i%2===0 ? "rgba(255,255,255,.07)":"transparent", border: i%2===0 ? "1px solid rgba(255,255,255,.15)":"none", borderRadius:8 }}>
+                  <span className="mono" style={{ fontSize: i%2===1 ? "1.2rem":".72rem", color: i%2===1 ? "rgba(255,255,255,.45)":"var(--gray)", letterSpacing:".1em", fontWeight:500 }}>{item}</span>
                 </div>
               ))}
             </div>
             <div style={{ width:1, height:40, background:"linear-gradient(to bottom,rgba(255,77,87,.4),rgba(255,77,87,.1))" }}/>
             <div style={{ display:"flex", alignItems:"center", gap:10, flexWrap:"wrap", justifyContent:"center" }}>
               {["MATCHED","→","ACCOUNTABLE","→","CONSISTENT"].map((item,i) => (
-                <div key={i} style={{ padding: i%2===0 ? "12px 22px":"0 6px", background: i%2===0 ? "rgba(255,77,87,.1)":"transparent", border: i%2===0 ? "1px solid rgba(255,77,87,.24)":"none", borderRadius:8 }}>
-                  <span className="mono" style={{ fontSize: i%2===1 ? "1.2rem":".7rem", color: i%2===1 ? "rgba(255,255,255,.2)":"var(--coral2)", letterSpacing:".1em" }}>{item}</span>
+                <div key={i} style={{ padding: i%2===0 ? "12px 22px":"0 6px", background: i%2===0 ? "rgba(255,77,87,.16)":"transparent", border: i%2===0 ? "1px solid rgba(255,77,87,.38)":"none", borderRadius:8 }}>
+                  <span className="mono" style={{ fontSize: i%2===1 ? "1.2rem":".72rem", color: i%2===1 ? "rgba(255,255,255,.45)":"#FF8A92", letterSpacing:".1em", fontWeight:600 }}>{item}</span>
                 </div>
               ))}
             </div>
@@ -850,7 +846,7 @@ function HowItWorks({ t }) {
           <div className="four-col" style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:3 }}>
             {t.steps.map((s,i) => (
               <div key={i} className="glass-card" style={{ padding:"40px 28px", borderRadius: i===0 ? "20px 4px 4px 20px" : i===3 ? "4px 20px 20px 4px" : "4px" }}>
-                <div className="bebas" style={{ fontSize:"5rem", color:"rgba(255,77,87,.07)", lineHeight:1, marginBottom:8, letterSpacing:".04em" }}>{s.n}</div>
+                <div className="bebas" style={{ fontSize:"5rem", color:"rgba(255,77,87,.42)", lineHeight:1, marginBottom:8, letterSpacing:".04em" }}>{s.n}</div>
                 <div className="mono" style={{ fontSize:".62rem", color:"var(--coral)", letterSpacing:".15em", textTransform:"uppercase", marginBottom:12 }}>Step {s.n}</div>
                 <h3 className="bebas" style={{ fontSize:"1.55rem", color:"var(--frost)", marginBottom:14, letterSpacing:".04em" }}>{s.title}</h3>
                 <p style={{ fontSize:".88rem", color:"var(--gray)", lineHeight:1.78 }}>{s.body}</p>
