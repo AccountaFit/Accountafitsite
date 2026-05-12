@@ -294,10 +294,10 @@ body {
 .marquee-item {
   display: flex; align-items: center; gap: 24px; padding: 0 32px;
   font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: .08em;
-  white-space: nowrap; color: rgba(183,193,211,.13);
-  border-right: 1px solid rgba(255,255,255,.05);
+  white-space: nowrap; color: rgba(183,193,211,.55);
+  border-right: 1px solid rgba(255,255,255,.08);
 }
-.marquee-item.hi { color: rgba(255,77,87,.7); }
+.marquee-item.hi { color: #FF6B74; }
 
 /* ── CHATBOT ── */
 .af-chat-btn {
@@ -597,101 +597,162 @@ function Nav({ lang, setLang, t, onCTA }) {
 function Hero({ onCTA, t }) {
   return (
     <section style={{ minHeight:"100vh", display:"flex", alignItems:"center", position:"relative", overflow:"hidden", paddingTop:70 }}>
-      {/* Large hero glow rings */}
-      <div style={{ position:"absolute", top:"50%", left:"50%", transform:"translate(-50%,-50%)", width:"140vw", height:"140vw", maxWidth:1600, maxHeight:1600, borderRadius:"50%", border:"1px solid rgba(255,255,255,.03)", pointerEvents:"none" }}/>
-      <div style={{ position:"absolute", top:"50%", left:"50%", transform:"translate(-50%,-50%)", width:"100vw", height:"100vw", maxWidth:1100, maxHeight:1100, borderRadius:"50%", border:"1px solid rgba(255,255,255,.04)", pointerEvents:"none" }}/>
-      <div style={{ position:"absolute", top:"50%", left:"50%", transform:"translate(-50%,-50%)", width:"60vw", height:"60vw", maxWidth:700, maxHeight:700, borderRadius:"50%", border:"1px solid rgba(100,150,255,.06)", pointerEvents:"none" }}/>
+      {/* Subtle ring decorations */}
+      <div style={{ position:"absolute", top:"50%", left:"30%", transform:"translate(-50%,-50%)", width:"90vw", height:"90vw", maxWidth:900, maxHeight:900, borderRadius:"50%", border:"1px solid rgba(255,255,255,.03)", pointerEvents:"none" }}/>
+      <div style={{ position:"absolute", top:"50%", left:"30%", transform:"translate(-50%,-50%)", width:"55vw", height:"55vw", maxWidth:580, maxHeight:580, borderRadius:"50%", border:"1px solid rgba(100,150,255,.05)", pointerEvents:"none" }}/>
 
-      <div className="wrap" style={{ position:"relative", zIndex:2, width:"100%", paddingTop:40, paddingBottom:80 }}>
-        {/* Eyebrow */}
-        <div style={{ marginBottom:28, display:"flex", justifyContent:"flex-start" }}>
-          <div style={{ display:"inline-flex", alignItems:"center", gap:10, background:"rgba(255,77,87,.1)", border:"1px solid rgba(255,77,87,.2)", borderRadius:100, padding:"7px 18px", backdropFilter:"blur(12px)" }}>
+      {/* RED GLOW behind the headline — the signature effect */}
+      <div style={{ position:"absolute", top:"38%", left:"4%", width:"44%", height:"55%", background:"radial-gradient(ellipse 80% 70% at 40% 50%, rgba(255,50,60,.28) 0%, rgba(255,50,60,.10) 45%, transparent 75%)", pointerEvents:"none", zIndex:1, filter:"blur(8px)" }}/>
+
+      <div className="wrap" style={{ position:"relative", zIndex:2, width:"100%", paddingTop:48, paddingBottom:72 }}>
+
+        {/* Eyebrow pill */}
+        <div style={{ marginBottom:24 }}>
+          <div style={{ display:"inline-flex", alignItems:"center", gap:10, background:"rgba(255,77,87,.1)", border:"1px solid rgba(255,77,87,.22)", borderRadius:100, padding:"7px 18px", backdropFilter:"blur(12px)" }}>
             <div style={{ width:6, height:6, borderRadius:"50%", background:"var(--coral)", animation:"glow 2s ease-in-out infinite" }}/>
-            <span className="mono" style={{ fontSize:".65rem", letterSpacing:".2em", color:"var(--coral)" }}>{t.heroEyebrow}</span>
+            <span className="mono" style={{ fontSize:".63rem", letterSpacing:".2em", color:"var(--coral)" }}>{t.heroEyebrow}</span>
           </div>
         </div>
 
-        {/* Main headline */}
-        <div style={{ marginBottom:32 }}>
-          <h1 className="bebas" style={{ fontSize:"clamp(3.8rem,8vw,6.5rem)", lineHeight:.88, letterSpacing:".04em", color:"var(--frost)", maxWidth:680 }}>
-            {t.heroH1a}<br/>
-            <span style={{ color:"var(--coral)" }}>{t.heroH1b}</span><br/>
-            {t.heroH1c}
-          </h1>
-        </div>
-
-        {/* Two column: copy + glass card */}
-        <div className="hero-grid" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:56, alignItems:"flex-start" }}>
-          {/* Left: copy + CTA */}
+        {/* ── DESKTOP: two-col grid — headline+copy left, beta card right ── */}
+        <div className="hide-m" style={{ display:"grid", gridTemplateColumns:"minmax(0,1fr) 420px", gap:48, alignItems:"flex-start" }}>
+          {/* Left column */}
           <div>
-            <p style={{ fontSize:"1.05rem", color:"var(--gray)", lineHeight:1.82, marginBottom:28, maxWidth:440 }}>{t.heroSub}</p>
-            {/* Mobile-only CTA — desktop users use glass panel button */}
-            <div className="hide-d" style={{ marginBottom:24 }}>
-              <button className="btn-primary" onClick={onCTA} style={{ fontSize:".82rem", width:"100%" }}>{t.heroCTA} →</button>
-            </div>
-            <p className="mono" style={{ fontSize:".62rem", color:"var(--gray3)", letterSpacing:".1em", marginBottom:32 }}>{t.heroSub2}</p>
-
-            {/* Stats */}
-            <div style={{ display:"flex", gap:0, marginTop:48, paddingTop:36, borderTop:"1px solid rgba(255,255,255,.07)" }}>
+            {/* Headline with red glow context */}
+            <h1 className="bebas" style={{ fontSize:"clamp(3.6rem,7.5vw,6.2rem)", lineHeight:.88, letterSpacing:".04em", color:"var(--frost)", marginBottom:28, maxWidth:580 }}>
+              {t.heroH1a}<br/>
+              <span style={{ color:"var(--coral)" }}>{t.heroH1b}</span><br/>
+              {t.heroH1c}
+            </h1>
+            <p style={{ fontSize:"1rem", color:"var(--gray)", lineHeight:1.82, marginBottom:28, maxWidth:420 }}>{t.heroSub}</p>
+            <p className="mono" style={{ fontSize:".6rem", color:"var(--gray3)", letterSpacing:".1em", marginBottom:36 }}>{t.heroSub2}</p>
+            {/* Stats strip */}
+            <div style={{ display:"flex", gap:0, paddingTop:28, borderTop:"1px solid rgba(255,255,255,.07)" }}>
               {[[t.stat1v,t.stat1l],[t.stat2v,t.stat2l],[t.stat3v,t.stat3l]].map(([v,l],i) => (
-                <div key={v} style={{ flex:1, paddingRight: i<2 ? 24:0, paddingLeft: i>0 ? 24:0, borderRight: i<2 ? "1px solid rgba(255,255,255,.07)":"none" }}>
-                  <div className="bebas" style={{ fontSize:"2.4rem", color:"var(--coral)", letterSpacing:".04em", lineHeight:1 }}>{v}</div>
-                  <div className="mono" style={{ fontSize:".58rem", color:"var(--gray2)", letterSpacing:".1em", textTransform:"uppercase", marginTop:7, lineHeight:1.5 }}>{l}</div>
+                <div key={v} style={{ flex:1, paddingRight:i<2?20:0, paddingLeft:i>0?20:0, borderRight:i<2?"1px solid rgba(255,255,255,.07)":"none" }}>
+                  <div className="bebas" style={{ fontSize:"2.2rem", color:"var(--coral)", letterSpacing:".04em", lineHeight:1 }}>{v}</div>
+                  <div className="mono" style={{ fontSize:".56rem", color:"var(--gray2)", letterSpacing:".1em", textTransform:"uppercase", marginTop:6, lineHeight:1.5 }}>{l}</div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Right: premium glass feature panel */}
-          <div className="hide-m" style={{ position:"relative" }}>
-            <div className="glass-panel" style={{ padding:"36px 32px", borderRadius:28 }}>
-              {/* Top row with app icon */}
-              <div style={{ display:"flex", alignItems:"center", gap:14, marginBottom:28, paddingBottom:24, borderBottom:"1px solid rgba(255,255,255,.07)" }}>
-                <img src="/app-icon.png" alt="AccountaFit" style={{ width:48, height:48, borderRadius:12, objectFit:"contain" }}/>
-                <div>
-                  <div style={{ fontWeight:700, fontSize:"1rem", color:"var(--frost)", marginBottom:2, fontFamily:"'Plus Jakarta Sans',sans-serif" }}>AccountaFit</div>
-                  <div className="mono" style={{ fontSize:".62rem", color:"var(--coral)", letterSpacing:".1em" }}>COMING SOON · iOS & ANDROID</div>
+          {/* Right column — beta card, fixed width, aligned to top of headline */}
+          <div style={{ position:"relative", marginTop:4 }}>
+            <div className="glass-panel" style={{ padding:"24px 22px", borderRadius:22, width:"100%", maxWidth:420 }}>
+              {/* Header row */}
+              <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:20, paddingBottom:16, borderBottom:"1px solid rgba(255,255,255,.07)" }}>
+                <img src="/app-icon.png" alt="AccountaFit" style={{ width:40, height:40, borderRadius:10, objectFit:"contain", flexShrink:0 }}/>
+                <div style={{ flex:1, minWidth:0 }}>
+                  <div style={{ fontWeight:700, fontSize:".92rem", color:"var(--frost)", marginBottom:2, fontFamily:"'Plus Jakarta Sans',sans-serif" }}>AccountaFit</div>
+                  <div className="mono" style={{ fontSize:".58rem", color:"var(--coral)", letterSpacing:".08em" }}>COMING SOON · iOS & ANDROID</div>
                 </div>
-                <div style={{ marginLeft:"auto", display:"flex", alignItems:"center", gap:6, background:"rgba(34,197,94,.1)", border:"1px solid rgba(34,197,94,.2)", borderRadius:100, padding:"5px 12px" }}>
+                <div style={{ display:"flex", alignItems:"center", gap:5, background:"rgba(34,197,94,.1)", border:"1px solid rgba(34,197,94,.22)", borderRadius:100, padding:"4px 10px", flexShrink:0 }}>
                   <div style={{ width:5, height:5, borderRadius:"50%", background:"#22c55e" }}/>
-                  <span className="mono" style={{ fontSize:".58rem", color:"#22c55e", letterSpacing:".1em" }}>LIVE BETA</span>
+                  <span className="mono" style={{ fontSize:".54rem", color:"#22c55e", letterSpacing:".08em" }}>LIVE BETA</span>
                 </div>
               </div>
-
               {/* Feature rows */}
               {[
-                { icon: ICONS.match,    label: "Smart Matching",       sub: "Matched in 48 hours" },
-                { icon: ICONS.streak,   label: "Shared Streaks",       sub: "Both win or both lose" },
-                { icon: ICONS.chat,     label: "Accountability Chat",  sub: "Direct partner line" },
-                { icon: ICONS.ai,       label: "AI Workout Plans",     sub: "Built for your goals" },
+                { icon: ICONS.match,  label: "Smart Matching",      sub: "Matched in 48 hours" },
+                { icon: ICONS.streak, label: "Shared Streaks",      sub: "Both win or both lose" },
+                { icon: ICONS.chat,   label: "Accountability Chat", sub: "Direct partner line" },
+                { icon: ICONS.ai,     label: "AI Workout Plans",    sub: "Built for your goals" },
               ].map((item, i) => (
-                <div key={i} style={{ display:"flex", alignItems:"center", gap:14, padding:"14px 0", borderBottom: i<3 ? "1px solid rgba(255,255,255,.05)":"none" }}>
-                  <div style={{ width:38, height:38, borderRadius:10, background:"rgba(255,77,87,.1)", border:"1px solid rgba(255,77,87,.18)", display:"flex", alignItems:"center", justifyContent:"center", color:"var(--coral)", flexShrink:0 }}>
+                <div key={i} style={{ display:"flex", alignItems:"center", gap:12, padding:"11px 0", borderBottom:i<3?"1px solid rgba(255,255,255,.05)":"none" }}>
+                  <div style={{ width:34, height:34, borderRadius:9, background:"rgba(255,77,87,.1)", border:"1px solid rgba(255,77,87,.18)", display:"flex", alignItems:"center", justifyContent:"center", color:"var(--coral)", flexShrink:0 }}>
                     {item.icon}
                   </div>
-                  <div style={{ flex:1 }}>
-                    <div style={{ fontWeight:600, fontSize:".9rem", color:"var(--frost)" }}>{item.label}</div>
-                    <div style={{ fontSize:".78rem", color:"var(--gray2)" }}>{item.sub}</div>
+                  <div style={{ flex:1, minWidth:0 }}>
+                    <div style={{ fontWeight:600, fontSize:".85rem", color:"var(--frost)", lineHeight:1.2 }}>{item.label}</div>
+                    <div style={{ fontSize:".73rem", color:"var(--gray2)" }}>{item.sub}</div>
                   </div>
-                  <div style={{ width:7, height:7, borderRadius:"50%", background:"rgba(34,197,94,.6)", flexShrink:0 }}/>
+                  <div style={{ width:6, height:6, borderRadius:"50%", background:"rgba(34,197,94,.65)", flexShrink:0 }}/>
                 </div>
               ))}
-
-              {/* Bottom CTA — functional button */}
-              <button onClick={onCTA} style={{ marginTop:24, padding:"16px 20px", background:"rgba(255,77,87,.08)", border:"1px solid rgba(255,77,87,.16)", borderRadius:12, display:"flex", alignItems:"center", justifyContent:"space-between", width:"100%", cursor:"pointer", transition:"background .2s" }}
-                onMouseEnter={e => e.currentTarget.style.background="rgba(255,77,87,.16)"}
+              {/* CTA button — functional */}
+              <button onClick={onCTA}
+                style={{ marginTop:18, padding:"14px 18px", background:"rgba(255,77,87,.08)", border:"1px solid rgba(255,77,87,.18)", borderRadius:11, display:"flex", alignItems:"center", justifyContent:"space-between", width:"100%", cursor:"pointer", transition:"background .2s" }}
+                onMouseEnter={e => e.currentTarget.style.background="rgba(255,77,87,.18)"}
                 onMouseLeave={e => e.currentTarget.style.background="rgba(255,77,87,.08)"}>
                 <div>
-                  <div style={{ fontWeight:700, fontSize:".88rem", color:"var(--frost)", textAlign:"left" }}>Join the Waitlist</div>
-                  <div style={{ fontSize:".75rem", color:"var(--gray2)", textAlign:"left" }}>Priority access at launch</div>
+                  <div style={{ fontWeight:700, fontSize:".85rem", color:"var(--frost)", textAlign:"left" }}>Join the Waitlist</div>
+                  <div style={{ fontSize:".72rem", color:"var(--gray2)", textAlign:"left" }}>Priority access at launch</div>
                 </div>
-                <div style={{ width:32, height:32, borderRadius:"50%", background:"var(--coral)", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                <div style={{ width:30, height:30, borderRadius:"50%", background:"var(--coral)", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </div>
               </button>
             </div>
           </div>
         </div>
+
+        {/* ── MOBILE: stacked single column ── */}
+        <div className="hide-d">
+          {/* Headline */}
+          <h1 className="bebas" style={{ fontSize:"clamp(3.4rem,16vw,5rem)", lineHeight:.88, letterSpacing:".04em", color:"var(--frost)", marginBottom:20 }}>
+            {t.heroH1a}<br/>
+            <span style={{ color:"var(--coral)" }}>{t.heroH1b}</span><br/>
+            {t.heroH1c}
+          </h1>
+          <p style={{ fontSize:"1rem", color:"var(--gray)", lineHeight:1.78, marginBottom:20 }}>{t.heroSub}</p>
+          {/* Mobile CTA */}
+          <button className="btn-primary" onClick={onCTA} style={{ fontSize:".82rem", width:"100%", marginBottom:16 }}>{t.heroCTA} →</button>
+          <p className="mono" style={{ fontSize:".6rem", color:"var(--gray3)", letterSpacing:".1em", marginBottom:28 }}>{t.heroSub2}</p>
+          {/* Stats */}
+          <div style={{ display:"flex", gap:0, paddingTop:24, borderTop:"1px solid rgba(255,255,255,.07)", marginBottom:32 }}>
+            {[[t.stat1v,t.stat1l],[t.stat2v,t.stat2l],[t.stat3v,t.stat3l]].map(([v,l],i) => (
+              <div key={v} style={{ flex:1, paddingRight:i<2?12:0, paddingLeft:i>0?12:0, borderRight:i<2?"1px solid rgba(255,255,255,.07)":"none" }}>
+                <div className="bebas" style={{ fontSize:"1.7rem", color:"var(--coral)", letterSpacing:".04em", lineHeight:1 }}>{v}</div>
+                <div className="mono" style={{ fontSize:".5rem", color:"var(--gray2)", letterSpacing:".07em", textTransform:"uppercase", marginTop:5, lineHeight:1.4 }}>{l}</div>
+              </div>
+            ))}
+          </div>
+          {/* Mobile beta card — compact, centered, part of hero */}
+          <div style={{ maxWidth:360, margin:"0 auto" }}>
+            <div className="glass-panel" style={{ padding:"20px 18px", borderRadius:18 }}>
+              <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:16, paddingBottom:14, borderBottom:"1px solid rgba(255,255,255,.07)" }}>
+                <img src="/app-icon.png" alt="AccountaFit" style={{ width:36, height:36, borderRadius:9, objectFit:"contain", flexShrink:0 }}/>
+                <div style={{ flex:1 }}>
+                  <div style={{ fontWeight:700, fontSize:".88rem", color:"var(--frost)", fontFamily:"'Plus Jakarta Sans',sans-serif" }}>AccountaFit</div>
+                  <div className="mono" style={{ fontSize:".54rem", color:"var(--coral)", letterSpacing:".08em" }}>COMING SOON · iOS & ANDROID</div>
+                </div>
+                <div style={{ display:"flex", alignItems:"center", gap:4, background:"rgba(34,197,94,.1)", border:"1px solid rgba(34,197,94,.2)", borderRadius:100, padding:"3px 8px" }}>
+                  <div style={{ width:4, height:4, borderRadius:"50%", background:"#22c55e" }}/>
+                  <span className="mono" style={{ fontSize:".5rem", color:"#22c55e", letterSpacing:".07em" }}>BETA</span>
+                </div>
+              </div>
+              {[
+                { icon: ICONS.match,  label: "Smart Matching",      sub: "48hr match time" },
+                { icon: ICONS.streak, label: "Shared Streaks",      sub: "Both win or lose" },
+                { icon: ICONS.chat,   label: "Accountability Chat", sub: "Direct line" },
+                { icon: ICONS.ai,     label: "AI Workouts",         sub: "Your goals" },
+              ].map((item, i) => (
+                <div key={i} style={{ display:"flex", alignItems:"center", gap:10, padding:"9px 0", borderBottom:i<3?"1px solid rgba(255,255,255,.05)":"none" }}>
+                  <div style={{ width:30, height:30, borderRadius:8, background:"rgba(255,77,87,.1)", border:"1px solid rgba(255,77,87,.16)", display:"flex", alignItems:"center", justifyContent:"center", color:"var(--coral)", flexShrink:0 }}>
+                    {item.icon}
+                  </div>
+                  <div style={{ flex:1 }}>
+                    <div style={{ fontWeight:600, fontSize:".8rem", color:"var(--frost)" }}>{item.label}</div>
+                    <div style={{ fontSize:".68rem", color:"var(--gray2)" }}>{item.sub}</div>
+                  </div>
+                  <div style={{ width:5, height:5, borderRadius:"50%", background:"rgba(34,197,94,.65)", flexShrink:0 }}/>
+                </div>
+              ))}
+              <button onClick={onCTA}
+                style={{ marginTop:14, padding:"12px 16px", background:"rgba(255,77,87,.1)", border:"1px solid rgba(255,77,87,.2)", borderRadius:10, display:"flex", alignItems:"center", justifyContent:"space-between", width:"100%", cursor:"pointer" }}>
+                <div>
+                  <div style={{ fontWeight:700, fontSize:".82rem", color:"var(--frost)", textAlign:"left" }}>Join the Waitlist</div>
+                  <div style={{ fontSize:".68rem", color:"var(--gray2)", textAlign:"left" }}>Priority access at launch</div>
+                </div>
+                <div style={{ width:26, height:26, borderRadius:"50%", background:"var(--coral)", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
   );
