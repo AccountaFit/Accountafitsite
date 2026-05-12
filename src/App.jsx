@@ -596,7 +596,7 @@ function Nav({ lang, setLang, t, onCTA }) {
 ───────────────────────────────────────────── */
 function Hero({ onCTA, t }) {
   return (
-    <section style={{ minHeight:"100vh", display:"flex", alignItems:"center", position:"relative", overflow:"hidden", paddingTop:70 }}>
+    <section style={{ minHeight:"92vh", display:"flex", alignItems:"center", position:"relative", overflow:"hidden", paddingTop:70 }}>
       {/* Subtle ring decorations */}
       <div style={{ position:"absolute", top:"50%", left:"30%", transform:"translate(-50%,-50%)", width:"90vw", height:"90vw", maxWidth:900, maxHeight:900, borderRadius:"50%", border:"1px solid rgba(255,255,255,.03)", pointerEvents:"none" }}/>
       <div style={{ position:"absolute", top:"50%", left:"30%", transform:"translate(-50%,-50%)", width:"55vw", height:"55vw", maxWidth:580, maxHeight:580, borderRadius:"50%", border:"1px solid rgba(100,150,255,.05)", pointerEvents:"none" }}/>
@@ -604,7 +604,7 @@ function Hero({ onCTA, t }) {
       {/* RED GLOW behind the headline — the signature effect */}
       <div style={{ position:"absolute", top:"38%", left:"4%", width:"44%", height:"55%", background:"radial-gradient(ellipse 80% 70% at 40% 50%, rgba(255,50,60,.28) 0%, rgba(255,50,60,.10) 45%, transparent 75%)", pointerEvents:"none", zIndex:1, filter:"blur(8px)" }}/>
 
-      <div className="wrap" style={{ position:"relative", zIndex:2, width:"100%", paddingTop:48, paddingBottom:72 }}>
+      <div className="wrap" style={{ position:"relative", zIndex:2, width:"100%", paddingTop:48, paddingBottom:20 }}>
 
         {/* Eyebrow pill */}
         <div style={{ marginBottom:24 }}>
@@ -955,7 +955,7 @@ function Features({ t }) {
 ───────────────────────────────────────────── */
 function LoopMarquee({ t }) {
   return (
-    <div style={{ padding:"48px 0", overflow:"hidden", borderTop:"1px solid rgba(255,255,255,.05)", borderBottom:"1px solid rgba(255,255,255,.05)" }}>
+    <div style={{ padding:"36px 0", overflow:"hidden", borderTop:"1px solid rgba(255,255,255,.05)", borderBottom:"1px solid rgba(255,255,255,.05)" }}>
       <div className="marquee-track">
         {[...t.loopItems,...t.loopItems].map((item,i) => (
           <div key={i} className={`marquee-item${["Build Streak","Get Results"].includes(item)?" hi":""}`}>
