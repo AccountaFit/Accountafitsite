@@ -65,7 +65,7 @@ const T = {
     faqH: "Real questions.",
     faqs: [
       { q: "Is this a dating app?", a: "No. Matching is 100% based on fitness goals and schedule. This is accountability, not socializing." },
-      { q: "What if my partner ghosts me?", a: "Smart Rematch detects disengagement early and finds you a better fit before your momentum breaks." },
+      { q: "What if my partner ghosts me?", a: "Our system automatically monitors partner activity and will detect and notify you when your partner has been inactive for a period of time — so you're never left wondering. You'll always know, and we'll help you find a better match before your momentum breaks." },
       { q: "How long does matching take?", a: "Most people are matched within 48 hours. We prioritize fit over speed." },
       { q: "Is it really free?", a: "Yes. Core features are free forever. Pro upgrades are available for power users." },
       { q: "How much time does it take daily?", a: "About 60 seconds for a check-in. Consistency over complexity." },
@@ -1307,7 +1307,6 @@ export default function AccountaFit() {
       <Problem t={t} />
       <Solution t={t} />
       <WhatIsIt t={t} onCTA={() => setModal(true)} />
-      <HowItWorks t={t} />
       <Features t={t} />
       <SocialProof t={t} />
       <Pricing t={t} onCTA={() => setModal(true)} />
