@@ -14,495 +14,406 @@ const LANGS = {
 
 const T = {
   en: {
-    nav: ["How It Works", "Features", "FAQ"],
+    nav: ["How It Works", "Features", "Programs", "Community", "FAQ"],
     joinWaitlist: "Join Waitlist",
-    heroEyebrow: "STRONGER TOGETHER. ACCOUNTABLE ALWAYS.",
-    heroH1a: "STOP", heroH1b: "STARTING", heroH1c: "OVER.",
-    heroSub: "Most people don't fail fitness because they're lazy. They fail because they do it alone. AccountaFit matches you with a real partner who keeps you accountable — every day.",
-    heroCTA: "Join the Waitlist",
-    heroSub2: "Free to join · No credit card required · iOS & Android coming soon",
-    stat1v: "3×", stat1l: "More likely to hit goals",
-    stat2v: "48H", stat2l: "Average match time",
-    stat3v: "94%", stat3l: "Report stronger consistency",
-    problemEyebrow: "THE REAL PROBLEM",
-    problemH: "You don't need more motivation.",
-    problemBody: "You've downloaded the apps. You've started the routines. You've told yourself \"this time is different.\" And somehow… it always resets. Not because you're incapable. Because you're doing it alone.",
-    solutionEyebrow: "THE FIX",
-    solutionH: "Fitness doesn't fail. Systems do.",
-    solutionBody: "AccountaFit fixes the real problem: accountability. We pair you with someone who has similar goals, schedules, and drive — so showing up isn't optional anymore.",
+    heroBadge: "BY ACCOUNTAFIT CORP",
+    heroH1a: "FIND YOUR", heroH1b: "FITNESS", heroH1c: "PARTNER.",
+    heroSub: "PACT matches you with a real accountability partner based on your goals, schedule, and commitment level. Train smarter. Stay consistent. Never start over.",
+    heroCTA: "Get Early Access", heroGhost: "See How It Works",
+    stat1v: "200+", stat1l: "Workout Benchmarks",
+    stat2v: "12+",  stat2l: "AI Sport Programs",
+    stat3v: "48H",  stat3l: "Avg. Match Time",
+    introEyebrow: "INTRODUCING PACT",
+    introH1: "The World's First", introH2: "Fitness Accountability", introH3: "Matching Platform.",
+    introSub: "AccountaFit Corp didn't build another workout tracker. We built something the fitness world has never seen — a partner-matching system designed around the one thing that determines whether you succeed:",
+    introSub2: "who's with you.",
     howEyebrow: "HOW IT WORKS",
     howH: "Four steps. One system.\nNo more restarting.",
     steps: [
-      { n: "01", title: "Get Matched", body: "Tell us your goals, schedule, and commitment level. We find your perfect accountability partner in 48 hours." },
-      { n: "02", title: "Check In Daily", body: "A 60-second daily check-in keeps both of you locked in. Miss one and the streak breaks — for both of you." },
-      { n: "03", title: "Build Your Streak", body: "Streaks are shared. The longer they get, the harder they are to break. That's the design." },
-      { n: "04", title: "Get Results", body: "Consistency compounds. When someone is counting on you every single day, results are inevitable." },
+      { n:"01", title:"Match With Your Partner",  body:"Tell us your goals, schedule, and commitment level. Our algorithm finds your perfect accountability partner in 48 hours — filtered by sport, level, and location." },
+      { n:"02", title:"Check In Daily",           body:"A quick daily check-in keeps both of you locked in. Log workouts, share progress, and hold each other accountable every single day." },
+      { n:"03", title:"Build Your Training",      body:"Use the AI program builder to generate a fully personalized plan across 12+ sports with customizable goals and weekly periodization." },
+      { n:"04", title:"Compete and Grow",         body:"Hit daily benchmarks, climb the King/Queen of the Workout leaderboard, and grow inside Communities with people who share your discipline." },
     ],
     featEyebrow: "FEATURES",
     featH: "Built different.\nBecause the problem is different.",
     features: [
-      { icon: "match",    title: "Smart Matching",       body: "Paired by goals, schedule, and intensity — not randomly. Your match is your mirror." },
-      { icon: "streak",   title: "Streak Tracking",      body: "Shared streaks between partners. Both check in or both lose it. Social pressure that actually works." },
-      { icon: "chat",     title: "Accountability Chat",  body: "Direct line to your partner. No feed. No noise. Just the two of you, every day." },
-      { icon: "ai",       title: "AI Workout Generator", body: "Personalized plans built around your goals, level, and available time. No guesswork." },
-      { icon: "meal",     title: "Daily Meal Guidance",  body: "A new meal every day tailored to your fitness goals. High-protein, low-carb, vegan — your choice." },
-      { icon: "progress", title: "Real-Time Progress",   body: "See your partner's activity in real time. When they're online, you know. When they skip, you know." },
+      { key:"match",  title:"Smart Partner Matching",  body:"Paired by sport, goals, schedule, and intensity. Swipe, connect, and make a pact you will not break." },
+      { key:"ai",     title:"AI Program Builder",      body:"Generate fully personalized training programs across 12+ sports. Choose your phase: Base Build Peak, Aggressive, or Maintenance." },
+      { key:"wod",    title:"King / Queen of the WOD", body:"A new benchmark every day. Log your score and compete on the real-time leaderboard. Claim the throne." },
+      { key:"cal",    title:"Schedule & Calendar",     body:"Plan your training week. Add workouts, goals, habits, and events. Your calendar synced to your commitment." },
+      { key:"lib",    title:"Workout Library",         body:"200+ pre-built workouts across Bodybuilding, CrossFit, Hyrox, Powerlifting and more. Ready to use or customize." },
+      { key:"comm",   title:"Communities",             body:"Join or create Communities around your gym, sport, or training style. Shared workouts, group chats, collective progress." },
+      { key:"goals",  title:"Goals & Events",          body:"Set fitness goals, register for upcoming events, and track daily habits all in one unified training hub." },
+      { key:"pr",     title:"Personal Records",        body:"Search, add, and manage your PRs across every movement. See your strength story grow week over week." },
+      { key:"chat",   title:"Direct Partner Chat",     body:"A private, direct line to your accountability partner. No feed noise. Just the two of you staying on track." },
     ],
-    loopItems: ["Match", "Show Up", "Check In", "Build Streak", "Get Results", "Repeat"],
-    proofEyebrow: "EARLY FEEDBACK",
-    proofH: "They stopped starting over.",
-    testimonials: [
-      { q: "I've tried every app. The difference with AccountaFit is someone is actually waiting on my check-in. That changes everything.", name: "Marcus T.", role: "Beta tester · -28 lbs", ini: "MT" },
-      { q: "Eleven weeks. Me and my partner haven't missed one check-in. That streak starts to feel like part of your identity.", name: "Priya S.", role: "Beta tester · Marathon finisher", ini: "PS" },
-      { q: "I stopped trying to stay motivated. I just made sure my partner knew I was showing up. That's the whole system.", name: "Devon K.", role: "Early access · +15 lbs muscle", ini: "DK" },
-      { q: "I didn't need a trainer. I needed someone who would notice if I went quiet. AccountaFit gave me exactly that.", name: "Aaliyah W.", role: "Beta tester · Goal weight reached", ini: "AW" },
+    progEyebrow: "AI PROGRAM BUILDER",
+    progH: "Your coach.\nPowered by AI.",
+    progSub: "Select your sport, set your goal, and PACT's AI generates a fully periodized training program tailored to you — weeks of structured programming in one tap.",
+    sports: ["Bodybuilding","General Fitness","Weight Loss","Strength Training","Powerlifting","Olympic Lifting","CrossFit","Hyrox","Running","Marathon","Triathlon","Swimming"],
+    libEyebrow: "WORKOUT LIBRARY",
+    libH: "200+ workouts.\nZero guesswork.",
+    libSub: "From HYROX benchmarks to CrossFit WODs, from powerlifting templates to custom sessions — PACT's library has pre-built workouts ready to log, share, or add to your schedule.",
+    commEyebrow: "COMMUNITIES",
+    commH: "Your gym. Your crew.\nYour community.",
+    commSub: "Create or join Communities built around your gym, sport, or training style. Share workouts, chat with members, and grow together.",
+    commCards: [
+      { tag:"COMM", title:"Create a Community",  body:"Start your own space — name it, set the level, and invite your training crew." },
+      { tag:"CHAT", title:"Community Chat",       body:"A dedicated group chat for every community. Share WODs, results, and motivation." },
+      { tag:"WOD",  title:"Shared Workouts",      body:"Post workouts to your community. Members log scores and compete together on a shared leaderboard." },
+      { tag:"LOCK", title:"Private or Public",    body:"Keep your community open to all or restricted to your inner circle. Your space, your rules." },
     ],
-    pricingEyebrow: "PRICING",
-    pricingH: "Free to start.\nBuilt to scale.",
-    freeFeatures: ["Partner matching", "Daily check-ins", "Shared streaks", "Basic chat", "AI workout (3/week)"],
-    proFeatures: ["Everything in Free", "Unlimited AI workouts", "Daily meal plans", "Priority matching", "Advanced analytics", "Smart Rematch"],
-    faqEyebrow: "FAQ",
-    faqH: "Real questions.",
+    waitlistEyebrow: "YOUR MOVE",
+    waitlistH: "Your next restart doesn't have to happen.",
+    waitlistSub: "Find someone who won't let you quit. Join the PACT waitlist and get first access when we launch on iOS and Android.",
+    waitlistNote: "FREE TO JOIN · NO CREDIT CARD REQUIRED · iOS & ANDROID COMING SOON",
+    emailPH: "Enter your email", joinBtn: "Join the Waitlist",
+    faqEyebrow: "FAQ", faqH: "Real questions.",
+    faqSub: "Everything you need to know about PACT before you make yours.",
     faqs: [
-      { q: "Is this a dating app?", a: "No. Matching is 100% based on fitness goals and schedule. This is accountability, not socializing." },
-      { q: "What if my partner ghosts me?", a: "Our system automatically monitors partner activity and will detect and notify you when your partner has been inactive for a period of time — so you're never left wondering. You'll always know, and we'll help you find a better match before your momentum breaks." },
-      { q: "How long does matching take?", a: "Most people are matched within 48 hours. We prioritize fit over speed." },
-      { q: "Is it really free?", a: "Yes. Core features are free forever. Pro upgrades are available for power users." },
-      { q: "How much time does it take daily?", a: "About 60 seconds for a check-in. Consistency over complexity." },
+      { q:"Is PACT a dating app?",                            a:"No. Partner matching is 100% based on fitness goals, schedule, and commitment level. This is accountability, not socializing." },
+      { q:"What sports does the AI program builder support?", a:"12+ disciplines including Bodybuilding, CrossFit, Hyrox, Powerlifting, Olympic Lifting, Running, Marathon, Triathlon, Swimming, and General Fitness. Each program is fully personalized to your goal, phase preference, and timeline." },
+      { q:"What is King / Queen of the Workout?",            a:"Every day a new benchmark Workout of the Day is posted. Athletes log their score and compete on a real-time leaderboard to claim the throne — King or Queen of the Workout." },
+      { q:"How does partner matching work?",                  a:"Think Tinder for fitness. You browse profiles matched to your goals, fitness level, and location. When both sides connect, you make a Pact and start training together with shared accountability." },
+      { q:"What if my partner goes inactive?",               a:"Our system automatically monitors partner activity and will detect and notify you when your partner has been inactive for a period of time — so you're never left wondering. You'll always know, and we'll help you find a better match before your momentum breaks." },
+      { q:"When does PACT launch?",                          a:"PACT is in active development. iOS and Android launch is coming soon. Join the waitlist to get early access and be the first to know." },
+      { q:"Is it free to use?",                              a:"Core features including partner matching, workout library, and scheduling are free. Premium AI programs and advanced analytics will be available on a subscription plan." },
     ],
-    ctaEyebrow: "YOUR MOVE",
-    ctaH1: "Your next restart",
-    ctaH2: "doesn't have to happen.",
-    ctaSub: "Find someone who won't let you quit.",
-    ctaBtn: "Join the Waitlist",
-    ctaNote: "Free to join. No credit card required.",
-    emailPH: "Enter your email",
-    whatEyebrow: "INTRODUCING ACCOUNTAFIT",
-    whatH: "The World's First Fitness Accountability Matching Platform",
-    whatSub: "We didn't build another workout tracker. We built something the fitness world has never seen — a partner-matching system designed around the one thing that determines whether you succeed:",
-    whatSub2: "who's with you.",
-    comingSoon: "MORE FEATURES COMING SOON",
-    comingH: "We're just getting started.",
-    comingBody: "Leaderboards. AI workout programs. Meal planning. Real-time partner updates. Video check-ins. Waitlist members get everything first.",
-    whatSteps: [
-      { n: "01", title: "Build Your Profile", body: "Set your fitness goals, upload photos, define your schedule and commitment level. Tell us what you're working toward and how hard you're willing to push." },
-      { n: "02", title: "Set Your Preferences", body: "Choose your training style, intensity level, and what you need from a partner. Someone to push you? Someone to match your pace? You decide." },
-      { n: "03", title: "Get Matched", body: "Think Tinder, but for fitness accountability. Swipe through profiles, connect with someone who has the same fire — and make a commitment that neither of you will break." },
-    ],
+    chatGreeting: "Hey! I'm the PACT AI assistant. Ask me anything about the app, matching, features, or how to get started.",
+    chatPH: "Ask about PACT...",
   },
 };
 
 /* ─────────────────────────────────────────────
-   GLOBAL CSS  — ONE UNIFIED GLASS SYSTEM
+   GLOBAL CSS
 ───────────────────────────────────────────── */
 const G = `
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  background: #060e1e;
-  color: #F6F8FB;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  line-height: 1.6;
-}
-::selection { background: rgba(255,77,87,.3); color: #fff; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:#05090f;color:#EEF2FF;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6}
+a{color:inherit;text-decoration:none}
+::selection{background:rgba(59,123,255,.35);color:#fff}
 
-/* ── CSS VARIABLES ── */
-:root {
-  --navy:      #0D1526;
-  --navy-deep: #060e1e;
-  --navy-mid:  #0f1e38;
-  --navy-hi:   #172344;
-  --coral:     #FF4D57;
-  --coral2:    #FF6B74;
-  --coral-dim: rgba(255,77,87,.18);
-  --frost:     #F6F8FB;
-  --gray:      #B7C1D3;
-  --gray2:     #8A97AD;
-  --gray3:     #5a6a84;
-
-  /* glass panel tokens */
-  --glass-1: rgba(255,255,255,.055);
-  --glass-2: rgba(255,255,255,.08);
-  --glass-3: rgba(255,255,255,.11);
-  --glass-border: rgba(255,255,255,.09);
-  --glass-border-hi: rgba(255,255,255,.18);
-  --glass-shine: linear-gradient(135deg, rgba(255,255,255,.13) 0%, rgba(255,255,255,0) 60%);
-
-  /* blur levels */
-  --blur-sm: blur(12px);
-  --blur-md: blur(24px);
-  --blur-lg: blur(40px);
-
-  --radius-sm: 12px;
-  --radius-md: 18px;
-  --radius-lg: 24px;
-  --radius-xl: 32px;
+:root{
+  --bg:#05090f;
+  --navy:#080e1c;
+  --navy-mid:#0d1628;
+  --navy-hi:#131e35;
+  --blue:#3B7BFF;
+  --blue2:#5B94FF;
+  --blue-dim:rgba(59,123,255,.18);
+  --cyan:#00D4FF;
+  --cyan-dim:rgba(0,212,255,.12);
+  --purple:#7C5CFC;
+  --frost:#EEF2FF;
+  --gray:#9AAAC8;
+  --gray2:#6B7FA3;
+  --gray3:#3D4F70;
+  --glass-1:rgba(255,255,255,.045);
+  --glass-2:rgba(255,255,255,.075);
+  --glass-3:rgba(255,255,255,.11);
+  --glass-border:rgba(255,255,255,.08);
+  --glass-border-hi:rgba(255,255,255,.16);
+  --blur-sm:blur(12px);
+  --blur-md:blur(24px);
+  --blur-lg:blur(40px);
+  --r-sm:10px;
+  --r-md:16px;
+  --r-lg:22px;
+  --r-xl:28px;
 }
 
-/* ── FONT UTILS ── */
-.bebas  { font-family: 'Bebas Neue', sans-serif; letter-spacing: .04em; }
-.mono   { font-family: 'JetBrains Mono', monospace; }
-.jakarta { font-family: 'Plus Jakarta Sans', sans-serif; }
+.raj{font-family:'Rajdhani',sans-serif;letter-spacing:.02em}
+.mono{font-family:'JetBrains Mono',monospace}
 
-/* ── ANIMATIONS ── */
-@keyframes fadeUp   { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
-@keyframes fadeIn   { from { opacity:0; } to { opacity:1; } }
-@keyframes floatA   { 0%,100%{transform:translateY(0)}    50%{transform:translateY(-12px)} }
-@keyframes floatB   { 0%,100%{transform:translateY(-8px)} 50%{transform:translateY(4px)} }
-@keyframes marquee  { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-@keyframes shimmer  { 0%{background-position:200% center} 100%{background-position:-200% center} }
-@keyframes glow     { 0%,100%{opacity:.55} 50%{opacity:1} }
-@keyframes spin     { to { transform: rotate(360deg); } }
-@keyframes afDot    { 0%,100%{opacity:.3} 50%{opacity:1; background:var(--coral)} }
+/* ── Keyframes ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes glow{0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes afDot{0%,100%{opacity:.3}50%{opacity:1;background:var(--blue)}}
+@keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 
-/* ── BACKGROUND ATMOSPHERE ── */
-.page-bg {
-  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+/* ── Page Background ── */
+.page-bg{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;
   background:
-    radial-gradient(ellipse 80% 60% at 70% -10%,  rgba(60,100,200,.28) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at -10% 40%,  rgba(40,80,180,.22) 0%, transparent 55%),
-    radial-gradient(ellipse 70% 60% at 110% 80%,  rgba(255,77,87,.12) 0%, transparent 55%),
-    radial-gradient(ellipse 80% 80% at 50% 110%,  rgba(30,60,140,.35) 0%, transparent 60%),
-    linear-gradient(160deg, #060e1e 0%, #0a1628 40%, #0d1a30 70%, #080f1e 100%);
+    radial-gradient(ellipse 70% 55% at 75% -5%,rgba(59,123,255,.22) 0%,transparent 60%),
+    radial-gradient(ellipse 55% 45% at -5% 40%,rgba(59,123,255,.16) 0%,transparent 55%),
+    radial-gradient(ellipse 60% 55% at 105% 80%,rgba(124,92,252,.14) 0%,transparent 55%),
+    radial-gradient(ellipse 80% 70% at 50% 110%,rgba(0,212,255,.08) 0%,transparent 60%),
+    linear-gradient(160deg,#05090f 0%,#07111f 40%,#0a1428 70%,#060a14 100%);
 }
-.page-bg-noise {
-  position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .035;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 256px;
-}
-
-/* ── GLASS PANEL SYSTEM ── */
-.glass-panel {
-  background: var(--glass-2);
-  backdrop-filter: var(--blur-md);
-  -webkit-backdrop-filter: var(--blur-md);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-lg);
-  position: relative;
-  overflow: hidden;
-}
-.glass-panel::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-  background: var(--glass-shine);
-  pointer-events: none;
-  z-index: 0;
-}
-.glass-panel > * { position: relative; z-index: 1; }
-
-.glass-card {
-  background: var(--glass-1);
-  backdrop-filter: var(--blur-sm);
-  -webkit-backdrop-filter: var(--blur-sm);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-md);
-  position: relative; overflow: hidden;
-  transition: background .3s ease, border-color .3s ease, transform .3s ease, box-shadow .3s ease;
-}
-.glass-card::after {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
-  pointer-events: none;
-}
-.glass-card:hover {
-  background: var(--glass-2);
-  border-color: rgba(255,255,255,.16);
-  transform: translateY(-5px);
-  box-shadow: 0 28px 56px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.08), 0 0 40px rgba(255,77,87,.06);
+.page-bg-noise{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.028;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:256px;
 }
 
-/* ── EYEBROW LABEL ── */
-.eyebrow {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; color: var(--coral);
-  margin-bottom: 18px;
+/* ── Glass ── */
+.glass{
+  background:var(--glass-2);
+  backdrop-filter:var(--blur-md);-webkit-backdrop-filter:var(--blur-md);
+  border:1px solid var(--glass-border);border-radius:var(--r-lg);
+  position:relative;overflow:hidden;
 }
-.eyebrow::before {
-  content: '';
-  display: block; width: 20px; height: 1.5px;
-  background: var(--coral); flex-shrink: 0;
+.glass::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.09) 0%,rgba(255,255,255,0) 60%);
+  pointer-events:none;z-index:0;
+}
+.glass>*{position:relative;z-index:1}
+
+.glass-card{
+  background:var(--glass-1);
+  backdrop-filter:var(--blur-sm);-webkit-backdrop-filter:var(--blur-sm);
+  border:1px solid var(--glass-border);border-radius:var(--r-md);
+  position:relative;overflow:hidden;
+  transition:background .3s,border-color .3s,transform .3s,box-shadow .3s;
+}
+.glass-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
+  pointer-events:none;
+}
+.glass-card:hover{
+  background:var(--glass-2);border-color:rgba(59,123,255,.28);
+  transform:translateY(-4px);
+  box-shadow:0 24px 56px rgba(0,0,0,.4),0 0 40px rgba(59,123,255,.07);
 }
 
-/* ── BUTTONS ── */
-.btn-primary {
-  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: .78rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
-  color: #fff; border: none; border-radius: 100px; cursor: pointer;
-  padding: 16px 40px;
-  background: linear-gradient(135deg, #FF4D57 0%, #e0353f 100%);
-  box-shadow: 0 8px 32px rgba(255,77,87,.38), inset 0 1px 0 rgba(255,255,255,.22);
-  transition: all .25s ease;
-  position: relative; overflow: hidden;
+/* ── Eyebrow ── */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'JetBrains Mono',monospace;font-size:.64rem;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);
+  margin-bottom:16px;
 }
-.btn-primary::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,.14) 0%, transparent 60%);
-  pointer-events: none;
-}
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 48px rgba(255,77,87,.52), inset 0 1px 0 rgba(255,255,255,.22);
-}
-.btn-primary:active { transform: translateY(0); }
+.eyebrow::before{content:'';display:block;width:18px;height:1.5px;background:var(--cyan);flex-shrink:0}
 
-.btn-ghost {
-  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: .78rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
-  color: var(--frost); border-radius: 100px; cursor: pointer;
-  padding: 15px 40px;
-  background: var(--glass-1);
-  backdrop-filter: var(--blur-sm); -webkit-backdrop-filter: var(--blur-sm);
-  border: 1px solid var(--glass-border-hi);
-  transition: all .25s ease;
+/* ── Buttons ── */
+.btn-primary{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:'JetBrains Mono',monospace;font-size:.76rem;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:#fff;border:none;border-radius:100px;cursor:pointer;
+  padding:15px 38px;
+  background:linear-gradient(135deg,#3B7BFF 0%,#2563EB 100%);
+  box-shadow:0 8px 32px rgba(59,123,255,.42),inset 0 1px 0 rgba(255,255,255,.2);
+  transition:all .25s ease;position:relative;overflow:hidden;
 }
-.btn-ghost:hover {
-  background: var(--glass-2);
-  border-color: rgba(255,77,87,.5);
-  color: var(--coral);
-  transform: translateY(-2px);
+.btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.13) 0%,transparent 60%);pointer-events:none}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 48px rgba(59,123,255,.58)}
+
+.btn-ghost{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:'JetBrains Mono',monospace;font-size:.76rem;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--frost);border-radius:100px;cursor:pointer;
+  padding:14px 38px;
+  background:var(--glass-1);
+  backdrop-filter:var(--blur-sm);-webkit-backdrop-filter:var(--blur-sm);
+  border:1px solid var(--glass-border-hi);transition:all .25s ease;
 }
+.btn-ghost:hover{background:var(--glass-2);border-color:rgba(59,123,255,.45);color:var(--blue2);transform:translateY(-2px)}
 
-/* ── NAV ── */
-.nav-link {
-  color: var(--gray); font-size: .88rem; font-weight: 400;
-  transition: color .2s; cursor: pointer; white-space: nowrap;
-}
-.nav-link:hover { color: var(--frost); }
+/* ── Nav ── */
+.nav-link{color:var(--gray);font-size:.88rem;font-weight:400;transition:color .2s;cursor:pointer;white-space:nowrap;background:none;border:none;font-family:'Inter',sans-serif}
+.nav-link:hover{color:var(--frost)}
 
-/* ── SECTION ── */
-.sec { padding: 112px 0; position: relative; }
-.wrap { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+/* ── Layout ── */
+.sec{padding:108px 0;position:relative}
+.wrap{max-width:1200px;margin:0 auto;padding:0 5%}
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.07) 30%,rgba(255,255,255,.11) 50%,rgba(255,255,255,.07) 70%,transparent);margin:0 5%}
 
-/* ── DIVIDER LINE ── */
-.sec-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.08) 30%, rgba(255,255,255,.12) 50%, rgba(255,255,255,.08) 70%, transparent 100%);
-  margin: 0 5%;
+/* ── Gradient text ── */
+.grad-text{
+  background:linear-gradient(135deg,#3B7BFF 0%,#00D4FF 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
 
-/* ── MARQUEE ── */
-.marquee-track { display: flex; width: max-content; animation: marquee 22s linear infinite; }
-.marquee-item {
-  display: flex; align-items: center; gap: 24px; padding: 0 32px;
-  font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: .08em;
-  white-space: nowrap; color: rgba(183,193,211,.55);
-  border-right: 1px solid rgba(255,255,255,.08);
+/* ── Stat pill ── */
+.stat-pill{
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  background:var(--glass-1);border:1px solid var(--glass-border);
+  border-radius:var(--r-md);padding:22px 18px;flex:1;min-width:100px;
 }
-.marquee-item.hi { color: #FF6B74; }
 
-/* ── CHATBOT ── */
-.af-chat-btn {
-  position:fixed; bottom:28px; right:28px; z-index:800; height:48px;
-  border-radius:100px; cursor:pointer;
-  background: rgba(255,77,87,.14);
-  backdrop-filter: var(--blur-sm); -webkit-backdrop-filter: var(--blur-sm);
-  border: 1px solid rgba(255,77,87,.28);
-  display:flex; align-items:center; justify-content:center; gap:9px;
-  box-shadow: 0 4px 24px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.1);
-  transition: all .25s ease; padding: 0 20px; white-space: nowrap;
+/* ── Step number ── */
+.step-num{
+  width:50px;height:50px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;
+  background:rgba(59,123,255,.12);border:1.5px solid rgba(59,123,255,.28);
+  color:var(--blue2);
 }
-.af-chat-btn:hover { background: rgba(255,77,87,.26); border-color: rgba(255,77,87,.5); transform: translateY(-2px); }
-.af-chat-btn.open { width:48px; height:48px; padding:0; border-radius:50%; }
-.af-chat-win {
-  position:fixed; bottom:88px; right:28px; z-index:800; width:350px;
-  background: rgba(12,20,38,.92);
-  border: 1px solid rgba(255,255,255,.1); border-radius: var(--radius-xl);
-  overflow:hidden;
-  box-shadow: 0 28px 72px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.05);
-  display:flex; flex-direction:column; animation:fadeIn .25s ease; max-height:520px;
-  backdrop-filter: var(--blur-lg); -webkit-backdrop-filter: var(--blur-lg);
+
+/* ── Tag pills ── */
+.tag{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:5px 12px;border-radius:100px;border:1px solid}
+.tag-blue{color:var(--blue2);background:rgba(59,123,255,.1);border-color:rgba(59,123,255,.22)}
+.tag-cyan{color:var(--cyan);background:rgba(0,212,255,.08);border-color:rgba(0,212,255,.2)}
+.tag-purple{color:#A78BFA;background:rgba(124,92,252,.1);border-color:rgba(124,92,252,.22)}
+.tag-green{color:#34D399;background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.2)}
+.tag-amber{color:#FBBF24;background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.2)}
+
+/* ── Marquee ── */
+.marquee-track{display:flex;width:max-content;animation:marquee 26s linear infinite}
+.marquee-item{
+  display:flex;align-items:center;gap:22px;padding:0 30px;
+  font-family:'Rajdhani',sans-serif;font-size:1.5rem;font-weight:600;
+  letter-spacing:.1em;white-space:nowrap;color:rgba(154,170,200,.4);
+  border-right:1px solid rgba(255,255,255,.06);
 }
-.af-chat-hd { background: rgba(255,255,255,.04); border-bottom: 1px solid rgba(255,255,255,.07); padding:14px 16px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0; }
-.af-chat-msgs { flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:12px; scroll-behavior:smooth; }
-.af-chat-msgs::-webkit-scrollbar { width:3px; }
-.af-chat-msgs::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius:2px; }
-.af-chat-inp { border-top: 1px solid rgba(255,255,255,.07); padding:12px 14px; background: rgba(255,255,255,.03); display:flex; gap:8px; align-items:center; flex-shrink:0; }
-.af-msg-bot { display:flex; gap:8px; align-items:flex-start; }
-.af-msg-user { display:flex; justify-content:flex-end; }
-.af-bubble-bot { background: rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.08); border-radius:12px 12px 12px 4px; padding:10px 13px; max-width:260px; font-size:13px; color:var(--frost); line-height:1.55; white-space:pre-line; }
-.af-bubble-user { background: linear-gradient(135deg,#FF4D57,#e0353f); border-radius:12px 12px 4px 12px; padding:10px 13px; max-width:240px; font-size:13px; color:#fff; line-height:1.55; }
-.af-av { width:26px; height:26px; border-radius:50%; background: linear-gradient(135deg,#FF4D57,#B91C1C); display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#fff; flex-shrink:0; font-family:'JetBrains Mono',monospace; }
-.af-inp { flex:1; background: rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:100px; color:var(--frost); font-family:'Plus Jakarta Sans',sans-serif; font-size:12.5px; padding:9px 14px; outline:none; transition:border-color .2s; }
-.af-inp::placeholder { color: var(--gray3); }
-.af-inp:focus { border-color: rgba(255,77,87,.5); }
-.af-send { width:34px; height:34px; border-radius:50%; background: linear-gradient(135deg,#FF4D57,#e0353f); border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:opacity .2s; }
-.af-send:hover { opacity:.85; }
-.af-dot { width:6px; height:6px; border-radius:50%; background: rgba(255,255,255,.25); animation:afDot .9s ease-in-out infinite; }
-.af-dot:nth-child(2){animation-delay:.2s} .af-dot:nth-child(3){animation-delay:.4s}
+.marquee-item.hi{color:var(--cyan)}
 
 /* ── FAQ ── */
-.faq-row { background: var(--glass-1); border:1px solid var(--glass-border); border-radius: var(--radius-sm); overflow:hidden; margin-bottom:4px; transition: background .2s, border-color .2s; }
-.faq-row.open { background: rgba(255,77,87,.06); border-color: rgba(255,77,87,.22); }
-.faq-btn { width:100%; background:none; border:none; cursor:pointer; padding:20px 24px; display:flex; justify-content:space-between; align-items:center; gap:16px; }
-.faq-q { font-family:'Plus Jakarta Sans',sans-serif; font-weight:600; color:var(--frost); font-size:.93rem; flex:1; text-align:left; }
-.faq-a { padding:0 24px 20px; color:var(--gray); line-height:1.8; font-size:.9rem; }
-.faq-icon { color: var(--coral); font-size:1.3rem; line-height:1; transition:transform .25s; flex-shrink:0; }
+.faq-row{background:var(--glass-1);border:1px solid var(--glass-border);border-radius:var(--r-sm);overflow:hidden;margin-bottom:4px;transition:background .2s,border-color .2s}
+.faq-row.open{background:rgba(59,123,255,.06);border-color:rgba(59,123,255,.22)}
+.faq-btn{width:100%;background:none;border:none;cursor:pointer;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.faq-q{font-family:'Inter',sans-serif;font-weight:600;color:var(--frost);font-size:.92rem;flex:1;text-align:left}
+.faq-icon{color:var(--blue);font-size:1.3rem;line-height:1;transition:transform .25s;flex-shrink:0}
+.faq-a{padding:0 24px 20px;color:var(--gray);line-height:1.8;font-size:.9rem}
 
-/* ── RESPONSIVE ── */
-@media (max-width: 960px) {
-  .hide-m  { display: none !important; }
-  .sec     { padding: 80px 0; }
-  .two-col { grid-template-columns: 1fr !important; gap: 48px !important; }
-  .three-col { grid-template-columns: 1fr 1fr !important; }
-  .four-col  { grid-template-columns: 1fr 1fr !important; }
-  .feat-grid { grid-template-columns: 1fr 1fr !important; }
-  .proof-grid { grid-template-columns: 1fr !important; }
-  .pricing-grid { grid-template-columns: 1fr !important; max-width: 480px !important; }
-  .faq-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
-  .hero-grid  { grid-template-columns: 1fr !important; }
+/* ── Chatbot ── */
+.af-chat-btn{position:fixed;bottom:28px;right:28px;z-index:800;height:48px;border-radius:100px;cursor:pointer;background:rgba(59,123,255,.14);backdrop-filter:var(--blur-sm);-webkit-backdrop-filter:var(--blur-sm);border:1px solid rgba(59,123,255,.28);display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:0 4px 24px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.1);transition:all .25s ease;padding:0 20px;white-space:nowrap}
+.af-chat-btn:hover{background:rgba(59,123,255,.26);border-color:rgba(59,123,255,.5);transform:translateY(-2px)}
+.af-chat-btn.open{width:48px;height:48px;padding:0;border-radius:50%}
+.af-chat-win{position:fixed;bottom:88px;right:28px;z-index:800;width:350px;background:rgba(8,14,28,.94);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-xl);overflow:hidden;box-shadow:0 28px 72px rgba(0,0,0,.75);display:flex;flex-direction:column;animation:fadeIn .25s ease;max-height:520px;backdrop-filter:var(--blur-lg);-webkit-backdrop-filter:var(--blur-lg)}
+.af-chat-hd{background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.07);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.af-chat-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;scroll-behavior:smooth}
+.af-chat-msgs::-webkit-scrollbar{width:3px}
+.af-chat-msgs::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
+.af-chat-inp{border-top:1px solid rgba(255,255,255,.07);padding:12px 14px;background:rgba(255,255,255,.03);display:flex;gap:8px;align-items:center;flex-shrink:0}
+.af-msg-bot{display:flex;gap:8px;align-items:flex-start}
+.af-msg-user{display:flex;justify-content:flex-end}
+.af-bubble-bot{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.08);border-radius:12px 12px 12px 4px;padding:10px 13px;max-width:260px;font-size:13px;color:var(--frost);line-height:1.55;white-space:pre-line}
+.af-bubble-user{background:linear-gradient(135deg,#3B7BFF,#2563EB);border-radius:12px 12px 4px 12px;padding:10px 13px;max-width:240px;font-size:13px;color:#fff;line-height:1.55}
+.af-av{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#3B7BFF,#1D4ED8);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex-shrink:0;font-family:'JetBrains Mono',monospace}
+.af-inp{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:100px;color:var(--frost);font-family:'Inter',sans-serif;font-size:12.5px;padding:9px 14px;outline:none;transition:border-color .2s}
+.af-inp::placeholder{color:var(--gray3)}
+.af-inp:focus{border-color:rgba(59,123,255,.5)}
+.af-send{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#3B7BFF,#2563EB);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity .2s}
+.af-send:hover{opacity:.85}
+.af-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.25);animation:afDot .9s ease-in-out infinite}
+.af-dot:nth-child(2){animation-delay:.2s}.af-dot:nth-child(3){animation-delay:.4s}
+
+/* ── Responsive ── */
+@media(max-width:960px){
+  .hide-m{display:none!important}
+  .sec{padding:80px 0}
+  .two-col{grid-template-columns:1fr!important;gap:48px!important}
+  .three-col{grid-template-columns:1fr 1fr!important}
+  .feat-grid{grid-template-columns:1fr 1fr!important}
+  .four-col{grid-template-columns:1fr 1fr!important}
+  .faq-grid{grid-template-columns:1fr!important;gap:32px!important}
+  .hero-h1{font-size:clamp(3.2rem,11vw,5rem)!important}
+  .pricing-grid{grid-template-columns:1fr!important;max-width:480px!important}
 }
-@media (max-width: 600px) {
-  .sec { padding: 64px 0; }
-  .three-col { grid-template-columns: 1fr !important; }
-  .four-col  { grid-template-columns: 1fr !important; }
-  .feat-grid { grid-template-columns: 1fr !important; }
-  .hero-btns { flex-direction: column !important; align-items: stretch !important; }
-  .hero-btns .btn-primary, .hero-btns .btn-ghost { justify-content: center; }
-  .af-chat-win { width: calc(100vw - 32px); right:16px; bottom:80px; }
-  .af-chat-btn { right:16px; bottom:16px; }
+@media(max-width:600px){
+  .three-col{grid-template-columns:1fr!important}
+  .feat-grid{grid-template-columns:1fr!important}
+  .four-col{grid-template-columns:1fr!important}
+  .hero-btns{flex-direction:column;align-items:stretch!important}
+  .hero-btns .btn-primary,.hero-btns .btn-ghost{justify-content:center}
+  .stat-pill{min-width:80px!important;padding:16px 10px!important}
+  .af-chat-win{width:calc(100vw - 32px);right:16px;bottom:80px}
+  .af-chat-btn{right:16px;bottom:16px}
 }
-@media (min-width: 961px) { .hide-d { display: none !important; } }
+@media(min-width:961px){.hide-d{display:none!important}}
 `;
 
 /* ─────────────────────────────────────────────
-   FEATURE ICONS
-───────────────────────────────────────────── */
-const ICONS = {
-  match: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="3.2"/>
-      <path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a3.2 3.2 0 0 1 0 6.2"/>
-    </svg>
-  ),
-  streak: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 2c2.8 3 4.5 5.6 4.5 8.2A4.5 4.5 0 0 1 12 14.7a4.5 4.5 0 0 1-4.5-4.5C7.5 7.6 9.2 5 12 2Z"/>
-      <path d="M7 15.5A5 5 0 0 0 12 21a5 5 0 0 0 5-5.5"/>
-    </svg>
-  ),
-  chat: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-    </svg>
-  ),
-  ai: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="3" y="3" width="18" height="18" rx="3"/>
-      <path d="M9 9h6M9 12h6M9 15h4"/>
-    </svg>
-  ),
-  meal: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
-      <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
-      <line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
-    </svg>
-  ),
-  progress: (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/>
-      <line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/>
-    </svg>
-  ),
-};
-
-/* ─────────────────────────────────────────────
-   GEMINI CHATBOT
+   CHATBOT
 ───────────────────────────────────────────── */
 const GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY;
-const SYSTEM_PROMPT = `You are the AccountaFit AI assistant. Only answer questions about AccountaFit. Keep answers concise, warm, and direct — max 3 sentences unless a list is genuinely needed.
+const SYSTEM = `You are the PACT app AI assistant, embedded on the PACT website. PACT is a fitness accountability partner-matching platform by AccountaFit Corp.
 
-AccountaFit is a fitness accountability platform that matches users with real partners based on goals, schedule, and commitment level. Tagline: "Stop Starting Over."
+KEY FACTS:
+- PACT matches users with real fitness accountability partners based on goals, schedule, and commitment level
+- Think Tinder for fitness — swipe profiles, connect, make a pact
+- Features: Smart Partner Matching, AI Program Builder (12+ sports), King/Queen of the WOD daily leaderboard, Schedule & Calendar, 200+ Workout Library, Communities, Goals & Events, Personal Records, Direct Partner Chat
+- 12 sports: Bodybuilding, General Fitness, Weight Loss, Strength Training, Powerlifting, Olympic Lifting, CrossFit, Hyrox, Running, Marathon, Triathlon, Swimming
+- Free core features. Premium AI programs via subscription coming soon
+- iOS & Android launch coming soon
+- Built by AccountaFit Corp (Delaware)
+- Waitlist: info@accountafit.com
 
-HOW IT WORKS: 1. Get Matched (48hrs) 2. Check In Daily (60 sec) 3. Build Your Streak (shared) 4. Get Results
+Keep answers concise, enthusiastic, and fitness-focused. Max 3 sentences unless a list is needed.`;
 
-FEATURES: Smart Matching, Shared Streaks, Accountability Chat, AI Workout Generator, Daily Meal Guidance, Real-Time Progress, Tinder-style matching with optional video call.
-
-PRICING: Free tier (matching, check-ins, streaks, chat, 3 AI workouts/week). Pro tier pricing coming soon.
-
-CONTACT: info@accountafit.com | @accountafitcorp Instagram | @accountafit X & TikTok. Delaware corporation. Mobile apps coming soon.`;
-
-function Chatbot() {
+function Chatbot({ t }) {
   const [open, setOpen] = useState(false);
-  const [msgs, setMsgs] = useState([{ role: "bot", text: "Hey! I'm the AccountaFit AI. Ask me anything about the app, matching, pricing, or how it works. 💪" }]);
-  const [input, setInput] = useState("");
+  const [msgs, setMsgs] = useState([{ role:"bot", text: t.chatGreeting }]);
+  const [inp, setInp] = useState("");
   const [loading, setLoading] = useState(false);
-  const msgsRef = useRef(null);
-  useEffect(() => { if (msgsRef.current) msgsRef.current.scrollTop = msgsRef.current.scrollHeight; }, [msgs, loading]);
+  const ref = useRef(null);
+  useEffect(() => { if (ref.current) ref.current.scrollTop = ref.current.scrollHeight; }, [msgs, loading]);
 
   const send = async (override) => {
-    const text = (override || input).trim();
+    const text = (override || inp).trim();
     if (!text || loading) return;
-    setInput(""); setMsgs(m => [...m, { role: "user", text }]); setLoading(true);
+    setInp(""); setMsgs(m => [...m, { role:"user", text }]); setLoading(true);
     try {
       if (!GEMINI_KEY) throw new Error("no key");
-      const history = msgs.map(m => ({ role: m.role === "bot" ? "model" : "user", parts: [{ text: m.text }] }));
+      const history = msgs.map(m => ({ role: m.role === "bot" ? "model" : "user", parts:[{ text: m.text }] }));
       const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`, {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ system_instruction: { parts: [{ text: SYSTEM_PROMPT }] }, contents: [...history, { role: "user", parts: [{ text }] }], generationConfig: { maxOutputTokens: 300, temperature: 0.7 } }),
+        method:"POST", headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({ system_instruction:{ parts:[{ text: SYSTEM }] }, contents:[...history,{ role:"user", parts:[{ text }] }], generationConfig:{ maxOutputTokens:300, temperature:0.7 } }),
       });
       const data = await res.json();
       const raw = data?.candidates?.[0]?.content?.parts?.[0]?.text || "";
-      const reply = raw.replace(/\*\*(.*?)\*\*/g, '$1').replace(/\*(.*?)\*/g, '$1').trim();
-      setMsgs(m => [...m, { role: "bot", text: reply || "Something went wrong. Try again!" }]);
-    } catch { setMsgs(m => [...m, { role: "bot", text: "Something went wrong. Reach us at info@accountafit.com." }]); }
+      setMsgs(m => [...m, { role:"bot", text: raw.replace(/\*\*(.*?)\*\*/g,'$1').replace(/\*(.*?)\*/g,'$1').trim() || "Try again!" }]);
+    } catch { setMsgs(m => [...m, { role:"bot", text:"Something went wrong. Reach us at info@accountafit.com" }]); }
     setLoading(false);
   };
 
-  const QUICK = ["How does matching work?", "Is it free?", "What features are included?"];
+  const QUICK = ["How does matching work?", "What sports does AI support?", "Is it free?"];
   return (
     <>
       {open && (
         <div className="af-chat-win">
           <div className="af-chat-hd">
-            <div style={{ display:"flex", alignItems:"center", gap:10 }}>
-              <div className="af-av" style={{ width:34, height:34, fontSize:11 }}>AF</div>
+            <div style={{display:"flex",alignItems:"center",gap:10}}>
+              <div className="af-av" style={{width:34,height:34,fontSize:11}}>P</div>
               <div>
-                <div style={{ fontWeight:600, fontSize:13, color:"#F6F8FB", fontFamily:"'Plus Jakarta Sans',sans-serif" }}>AccountaFit AI</div>
-                <div style={{ display:"flex", alignItems:"center", gap:4, marginTop:2 }}>
-                  <div style={{ width:6, height:6, borderRadius:"50%", background:"#22c55e" }}/>
-                  <span style={{ fontSize:".62rem", color:"#22c55e", letterSpacing:".08em", fontFamily:"'JetBrains Mono',monospace" }}>ONLINE</span>
+                <div style={{fontWeight:600,fontSize:13,color:"var(--frost)",fontFamily:"'Inter',sans-serif"}}>PACT Assistant</div>
+                <div style={{display:"flex",alignItems:"center",gap:4,marginTop:2}}>
+                  <div style={{width:6,height:6,borderRadius:"50%",background:"#22c55e"}}/>
+                  <span style={{fontSize:".62rem",color:"#22c55e",letterSpacing:".08em",fontFamily:"'JetBrains Mono',monospace"}}>ONLINE</span>
                 </div>
               </div>
             </div>
-            <button onClick={() => setOpen(false)} style={{ background:"none", border:"none", color:"rgba(255,255,255,.35)", cursor:"pointer", fontSize:"1.2rem", lineHeight:1, padding:4 }}>✕</button>
+            <button onClick={()=>setOpen(false)} style={{background:"none",border:"none",color:"rgba(255,255,255,.35)",cursor:"pointer",fontSize:"1.2rem",lineHeight:1,padding:4}}>✕</button>
           </div>
-          <div className="af-chat-msgs" ref={msgsRef}>
-            {msgs.map((m, i) => m.role === "bot"
-              ? <div key={i} className="af-msg-bot"><div className="af-av">AF</div><div className="af-bubble-bot">{m.text}</div></div>
+          <div className="af-chat-msgs" ref={ref}>
+            {msgs.map((m,i) => m.role==="bot"
+              ? <div key={i} className="af-msg-bot"><div className="af-av">P</div><div className="af-bubble-bot">{m.text}</div></div>
               : <div key={i} className="af-msg-user"><div className="af-bubble-user">{m.text}</div></div>
             )}
-            {loading && <div className="af-msg-bot"><div className="af-av">AF</div><div style={{ background:"rgba(255,255,255,.07)", border:"1px solid rgba(255,255,255,.08)", borderRadius:12, padding:"10px 16px", display:"flex", gap:4 }}><div className="af-dot"/><div className="af-dot"/><div className="af-dot"/></div></div>}
+            {loading && <div className="af-msg-bot"><div className="af-av">P</div><div style={{background:"rgba(255,255,255,.07)",border:"1px solid rgba(255,255,255,.08)",borderRadius:12,padding:"10px 16px",display:"flex",gap:4}}><div className="af-dot"/><div className="af-dot"/><div className="af-dot"/></div></div>}
           </div>
-          {msgs.length === 1 && (
-            <div style={{ padding:"0 14px 10px", display:"flex", flexWrap:"wrap", gap:6 }}>
-              {QUICK.map(q => <button key={q} onClick={() => send(q)} style={{ background:"rgba(255,77,87,.1)", border:"1px solid rgba(255,77,87,.25)", borderRadius:100, color:"#FF6B74", fontSize:11, padding:"5px 10px", cursor:"pointer", fontFamily:"'Plus Jakarta Sans',sans-serif" }}>{q}</button>)}
+          {msgs.length===1 && (
+            <div style={{padding:"0 14px 10px",display:"flex",flexWrap:"wrap",gap:6}}>
+              {QUICK.map(q => <button key={q} onClick={()=>send(q)} style={{background:"rgba(59,123,255,.1)",border:"1px solid rgba(59,123,255,.25)",borderRadius:100,color:"var(--blue2)",fontSize:11,padding:"5px 10px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>{q}</button>)}
             </div>
           )}
           <div className="af-chat-inp">
-            <input className="af-inp" type="text" placeholder="Ask anything about AccountaFit..." value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === "Enter" && send()} />
-            <button className="af-send" onClick={() => send()} disabled={loading}>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            <input className="af-inp" type="text" placeholder={t.chatPH} value={inp} onChange={e=>setInp(e.target.value)} onKeyDown={e=>e.key==="Enter"&&send()}/>
+            <button className="af-send" onClick={()=>send()} disabled={loading}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
             </button>
           </div>
         </div>
       )}
-      <button className={`af-chat-btn${open ? " open" : ""}`} onClick={() => setOpen(o => !o)}>
+      <button className={`af-chat-btn${open?" open":""}`} onClick={()=>setOpen(o=>!o)}>
         {open
           ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           : <>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" strokeWidth="2" strokeLinecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              <span style={{ color:"rgba(255,255,255,.9)", fontFamily:"'JetBrains Mono',monospace", fontWeight:500, fontSize:".78rem", letterSpacing:".1em", textTransform:"uppercase" }}>Ask AI</span>
-              <div style={{ width:7, height:7, borderRadius:"50%", background:"#22c55e", boxShadow:"0 0 6px rgba(34,197,94,.6)" }}/>
+              <span style={{color:"rgba(255,255,255,.9)",fontFamily:"'JetBrains Mono',monospace",fontWeight:500,fontSize:".76rem",letterSpacing:".1em",textTransform:"uppercase"}}>Ask PACT AI</span>
+              <div style={{width:7,height:7,borderRadius:"50%",background:"#22c55e",boxShadow:"0 0 6px rgba(34,197,94,.6)"}}/>
             </>
         }
       </button>
@@ -511,80 +422,128 @@ function Chatbot() {
 }
 
 /* ─────────────────────────────────────────────
+   WAITLIST FORM
+───────────────────────────────────────────── */
+function WaitlistForm({ placeholder = "Enter your email", btnText = "Join the Waitlist", fullWidth = false }) {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState("idle");
+
+  const submit = async (e) => {
+    e.preventDefault();
+    if (!email || status === "loading") return;
+    setStatus("loading");
+    try {
+      const res = await fetch("https://formspree.io/f/mnjwagoo", {
+        method:"POST",
+        headers:{"Content-Type":"application/json","Accept":"application/json"},
+        body: JSON.stringify({ email, _subject:"PACT Waitlist Signup", message:`New PACT waitlist signup: ${email}` }),
+      });
+      setStatus(res.ok ? "success" : "error");
+    } catch { setStatus("error"); }
+  };
+
+  if (status === "success") return (
+    <div style={{background:"rgba(59,123,255,.1)",border:"1px solid rgba(59,123,255,.3)",borderRadius:100,padding:"16px 32px",textAlign:"center",fontFamily:"'JetBrains Mono',monospace",fontSize:".76rem",letterSpacing:".1em",color:"#93C5FD"}}>
+      YOU'RE ON THE LIST — WE'LL BE IN TOUCH
+    </div>
+  );
+
+  return (
+    <form onSubmit={submit} style={{display:"flex",gap:12,flexWrap:"wrap",width:fullWidth?"100%":undefined}}>
+      <input type="email" required value={email} onChange={e=>setEmail(e.target.value)} placeholder={placeholder}
+        style={{flex:"1 1 240px",minWidth:200,background:"rgba(255,255,255,.06)",border:"1px solid rgba(255,255,255,.12)",borderRadius:100,color:"var(--frost)",fontFamily:"'Inter',sans-serif",fontSize:14,padding:"14px 22px",outline:"none",transition:"border-color .2s"}}
+        onFocus={e=>e.target.style.borderColor="rgba(59,123,255,.5)"} onBlur={e=>e.target.style.borderColor="rgba(255,255,255,.12)"}/>
+      <button type="submit" className="btn-primary" style={{opacity:status==="loading"?.6:1}}>
+        {status==="loading" ? "JOINING..." : btnText}
+      </button>
+    </form>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   FAQ ROW
+───────────────────────────────────────────── */
+function FaqRow({ q, a }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={`faq-row${open?" open":""}`}>
+      <button className="faq-btn" onClick={()=>setOpen(o=>!o)}>
+        <span className="faq-q">{q}</span>
+        <span className="faq-icon" style={{transform:open?"rotate(45deg)":"none",display:"inline-block"}}>+</span>
+      </button>
+      {open && <div className="faq-a">{a}</div>}
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   LANG SWITCHER
+───────────────────────────────────────────── */
+function LangSwitcher({ lang, setLang }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+  useEffect(() => {
+    const h = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+    document.addEventListener("mousedown", h);
+    return () => document.removeEventListener("mousedown", h);
+  }, []);
+  return (
+    <div ref={ref} style={{position:"relative"}}>
+      <button onClick={()=>setOpen(o=>!o)} style={{display:"flex",alignItems:"center",gap:6,background:"var(--glass-1)",border:"1px solid var(--glass-border)",borderRadius:100,padding:"7px 14px",cursor:"pointer",fontFamily:"'JetBrains Mono',monospace",fontSize:".65rem",letterSpacing:".08em",color:"var(--gray)",transition:"all .2s",backdropFilter:"var(--blur-sm)"}}>
+        <span>{LANGS[lang].flag}</span><span>{LANGS[lang].name}</span>
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" style={{transform:open?"rotate(180deg)":"none",transition:"transform .2s"}}><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      {open && (
+        <div style={{position:"absolute",top:"calc(100% + 8px)",right:0,background:"rgba(7,11,22,.97)",border:"1px solid rgba(255,255,255,.1)",borderRadius:var_r_md,padding:"6px 0",minWidth:170,zIndex:999,boxShadow:"0 20px 50px rgba(0,0,0,.7)",backdropFilter:"blur(24px)"}}>
+          {Object.entries(LANGS).map(([code,{name,flag}]) => (
+            <button key={code} onClick={()=>{setLang(code);setOpen(false);}} style={{display:"flex",alignItems:"center",gap:10,width:"100%",background:code===lang?"rgba(59,123,255,.12)":"none",border:"none",cursor:"pointer",padding:"9px 16px",color:code===lang?"var(--blue2)":"var(--gray)",fontFamily:"'Inter',sans-serif",fontSize:".85rem",transition:"background .15s"}}>
+              <span style={{fontSize:"1rem"}}>{flag}</span>{name}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+const var_r_md = "var(--r-md)";
+
+/* ─────────────────────────────────────────────
    NAV
 ───────────────────────────────────────────── */
-function Nav({ lang, setLang, t, onCTA }) {
-  const [langOpen, setLangOpen] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+function Nav({ lang, setLang, t, onWaitlist }) {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", h); return () => window.removeEventListener("scroll", h);
   }, []);
-
+  const scrollTo = (id) => { document.getElementById(id)?.scrollIntoView({behavior:"smooth"}); setMenuOpen(false); };
+  const IDS = ["how","features","programs","community","faq"];
   return (
-    <nav style={{
-      position:"fixed", top:0, left:0, right:0, zIndex:500, padding:"0 5%",
-      background: scrolled ? "rgba(8,15,30,.88)" : "transparent",
-      backdropFilter: scrolled ? "blur(28px)" : "none",
-      WebkitBackdropFilter: scrolled ? "blur(28px)" : "none",
-      borderBottom: scrolled ? "1px solid rgba(255,255,255,.07)" : "none",
-      transition: "all .35s ease"
-    }}>
-      <div style={{ maxWidth:1200, margin:"0 auto", display:"flex", alignItems:"center", justifyContent:"space-between", height:70 }}>
+    <nav style={{position:"fixed",top:0,left:0,right:0,zIndex:500,padding:"0 5%",background:scrolled?"rgba(5,9,15,.9)":"transparent",backdropFilter:scrolled?"blur(28px)":"none",WebkitBackdropFilter:scrolled?"blur(28px)":"none",borderBottom:scrolled?"1px solid rgba(255,255,255,.07)":"none",transition:"all .35s ease"}}>
+      <div style={{maxWidth:1200,margin:"0 auto",display:"flex",alignItems:"center",justifyContent:"space-between",height:70}}>
         {/* Logo */}
-        <a href="/" style={{ display:"flex", alignItems:"center", gap:10, flexShrink:0 }}>
-          <img src="/af-mark.png" alt="AccountaFit mark" style={{ height:32, width:"auto", objectFit:"contain" }} />
+        <a href="/" style={{display:"flex",alignItems:"center",flexShrink:0}}>
+          <img src="/images/pact-logo-full.webp" alt="PACT" style={{height:40,width:"auto",filter:"drop-shadow(0 0 10px rgba(59,123,255,.45))"}}/>
         </a>
-
         {/* Desktop links */}
-        <div className="hide-m" style={{ display:"flex", alignItems:"center", gap:36 }}>
-          {t.nav.map((label, i) => {
-            const hrefs = ["#how-it-works", "#features", "#faq"];
-            return <a key={i} href={hrefs[i]} className="nav-link">{label}</a>;
-          })}
-          <button className="btn-primary" onClick={onCTA} style={{ padding:"10px 26px", fontSize:".75rem" }}>{t.joinWaitlist}</button>
-          {/* Language */}
-          <div style={{ position:"relative" }}>
-            <button onClick={() => setLangOpen(o => !o)} style={{ display:"flex", alignItems:"center", gap:5, background:"none", border:"none", cursor:"pointer", color:"var(--coral)", fontFamily:"'JetBrains Mono',monospace", fontSize:".7rem", letterSpacing:".1em" }}>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--coral)" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-              {LANGS[lang]?.name}
-            </button>
-            {langOpen && (
-              <div style={{ position:"absolute", top:"calc(100% + 12px)", right:0, background:"rgba(10,18,36,.97)", border:"1px solid rgba(255,255,255,.1)", borderRadius:14, padding:"6px 0", minWidth:160, zIndex:999, boxShadow:"0 20px 56px rgba(0,0,0,.7)", backdropFilter:"blur(24px)" }}>
-                {Object.entries(LANGS).map(([code, { name, flag }]) => (
-                  <button key={code} onClick={() => { setLang(code); setLangOpen(false); }} style={{ display:"flex", alignItems:"center", gap:10, width:"100%", background: code===lang ? "rgba(255,77,87,.1)" : "none", border:"none", cursor:"pointer", padding:"9px 16px", color: code===lang ? "var(--coral)" : "var(--gray)", fontFamily:"'Plus Jakarta Sans',sans-serif", fontSize:".88rem" }}>
-                    <span>{flag}</span>{name}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
+        <div className="hide-m" style={{display:"flex",alignItems:"center",gap:32}}>
+          {t.nav.map((label,i) => <button key={i} className="nav-link" onClick={()=>scrollTo(IDS[i])}>{label}</button>)}
         </div>
-
-        {/* Mobile hamburger */}
-        <div className="hide-d" style={{ display:"flex", alignItems:"center", gap:12 }}>
-          <button onClick={() => setMenuOpen(o => !o)} style={{ background:"none", border:"none", color:"var(--frost)", fontSize:"1.5rem", cursor:"pointer", lineHeight:1, padding:4 }}>
-            {menuOpen ? "✕" : "☰"}
-          </button>
+        <div className="hide-m" style={{display:"flex",alignItems:"center",gap:14}}>
+          <LangSwitcher lang={lang} setLang={setLang}/>
+          <button className="btn-primary" onClick={onWaitlist} style={{padding:"10px 24px",fontSize:".72rem"}}>{t.joinWaitlist}</button>
+        </div>
+        {/* Mobile */}
+        <div className="hide-d" style={{display:"flex",alignItems:"center",gap:12}}>
+          <button onClick={()=>setMenuOpen(o=>!o)} style={{background:"none",border:"none",color:"var(--frost)",fontSize:"1.5rem",cursor:"pointer",lineHeight:1,padding:4}}>{menuOpen?"✕":"☰"}</button>
         </div>
       </div>
-
-      {/* Mobile menu */}
       {menuOpen && (
-        <div className="hide-d" style={{ background:"rgba(8,15,30,.97)", backdropFilter:"blur(28px)", borderTop:"1px solid rgba(255,255,255,.07)", padding:"24px 5% 32px", display:"flex", flexDirection:"column", gap:20 }}>
-          {t.nav.map((label, i) => {
-            const hrefs = ["#how-it-works", "#features", "#faq"];
-            return <a key={i} href={hrefs[i]} onClick={() => setMenuOpen(false)} style={{ color:"var(--frost)", fontFamily:"'Plus Jakarta Sans',sans-serif", fontSize:"1.1rem" }}>{label}</a>;
-          })}
-          <button className="btn-primary" onClick={() => { onCTA(); setMenuOpen(false); }} style={{ width:"100%" }}>{t.joinWaitlist}</button>
-          <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:8 }}>
-            {Object.entries(LANGS).map(([code, { name, flag }]) => (
-              <button key={code} onClick={() => { setLang(code); setMenuOpen(false); }} style={{ display:"flex", alignItems:"center", gap:8, background: code===lang ? "rgba(255,77,87,.1)" : "rgba(255,255,255,.04)", border:`1px solid ${code===lang ? "rgba(255,77,87,.3)" : "rgba(255,255,255,.08)"}`, borderRadius:8, padding:"9px 12px", cursor:"pointer", color: code===lang ? "var(--coral)" : "var(--gray)", fontFamily:"'Plus Jakarta Sans',sans-serif", fontSize:".84rem" }}>
-                <span>{flag}</span>{name}
-              </button>
-            ))}
-          </div>
+        <div className="hide-d" style={{background:"rgba(5,9,15,.98)",backdropFilter:"blur(28px)",borderTop:"1px solid rgba(255,255,255,.07)",padding:"24px 5% 32px",display:"flex",flexDirection:"column",gap:18}}>
+          {t.nav.map((label,i) => <button key={i} onClick={()=>scrollTo(IDS[i])} style={{background:"none",border:"none",color:"var(--frost)",fontFamily:"'Inter',sans-serif",fontSize:"1.05rem",textAlign:"left",cursor:"pointer",padding:"4px 0"}}>{label}</button>)}
+          <button className="btn-primary" onClick={()=>{onWaitlist();setMenuOpen(false);}} style={{width:"100%"}}>{t.joinWaitlist}</button>
+          <LangSwitcher lang={lang} setLang={setLang}/>
         </div>
       )}
     </nav>
@@ -594,300 +553,143 @@ function Nav({ lang, setLang, t, onCTA }) {
 /* ─────────────────────────────────────────────
    HERO
 ───────────────────────────────────────────── */
-function Hero({ onCTA, t }) {
+function Hero({ t, onWaitlist }) {
+  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({behavior:"smooth"});
   return (
-    <section style={{ minHeight:"92vh", display:"flex", alignItems:"center", position:"relative", overflow:"hidden", paddingTop:70 }}>
-      {/* Subtle ring decorations */}
-      <div style={{ position:"absolute", top:"50%", left:"30%", transform:"translate(-50%,-50%)", width:"90vw", height:"90vw", maxWidth:900, maxHeight:900, borderRadius:"50%", border:"1px solid rgba(255,255,255,.03)", pointerEvents:"none" }}/>
-      <div style={{ position:"absolute", top:"50%", left:"30%", transform:"translate(-50%,-50%)", width:"55vw", height:"55vw", maxWidth:580, maxHeight:580, borderRadius:"50%", border:"1px solid rgba(100,150,255,.05)", pointerEvents:"none" }}/>
+    <section style={{minHeight:"100vh",display:"flex",alignItems:"center",position:"relative",overflow:"hidden",paddingTop:70}}>
+      {/* Ring decorations */}
+      <div style={{position:"absolute",top:"50%",left:"40%",transform:"translate(-50%,-50%)",width:"90vw",height:"90vw",maxWidth:900,maxHeight:900,borderRadius:"50%",border:"1px solid rgba(59,123,255,.06)",pointerEvents:"none"}}/>
+      <div style={{position:"absolute",top:"50%",left:"40%",transform:"translate(-50%,-50%)",width:"58vw",height:"58vw",maxWidth:600,maxHeight:600,borderRadius:"50%",border:"1px solid rgba(0,212,255,.05)",pointerEvents:"none"}}/>
 
-      {/* RED GLOW behind the headline — the signature effect */}
-      <div style={{ position:"absolute", top:"38%", left:"4%", width:"44%", height:"55%", background:"radial-gradient(ellipse 80% 70% at 40% 50%, rgba(255,50,60,.28) 0%, rgba(255,50,60,.10) 45%, transparent 75%)", pointerEvents:"none", zIndex:1, filter:"blur(8px)" }}/>
-
-      <div className="wrap" style={{ position:"relative", zIndex:2, width:"100%", paddingTop:48, paddingBottom:20 }}>
-
-        {/* Eyebrow pill */}
-        <div style={{ marginBottom:24 }}>
-          <div style={{ display:"inline-flex", alignItems:"center", gap:10, background:"rgba(255,77,87,.1)", border:"1px solid rgba(255,77,87,.22)", borderRadius:100, padding:"7px 18px", backdropFilter:"blur(12px)" }}>
-            <div style={{ width:6, height:6, borderRadius:"50%", background:"var(--coral)", animation:"glow 2s ease-in-out infinite" }}/>
-            <span className="mono" style={{ fontSize:".63rem", letterSpacing:".2em", color:"var(--coral)" }}>{t.heroEyebrow}</span>
-          </div>
-        </div>
-
-        {/* ── DESKTOP: two-col grid — headline+copy left, beta card right ── */}
-        <div className="hide-m" style={{ display:"grid", gridTemplateColumns:"minmax(0,1fr) 420px", gap:48, alignItems:"flex-start" }}>
-          {/* Left column */}
-          <div>
-            {/* Headline with red glow context */}
-            <h1 className="bebas" style={{ fontSize:"clamp(3.6rem,7.5vw,6.2rem)", lineHeight:.88, letterSpacing:".04em", color:"var(--frost)", marginBottom:28, maxWidth:580 }}>
-              {t.heroH1a}<br/>
-              <span style={{ color:"var(--coral)" }}>{t.heroH1b}</span><br/>
-              {t.heroH1c}
-            </h1>
-            <p style={{ fontSize:"1rem", color:"var(--gray)", lineHeight:1.82, marginBottom:28, maxWidth:420 }}>{t.heroSub}</p>
-            <p className="mono" style={{ fontSize:".6rem", color:"var(--gray3)", letterSpacing:".1em", marginBottom:36 }}>{t.heroSub2}</p>
-            {/* Stats strip */}
-            <div style={{ display:"flex", gap:0, paddingTop:28, borderTop:"1px solid rgba(255,255,255,.07)" }}>
-              {[[t.stat1v,t.stat1l],[t.stat2v,t.stat2l],[t.stat3v,t.stat3l]].map(([v,l],i) => (
-                <div key={v} style={{ flex:1, paddingRight:i<2?20:0, paddingLeft:i>0?20:0, borderRight:i<2?"1px solid rgba(255,255,255,.07)":"none" }}>
-                  <div className="bebas" style={{ fontSize:"2.2rem", color:"var(--coral)", letterSpacing:".04em", lineHeight:1 }}>{v}</div>
-                  <div className="mono" style={{ fontSize:".56rem", color:"var(--gray2)", letterSpacing:".1em", textTransform:"uppercase", marginTop:6, lineHeight:1.5 }}>{l}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Right column — beta card, fixed width, aligned to top of headline */}
-          <div style={{ position:"relative", marginTop:4 }}>
-            <div className="glass-panel" style={{ padding:"24px 22px", borderRadius:22, width:"100%", maxWidth:420 }}>
-              {/* Header row */}
-              <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:20, paddingBottom:16, borderBottom:"1px solid rgba(255,255,255,.07)" }}>
-                <img src="/app-icon.png" alt="AccountaFit" style={{ width:40, height:40, borderRadius:10, objectFit:"contain", flexShrink:0 }}/>
-                <div style={{ flex:1, minWidth:0 }}>
-                  <div style={{ fontWeight:700, fontSize:".92rem", color:"var(--frost)", marginBottom:2, fontFamily:"'Plus Jakarta Sans',sans-serif" }}>AccountaFit</div>
-                  <div className="mono" style={{ fontSize:".58rem", color:"var(--coral)", letterSpacing:".08em" }}>COMING SOON · iOS & ANDROID</div>
-                </div>
-                <div style={{ display:"flex", alignItems:"center", gap:5, background:"rgba(34,197,94,.1)", border:"1px solid rgba(34,197,94,.22)", borderRadius:100, padding:"4px 10px", flexShrink:0 }}>
-                  <div style={{ width:5, height:5, borderRadius:"50%", background:"#22c55e" }}/>
-                  <span className="mono" style={{ fontSize:".54rem", color:"#22c55e", letterSpacing:".08em" }}>LIVE BETA</span>
-                </div>
+      <div className="wrap" style={{position:"relative",zIndex:2,width:"100%",paddingTop:40,paddingBottom:60}}>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 400px",gap:56,alignItems:"center"}} className="two-col">
+          {/* Left */}
+          <div style={{animation:"fadeUp .8s ease both"}}>
+            {/* Badge */}
+            <div style={{marginBottom:22}}>
+              <div style={{display:"inline-flex",alignItems:"center",gap:10,background:"rgba(59,123,255,.1)",border:"1px solid rgba(59,123,255,.22)",borderRadius:100,padding:"6px 18px"}}>
+                <div style={{width:6,height:6,borderRadius:"50%",background:"var(--cyan)",animation:"glow 2s ease infinite"}}/>
+                <span className="mono" style={{fontSize:".62rem",letterSpacing:".2em",color:"var(--cyan)"}}>{t.heroBadge}</span>
               </div>
-              {/* Feature rows */}
-              {[
-                { icon: ICONS.match,  label: "Smart Matching",      sub: "Matched in 48 hours" },
-                { icon: ICONS.streak, label: "Shared Streaks",      sub: "Both win or both lose" },
-                { icon: ICONS.chat,   label: "Accountability Chat", sub: "Direct partner line" },
-                { icon: ICONS.ai,     label: "AI Workout Plans",    sub: "Built for your goals" },
-              ].map((item, i) => (
-                <div key={i} style={{ display:"flex", alignItems:"center", gap:12, padding:"11px 0", borderBottom:i<3?"1px solid rgba(255,255,255,.05)":"none" }}>
-                  <div style={{ width:34, height:34, borderRadius:9, background:"rgba(255,77,87,.1)", border:"1px solid rgba(255,77,87,.18)", display:"flex", alignItems:"center", justifyContent:"center", color:"var(--coral)", flexShrink:0 }}>
-                    {item.icon}
-                  </div>
-                  <div style={{ flex:1, minWidth:0 }}>
-                    <div style={{ fontWeight:600, fontSize:".85rem", color:"var(--frost)", lineHeight:1.2 }}>{item.label}</div>
-                    <div style={{ fontSize:".73rem", color:"var(--gray2)" }}>{item.sub}</div>
-                  </div>
-                  <div style={{ width:6, height:6, borderRadius:"50%", background:"rgba(34,197,94,.65)", flexShrink:0 }}/>
+            </div>
+            {/* Headline */}
+            <h1 className="hero-h1 raj" style={{fontSize:"clamp(3.8rem,8.5vw,7rem)",fontWeight:700,lineHeight:.92,letterSpacing:".02em",marginBottom:24}}>
+              <span style={{display:"block",color:"var(--frost)"}}>{t.heroH1a}</span>
+              <span style={{display:"block",background:"linear-gradient(135deg,#3B7BFF 0%,#00D4FF 100%)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",backgroundClip:"text"}}>{t.heroH1b}</span>
+              <span style={{display:"block",color:"var(--frost)"}}>{t.heroH1c}</span>
+            </h1>
+            <p style={{fontSize:"1.05rem",color:"var(--gray)",lineHeight:1.8,maxWidth:480,marginBottom:34}}>{t.heroSub}</p>
+            <div className="hero-btns" style={{display:"flex",gap:14,flexWrap:"wrap",marginBottom:40}}>
+              <button className="btn-primary" onClick={onWaitlist}>{t.heroCTA}</button>
+              <button className="btn-ghost" onClick={()=>scrollTo("how")}>{t.heroGhost}</button>
+            </div>
+            {/* Stats */}
+            <div style={{display:"flex",gap:12,flexWrap:"wrap"}}>
+              {[[t.stat1v,t.stat1l],[t.stat2v,t.stat2l],[t.stat3v,t.stat3l]].map(([v,l]) => (
+                <div key={l} className="stat-pill">
+                  <span className="raj" style={{fontWeight:700,fontSize:"1.9rem",background:"linear-gradient(135deg,#3B7BFF,#00D4FF)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",backgroundClip:"text",lineHeight:1}}>{v}</span>
+                  <span className="mono" style={{fontSize:".6rem",color:"var(--gray2)",letterSpacing:".08em",textAlign:"center"}}>{l}</span>
                 </div>
               ))}
-              {/* CTA button — functional */}
-              <button onClick={onCTA}
-                style={{ marginTop:18, padding:"14px 18px", background:"rgba(255,77,87,.08)", border:"1px solid rgba(255,77,87,.18)", borderRadius:11, display:"flex", alignItems:"center", justifyContent:"space-between", width:"100%", cursor:"pointer", transition:"background .2s" }}
-                onMouseEnter={e => e.currentTarget.style.background="rgba(255,77,87,.18)"}
-                onMouseLeave={e => e.currentTarget.style.background="rgba(255,77,87,.08)"}>
-                <div>
-                  <div style={{ fontWeight:700, fontSize:".85rem", color:"var(--frost)", textAlign:"left" }}>Join the Waitlist</div>
-                  <div style={{ fontSize:".72rem", color:"var(--gray2)", textAlign:"left" }}>Priority access at launch</div>
-                </div>
-                <div style={{ width:30, height:30, borderRadius:"50%", background:"var(--coral)", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </div>
-              </button>
             </div>
           </div>
-        </div>
 
-        {/* ── MOBILE: stacked single column ── */}
-        <div className="hide-d">
-          {/* Headline */}
-          <h1 className="bebas" style={{ fontSize:"clamp(3.4rem,16vw,5rem)", lineHeight:.88, letterSpacing:".04em", color:"var(--frost)", marginBottom:20 }}>
-            {t.heroH1a}<br/>
-            <span style={{ color:"var(--coral)" }}>{t.heroH1b}</span><br/>
-            {t.heroH1c}
-          </h1>
-          <p style={{ fontSize:"1rem", color:"var(--gray)", lineHeight:1.78, marginBottom:20 }}>{t.heroSub}</p>
-          {/* Mobile CTA */}
-          <button className="btn-primary" onClick={onCTA} style={{ fontSize:".82rem", width:"100%", marginBottom:16 }}>{t.heroCTA} →</button>
-          <p className="mono" style={{ fontSize:".6rem", color:"var(--gray3)", letterSpacing:".1em", marginBottom:28 }}>{t.heroSub2}</p>
-          {/* Stats */}
-          <div style={{ display:"flex", gap:0, paddingTop:24, borderTop:"1px solid rgba(255,255,255,.07)", marginBottom:32 }}>
-            {[[t.stat1v,t.stat1l],[t.stat2v,t.stat2l],[t.stat3v,t.stat3l]].map(([v,l],i) => (
-              <div key={v} style={{ flex:1, paddingRight:i<2?12:0, paddingLeft:i>0?12:0, borderRight:i<2?"1px solid rgba(255,255,255,.07)":"none" }}>
-                <div className="bebas" style={{ fontSize:"1.7rem", color:"var(--coral)", letterSpacing:".04em", lineHeight:1 }}>{v}</div>
-                <div className="mono" style={{ fontSize:".5rem", color:"var(--gray2)", letterSpacing:".07em", textTransform:"uppercase", marginTop:5, lineHeight:1.4 }}>{l}</div>
+          {/* Right — app preview cards */}
+          <div className="hide-m" style={{display:"flex",flexDirection:"column",gap:14}}>
+            {[
+              {tag:"MATCH", label:"Jordan, 29", sub:"Denver · 15 mi away · Powerlifting", accent:"var(--blue2)", bg:"rgba(59,123,255,.12)", border:"rgba(59,123,255,.25)"},
+              {tag:"WOD",   label:"King/Queen of the WOD", sub:"Iron Hour · For Time · Today", accent:"var(--cyan)", bg:"rgba(0,212,255,.08)", border:"rgba(0,212,255,.2)"},
+              {tag:"AI",    label:"12-Week CrossFit Program", sub:"Generating with AI coach...", accent:"#A78BFA", bg:"rgba(124,92,252,.1)", border:"rgba(124,92,252,.22)"},
+            ].map((card,i) => (
+              <div key={i} className="glass-card" style={{padding:"18px 20px",display:"flex",alignItems:"center",gap:16,animation:`fadeUp .6s ease ${i*.12}s both`,border:`1px solid ${card.border}`}}>
+                <div style={{width:44,height:44,borderRadius:12,background:card.bg,border:`1px solid ${card.border}`,display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'JetBrains Mono',monospace",fontSize:".52rem",color:card.accent,flexShrink:0,letterSpacing:".08em",fontWeight:500}}>{card.tag}</div>
+                <div style={{flex:1,minWidth:0}}>
+                  <div className="raj" style={{fontWeight:700,fontSize:"1rem",color:"var(--frost)",marginBottom:3,lineHeight:1.2}}>{card.label}</div>
+                  <div style={{fontSize:".75rem",color:"var(--gray2)"}}>{card.sub}</div>
+                </div>
+                <div style={{width:8,height:8,borderRadius:"50%",background:card.accent,animation:"glow 2s ease infinite",flexShrink:0}}/>
               </div>
             ))}
-          </div>
-          {/* Mobile beta card — compact, centered, part of hero */}
-          <div style={{ maxWidth:360, margin:"0 auto" }}>
-            <div className="glass-panel" style={{ padding:"20px 18px", borderRadius:18 }}>
-              <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:16, paddingBottom:14, borderBottom:"1px solid rgba(255,255,255,.07)" }}>
-                <img src="/app-icon.png" alt="AccountaFit" style={{ width:36, height:36, borderRadius:9, objectFit:"contain", flexShrink:0 }}/>
-                <div style={{ flex:1 }}>
-                  <div style={{ fontWeight:700, fontSize:".88rem", color:"var(--frost)", fontFamily:"'Plus Jakarta Sans',sans-serif" }}>AccountaFit</div>
-                  <div className="mono" style={{ fontSize:".54rem", color:"var(--coral)", letterSpacing:".08em" }}>COMING SOON · iOS & ANDROID</div>
-                </div>
-                <div style={{ display:"flex", alignItems:"center", gap:4, background:"rgba(34,197,94,.1)", border:"1px solid rgba(34,197,94,.2)", borderRadius:100, padding:"3px 8px" }}>
-                  <div style={{ width:4, height:4, borderRadius:"50%", background:"#22c55e" }}/>
-                  <span className="mono" style={{ fontSize:".5rem", color:"#22c55e", letterSpacing:".07em" }}>BETA</span>
-                </div>
-              </div>
-              {[
-                { icon: ICONS.match,  label: "Smart Matching",      sub: "48hr match time" },
-                { icon: ICONS.streak, label: "Shared Streaks",      sub: "Both win or lose" },
-                { icon: ICONS.chat,   label: "Accountability Chat", sub: "Direct line" },
-                { icon: ICONS.ai,     label: "AI Workouts",         sub: "Your goals" },
-              ].map((item, i) => (
-                <div key={i} style={{ display:"flex", alignItems:"center", gap:10, padding:"9px 0", borderBottom:i<3?"1px solid rgba(255,255,255,.05)":"none" }}>
-                  <div style={{ width:30, height:30, borderRadius:8, background:"rgba(255,77,87,.1)", border:"1px solid rgba(255,77,87,.16)", display:"flex", alignItems:"center", justifyContent:"center", color:"var(--coral)", flexShrink:0 }}>
-                    {item.icon}
-                  </div>
-                  <div style={{ flex:1 }}>
-                    <div style={{ fontWeight:600, fontSize:".8rem", color:"var(--frost)" }}>{item.label}</div>
-                    <div style={{ fontSize:".68rem", color:"var(--gray2)" }}>{item.sub}</div>
-                  </div>
-                  <div style={{ width:5, height:5, borderRadius:"50%", background:"rgba(34,197,94,.65)", flexShrink:0 }}/>
+            {/* Mini stat strip */}
+            <div className="glass-card" style={{padding:"14px 20px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+              {[["MATCH","Active Pacts"],["200+","Workouts"],["12","Sports"]].map(([v,l]) => (
+                <div key={l} style={{textAlign:"center"}}>
+                  <div className="raj" style={{fontWeight:700,fontSize:"1.25rem",color:"var(--blue2)"}}>{v}</div>
+                  <div className="mono" style={{fontSize:".56rem",color:"var(--gray2)",letterSpacing:".08em"}}>{l}</div>
                 </div>
               ))}
-              <button onClick={onCTA}
-                style={{ marginTop:14, padding:"12px 16px", background:"rgba(255,77,87,.1)", border:"1px solid rgba(255,77,87,.2)", borderRadius:10, display:"flex", alignItems:"center", justifyContent:"space-between", width:"100%", cursor:"pointer" }}>
-                <div>
-                  <div style={{ fontWeight:700, fontSize:".82rem", color:"var(--frost)", textAlign:"left" }}>Join the Waitlist</div>
-                  <div style={{ fontSize:".68rem", color:"var(--gray2)", textAlign:"left" }}>Priority access at launch</div>
-                </div>
-                <div style={{ width:26, height:26, borderRadius:"50%", background:"var(--coral)", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </div>
-              </button>
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );
 }
 
 /* ─────────────────────────────────────────────
-   WHAT IS IT
+   MARQUEE
 ───────────────────────────────────────────── */
-function WhatIsIt({ t, onCTA }) {
+function Marquee() {
+  const items = ["Partner Matching","AI Programs","200+ Workouts","Daily Leaderboard","Communities","Goals & Events","Personal Records","Schedule Tracking","12+ Sports","Make Your Pact"];
   return (
-    <>
-      <div className="sec-divider"/>
-      <section className="sec">
-        <div className="wrap">
-          <div style={{ textAlign:"center", marginBottom:72 }}>
-            <div className="eyebrow" style={{ justifyContent:"center", display:"flex" }}>{t.whatEyebrow}</div>
-            <h2 className="bebas" style={{ fontSize:"clamp(2.8rem,5.5vw,4.8rem)", lineHeight:.9, color:"var(--frost)", maxWidth:760, margin:"0 auto 24px" }}>
-              {t.whatH.split("Fitness Accountability").map((part, i) => (
-                <span key={i}>{i > 0 && <span style={{ color:"var(--coral)" }}>Fitness Accountability</span>}{part}</span>
-              ))}
-            </h2>
-            <p style={{ fontSize:"1.02rem", color:"var(--gray)", lineHeight:1.85, maxWidth:560, margin:"0 auto" }}>
-              {t.whatSub} <em style={{ color:"var(--frost)", fontStyle:"italic" }}>{t.whatSub2}</em>
-            </p>
+    <div style={{overflow:"hidden",padding:"24px 0",borderTop:"1px solid rgba(255,255,255,.06)",borderBottom:"1px solid rgba(255,255,255,.06)"}}>
+      <div className="marquee-track">
+        {[...items,...items].map((item,i) => (
+          <div key={i} className={`marquee-item${i%5===1?" hi":""}`}>
+            <span>{item}</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </div>
-
-          {/* 3 cards */}
-          <div className="three-col" style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:3, marginBottom:56 }}>
-            {t.whatSteps.map((s, i) => (
-              <div key={i} className="glass-card" style={{ padding:"40px 32px", borderRadius: i===0 ? "20px 4px 4px 20px" : i===2 ? "4px 20px 20px 4px" : "4px" }}>
-                <div className="bebas" style={{ fontSize:"4rem", color:"rgba(255,77,87,.45)", lineHeight:1, marginBottom:16, letterSpacing:".04em" }}>{s.n}</div>
-                <h3 className="bebas" style={{ fontSize:"1.6rem", color:"var(--frost)", marginBottom:14, letterSpacing:".04em" }}>{s.title}</h3>
-                <p style={{ fontSize:".9rem", color:"var(--gray)", lineHeight:1.78 }}>{s.body}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Coming soon banner */}
-          <div className="glass-panel" style={{ padding:"36px 44px", display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:24, borderRadius:20 }}>
-            <div>
-              <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:10 }}>
-                <div style={{ width:7, height:7, borderRadius:"50%", background:"var(--coral)", animation:"glow 2s ease-in-out infinite" }}/>
-                <span className="mono" style={{ fontSize:".65rem", color:"var(--coral)", letterSpacing:".2em" }}>{t.comingSoon}</span>
-              </div>
-              <h3 className="bebas" style={{ fontSize:"clamp(1.6rem,3vw,2.4rem)", color:"var(--frost)", marginBottom:10, letterSpacing:".04em" }}>{t.comingH}</h3>
-              <p style={{ fontSize:".9rem", color:"var(--gray)", maxWidth:500, lineHeight:1.75 }}>{t.comingBody}</p>
-            </div>
-            <button className="btn-primary" onClick={onCTA} style={{ flexShrink:0 }}>Join the Waitlist →</button>
-          </div>
-        </div>
-      </section>
-    </>
+        ))}
+      </div>
+    </div>
   );
 }
 
 /* ─────────────────────────────────────────────
-   PROBLEM
+   INTRO
 ───────────────────────────────────────────── */
-function Problem({ t }) {
-  const items = ["Downloaded the apps", "Started the routines", "Bought the gear", "Told yourself 'this time'"];
+function Intro({ t, onWaitlist }) {
   return (
-    <>
-      <div className="sec-divider"/>
-      <section className="sec">
-        <div className="wrap">
-          <div className="two-col" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:72, alignItems:"center" }}>
-            {/* Visual */}
-            <div>
-              <div className="glass-panel" style={{ padding:"36px", borderRadius:24 }}>
-                <div className="mono" style={{ fontSize:".62rem", letterSpacing:".2em", color:"var(--coral)", marginBottom:24, fontWeight:600 }}>THE PATTERN</div>
-                {items.map((item, i) => (
-                  <div key={i} style={{ display:"flex", alignItems:"center", gap:14, padding:"16px 0", borderBottom:"1px solid rgba(255,255,255,.05)" }}>
-                    <div style={{ width:26, height:26, borderRadius:7, border:"1px solid rgba(255,255,255,.1)", background:"rgba(255,255,255,.04)", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.25)" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                    </div>
-                    <span style={{ fontSize:".92rem", color:"rgba(183,193,211,.75)", textDecoration:"line-through", textDecorationColor:"rgba(255,255,255,.3)" }}>{item}</span>
-                  </div>
-                ))}
-                <div style={{ marginTop:20, padding:"16px 20px", background:"rgba(255,77,87,.1)", border:"1px solid rgba(255,77,87,.22)", borderRadius:10, display:"flex", alignItems:"center", gap:12 }}>
-                  <div style={{ width:8, height:8, borderRadius:"50%", background:"var(--coral)", flexShrink:0 }}/>
-                  <span className="mono" style={{ fontSize:".72rem", color:"var(--coral)", letterSpacing:".1em", fontWeight:600 }}>BACK TO DAY ONE. AGAIN.</span>
-                </div>
-              </div>
-            </div>
-            {/* Copy */}
-            <div>
-              <div className="eyebrow">{t.problemEyebrow}</div>
-              <h2 className="bebas" style={{ fontSize:"clamp(2.6rem,5vw,4.2rem)", lineHeight:.92, color:"#F6F8FB", marginBottom:24 }}>{t.problemH}</h2>
-              <p style={{ fontSize:"1rem", color:"var(--frost)", lineHeight:1.85, marginBottom:28, opacity:.82 }}>{t.problemBody}</p>
-              <div style={{ display:"flex", alignItems:"center", gap:14 }}>
-                <div style={{ width:36, height:1.5, background:"var(--coral)", flexShrink:0 }}/>
-                <span className="mono" style={{ fontSize:".68rem", color:"var(--coral)", letterSpacing:".14em", textTransform:"uppercase", fontWeight:600 }}>The pattern is the problem</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
-  );
-}
+    <section className="sec" style={{textAlign:"center"}}>
+      <div className="wrap">
+        <div className="eyebrow" style={{justifyContent:"center",display:"flex"}}>{t.introEyebrow}</div>
+        <h2 className="raj" style={{fontWeight:700,fontSize:"clamp(2.6rem,5.5vw,4.6rem)",lineHeight:.9,letterSpacing:".02em",marginBottom:28,maxWidth:820,margin:"0 auto 28px"}}>
+          <span style={{display:"block",color:"var(--frost)"}}>{t.introH1}</span>
+          <span style={{display:"block",background:"linear-gradient(135deg,#3B7BFF 0%,#00D4FF 100%)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",backgroundClip:"text"}}>{t.introH2}</span>
+          <span style={{display:"block",color:"var(--frost)"}}>{t.introH3}</span>
+        </h2>
+        <p style={{fontSize:"1.05rem",color:"var(--gray)",lineHeight:1.85,maxWidth:560,margin:"0 auto 20px"}}>{t.introSub}</p>
+        <p style={{fontSize:"1.15rem",color:"var(--frost)",fontStyle:"italic",marginBottom:48}}>{t.introSub2}</p>
 
-/* ─────────────────────────────────────────────
-   SOLUTION
-───────────────────────────────────────────── */
-function Solution({ t }) {
-  return (
-    <>
-      <div className="sec-divider"/>
-      <section className="sec" style={{ textAlign:"center" }}>
-        <div className="wrap">
-          <div className="eyebrow" style={{ justifyContent:"center", display:"flex" }}>{t.solutionEyebrow}</div>
-          <h2 className="bebas" style={{ fontSize:"clamp(2.8rem,6vw,5.2rem)", lineHeight:.9, color:"var(--frost)", maxWidth:720, margin:"0 auto 24px" }}>{t.solutionH}</h2>
-          <p style={{ fontSize:"1.04rem", color:"var(--gray)", lineHeight:1.85, maxWidth:520, margin:"0 auto 56px" }}>{t.solutionBody}</p>
-
-          {/* Diagram */}
-          <div style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:16 }}>
-            <div style={{ display:"flex", alignItems:"center", gap:10, flexWrap:"wrap", justifyContent:"center" }}>
-              {["ALONE","→","STRUGGLING","→","RESTART"].map((item,i) => (
-                <div key={i} style={{ padding: i%2===0 ? "12px 22px":"0 6px", background: i%2===0 ? "rgba(255,255,255,.07)":"transparent", border: i%2===0 ? "1px solid rgba(255,255,255,.15)":"none", borderRadius:8 }}>
-                  <span className="mono" style={{ fontSize: i%2===1 ? "1.2rem":".72rem", color: i%2===1 ? "rgba(255,255,255,.45)":"var(--gray)", letterSpacing:".1em", fontWeight:500 }}>{item}</span>
-                </div>
-              ))}
+        {/* 3 concept cards */}
+        <div className="three-col" style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:3,marginBottom:56}}>
+          {[
+            {n:"01",title:"Build Your Profile",body:"Set your fitness goals, upload photos, define your schedule and commitment level. Tell us what you're working toward and how hard you're willing to push.",accent:"var(--blue2)"},
+            {n:"02",title:"Set Your Preferences",body:"Choose your training style, intensity level, and what you need from a partner. Someone to push you? Someone to match your pace? You decide.",accent:"var(--cyan)"},
+            {n:"03",title:"Make Your Pact",body:"Think Tinder, but for fitness accountability. Swipe through profiles, connect with someone who has the same fire — and make a pact that neither of you will break.",accent:"#A78BFA"},
+          ].map((s,i) => (
+            <div key={i} className="glass-card" style={{padding:"40px 30px",borderRadius:i===0?"22px 4px 4px 22px":i===2?"4px 22px 22px 4px":"4px",textAlign:"left"}}>
+              <div className="raj" style={{fontWeight:700,fontSize:"4rem",color:"rgba(59,123,255,.09)",lineHeight:1,marginBottom:16,letterSpacing:".02em"}}>{s.n}</div>
+              <h3 className="raj" style={{fontWeight:700,fontSize:"1.4rem",color:"var(--frost)",marginBottom:12,letterSpacing:".02em"}}>{s.title}</h3>
+              <p style={{fontSize:".9rem",color:"var(--gray)",lineHeight:1.78}}>{s.body}</p>
             </div>
-            <div style={{ width:1, height:40, background:"linear-gradient(to bottom,rgba(255,77,87,.4),rgba(255,77,87,.1))" }}/>
-            <div style={{ display:"flex", alignItems:"center", gap:10, flexWrap:"wrap", justifyContent:"center" }}>
-              {["MATCHED","→","ACCOUNTABLE","→","CONSISTENT"].map((item,i) => (
-                <div key={i} style={{ padding: i%2===0 ? "12px 22px":"0 6px", background: i%2===0 ? "rgba(255,77,87,.16)":"transparent", border: i%2===0 ? "1px solid rgba(255,77,87,.38)":"none", borderRadius:8 }}>
-                  <span className="mono" style={{ fontSize: i%2===1 ? "1.2rem":".72rem", color: i%2===1 ? "rgba(255,255,255,.45)":"#FF8A92", letterSpacing:".1em", fontWeight:600 }}>{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
-      </section>
-    </>
+
+        {/* Coming soon banner */}
+        <div className="glass" style={{padding:"36px 44px",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:24,textAlign:"left",background:"linear-gradient(135deg,rgba(59,123,255,.09) 0%,rgba(0,212,255,.05) 100%)",border:"1px solid rgba(59,123,255,.2)"}}>
+          <div>
+            <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:10}}>
+              <div style={{width:7,height:7,borderRadius:"50%",background:"var(--cyan)",animation:"glow 2s ease infinite"}}/>
+              <span className="mono" style={{fontSize:".64rem",color:"var(--cyan)",letterSpacing:".2em"}}>MORE FEATURES COMING SOON</span>
+            </div>
+            <h3 className="raj" style={{fontWeight:700,fontSize:"clamp(1.6rem,3vw,2.2rem)",color:"var(--frost)",marginBottom:10,letterSpacing:".02em"}}>We're just getting started.</h3>
+            <p style={{fontSize:".92rem",color:"var(--gray)",maxWidth:500,lineHeight:1.75}}>Leaderboards. AI workout programs. Meal planning. Real-time partner updates. Video check-ins. Waitlist members get everything first.</p>
+          </div>
+          <button className="btn-primary" onClick={onWaitlist} style={{flexShrink:0}}>Join the Waitlist →</button>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -897,22 +699,45 @@ function Solution({ t }) {
 function HowItWorks({ t }) {
   return (
     <>
-      <div className="sec-divider"/>
-      <section className="sec" id="how-it-works">
+      <div className="divider"/>
+      <section className="sec" id="how">
         <div className="wrap">
-          <div style={{ marginBottom:64 }}>
-            <div className="eyebrow">{t.howEyebrow}</div>
-            <h2 className="bebas" style={{ fontSize:"clamp(2.8rem,5vw,4.2rem)", lineHeight:.9, color:"var(--frost)", whiteSpace:"pre-line" }}>{t.howH}</h2>
-          </div>
-          <div className="four-col" style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:3 }}>
-            {t.steps.map((s,i) => (
-              <div key={i} className="glass-card" style={{ padding:"40px 28px", borderRadius: i===0 ? "20px 4px 4px 20px" : i===3 ? "4px 20px 20px 4px" : "4px" }}>
-                <div className="bebas" style={{ fontSize:"5rem", color:"rgba(255,77,87,.42)", lineHeight:1, marginBottom:8, letterSpacing:".04em" }}>{s.n}</div>
-                <div className="mono" style={{ fontSize:".62rem", color:"var(--coral)", letterSpacing:".15em", textTransform:"uppercase", marginBottom:12 }}>Step {s.n}</div>
-                <h3 className="bebas" style={{ fontSize:"1.55rem", color:"var(--frost)", marginBottom:14, letterSpacing:".04em" }}>{s.title}</h3>
-                <p style={{ fontSize:".88rem", color:"var(--gray)", lineHeight:1.78 }}>{s.body}</p>
+          <div className="two-col" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:80,alignItems:"center"}}>
+            <div>
+              <div className="eyebrow">{t.howEyebrow}</div>
+              <h2 className="raj" style={{fontWeight:700,fontSize:"clamp(2.4rem,4.5vw,3.4rem)",lineHeight:1,letterSpacing:".02em",marginBottom:52,whiteSpace:"pre-line"}}>{t.howH}</h2>
+              <div style={{display:"flex",flexDirection:"column",gap:0}}>
+                {t.steps.map((s,i,arr) => (
+                  <div key={s.n} style={{display:"flex",gap:20,position:"relative",paddingBottom:i<arr.length-1?40:0}}>
+                    {i<arr.length-1 && <div style={{position:"absolute",left:25,top:50,bottom:0,width:1.5,background:"linear-gradient(180deg,rgba(59,123,255,.3) 0%,transparent 100%)"}}/>}
+                    <div className="step-num" style={{zIndex:1,flexShrink:0}}>{s.n}</div>
+                    <div style={{paddingTop:10}}>
+                      <h3 className="raj" style={{fontWeight:700,fontSize:"1.2rem",letterSpacing:".02em",marginBottom:8,color:"var(--frost)"}}>{s.title}</h3>
+                      <p style={{color:"var(--gray)",fontSize:".9rem",lineHeight:1.78}}>{s.body}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+            {/* Visual */}
+            <div className="hide-m" style={{position:"relative"}}>
+              <div style={{position:"absolute",inset:"-40px",background:"radial-gradient(ellipse 65% 70% at 50% 50%,rgba(0,212,255,.14) 0%,transparent 70%)",pointerEvents:"none"}}/>
+              <div className="glass" style={{padding:32}}>
+                <div className="mono" style={{fontSize:".6rem",letterSpacing:".18em",color:"var(--cyan)",marginBottom:20}}>TRAINING SCHEDULE</div>
+                {["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].map((day,i) => (
+                  <div key={day} style={{display:"flex",alignItems:"center",gap:12,marginBottom:10}}>
+                    <div className="mono" style={{width:36,fontSize:".62rem",color:i===5?"var(--blue2)":"var(--gray3)",letterSpacing:".08em"}}>{day}</div>
+                    <div style={{flex:1,height:8,borderRadius:4,background:i===5?"linear-gradient(90deg,#3B7BFF,#00D4FF)":i%2===0?"rgba(59,123,255,.18)":"rgba(255,255,255,.05)",border:"1px solid rgba(255,255,255,.06)"}}/>
+                    {i<5&&i%2===0&&<div style={{width:6,height:6,borderRadius:"50%",background:"#34D399"}}/>}
+                    {i===5&&<div className="mono" style={{fontSize:".52rem",color:"var(--blue2)",letterSpacing:".08em"}}>TODAY</div>}
+                  </div>
+                ))}
+                <div style={{marginTop:20,padding:"14px 18px",background:"rgba(59,123,255,.1)",border:"1px solid rgba(59,123,255,.22)",borderRadius:14}}>
+                  <div className="raj" style={{fontWeight:700,fontSize:"1rem",color:"var(--frost)",marginBottom:4}}>Iron Hour</div>
+                  <div style={{fontSize:".76rem",color:"var(--gray2)"}}>For Time · 1000m Row · 50 Thrusters · 30 Box Jumps</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -923,24 +748,38 @@ function HowItWorks({ t }) {
 /* ─────────────────────────────────────────────
    FEATURES
 ───────────────────────────────────────────── */
+const FEAT_ICONS = {
+  match:  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="3.2"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a3.2 3.2 0 0 1 0 6.2"/></svg>,
+  ai:     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>,
+  wod:    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>,
+  cal:    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>,
+  lib:    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>,
+  comm:   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
+  goals:  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>,
+  pr:     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>,
+  chat:   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
+};
+
+const FEAT_ACCENTS = {
+  match:"var(--blue2)", ai:"var(--cyan)", wod:"#FBBF24", cal:"var(--blue2)", lib:"#34D399", comm:"#A78BFA", goals:"var(--cyan)", pr:"#34D399", chat:"var(--blue2)"
+};
+
 function Features({ t }) {
   return (
     <>
-      <div className="sec-divider"/>
+      <div className="divider"/>
       <section className="sec" id="features">
         <div className="wrap">
-          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-end", marginBottom:60, flexWrap:"wrap", gap:24 }}>
-            <div>
-              <div className="eyebrow">{t.featEyebrow}</div>
-              <h2 className="bebas" style={{ fontSize:"clamp(2.8rem,5vw,4.2rem)", lineHeight:.9, color:"var(--frost)", whiteSpace:"pre-line" }}>{t.featH}</h2>
-            </div>
+          <div style={{textAlign:"center",marginBottom:60}}>
+            <div className="eyebrow" style={{justifyContent:"center",display:"flex"}}>{t.featEyebrow}</div>
+            <h2 className="raj" style={{fontWeight:700,fontSize:"clamp(2.4rem,4.5vw,3.4rem)",lineHeight:1,letterSpacing:".02em",whiteSpace:"pre-line"}}>{t.featH}</h2>
           </div>
-          <div className="feat-grid" style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:3 }}>
-            {t.features.map(({ icon, title, body }, i) => (
-              <div key={i} className="glass-card" style={{ padding:"36px 28px", borderRadius: i===0 ? "20px 4px 4px 20px" : i===2 ? "4px 20px 4px 4px" : i===3 ? "4px 4px 4px 20px" : i===5 ? "4px 4px 20px 4px" : "4px" }}>
-                <div style={{ color:"var(--coral)", marginBottom:20 }}>{ICONS[icon]}</div>
-                <h3 className="bebas" style={{ fontSize:"1.45rem", color:"var(--frost)", marginBottom:12, letterSpacing:".04em" }}>{title}</h3>
-                <p style={{ fontSize:".88rem", color:"var(--gray)", lineHeight:1.78 }}>{body}</p>
+          <div className="feat-grid" style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:3}}>
+            {t.features.map(({ key, title, body },i) => (
+              <div key={key} className="glass-card" style={{padding:"34px 28px",borderRadius:i===0?"22px 4px 4px 22px":i===2?"4px 22px 4px 4px":i===3?"4px 4px 4px 22px":i===5?"4px 4px 22px 4px":"4px"}}>
+                <div style={{color:FEAT_ACCENTS[key],marginBottom:18,opacity:.9}}>{FEAT_ICONS[key]}</div>
+                <h3 className="raj" style={{fontWeight:700,fontSize:"1.15rem",color:"var(--frost)",marginBottom:10,letterSpacing:".02em"}}>{title}</h3>
+                <p style={{fontSize:".88rem",color:"var(--gray)",lineHeight:1.78}}>{body}</p>
               </div>
             ))}
           </div>
@@ -951,50 +790,177 @@ function Features({ t }) {
 }
 
 /* ─────────────────────────────────────────────
-   LOOP MARQUEE
+   AI PROGRAMS
 ───────────────────────────────────────────── */
-function LoopMarquee({ t }) {
+function Programs({ t }) {
   return (
-    <div style={{ padding:"36px 0", overflow:"hidden", borderTop:"1px solid rgba(255,255,255,.05)", borderBottom:"1px solid rgba(255,255,255,.05)" }}>
-      <div className="marquee-track">
-        {[...t.loopItems,...t.loopItems].map((item,i) => (
-          <div key={i} className={`marquee-item${["Build Streak","Get Results"].includes(item)?" hi":""}`}>
-            <span>{item}</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    <>
+      <div className="divider"/>
+      <section className="sec" id="programs">
+        <div className="wrap">
+          <div className="two-col" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:80,alignItems:"center"}}>
+            <div>
+              <div className="eyebrow">{t.progEyebrow}</div>
+              <h2 className="raj" style={{fontWeight:700,fontSize:"clamp(2.4rem,4.5vw,3.4rem)",lineHeight:1,letterSpacing:".02em",marginBottom:20,whiteSpace:"pre-line"}}>{t.progH}</h2>
+              <p style={{fontSize:"1rem",color:"var(--gray)",lineHeight:1.82,marginBottom:32}}>{t.progSub}</p>
+              <div style={{display:"flex",flexWrap:"wrap",gap:8,marginBottom:36}}>
+                {t.sports.map(s => (
+                  <div key={s} style={{display:"inline-flex",alignItems:"center",background:"rgba(59,123,255,.08)",border:"1px solid rgba(59,123,255,.18)",borderRadius:100,padding:"6px 14px",fontFamily:"'Inter',sans-serif",fontSize:".78rem",color:"var(--gray)",transition:"all .2s",cursor:"default"}}
+                    onMouseEnter={e=>{e.currentTarget.style.background="rgba(59,123,255,.18)";e.currentTarget.style.color="var(--frost)"}}
+                    onMouseLeave={e=>{e.currentTarget.style.background="rgba(59,123,255,.08)";e.currentTarget.style.color="var(--gray)"}}>{s}</div>
+                ))}
+              </div>
+              <div style={{display:"flex",gap:12}}>
+                <span className="tag tag-blue">12+ Sports</span>
+                <span className="tag tag-cyan">AI Powered</span>
+                <span className="tag tag-purple">Periodized</span>
+              </div>
+            </div>
+            <div className="hide-m" style={{position:"relative"}}>
+              <div style={{position:"absolute",inset:"-40px",background:"radial-gradient(ellipse 60% 70% at 50% 50%,rgba(59,123,255,.18) 0%,transparent 70%)",pointerEvents:"none"}}/>
+              <div className="glass" style={{padding:28}}>
+                <div className="mono" style={{fontSize:".6rem",letterSpacing:".18em",color:"var(--blue2)",marginBottom:20}}>BUILD A PROGRAM</div>
+                <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:20}}>
+                  {[["CF","CrossFit","var(--cyan)"],["BB","Bodybuilding","var(--blue2)"],["HX","Hyrox","#FBBF24"],["PL","Powerlifting","#A78BFA"],["RN","Running","#34D399"],["OL","Olympic Lifting","#FB923C"]].map(([code,label,color]) => (
+                    <div key={code} style={{background:"rgba(255,255,255,.04)",border:`1px solid ${color}2a`,borderRadius:10,padding:"10px 12px",display:"flex",alignItems:"center",gap:10}}>
+                      <div className="mono" style={{fontSize:".52rem",color,width:28,height:28,borderRadius:8,background:`${color}1a`,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>{code}</div>
+                      <span style={{fontSize:".78rem",color:"var(--gray)"}}>{label}</span>
+                    </div>
+                  ))}
+                </div>
+                <div style={{background:"linear-gradient(135deg,rgba(59,123,255,.14),rgba(0,212,255,.07))",border:"1px solid rgba(59,123,255,.28)",borderRadius:14,padding:"14px 18px"}}>
+                  <div style={{display:"flex",justifyContent:"space-between",marginBottom:8}}>
+                    <span className="raj" style={{fontWeight:700,fontSize:"1rem",color:"var(--frost)"}}>Generating Program</span>
+                    <span className="mono" style={{fontSize:".62rem",color:"var(--cyan)"}}>AI</span>
+                  </div>
+                  <div style={{height:6,borderRadius:3,background:"rgba(255,255,255,.08)",overflow:"hidden"}}>
+                    <div style={{height:"100%",width:"68%",borderRadius:3,background:"linear-gradient(90deg,#3B7BFF,#00D4FF)",animation:"glow 2s ease infinite"}}/>
+                  </div>
+                  <div style={{fontSize:".74rem",color:"var(--gray2)",marginTop:8}}>Writing week 1 workouts for CrossFit · Base Build phase...</div>
+                </div>
+              </div>
+            </div>
           </div>
-        ))}
-      </div>
-    </div>
+        </div>
+      </section>
+    </>
   );
 }
 
 /* ─────────────────────────────────────────────
-   SOCIAL PROOF
+   WORKOUT LIBRARY
 ───────────────────────────────────────────── */
-function SocialProof({ t }) {
+function Library({ t }) {
   return (
     <>
-      <div className="sec-divider"/>
+      <div className="divider"/>
       <section className="sec">
         <div className="wrap">
-          <div style={{ marginBottom:56 }}>
-            <div className="eyebrow">{t.proofEyebrow}</div>
-            <h2 className="bebas" style={{ fontSize:"clamp(2.8rem,5vw,4.2rem)", lineHeight:.9, color:"var(--frost)" }}>{t.proofH}</h2>
+          <div className="two-col" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:80,alignItems:"center"}}>
+            <div className="hide-m" style={{position:"relative"}}>
+              <div style={{position:"absolute",inset:"-40px",background:"radial-gradient(ellipse 60% 70% at 50% 50%,rgba(124,92,252,.18) 0%,transparent 70%)",pointerEvents:"none"}}/>
+              <div className="glass" style={{padding:28}}>
+                <div className="mono" style={{fontSize:".6rem",letterSpacing:".18em",color:"#A78BFA",marginBottom:16}}>WORKOUT LIBRARY</div>
+                <div style={{display:"flex",gap:8,flexWrap:"wrap",marginBottom:18}}>
+                  {[["All","var(--blue2)"],["Hyrox","var(--cyan)"],["CrossFit","#34D399"],["Powerlifting","#A78BFA"]].map(([l,c],i)=>(
+                    <div key={l} style={{padding:"4px 12px",borderRadius:100,fontFamily:"'JetBrains Mono',monospace",fontSize:".56rem",letterSpacing:".08em",background:i===0?"rgba(59,123,255,.2)":"rgba(255,255,255,.05)",border:`1px solid ${i===0?"rgba(59,123,255,.38)":"rgba(255,255,255,.1)"}`,color:i===0?"var(--blue2)":"var(--gray2)"}}>{l}</div>
+                  ))}
+                </div>
+                {[
+                  {tag:"HYROX",name:"HYROX Individual Open",detail:"90 min · For Time",color:"var(--cyan)"},
+                  {tag:"HYROX",name:"HYROX Individual Pro",detail:"75 min · For Time",color:"var(--cyan)"},
+                  {tag:"CF",name:"Iron Hour",detail:"20 min cap · For Time",color:"#34D399"},
+                  {tag:"PL",name:"5/3/1 Week 1",detail:"Strength · 4 sets",color:"#A78BFA"},
+                ].map((w,i)=>(
+                  <div key={i} style={{display:"flex",alignItems:"center",gap:14,padding:"12px 0",borderBottom:"1px solid rgba(255,255,255,.05)"}}>
+                    <div style={{width:36,height:36,borderRadius:9,background:`${w.color}18`,border:`1px solid ${w.color}2a`,display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'JetBrains Mono',monospace",fontSize:".5rem",color:w.color,flexShrink:0}}>{w.tag}</div>
+                    <div>
+                      <div style={{fontWeight:600,fontSize:".84rem",color:"var(--frost)",marginBottom:2}}>{w.name}</div>
+                      <div className="mono" style={{fontSize:".6rem",color:"var(--gray2)",letterSpacing:".06em"}}>{w.detail}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div>
+              <div className="eyebrow">{t.libEyebrow}</div>
+              <h2 className="raj" style={{fontWeight:700,fontSize:"clamp(2.4rem,4.5vw,3.4rem)",lineHeight:1,letterSpacing:".02em",marginBottom:20,whiteSpace:"pre-line"}}>{t.libH}</h2>
+              <p style={{fontSize:"1rem",color:"var(--gray)",lineHeight:1.82,marginBottom:32}}>{t.libSub}</p>
+              <div style={{display:"flex",flexWrap:"wrap",gap:8,marginBottom:28}}>
+                {[["Bodybuilding","tag-amber"],["CrossFit","tag-green"],["Hyrox","tag-cyan"],["Powerlifting","tag-purple"],["Running","tag-blue"]].map(([l,c])=>(
+                  <span key={l} className={`tag ${c}`}>{l}</span>
+                ))}
+              </div>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
+                {[["200+","Saved Benchmarks","var(--blue2)"],["12+","Sport Categories","var(--cyan)"]].map(([v,l,c])=>(
+                  <div key={l} style={{background:"var(--glass-1)",border:"1px solid var(--glass-border)",borderRadius:"var(--r-sm)",padding:"20px 18px"}}>
+                    <div className="raj" style={{fontWeight:700,fontSize:"2rem",color:c,lineHeight:1}}>{v}</div>
+                    <div className="mono" style={{fontSize:".72rem",color:"var(--gray2)",marginTop:4,letterSpacing:".08em"}}>{l}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-          <div className="proof-grid" style={{ display:"grid", gridTemplateColumns:"repeat(2,1fr)", gap:3 }}>
-            {t.testimonials.map(({ q, name, role, ini }, i) => (
-              <div key={i} className="glass-card" style={{ padding:"36px 32px", borderRadius: i===0 ? "20px 4px 4px 20px" : i===1 ? "4px 20px 20px 4px" : i===2 ? "4px 20px 4px 4px" : "20px 4px 4px 20px" }}>
-                <div className="bebas" style={{ fontSize:"3.5rem", color:"rgba(255,77,87,.14)", lineHeight:1, marginBottom:16 }}>"</div>
-                <p style={{ fontSize:".95rem", color:"var(--gray)", lineHeight:1.85, marginBottom:28 }}>{q}</p>
-                <div style={{ display:"flex", alignItems:"center", gap:14, borderTop:"1px solid rgba(255,255,255,.06)", paddingTop:22 }}>
-                  <div style={{ width:42, height:42, borderRadius:"50%", background:"linear-gradient(135deg, rgba(255,77,87,.6), rgba(255,77,87,.2))", border:"1px solid rgba(255,77,87,.25)", display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"'JetBrains Mono',monospace", fontSize:".72rem", fontWeight:700, color:"#fff", flexShrink:0 }}>{ini}</div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   COMMUNITY
+───────────────────────────────────────────── */
+function Community({ t }) {
+  return (
+    <>
+      <div className="divider"/>
+      <section className="sec" id="community">
+        <div className="wrap">
+          <div style={{textAlign:"center",maxWidth:640,margin:"0 auto",marginBottom:64}}>
+            <div className="eyebrow" style={{justifyContent:"center",display:"flex"}}>{t.commEyebrow}</div>
+            <h2 className="raj" style={{fontWeight:700,fontSize:"clamp(2.4rem,4.5vw,3.4rem)",lineHeight:1,letterSpacing:".02em",marginBottom:16,whiteSpace:"pre-line"}}>{t.commH}</h2>
+            <p style={{color:"var(--gray)",fontSize:"1rem",lineHeight:1.82}}>{t.commSub}</p>
+          </div>
+          <div className="two-col" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:60,alignItems:"center"}}>
+            <div style={{display:"flex",flexDirection:"column",gap:14}}>
+              {t.commCards.map((card,i)=>(
+                <div key={i} className="glass-card" style={{padding:"22px 24px",display:"flex",gap:18,alignItems:"flex-start"}}>
+                  <div style={{width:44,height:44,borderRadius:12,background:"rgba(124,92,252,.12)",border:"1px solid rgba(124,92,252,.22)",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'JetBrains Mono',monospace",fontSize:".5rem",letterSpacing:".1em",color:"#A78BFA",flexShrink:0}}>{card.tag}</div>
                   <div>
-                    <div style={{ fontWeight:700, color:"var(--frost)", fontSize:".92rem" }}>{name}</div>
-                    <div className="mono" style={{ fontSize:".6rem", color:"var(--coral)", letterSpacing:".08em" }}>{role}</div>
+                    <h3 className="raj" style={{fontWeight:700,fontSize:"1.05rem",letterSpacing:".02em",marginBottom:5,color:"var(--frost)"}}>{card.title}</h3>
+                    <p style={{color:"var(--gray)",fontSize:".88rem",lineHeight:1.7}}>{card.body}</p>
                   </div>
                 </div>
+              ))}
+            </div>
+            <div className="hide-m" style={{position:"relative"}}>
+              <div style={{position:"absolute",inset:"-40px",background:"radial-gradient(ellipse 60% 70% at 50% 50%,rgba(124,92,252,.18) 0%,transparent 70%)",pointerEvents:"none"}}/>
+              <div className="glass" style={{padding:28}}>
+                <div className="mono" style={{fontSize:".6rem",letterSpacing:".18em",color:"#A78BFA",marginBottom:20}}>COMMUNITIES</div>
+                {[
+                  {name:"PR Star Barbell",members:24,tag:"Powerlifting",online:8},
+                  {name:"Hyrox DC Crew",members:61,tag:"Hyrox",online:14},
+                  {name:"CrossFit Capital",members:38,tag:"CrossFit",online:5},
+                ].map((c,i)=>(
+                  <div key={i} style={{background:"rgba(255,255,255,.04)",border:"1px solid rgba(255,255,255,.08)",borderRadius:12,padding:"14px 16px",marginBottom:10,display:"flex",alignItems:"center",gap:14}}>
+                    <div style={{width:42,height:42,borderRadius:12,background:"rgba(124,92,252,.12)",border:"1px solid rgba(124,92,252,.22)",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'Rajdhani',sans-serif",fontWeight:700,fontSize:"1.1rem",color:"#A78BFA",flexShrink:0}}>{c.name[0]}</div>
+                    <div style={{flex:1,minWidth:0}}>
+                      <div style={{fontWeight:600,fontSize:".85rem",color:"var(--frost)",marginBottom:3}}>{c.name}</div>
+                      <div style={{display:"flex",gap:8,alignItems:"center"}}>
+                        <span className="mono" style={{fontSize:".58rem",color:"var(--gray2)"}}>{c.members} members</span>
+                        <span style={{width:3,height:3,borderRadius:"50%",background:"var(--gray3)",display:"inline-block"}}/>
+                        <span className="mono" style={{fontSize:".58rem",color:"#34D399"}}>{c.online} online</span>
+                      </div>
+                    </div>
+                    <div style={{padding:"4px 10px",borderRadius:100,background:"rgba(124,92,252,.12)",border:"1px solid rgba(124,92,252,.22)",fontFamily:"'JetBrains Mono',monospace",fontSize:".52rem",color:"#A78BFA"}}>JOIN</div>
+                  </div>
+                ))}
+                <div style={{padding:"10px 16px",background:"rgba(59,123,255,.08)",border:"1px solid rgba(59,123,255,.18)",borderRadius:12,display:"flex",alignItems:"center",gap:10}}>
+                  <div style={{width:6,height:6,borderRadius:"50%",background:"var(--blue2)",flexShrink:0}}/>
+                  <span style={{fontSize:".78rem",color:"var(--gray2)"}}>New workout posted in PR Star Barbell</span>
+                </div>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
@@ -1003,54 +969,22 @@ function SocialProof({ t }) {
 }
 
 /* ─────────────────────────────────────────────
-   PRICING
+   WAITLIST
 ───────────────────────────────────────────── */
-function Pricing({ t, onCTA }) {
+function Waitlist({ t }) {
   return (
     <>
-      <div className="sec-divider"/>
-      <section className="sec">
+      <div className="divider"/>
+      <section className="sec" id="waitlist">
         <div className="wrap">
-          <div style={{ textAlign:"center", marginBottom:56 }}>
-            <div className="eyebrow" style={{ justifyContent:"center", display:"flex" }}>{t.pricingEyebrow}</div>
-            <h2 className="bebas" style={{ fontSize:"clamp(2.8rem,5vw,4.2rem)", lineHeight:.9, color:"var(--frost)", whiteSpace:"pre-line" }}>{t.pricingH}</h2>
-          </div>
-          <div className="pricing-grid" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:3, maxWidth:860, margin:"0 auto" }}>
-            {/* Free */}
-            <div className="glass-card" style={{ padding:"44px 40px", borderRadius:"20px 4px 4px 20px" }}>
-              <div className="mono" style={{ fontSize:".65rem", letterSpacing:".16em", color:"var(--gray2)", textTransform:"uppercase", marginBottom:12 }}>Free</div>
-              <div className="bebas" style={{ fontSize:"4rem", color:"var(--frost)", letterSpacing:".04em", lineHeight:1, marginBottom:6 }}>$0</div>
-              <div className="mono" style={{ fontSize:".65rem", color:"var(--gray3)", marginBottom:32 }}>/ forever</div>
-              {t.freeFeatures.map(f => (
-                <div key={f} style={{ display:"flex", alignItems:"center", gap:12, marginBottom:14 }}>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--coral)" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span style={{ fontSize:".9rem", color:"var(--gray)" }}>{f}</span>
-                </div>
-              ))}
-              <button className="btn-ghost" onClick={onCTA} style={{ width:"100%", marginTop:32 }}>Get Started</button>
+          <div className="glass" style={{padding:"80px 60px",textAlign:"center",background:"linear-gradient(135deg,rgba(59,123,255,.09) 0%,rgba(0,212,255,.05) 100%)",border:"1px solid rgba(59,123,255,.2)"}}>
+            <div className="eyebrow" style={{justifyContent:"center",display:"flex"}}>{t.waitlistEyebrow}</div>
+            <h2 className="raj" style={{fontWeight:700,fontSize:"clamp(2.2rem,5vw,3.6rem)",lineHeight:1.05,letterSpacing:".02em",marginBottom:16,color:"var(--frost)"}}>{t.waitlistH}</h2>
+            <p style={{color:"var(--gray)",fontSize:"1.05rem",lineHeight:1.82,maxWidth:520,margin:"0 auto 40px"}}>{t.waitlistSub}</p>
+            <div style={{display:"flex",justifyContent:"center",marginBottom:20}}>
+              <WaitlistForm placeholder={t.emailPH} btnText={t.joinBtn}/>
             </div>
-            {/* Pro */}
-            <div className="glass-panel" style={{ padding:"44px 40px", borderRadius:"4px 20px 20px 4px", position:"relative", overflow:"hidden" }}>
-              <div style={{ position:"absolute", top:0, left:0, right:0, height:2, background:"linear-gradient(90deg, var(--coral), var(--coral2), var(--coral))" }}/>
-              <div style={{ position:"absolute", top:18, right:18 }}>
-                <span className="mono" style={{ fontSize:".6rem", background:"var(--coral)", color:"#fff", padding:"4px 10px", borderRadius:4, letterSpacing:".1em" }}>POPULAR</span>
-              </div>
-              <div className="mono" style={{ fontSize:".65rem", letterSpacing:".16em", color:"var(--coral)", textTransform:"uppercase", marginBottom:12 }}>Pro</div>
-              <div style={{ marginBottom:32 }}>
-                <div style={{ display:"inline-flex", alignItems:"center", gap:9, background:"rgba(255,77,87,.1)", border:"1px solid rgba(255,77,87,.22)", borderRadius:10, padding:"13px 18px" }}>
-                  <div style={{ width:7, height:7, borderRadius:"50%", background:"var(--coral)", animation:"glow 2s ease-in-out infinite" }}/>
-                  <span className="mono" style={{ fontSize:".7rem", color:"var(--coral2)", letterSpacing:".12em" }}>PRICING COMING SOON</span>
-                </div>
-                <p className="mono" style={{ fontSize:".6rem", color:"var(--gray3)", letterSpacing:".07em", marginTop:8 }}>Join waitlist for early access pricing</p>
-              </div>
-              {t.proFeatures.map(f => (
-                <div key={f} style={{ display:"flex", alignItems:"center", gap:12, marginBottom:14 }}>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--coral2)" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span style={{ fontSize:".9rem", color: f.includes("Everything") ? "var(--coral2)" : "var(--gray)" }}>{f}</span>
-                </div>
-              ))}
-              <button className="btn-primary" onClick={onCTA} style={{ width:"100%", marginTop:32 }}>Get Early Access</button>
-            </div>
+            <p className="mono" style={{fontSize:".62rem",letterSpacing:".14em",color:"var(--gray3)"}}>{t.waitlistNote}</p>
           </div>
         </div>
       </section>
@@ -1062,89 +996,19 @@ function Pricing({ t, onCTA }) {
    FAQ
 ───────────────────────────────────────────── */
 function FAQ({ t }) {
-  const [open, setOpen] = useState(null);
   return (
     <>
-      <div className="sec-divider"/>
+      <div className="divider"/>
       <section className="sec" id="faq">
         <div className="wrap">
-          <div className="faq-grid" style={{ display:"grid", gridTemplateColumns:"1fr 1.6fr", gap:80, alignItems:"start" }}>
+          <div className="faq-grid" style={{display:"grid",gridTemplateColumns:"1fr 1.7fr",gap:80,alignItems:"start"}}>
             <div>
               <div className="eyebrow">{t.faqEyebrow}</div>
-              <h2 className="bebas" style={{ fontSize:"clamp(2.8rem,5vw,4.2rem)", lineHeight:.9, color:"var(--frost)" }}>{t.faqH}</h2>
+              <h2 className="raj" style={{fontWeight:700,fontSize:"clamp(2.2rem,4vw,3rem)",lineHeight:1.05,letterSpacing:".02em",marginBottom:14,color:"var(--frost)"}}>{t.faqH}</h2>
+              <p style={{color:"var(--gray)",fontSize:".95rem",lineHeight:1.78}}>{t.faqSub}</p>
             </div>
-            <div>
-              {t.faqs.map(({ q, a }, i) => (
-                <div key={i} className={`faq-row${open===i?" open":""}`} style={{ marginBottom:4 }}>
-                  <button className="faq-btn" onClick={() => setOpen(open===i ? null:i)}>
-                    <span className="faq-q">{q}</span>
-                    <span className="faq-icon" style={{ transform: open===i ? "rotate(45deg)":"none", display:"inline-block" }}>+</span>
-                  </button>
-                  {open===i && <div className="faq-a">{a}</div>}
-                </div>
-              ))}
-            </div>
+            <div>{t.faqs.map(f => <FaqRow key={f.q} q={f.q} a={f.a}/>)}</div>
           </div>
-        </div>
-      </section>
-    </>
-  );
-}
-
-/* ─────────────────────────────────────────────
-   FINAL CTA
-───────────────────────────────────────────── */
-function FinalCTA({ t, onCTA }) {
-  const [email, setEmail] = useState("");
-  const [done, setDone] = useState(false);
-
-  const submit = async (e) => {
-    e.preventDefault();
-    if (!email.trim()) return;
-    try {
-      await fetch("https://formspree.io/f/mnjwagoo", {
-        method:"POST", headers:{ "Content-Type":"application/json", "Accept":"application/json" },
-        body: JSON.stringify({ email, _subject:"New AccountaFit Waitlist Signup", message:`Waitlist signup: ${email}` }),
-      });
-    } catch {}
-    setDone(true);
-  };
-
-  return (
-    <>
-      <div className="sec-divider"/>
-      <section className="sec" style={{ textAlign:"center" }}>
-        {/* Glow underneath */}
-        <div style={{ position:"absolute", top:"50%", left:"50%", transform:"translate(-50%,-50%)", width:800, height:500, background:"radial-gradient(ellipse, rgba(255,77,87,.12) 0%, transparent 65%)", borderRadius:"50%", pointerEvents:"none" }}/>
-        <div className="wrap" style={{ position:"relative", zIndex:2 }}>
-          {/* App icon centered */}
-          <div style={{ display:"flex", justifyContent:"center", marginBottom:28 }}>
-            <div style={{ width:80, height:80, background:"rgba(255,255,255,.07)", border:"1px solid rgba(255,255,255,.13)", borderRadius:22, display:"flex", alignItems:"center", justifyContent:"center", backdropFilter:"blur(20px)", boxShadow:"0 20px 48px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.14)" }}>
-              <img src="/app-icon.png" alt="AccountaFit" style={{ width:52, height:52, objectFit:"contain" }}/>
-            </div>
-          </div>
-          <div className="eyebrow" style={{ justifyContent:"center", display:"flex" }}>{t.ctaEyebrow}</div>
-          <h2 className="bebas" style={{ fontSize:"clamp(3.5rem,8vw,7.5rem)", lineHeight:.86, color:"var(--frost)", marginBottom:16 }}>
-            {t.ctaH1}<br/><span style={{ color:"var(--coral)" }}>{t.ctaH2}</span>
-          </h2>
-          <p style={{ fontSize:"1.08rem", color:"var(--gray)", marginBottom:52, fontStyle:"italic" }}>{t.ctaSub}</p>
-
-          {done ? (
-            <div className="glass-panel" style={{ padding:"44px", maxWidth:480, margin:"0 auto", borderRadius:24 }}>
-              <div className="bebas" style={{ fontSize:"2.5rem", color:"var(--frost)", marginBottom:10 }}>YOU'RE IN.</div>
-              <p style={{ color:"var(--gray)" }}>We'll reach out when it's your turn. Stay consistent until then.</p>
-            </div>
-          ) : (
-            <>
-              <form onSubmit={submit} style={{ display:"flex", gap:12, justifyContent:"center", flexWrap:"wrap", maxWidth:540, margin:"0 auto 16px" }}>
-                <input type="email" placeholder={t.emailPH} value={email} onChange={e => setEmail(e.target.value)} required
-                  style={{ flex:"1 1 280px", height:54, background:"rgba(255,255,255,.07)", border:"1px solid rgba(255,255,255,.12)", borderRadius:100, color:"var(--frost)", fontFamily:"'Plus Jakarta Sans',sans-serif", fontSize:".95rem", padding:"0 22px", outline:"none", transition:"border-color .2s", backdropFilter:"blur(12px)" }}
-                  onFocus={e => e.target.style.borderColor="rgba(255,77,87,.5)"} onBlur={e => e.target.style.borderColor="rgba(255,255,255,.12)"}/>
-                <button type="submit" className="btn-primary" style={{ height:54, padding:"0 36px", borderRadius:100 }}>{t.ctaBtn}</button>
-              </form>
-              <p className="mono" style={{ fontSize:".62rem", color:"var(--gray3)", letterSpacing:".1em" }}>{t.ctaNote}</p>
-            </>
-          )}
         </div>
       </section>
     </>
@@ -1154,72 +1018,52 @@ function FinalCTA({ t, onCTA }) {
 /* ─────────────────────────────────────────────
    FOOTER
 ───────────────────────────────────────────── */
-function Footer({ t }) {
+function Footer() {
   return (
     <>
-      <div className="sec-divider"/>
-      <footer style={{ padding:"56px 5% 36px", position:"relative" }}>
-        <div style={{ maxWidth:1200, margin:"0 auto" }}>
-          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", flexWrap:"wrap", gap:48, marginBottom:52 }}>
+      <div className="divider"/>
+      <footer style={{padding:"60px 5% 40px"}}>
+        <div style={{maxWidth:1200,margin:"0 auto"}}>
+          <div style={{display:"grid",gridTemplateColumns:"2fr 1fr 1fr 1fr",gap:48,marginBottom:56}} className="four-col">
             {/* Brand */}
-            <div style={{ maxWidth:300 }}>
-              <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:16 }}>
-                <img src="/af-mark.png" alt="AF" style={{ height:28, width:"auto", objectFit:"contain" }}/>
-                <img src="/wordmark.png" alt="AccountaFit" style={{ height:20, width:"auto", objectFit:"contain" }}/>
+            <div>
+              <div style={{marginBottom:18}}>
+                <img src="/images/pact-logo-full.webp" alt="PACT" style={{height:38,width:"auto",filter:"drop-shadow(0 0 8px rgba(59,123,255,.4))"}}/>
               </div>
-              <p style={{ fontSize:".88rem", color:"var(--gray2)", lineHeight:1.75, marginBottom:22 }}>Consistency over motivation. Accountability over intention. Stop starting over.</p>
-              {/* Socials */}
-              <div style={{ display:"flex", gap:10, marginBottom:24 }}>
-                {[
-                  { href:"https://x.com/accountafit", icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--gray2)"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.633 5.905-5.633Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> },
-                  { href:"https://instagram.com/accountafitcorp", icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gray2)" strokeWidth="2" strokeLinecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="var(--gray2)" stroke="none"/></svg> },
-                  { href:"https://tiktok.com/@accountafit", icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--gray2)"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.69a8.24 8.24 0 0 0 4.84 1.56V6.79a4.85 4.85 0 0 1-1.08-.1z"/></svg> },
-                ].map(({ href, icon }, i) => (
-                  <a key={i} href={href} target="_blank" rel="noopener noreferrer"
-                    style={{ width:36, height:36, borderRadius:"50%", background:"rgba(255,255,255,.05)", border:"1px solid rgba(255,255,255,.08)", display:"flex", alignItems:"center", justifyContent:"center", transition:"border-color .2s" }}
-                    onMouseEnter={e => e.currentTarget.style.borderColor="rgba(255,77,87,.4)"}
-                    onMouseLeave={e => e.currentTarget.style.borderColor="rgba(255,255,255,.08)"}>{icon}</a>
-                ))}
-              </div>
-              {/* App store badges */}
-              <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
-                {[
-                  { src:"https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg", alt:"App Store" },
-                  { src:"https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png", alt:"Google Play" },
-                ].map(({ src, alt }) => (
-                  <div key={alt} style={{ position:"relative", width:145, cursor:"not-allowed" }}>
-                    <img src={src} alt={alt} style={{ width:"100%", height:"auto", display:"block", filter:"blur(2px) grayscale(.6) brightness(.5)", opacity:.45 }}/>
-                    <div style={{ position:"absolute", inset:0, display:"flex", alignItems:"center", justifyContent:"center", background:"rgba(8,15,30,.5)", borderRadius:8 }}>
-                      <span className="mono" style={{ fontSize:".55rem", letterSpacing:".12em", color:"var(--gray3)" }}>COMING SOON</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <p style={{color:"var(--gray2)",fontSize:".88rem",lineHeight:1.78,maxWidth:260,marginBottom:18}}>The fitness accountability partner-matching platform. Find your partner. Make your pact. Never start over.</p>
+              <div className="mono" style={{fontSize:".6rem",letterSpacing:".12em",color:"var(--gray3)",lineHeight:1.8}}>BUILT BY ACCOUNTAFIT CORP<br/>DELAWARE, USA</div>
             </div>
-
-            {/* Links */}
-            <div style={{ display:"flex", flexWrap:"wrap", gap:52 }}>
-              {[
-                { title:"Product", links:[{label:"Features",href:"#features"},{label:"How It Works",href:"#how-it-works"},{label:"FAQ",href:"#faq"}] },
-                { title:"Company", links:[{label:"About",href:"#"},{label:"Contact",href:"mailto:info@accountafit.com"}] },
-                { title:"Legal", links:[{label:"Terms of Service",href:"/terms"},{label:"Privacy Policy",href:"/privacy"},{label:"Community Guidelines",href:"/guidelines"},{label:"Safety Policy",href:"/safety"}] },
-              ].map(({ title, links }) => (
-                <div key={title}>
-                  <div className="mono" style={{ fontSize:".6rem", letterSpacing:".18em", textTransform:"uppercase", color:"rgba(255,255,255,.2)", marginBottom:18 }}>{title}</div>
-                  {links.map(({ label, href }) => (
-                    <a key={label} href={href} style={{ display:"block", color:"var(--gray2)", fontSize:".88rem", marginBottom:12, transition:"color .2s" }}
-                      onMouseEnter={e => e.target.style.color="var(--coral)"}
-                      onMouseLeave={e => e.target.style.color="var(--gray2)"}>{label}</a>
-                  ))}
-                </div>
+            {/* Product */}
+            <div>
+              <div className="mono" style={{fontSize:".6rem",letterSpacing:".18em",color:"var(--gray3)",marginBottom:18}}>PRODUCT</div>
+              {["Features","How It Works","AI Programs","Workout Library","Communities"].map(l=>(
+                <div key={l} style={{marginBottom:12,color:"var(--gray2)",fontSize:".88rem",cursor:"pointer",transition:"color .2s"}}
+                  onMouseEnter={e=>e.target.style.color="var(--frost)"} onMouseLeave={e=>e.target.style.color="var(--gray2)"}>{l}</div>
+              ))}
+            </div>
+            {/* Company */}
+            <div>
+              <div className="mono" style={{fontSize:".6rem",letterSpacing:".18em",color:"var(--gray3)",marginBottom:18}}>COMPANY</div>
+              {["About AccountaFit Corp","Contact","Press"].map(l=>(
+                <div key={l} style={{marginBottom:12,color:"var(--gray2)",fontSize:".88rem",cursor:"pointer",transition:"color .2s"}}
+                  onMouseEnter={e=>e.target.style.color="var(--frost)"} onMouseLeave={e=>e.target.style.color="var(--gray2)"}>{l}</div>
+              ))}
+              <a href="mailto:info@accountafit.com" style={{display:"block",marginBottom:12,color:"var(--gray2)",fontSize:".88rem",transition:"color .2s"}}
+                onMouseEnter={e=>e.target.style.color="var(--frost)"} onMouseLeave={e=>e.target.style.color="var(--gray2)"}>info@accountafit.com</a>
+            </div>
+            {/* Legal */}
+            <div>
+              <div className="mono" style={{fontSize:".6rem",letterSpacing:".18em",color:"var(--gray3)",marginBottom:18}}>LEGAL</div>
+              {[["Terms of Service","/terms"],["Privacy Policy","/privacy"],["Community Guidelines","/guidelines"],["Safety Policy","/safety"]].map(([l,href])=>(
+                <a key={l} href={href} style={{display:"block",marginBottom:12,color:"var(--gray2)",fontSize:".88rem",transition:"color .2s"}}
+                  onMouseEnter={e=>e.target.style.color="var(--frost)"} onMouseLeave={e=>e.target.style.color="var(--gray2)"}>{l}</a>
               ))}
             </div>
           </div>
-
-          <div style={{ height:1, background:"linear-gradient(90deg, transparent, rgba(255,255,255,.07), transparent)", marginBottom:24 }}/>
-          <div style={{ display:"flex", justifyContent:"space-between", flexWrap:"wrap", gap:10 }}>
-            <p className="mono" style={{ fontSize:".6rem", color:"rgba(255,255,255,.18)", letterSpacing:".07em" }}>© 2026 ACCOUNTAFIT CORP. ALL RIGHTS RESERVED. INCORPORATED IN DELAWARE.</p>
-            <p className="mono" style={{ fontSize:".6rem", color:"rgba(255,255,255,.18)", letterSpacing:".07em" }}>STRONGER TOGETHER. ACCOUNTABLE ALWAYS.</p>
+          <div style={{height:1,background:"linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent)",marginBottom:24}}/>
+          <div style={{display:"flex",justifyContent:"space-between",flexWrap:"wrap",gap:12}}>
+            <div className="mono" style={{fontSize:".6rem",letterSpacing:".12em",color:"var(--gray3)"}}>© 2026 ACCOUNTAFIT CORP. ALL RIGHTS RESERVED.</div>
+            <div className="mono" style={{fontSize:".6rem",letterSpacing:".12em",color:"var(--gray3)"}}>YOUR DISCIPLINE STARTS NOW</div>
           </div>
         </div>
       </footer>
@@ -1228,93 +1072,33 @@ function Footer({ t }) {
 }
 
 /* ─────────────────────────────────────────────
-   MODAL
-───────────────────────────────────────────── */
-function Modal({ onClose, t }) {
-  const [email, setEmail] = useState("");
-  const [done, setDone] = useState(false);
-
-  const submit = async (e) => {
-    e.preventDefault();
-    if (!email.trim()) return;
-    try {
-      await fetch("https://formspree.io/f/mnjwagoo", {
-        method:"POST", headers:{ "Content-Type":"application/json", "Accept":"application/json" },
-        body: JSON.stringify({ email, _subject:"New AccountaFit Waitlist Signup", message:`Waitlist signup: ${email}` }),
-      });
-    } catch {}
-    setDone(true);
-  };
-
-  return (
-    <div style={{ position:"fixed", inset:0, zIndex:999, display:"flex", alignItems:"center", justifyContent:"center", padding:20 }} onClick={onClose}>
-      <div style={{ position:"absolute", inset:0, background:"rgba(4,9,20,.92)", backdropFilter:"blur(28px)" }}/>
-      <div className="glass-panel" style={{ position:"relative", padding:"52px 44px", maxWidth:460, width:"100%", borderRadius:28, animation:"fadeUp .3s ease" }} onClick={e => e.stopPropagation()}>
-        <div style={{ position:"absolute", top:0, left:0, right:0, height:2, background:"linear-gradient(90deg, var(--coral), var(--coral2), var(--coral))", borderRadius:"28px 28px 0 0" }}/>
-        <button onClick={onClose} style={{ position:"absolute", top:18, right:22, background:"none", border:"none", color:"rgba(255,255,255,.3)", cursor:"pointer", fontSize:"1.3rem" }}>✕</button>
-
-        {done ? (
-          <div style={{ textAlign:"center" }}>
-            <div style={{ display:"flex", justifyContent:"center", marginBottom:20 }}>
-              <img src="/app-icon.png" alt="AccountaFit" style={{ width:60, height:60, objectFit:"contain" }}/>
-            </div>
-            <div className="bebas" style={{ fontSize:"2.8rem", color:"var(--frost)", marginBottom:10 }}>YOU'RE IN.</div>
-            <p style={{ color:"var(--gray)" }}>We'll reach out when it's your turn. Stay consistent.</p>
-            <button className="btn-primary" onClick={onClose} style={{ marginTop:28, width:"100%" }}>Close</button>
-          </div>
-        ) : (
-          <>
-            <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:24 }}>
-              <img src="/app-icon.png" alt="AccountaFit" style={{ width:42, height:42, objectFit:"contain" }}/>
-              <img src="/wordmark.png" alt="AccountaFit" style={{ height:20, width:"auto", objectFit:"contain" }}/>
-            </div>
-            <span className="mono" style={{ fontSize:".62rem", color:"var(--coral)", letterSpacing:".2em", textTransform:"uppercase" }}>Early Access</span>
-            <h3 className="bebas" style={{ fontSize:"3rem", color:"var(--frost)", marginTop:8, marginBottom:14, lineHeight:.92 }}>
-              JOIN THE<br/><span style={{ color:"var(--coral)" }}>WAITLIST</span>
-            </h3>
-            <p style={{ fontSize:".9rem", color:"var(--gray)", marginBottom:28, lineHeight:1.75 }}>Priority matching and free access to all features at launch. No credit card required.</p>
-            <form onSubmit={submit} style={{ display:"flex", flexDirection:"column", gap:12 }}>
-              <input type="email" placeholder="your@email.com" value={email} onChange={e => setEmail(e.target.value)} required
-                style={{ background:"rgba(255,255,255,.07)", border:"1px solid rgba(255,255,255,.1)", borderRadius:12, color:"var(--frost)", fontFamily:"'Plus Jakarta Sans',sans-serif", fontSize:".95rem", padding:"14px 18px", outline:"none", transition:"border-color .2s" }}
-                onFocus={e => e.target.style.borderColor="rgba(255,77,87,.5)"} onBlur={e => e.target.style.borderColor="rgba(255,255,255,.1)"}/>
-              <button type="submit" className="btn-primary" style={{ justifyContent:"center", padding:"15px 0" }}>Claim My Spot →</button>
-            </form>
-            <p className="mono" style={{ marginTop:12, fontSize:".6rem", color:"var(--gray3)", textAlign:"center", letterSpacing:".08em" }}>NO SPAM. UNSUBSCRIBE ANYTIME.</p>
-          </>
-        )}
-      </div>
-    </div>
-  );
-}
-
-/* ─────────────────────────────────────────────
    ROOT
 ───────────────────────────────────────────── */
 export default function AccountaFit() {
   const [lang, setLang] = useState("en");
-  const [modal, setModal] = useState(false);
+  const [showWaitlist, setShowWaitlist] = useState(false);
   const t = T[lang] || T.en;
+
+  const scrollToWaitlist = () => document.getElementById("waitlist")?.scrollIntoView({behavior:"smooth"});
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: G }} />
-      {/* Fixed atmospheric background */}
+      <style dangerouslySetInnerHTML={{__html:G}}/>
       <div className="page-bg"/>
       <div className="page-bg-noise"/>
-      <Nav lang={lang} setLang={setLang} t={t} onCTA={() => setModal(true)} />
-      <Hero onCTA={() => setModal(true)} t={t} />
-      <LoopMarquee t={t} />
-      <Problem t={t} />
-      <Solution t={t} />
-      <WhatIsIt t={t} onCTA={() => setModal(true)} />
-      <Features t={t} />
-      <SocialProof t={t} />
-      <Pricing t={t} onCTA={() => setModal(true)} />
-      <FAQ t={t} />
-      <FinalCTA t={t} onCTA={() => setModal(true)} />
-      <Footer t={t} />
-      {modal && <Modal onClose={() => setModal(false)} t={t} />}
-      <Chatbot />
+      <Nav lang={lang} setLang={setLang} t={t} onWaitlist={scrollToWaitlist}/>
+      <Hero t={t} onWaitlist={scrollToWaitlist}/>
+      <Marquee/>
+      <Intro t={t} onWaitlist={scrollToWaitlist}/>
+      <HowItWorks t={t}/>
+      <Features t={t}/>
+      <Programs t={t}/>
+      <Library t={t}/>
+      <Community t={t}/>
+      <Waitlist t={t}/>
+      <FAQ t={t}/>
+      <Footer/>
+      <Chatbot t={t}/>
     </>
   );
 }
