@@ -359,16 +359,16 @@ a{color:inherit;text-decoration:none}
 .af-send:hover{opacity:.85}
 .af-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.25);animation:afDot .9s ease-in-out infinite}
 .af-dot:nth-child(2){animation-delay:.2s}.af-dot:nth-child(3){animation-delay:.4s}
-/* ── Mobile Nav ── */
+/* ── Mobile Nav Polish ── */
 .mob-nav-link{
   display:flex;align-items:center;gap:14px;background:none;border:none;
-  color:var(--gray);font-family:"Inter",sans-serif;font-size:1.05rem;
-  text-align:left;cursor:pointer;padding:12px 0;
+  color:var(--gray);font-family:"Inter",sans-serif;font-size:1rem;
+  text-align:left;cursor:pointer;padding:13px 0;
   border-bottom:1px solid rgba(255,255,255,.05);transition:color .2s;width:100%;
 }
-.mob-nav-link:hover{color:var(--frost)}
+.mob-nav-link:hover,.mob-nav-link:focus{color:var(--frost)}
 .mob-nav-link:last-of-type{border-bottom:none}
-.mob-nav-dot{width:5px;height:5px;border-radius:50%;background:rgba(59,123,255,.5);flex-shrink:0}
+.mob-nav-dot{width:5px;height:5px;border-radius:50%;background:rgba(59,123,255,.6);flex-shrink:0}
 
 
 /* ── Responsive ── */
@@ -394,56 +394,6 @@ a{color:inherit;text-decoration:none}
   .af-chat-btn{right:16px;bottom:16px}
 }
 @media(min-width:961px){.hide-d{display:none!important}}
-/* ── Scroll Reveal ── */
-.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-left{opacity:0;transform:translateX(-32px);transition:opacity .7s ease,transform .7s ease}
-.reveal-left.visible{opacity:1;transform:translateX(0)}
-.reveal-right{opacity:0;transform:translateX(32px);transition:opacity .7s ease,transform .7s ease}
-.reveal-right.visible{opacity:1;transform:translateX(0)}
-.reveal-scale{opacity:0;transform:scale(.93);transition:opacity .6s ease,transform .6s ease}
-.reveal-scale.visible{opacity:1;transform:scale(1)}
-@media(prefers-reduced-motion:reduce){.reveal,.reveal-left,.reveal-right,.reveal-scale{opacity:1;transform:none;transition:none}}
-
-/* ── Phone Mockup ── */
-.phone-shell{
-  width:260px;height:520px;border-radius:40px;
-  background:linear-gradient(160deg,rgba(13,22,40,1) 0%,rgba(7,11,22,1) 100%);
-  border:1.5px solid rgba(255,255,255,.13);
-  box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.04),inset 0 1px 0 rgba(255,255,255,.1);
-  position:relative;overflow:hidden;flex-shrink:0;
-}
-.phone-notch{
-  position:absolute;top:12px;left:50%;transform:translateX(-50%);
-  width:80px;height:22px;background:rgba(0,0,0,.9);border-radius:12px;z-index:10;
-}
-.phone-screen{position:absolute;inset:0;padding:44px 14px 14px;display:flex;flex-direction:column;gap:0;overflow:hidden}
-.phone-statusbar{display:flex;justify-content:space-between;align-items:center;padding:0 4px;margin-bottom:14px;flex-shrink:0}
-.phone-tab{display:flex;background:rgba(255,255,255,.05);border-radius:10px;padding:3px;margin-bottom:14px;flex-shrink:0}
-.phone-tab-btn{flex:1;padding:"5px 0";border-radius:8px;border:none;background:none;font-family:"JetBrains Mono",monospace;font-size:.5rem;letter-spacing:.08em;color:var(--gray3);cursor:pointer;transition:all .2s;text-align:center}
-.phone-tab-btn.active{background:rgba(59,123,255,.25);color:var(--blue2)}
-
-/* ── AI Demo ── */
-.sport-pill{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:10px 18px;border-radius:100px;cursor:pointer;
-  border:1px solid var(--glass-border);background:var(--glass-1);
-  font-family:"Inter",sans-serif;font-size:.85rem;color:var(--gray);
-  transition:all .22s ease;white-space:nowrap;
-}
-.sport-pill:hover{border-color:rgba(59,123,255,.4);color:var(--frost);background:rgba(59,123,255,.1)}
-.sport-pill.selected{border-color:rgba(59,123,255,.6);color:var(--frost);background:rgba(59,123,255,.18);box-shadow:0 0 20px rgba(59,123,255,.2)}
-.phase-btn{
-  padding:10px 20px;border-radius:100px;cursor:pointer;
-  border:1px solid var(--glass-border);background:var(--glass-1);
-  font-family:"JetBrains Mono",monospace;font-size:.65rem;letter-spacing:.1em;color:var(--gray);
-  transition:all .22s ease;white-space:nowrap;
-}
-.phase-btn:hover{border-color:rgba(0,212,255,.4);color:var(--cyan)}
-.phase-btn.selected{border-color:rgba(0,212,255,.5);color:var(--cyan);background:rgba(0,212,255,.1)}
-@keyframes progBar{from{width:0}to{width:100%}}
-@keyframes spinPact{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
-
 /* ── Scroll Reveal ── */
 .reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
@@ -512,6 +462,7 @@ a{color:inherit;text-decoration:none}
 /* ─────────────────────────────────────────────
    SCROLL REVEAL HOOK
 ───────────────────────────────────────────── */
+/* single ref-based reveal (used by existing Features/HowItWorks) */
 function useReveal(threshold = 0.15) {
   const ref = useRef(null);
   useEffect(() => {
@@ -527,28 +478,17 @@ function useReveal(threshold = 0.15) {
   return ref;
 }
 
-/* ─────────────────────────────────────────────
-   SCROLL REVEAL HOOK
-───────────────────────────────────────────── */
-function useReveal(className = "reveal") {
+/* global class-based reveal — call once in root to observe all .reveal* elements */
+function useGlobalReveal() {
   useEffect(() => {
-    const els = document.querySelectorAll("." + className);
-    if (!els.length) return;
+    const classes = ["reveal","reveal-left","reveal-right","reveal-scale"];
     const obs = new IntersectionObserver(
       (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); } }),
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
     );
-    els.forEach(el => obs.observe(el));
+    classes.forEach(c => document.querySelectorAll("."+c).forEach(el => obs.observe(el)));
     return () => obs.disconnect();
   });
-}
-
-function Reveal({ children, className = "reveal", delay = 0, style = {} }) {
-  return (
-    <div className={className} style={{ transitionDelay: delay ? `${delay}ms` : undefined, ...style }}>
-      {children}
-    </div>
-  );
 }
 
 /* ─────────────────────────────────────────────
@@ -1854,149 +1794,178 @@ function Pricing({ t, onWaitlist }) {
   );
 }
 
-/* ─────────────────────────────────────────────
-   APP MOCKUP — Phone preview section
-───────────────────────────────────────────── */
-function PhoneMockup() {
-  const [screen, setScreen] = useState(0);
-  useReveal("reveal");
-  useReveal("reveal-left");
-  useReveal("reveal-right");
-  useReveal("reveal-scale");
 
-  const screens = [
-    {
-      label: "MATCH",
-      color: "var(--blue2)",
-      content: (
-        <div style={{display:"flex",flexDirection:"column",gap:10,padding:"0 2px"}}>
-          <div className="mono" style={{fontSize:".52rem",letterSpacing:".16em",color:"var(--gray3)",marginBottom:4}}>NEARBY MATCHES</div>
-          {[
-            {name:"Jordan M.",age:29,sport:"Powerlifting",dist:"12 mi",compat:97,color:"#3B7BFF"},
-            {name:"Alex R.",  age:26,sport:"CrossFit",    dist:"8 mi", compat:94,color:"#00D4FF"},
-            {name:"Sam K.",   age:31,sport:"Hyrox",       dist:"20 mi",compat:88,color:"#A78BFA"},
-          ].map((p,i) => (
-            <div key={i} style={{background:"rgba(255,255,255,.05)",border:"1px solid rgba(255,255,255,.08)",borderRadius:12,padding:"10px 12px",display:"flex",alignItems:"center",gap:10}}>
-              <div style={{width:34,height:34,borderRadius:10,background:`${p.color}22`,border:`1.5px solid ${p.color}44`,display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'Rajdhani',sans-serif",fontWeight:700,fontSize:"1rem",color:p.color,flexShrink:0}}>{p.name[0]}</div>
-              <div style={{flex:1,minWidth:0}}>
-                <div style={{fontWeight:600,fontSize:".72rem",color:"var(--frost)",marginBottom:1}}>{p.name}, {p.age}</div>
-                <div style={{fontSize:".58rem",color:"var(--gray2)"}}>{p.sport} · {p.dist}</div>
-              </div>
-              <div style={{textAlign:"right"}}>
-                <div style={{fontFamily:"'Rajdhani',sans-serif",fontWeight:700,fontSize:".9rem",color:p.color}}>{p.compat}%</div>
-                <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:".42rem",color:"var(--gray3)"}}>MATCH</div>
-              </div>
-            </div>
-          ))}
-          <div style={{display:"flex",gap:8,marginTop:4}}>
-            <div style={{flex:1,padding:"8px",background:"rgba(255,255,255,.04)",border:"1px solid rgba(255,255,255,.08)",borderRadius:10,textAlign:"center",fontFamily:"'JetBrains Mono',monospace",fontSize:".48rem",color:"var(--gray2)",letterSpacing:".08em"}}>SKIP</div>
-            <div style={{flex:2,padding:"8px",background:"linear-gradient(135deg,#3B7BFF,#2563EB)",borderRadius:10,textAlign:"center",fontFamily:"'JetBrains Mono',monospace",fontSize:".48rem",color:"#fff",letterSpacing:".08em"}}>MAKE A PACT →</div>
+/* ─────────────────────────────────────────────
+   APP MOCKUP — Real phone preview
+───────────────────────────────────────────── */
+function PhoneScreen_Home() {
+  return (
+    <div style={{display:"flex",flexDirection:"column",gap:8,flex:1,overflowY:"auto"}}>
+      {/* greeting */}
+      <div style={{background:"rgba(255,255,255,.04)",border:"1px solid rgba(255,255,255,.07)",borderRadius:14,padding:"12px 14px",display:"flex",justifyContent:"space-between",alignItems:"flex-start"}}>
+        <div>
+          <div style={{fontWeight:700,fontSize:".9rem",color:"var(--frost)",marginBottom:2}}>Good Morning, Mike</div>
+          <div style={{fontSize:".58rem",color:"var(--gray2)"}}>Saturday, Jun 13</div>
+          <div style={{marginTop:6,display:"inline-flex",alignItems:"center",gap:4,background:"rgba(59,123,255,.15)",borderRadius:100,padding:"2px 8px"}}>
+            <span style={{fontSize:".56rem"}}>⚡</span>
+            <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:".46rem",color:"var(--blue2)"}}>3 DAY STREAK</span>
           </div>
         </div>
-      )
-    },
-    {
-      label: "WOD",
-      color: "var(--cyan)",
-      content: (
-        <div style={{display:"flex",flexDirection:"column",gap:10,padding:"0 2px"}}>
-          <div className="mono" style={{fontSize:".52rem",letterSpacing:".16em",color:"var(--gray3)",marginBottom:4}}>TODAY'S WOD</div>
-          <div style={{background:"rgba(0,212,255,.08)",border:"1px solid rgba(0,212,255,.2)",borderRadius:14,padding:"14px 14px 10px"}}>
-            <div style={{fontFamily:"'Rajdhani',sans-serif",fontWeight:700,fontSize:"1.1rem",color:"var(--frost)",marginBottom:4}}>Iron Hour</div>
-            <div style={{fontSize:".62rem",color:"var(--cyan)",marginBottom:8,fontFamily:"'JetBrains Mono',monospace",letterSpacing:".08em"}}>FOR TIME · 20 MIN CAP</div>
-            {["1000m Row","50 Thrusters (95/65)","30 Box Jumps (24/20)"].map((m,i)=>(
-              <div key={i} style={{display:"flex",alignItems:"center",gap:6,marginBottom:4}}>
-                <div style={{width:4,height:4,borderRadius:"50%",background:"var(--cyan)",flexShrink:0}}/>
-                <div style={{fontSize:".6rem",color:"var(--gray)"}}>{m}</div>
+        <div style={{width:28,height:28,borderRadius:"50%",background:"rgba(59,123,255,.2)",border:"1.5px solid rgba(59,123,255,.4)",display:"flex",alignItems:"center",justifyContent:"center"}}>
+          <span style={{fontSize:".7rem"}}>🔥</span>
+        </div>
+      </div>
+      {/* connections */}
+      <div style={{background:"rgba(255,255,255,.03)",border:"1px solid rgba(255,255,255,.06)",borderRadius:12,padding:"10px 12px"}}>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
+          <div style={{fontSize:".62rem",fontWeight:600,color:"var(--frost)"}}>Connections</div>
+          <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:".44rem",color:"var(--blue2)"}}>VIEW ALL</div>
+        </div>
+        <div style={{display:"flex",gap:10}}>
+          {[{name:"Pr",online:false},{name:"Mark",online:true},{name:"Carleigh",online:false}].map((p,i)=>(
+            <div key={i} style={{display:"flex",flexDirection:"column",alignItems:"center",gap:3}}>
+              <div style={{position:"relative"}}>
+                <div style={{width:28,height:28,borderRadius:"50%",background:`rgba(${i===0?"124,92,252":i===1?"59,123,255":"0,212,255"},.25)`,border:`1.5px solid rgba(${i===0?"124,92,252":i===1?"59,123,255":"0,212,255"},.5)`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:".58rem",fontWeight:700,color:"var(--frost)"}}>{p.name[0]}</div>
+                {p.online && <div style={{position:"absolute",bottom:0,right:0,width:7,height:7,borderRadius:"50%",background:"#22c55e",border:"1.5px solid #080c14"}}/>}
+              </div>
+              <div style={{fontSize:".42rem",color:"var(--gray2)"}}>{p.name}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* WOD */}
+      <div style={{background:"rgba(15,25,15,.8)",border:"1px solid rgba(34,197,94,.2)",borderRadius:12,padding:"10px 12px"}}>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:6}}>
+          <div style={{display:"flex",alignItems:"center",gap:5}}>
+            <span style={{fontSize:".7rem"}}>👑</span>
+            <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:".46rem",color:"#facc15",letterSpacing:".08em"}}>KING/QUEEN OF THE WOD</div>
+          </div>
+          <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:".46rem",color:"var(--cyan)"}}>06:42:21</div>
+        </div>
+        <div style={{fontWeight:700,fontSize:".82rem",color:"var(--frost)",marginBottom:4}}>Iron Hour</div>
+        {["1000m Row","50 DB Thrusters 50/35lb","30 Pull-Ups","50 Wall Ball Shots"].map((m,i)=>(
+          <div key={i} style={{fontSize:".52rem",color:"var(--gray2)",marginBottom:1}}>• {m}</div>
+        ))}
+        <div style={{display:"flex",gap:6,marginTop:8}}>
+          <div style={{flex:1,padding:"5px",background:"rgba(0,212,255,.15)",border:"1px solid rgba(0,212,255,.3)",borderRadius:8,textAlign:"center",fontFamily:"'JetBrains Mono',monospace",fontSize:".46rem",color:"var(--cyan)"}}>LOG SCORE</div>
+          <div style={{flex:1,padding:"5px",background:"rgba(255,255,255,.05)",border:"1px solid rgba(255,255,255,.1)",borderRadius:8,textAlign:"center",fontFamily:"'JetBrains Mono',monospace",fontSize:".46rem",color:"var(--gray2)"}}>ADD TO SCHEDULE</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PhoneScreen_Match() {
+  return (
+    <div style={{display:"flex",flexDirection:"column",gap:8,flex:1}}>
+      {/* tab */}
+      <div style={{display:"flex",gap:6,marginBottom:2}}>
+        <div style={{flex:1,padding:"5px 0",background:"rgba(59,123,255,.2)",border:"1px solid rgba(59,123,255,.4)",borderRadius:100,textAlign:"center",fontFamily:"'JetBrains Mono',monospace",fontSize:".46rem",color:"var(--blue2)"}}>❤ MATCHES</div>
+        <div style={{flex:1,padding:"5px 0",background:"rgba(255,255,255,.04)",border:"1px solid rgba(255,255,255,.08)",borderRadius:100,textAlign:"center",fontFamily:"'JetBrains Mono',monospace",fontSize:".46rem",color:"var(--gray3)"}}>PARTNERS</div>
+      </div>
+      {/* match card */}
+      <div style={{flex:1,background:"rgba(255,255,255,.03)",border:"1px solid rgba(255,255,255,.08)",borderRadius:16,overflow:"hidden",position:"relative"}}>
+        {/* pixel art placeholder */}
+        <div style={{height:140,background:"linear-gradient(160deg,rgba(20,30,60,.9),rgba(10,15,30,.95))",display:"flex",alignItems:"center",justifyContent:"center",position:"relative"}}>
+          <div style={{display:"flex",gap:8}}>
+            {["#3B7BFF","#A78BFA","#00D4FF"].map((c,i)=>(
+              <div key={i} style={{width:28,height:40,borderRadius:6,background:`${c}22`,border:`1.5px solid ${c}44`,display:"flex",alignItems:"flex-end",justifyContent:"center",paddingBottom:3}}>
+                <div style={{width:16,height:20,borderRadius:4,background:c+"55"}}/>
               </div>
             ))}
           </div>
-          <div className="mono" style={{fontSize:".48rem",letterSpacing:".12em",color:"var(--gray3)"}}>LEADERBOARD</div>
-          {[["👑","Alex R.","14:22"],["2","Jordan M.","15:08"],["3","Sam K.","16:44"]].map(([rank,name,time],i)=>(
-            <div key={i} style={{display:"flex",alignItems:"center",gap:8,padding:"6px 10px",background:i===0?"rgba(0,212,255,.08)":"rgba(255,255,255,.03)",border:`1px solid ${i===0?"rgba(0,212,255,.2)":"rgba(255,255,255,.06)"}`,borderRadius:10}}>
-              <div style={{fontSize:".7rem",width:16,textAlign:"center"}}>{rank}</div>
-              <div style={{flex:1,fontSize:".62rem",color:"var(--frost)",fontWeight:600}}>{name}</div>
-              <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:".58rem",color:i===0?"var(--cyan)":"var(--gray2)"}}>{time}</div>
-            </div>
-          ))}
-        </div>
-      )
-    },
-    {
-      label: "AI",
-      color: "#A78BFA",
-      content: (
-        <div style={{display:"flex",flexDirection:"column",gap:10,padding:"0 2px"}}>
-          <div className="mono" style={{fontSize:".52rem",letterSpacing:".16em",color:"var(--gray3)",marginBottom:4}}>AI PROGRAM</div>
-          <div style={{background:"rgba(124,92,252,.1)",border:"1px solid rgba(124,92,252,.22)",borderRadius:14,padding:"12px"}}>
-            <div style={{fontFamily:"'Rajdhani',sans-serif",fontWeight:700,fontSize:"1rem",color:"var(--frost)",marginBottom:2}}>12-Week CrossFit</div>
-            <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:".5rem",color:"#A78BFA",letterSpacing:".1em",marginBottom:8}}>BASE BUILD PHASE · WEEK 3</div>
-            <div style={{display:"flex",gap:6,marginBottom:8}}>
-              {["Strength","Conditioning","Recovery"].map((t,i)=>(
-                <div key={i} style={{padding:"3px 8px",background:`rgba(124,92,252,${i===0?.2:.08})`,border:"1px solid rgba(124,92,252,.22)",borderRadius:100,fontFamily:"'JetBrains Mono',monospace",fontSize:".42rem",color:"#A78BFA"}}>{t}</div>
-              ))}
-            </div>
-            <div style={{height:4,background:"rgba(255,255,255,.06)",borderRadius:2,overflow:"hidden"}}>
-              <div style={{height:"100%",width:"38%",background:"linear-gradient(90deg,#7C5CFC,#A78BFA)",borderRadius:2}}/>
-            </div>
-            <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:".46rem",color:"var(--gray3)",marginTop:4}}>WEEK 3 OF 12 · 38% COMPLETE</div>
+          <div style={{position:"absolute",top:8,right:8,background:"rgba(59,123,255,.25)",border:"1px solid rgba(59,123,255,.4)",borderRadius:100,padding:"2px 8px",display:"flex",alignItems:"center",gap:3}}>
+            <span style={{fontSize:".5rem"}}>❤</span>
+            <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:".46rem",color:"var(--blue2)"}}>94% FIT</span>
           </div>
-          {[
-            {day:"MON",wod:"Back Squat 5x5 @ 80%",done:true},
-            {day:"TUE",wod:"Metcon: 21-15-9 C&J + Pull-ups",done:true},
-            {day:"WED",wod:"Active Recovery + Mobility",done:false},
-          ].map((w,i)=>(
-            <div key={i} style={{display:"flex",alignItems:"center",gap:8,padding:"7px 10px",background:"rgba(255,255,255,.03)",border:"1px solid rgba(255,255,255,.06)",borderRadius:10}}>
-              <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:".48rem",color:"var(--gray3)",width:24,flexShrink:0}}>{w.day}</div>
-              <div style={{flex:1,fontSize:".58rem",color:w.done?"var(--gray2)":"var(--frost)"}}>{w.wod}</div>
-              <div style={{width:14,height:14,borderRadius:"50%",background:w.done?"rgba(52,211,153,.2)":"rgba(255,255,255,.05)",border:`1.5px solid ${w.done?"#34D399":"rgba(255,255,255,.1)"}`,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
-                {w.done && <svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="#34D399" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>}
-              </div>
-            </div>
-          ))}
         </div>
-      )
-    },
-  ];
+        <div style={{padding:"10px 12px"}}>
+          <div style={{fontWeight:700,fontSize:".85rem",color:"var(--frost)",marginBottom:4}}>Jordan M., 29</div>
+          <div style={{display:"flex",gap:5,flexWrap:"wrap",marginBottom:8}}>
+            {["📍 Denver · 12mi","📈 Intermediate"].map((t,i)=>(
+              <div key={i} style={{background:"rgba(255,255,255,.06)",borderRadius:100,padding:"2px 7px",fontSize:".48rem",color:"var(--gray2)"}}>{t}</div>
+            ))}
+          </div>
+          <div style={{display:"flex",gap:4,flexWrap:"wrap"}}>
+            {["Powerlifting","CrossFit","Hyrox"].map((t,i)=>(
+              <div key={i} style={{background:"rgba(59,123,255,.12)",border:"1px solid rgba(59,123,255,.25)",borderRadius:100,padding:"2px 7px",fontFamily:"'JetBrains Mono',monospace",fontSize:".44rem",color:"var(--blue2)"}}>{t}</div>
+            ))}
+          </div>
+        </div>
+      </div>
+      {/* pass / like */}
+      <div style={{display:"flex",gap:8}}>
+        <div style={{flex:1,padding:"8px",background:"rgba(255,255,255,.05)",border:"1px solid rgba(255,255,255,.1)",borderRadius:12,textAlign:"center",fontSize:".6rem",color:"var(--gray2)",cursor:"pointer"}}>✕ Pass</div>
+        <div style={{flex:2,padding:"8px",background:"linear-gradient(135deg,#3B7BFF,#2563EB)",borderRadius:12,textAlign:"center",fontSize:".6rem",color:"#fff",cursor:"pointer",fontWeight:600}}>❤ Like</div>
+      </div>
+    </div>
+  );
+}
 
-  const TABS = [
-    {label:"MATCH",color:"var(--blue2)"},
-    {label:"WOD",  color:"var(--cyan)"},
-    {label:"AI",   color:"#A78BFA"},
+function PhoneScreen_Library() {
+  const tiles = [
+    {icon:"✨",label:"Programs",sub:"0 active",color:"#3B7BFF"},
+    {icon:"👑",label:"Crown Archive",sub:"Past WODs",color:"#facc15"},
+    {icon:"💪",label:"Workouts",sub:"178 saved",color:"#f59e0b"},
+    {icon:"🎯",label:"Goals & Events",sub:"7 events",color:"#10b981"},
+    {icon:"🏃",label:"Movements",sub:"Catalog",color:"#06b6d4"},
+    {icon:"🏆",label:"Personal Records",sub:"PRs · Manage",color:"#a78bfa"},
   ];
+  return (
+    <div style={{flex:1,overflowY:"auto"}}>
+      <div style={{background:"rgba(255,255,255,.04)",border:"1px solid rgba(255,255,255,.07)",borderRadius:12,padding:"8px 12px",marginBottom:8,display:"flex",alignItems:"center",gap:8}}>
+        <span style={{fontSize:".7rem",color:"var(--gray3)"}}>🔍</span>
+        <span style={{fontSize:".58rem",color:"var(--gray3)"}}>Search Library</span>
+      </div>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:6}}>
+        {tiles.map((t,i)=>(
+          <div key={i} style={{background:"rgba(255,255,255,.03)",border:"1px solid rgba(255,255,255,.06)",borderRadius:12,padding:"10px 10px 8px",cursor:"pointer"}}>
+            <span style={{fontSize:".9rem",display:"block",marginBottom:14}}>{t.icon}</span>
+            <div style={{fontWeight:700,fontSize:".65rem",color:"var(--frost)",marginBottom:2}}>{t.label}</div>
+            <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:".44rem",color:t.color}}>{t.sub}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
+const PHONE_SCREENS = [
+  {id:"home",    label:"Home",    icon:<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,    content:<PhoneScreen_Home/>},
+  {id:"match",   label:"Match",   icon:<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>, content:<PhoneScreen_Match/>},
+  {id:"library", label:"Library", icon:<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>, content:<PhoneScreen_Library/>},
+];
+
+function PhoneMockup() {
+  const [active, setActive] = useState(0);
   return (
     <>
       <div className="divider"/>
       <section className="sec" id="app-preview" style={{overflow:"hidden"}}>
         <div className="wrap">
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:80,alignItems:"center"}} className="two-col">
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:72,alignItems:"center"}} className="two-col">
 
-            {/* Left — copy */}
+            {/* Left */}
             <div className="reveal-left">
               <div className="eyebrow">APP PREVIEW</div>
-              <h2 className="raj" style={{fontWeight:700,fontSize:"clamp(2.4rem,4.5vw,3.4rem)",lineHeight:1.02,letterSpacing:".02em",marginBottom:20,color:"var(--frost)"}}>
+              <h2 className="raj" style={{fontWeight:700,fontSize:"clamp(2.2rem,4vw,3.2rem)",lineHeight:1.02,letterSpacing:".02em",marginBottom:18,color:"var(--frost)"}}>
                 Built for the<br/>
                 <span style={{background:"linear-gradient(135deg,#3B7BFF,#00D4FF)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",backgroundClip:"text"}}>athlete in you.</span>
               </h2>
-              <p style={{color:"var(--gray)",fontSize:"1rem",lineHeight:1.82,marginBottom:36}}>
-                Every screen in PACT is built around one goal — keeping you and your partner locked in. Match, compete, and train from a single unified home.
-              </p>
-              <div style={{display:"flex",flexDirection:"column",gap:16}}>
+              <p style={{color:"var(--gray)",fontSize:"1rem",lineHeight:1.82,marginBottom:32}}>Every screen in PACT is purpose-built — keep you and your partner locked in from the moment you open the app.</p>
+              <div style={{display:"flex",flexDirection:"column",gap:12}}>
                 {[
-                  {label:"MATCH",   desc:"Browse and connect with accountability partners",    color:"var(--blue2)"},
-                  {label:"WOD",     desc:"Daily benchmark leaderboard — claim your crown",      color:"var(--cyan)"},
-                  {label:"AI PLAN", desc:"Your personalized training program, always ready",    color:"#A78BFA"},
-                ].map((item,i) => (
-                  <div key={i} onClick={()=>setScreen(i)} style={{display:"flex",alignItems:"center",gap:16,padding:"14px 18px",background:screen===i?"rgba(59,123,255,.08)":"var(--glass-1)",border:`1px solid ${screen===i?"rgba(59,123,255,.28)":"var(--glass-border)"}`,borderRadius:"var(--r-md)",cursor:"pointer",transition:"all .2s"}}>
-                    <div style={{width:36,height:36,borderRadius:10,background:`rgba(${item.color==="var(--blue2)"?"59,123,255":item.color==="var(--cyan)"?"0,212,255":"124,92,252"},.15)`,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
-                      <div className="mono" style={{fontSize:".46rem",color:item.color,letterSpacing:".08em"}}>{item.label}</div>
-                    </div>
+                  {idx:0,label:"Home Dashboard",  desc:"WOD countdown, connections, streak & upcoming events",color:"var(--blue2)"},
+                  {idx:1,label:"Partner Matching", desc:"Swipe profiles by sport, level, and distance",         color:"var(--cyan)"},
+                  {idx:2,label:"Library",          desc:"Programs, workouts, goals, movements, and PRs",        color:"#A78BFA"},
+                ].map(item=>(
+                  <div key={item.idx} onClick={()=>setActive(item.idx)}
+                    style={{display:"flex",alignItems:"center",gap:14,padding:"13px 16px",background:active===item.idx?"rgba(59,123,255,.08)":"var(--glass-1)",border:`1px solid ${active===item.idx?"rgba(59,123,255,.3)":"var(--glass-border)"}`,borderRadius:"var(--r-md)",cursor:"pointer",transition:"all .2s"}}>
+                    <div style={{width:8,height:8,borderRadius:"50%",background:active===item.idx?item.color:"var(--gray3)",border:`1.5px solid ${item.color}`,transition:"background .2s",flexShrink:0}}/>
                     <div>
-                      <div style={{fontFamily:"'Rajdhani',sans-serif",fontWeight:700,fontSize:"1rem",color:"var(--frost)",marginBottom:2}}>{item.label}</div>
-                      <div style={{fontSize:".82rem",color:"var(--gray)"}}>{item.desc}</div>
+                      <div className="raj" style={{fontWeight:700,fontSize:"1rem",color:active===item.idx?"var(--frost)":"var(--gray)",marginBottom:2,transition:"color .2s"}}>{item.label}</div>
+                      <div style={{fontSize:".8rem",color:"var(--gray2)"}}>{item.desc}</div>
                     </div>
-                    <div style={{marginLeft:"auto",width:6,height:6,borderRadius:"50%",background:screen===i?item.color:"transparent",border:`1.5px solid ${item.color}`,transition:"background .2s",flexShrink:0}}/>
                   </div>
                 ))}
               </div>
@@ -2004,50 +1973,44 @@ function PhoneMockup() {
 
             {/* Right — phone */}
             <div className="hide-m reveal-right" style={{display:"flex",justifyContent:"center",position:"relative"}}>
-              {/* Glow behind phone */}
-              <div style={{position:"absolute",inset:"-60px",background:`radial-gradient(ellipse 60% 60% at 50% 50%,rgba(59,123,255,.22) 0%,transparent 70%)`,pointerEvents:"none"}}/>
+              <div style={{position:"absolute",inset:"-80px",background:"radial-gradient(ellipse 55% 55% at 50% 50%,rgba(59,123,255,.18) 0%,transparent 70%)",pointerEvents:"none"}}/>
               <div className="phone-shell">
                 <div className="phone-notch"/>
                 <div className="phone-screen">
-                  {/* Status bar */}
-                  <div className="phone-statusbar">
-                    <span className="mono" style={{fontSize:".46rem",color:"var(--gray2)"}}>9:41</span>
-                    <div style={{display:"flex",gap:4,alignItems:"center"}}>
-                      {[3,4,5].map(i=><div key={i} style={{width:3,height:i*1.5,background:"var(--gray2)",borderRadius:1}}/>)}
-                      <div style={{width:14,height:7,border:"1.5px solid var(--gray2)",borderRadius:2,padding:"1px 1px",display:"flex",alignItems:"center"}}>
+                  {/* status bar */}
+                  <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"0 2px",marginBottom:10,flexShrink:0}}>
+                    <span className="mono" style={{fontSize:".44rem",color:"var(--gray2)"}}>9:41</span>
+                    <div style={{display:"flex",gap:3,alignItems:"center"}}>
+                      {[3,4,5].map(i=><div key={i} style={{width:2.5,height:i*1.2,background:"var(--gray2)",borderRadius:1}}/>)}
+                      <div style={{width:12,height:6,border:"1.5px solid var(--gray2)",borderRadius:2,padding:"1px",marginLeft:2}}>
                         <div style={{width:"60%",height:"100%",background:"var(--gray2)",borderRadius:1}}/>
                       </div>
                     </div>
                   </div>
-
-                  {/* Tab bar */}
-                  <div className="phone-tab">
-                    {TABS.map((tab,i)=>(
-                      <button key={i} className={`phone-tab-btn${screen===i?" active":""}`} onClick={()=>setScreen(i)}
-                        style={{color:screen===i?tab.color:undefined,padding:"5px 0"}}>
-                        {tab.label}
-                      </button>
-                    ))}
+                  {/* logo */}
+                  <div style={{textAlign:"center",marginBottom:8,flexShrink:0}}>
+                    <img src="/images/pact-logo-full.webp" alt="PACT" style={{height:18,width:"auto",mixBlendMode:"lighten",filter:"drop-shadow(0 0 6px rgba(59,123,255,.5))"}}/>
                   </div>
-
-                  {/* Screen content */}
-                  <div style={{flex:1,overflowY:"auto",paddingBottom:4}}>
-                    {screens[screen].content}
+                  {/* screen content */}
+                  <div style={{flex:1,overflow:"hidden",display:"flex",flexDirection:"column"}}>
+                    {PHONE_SCREENS[active].content}
                   </div>
-
-                  {/* Bottom nav */}
-                  <div style={{display:"flex",justifyContent:"space-around",paddingTop:10,borderTop:"1px solid rgba(255,255,255,.07)",flexShrink:0}}>
-                    {[
-                      {icon:<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>, label:"Home"},
-                      {icon:<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>, label:"Match"},
-                      {icon:<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>, label:"Chat"},
-                      {icon:<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>, label:"Me"},
-                    ].map((n,i)=>(
-                      <div key={i} style={{display:"flex",flexDirection:"column",alignItems:"center",gap:2,color:i===0?"var(--blue2)":"var(--gray3)",cursor:"pointer"}}>
-                        {n.icon}
-                        <span className="mono" style={{fontSize:".36rem",letterSpacing:".08em"}}>{n.label}</span>
-                      </div>
+                  {/* bottom nav */}
+                  <div className="phone-bnav">
+                    {PHONE_SCREENS.map((s,i)=>(
+                      i === active
+                        ? <div key={i} className="phone-bnav-pill" onClick={()=>setActive(i)} style={{cursor:"pointer"}}>
+                            <span style={{color:"var(--blue2)"}}>{s.icon}</span>
+                            <span className="mono" style={{fontSize:".42rem",color:"var(--blue2)",letterSpacing:".06em"}}>{s.label.toUpperCase()}</span>
+                          </div>
+                        : <div key={i} onClick={()=>setActive(i)} style={{cursor:"pointer",color:"var(--gray3)",padding:"2px 6px"}}>{s.icon}</div>
                     ))}
+                    <div style={{color:"var(--gray3)",padding:"2px 6px"}}>
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    </div>
+                    <div style={{color:"var(--gray3)",padding:"2px 6px"}}>
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -2061,146 +2024,158 @@ function PhoneMockup() {
 }
 
 /* ─────────────────────────────────────────────
-   AI PROGRAM BUILDER DEMO — Interactive sport picker
+   AI PROGRAM BUILDER DEMO
 ───────────────────────────────────────────── */
-const SPORT_DATA = {
-  "Bodybuilding":       {emoji:"💪", phase:"Hypertrophy", weeks:12, days:5, tag:"tag-amber"},
-  "CrossFit":           {emoji:"⚡", phase:"Base Build",  weeks:12, days:5, tag:"tag-green"},
-  "Hyrox":              {emoji:"🏃", phase:"Race Prep",   weeks:16, days:4, tag:"tag-cyan"},
-  "Powerlifting":       {emoji:"🏋️", phase:"Strength",    weeks:10, days:4, tag:"tag-purple"},
-  "Running":            {emoji:"👟", phase:"Endurance",   weeks:14, days:5, tag:"tag-blue"},
-  "General Fitness":    {emoji:"🎯", phase:"Foundation",  weeks:8,  days:4, tag:"tag-blue"},
-  "Weight Loss":        {emoji:"🔥", phase:"Cut",         weeks:12, days:5, tag:"tag-amber"},
-  "Olympic Lifting":    {emoji:"🥇", phase:"Technical",   weeks:10, days:5, tag:"tag-cyan"},
-  "Marathon":           {emoji:"🏅", phase:"Build",       weeks:20, days:5, tag:"tag-green"},
-  "Swimming":           {emoji:"🌊", phase:"Aerobic",     weeks:12, days:4, tag:"tag-blue"},
-  "Strength Training":  {emoji:"⚙️", phase:"Progressive", weeks:10, days:4, tag:"tag-purple"},
-  "Triathlon":          {emoji:"🚴", phase:"Multi-Sport", weeks:24, days:6, tag:"tag-cyan"},
+const SPORTS_GRID = [
+  {key:"Bodybuilding",        emoji:"💪"},
+  {key:"General Fitness",     emoji:"🎯"},
+  {key:"Weight Loss",         emoji:"🔥"},
+  {key:"General Strength",    emoji:"⚙️"},
+  {key:"Powerlifting",        emoji:"🏋️"},
+  {key:"Olympic Lifting",     emoji:"🥇"},
+  {key:"CrossFit",            emoji:"⚡"},
+  {key:"Hyrox",               emoji:"🏃"},
+  {key:"Running",             emoji:"👟"},
+  {key:"Marathon",            emoji:"🏅"},
+  {key:"Triathlon",           emoji:"🚴"},
+  {key:"Swimming",            emoji:"🌊"},
+];
+
+const PHASE_OPTIONS = [
+  {key:"Base Build Peak",    desc:"Progressive overload from foundation to peak"},
+  {key:"Conservative Base",  desc:"Gradual build, lower intensity"},
+  {key:"Aggressive Build",   desc:"High volume, accelerated gains"},
+  {key:"Maintenance Focus",  desc:"Hold current fitness level"},
+];
+
+const PROGRAM_PREVIEW = {
+  "Base Build Peak":   [{d:"MON",w:"Strength Foundation",x:"5×5 @ 70%",rest:false},{d:"TUE",w:"Conditioning",x:"AMRAP 20 min",rest:false},{d:"WED",w:"Active Recovery",x:"Mobility",rest:true},{d:"THU",w:"Skill Work",x:"Technique",rest:false},{d:"FRI",w:"WOD Benchmark",x:"For Time",rest:false},{d:"SAT",w:"Long Effort",x:"Aerobic Base",rest:false},{d:"SUN",w:"Rest",x:"Recovery",rest:true}],
+  "Conservative Base": [{d:"MON",w:"Base Lift",x:"3×8 @ 65%",rest:false},{d:"TUE",w:"Zone 2 Cardio",x:"40 min easy",rest:false},{d:"WED",w:"Rest",x:"Optional mobility",rest:true},{d:"THU",w:"Full Body",x:"Circuit",rest:false},{d:"FRI",w:"Benchmark",x:"Test effort",rest:false},{d:"SAT",w:"Outdoor",x:"Free choice",rest:false},{d:"SUN",w:"Rest",x:"Recovery",rest:true}],
+  "Aggressive Build":  [{d:"MON",w:"Max Effort",x:"Work to 1RM",rest:false},{d:"TUE",w:"High Intensity",x:"Tabata + EMOM",rest:false},{d:"WED",w:"Speed Work",x:"Sprint intervals",rest:false},{d:"THU",w:"Heavy Metcon",x:"Partner WOD",rest:false},{d:"FRI",w:"Volume Day",x:"5×5 clusters",rest:false},{d:"SAT",w:"Competition",x:"Test week",rest:false},{d:"SUN",w:"Rest",x:"Full recovery",rest:true}],
+  "Maintenance Focus": [{d:"MON",w:"Moderate Lift",x:"3×8 @ 75%",rest:false},{d:"TUE",w:"Cardio",x:"30 min Zone 2",rest:false},{d:"WED",w:"Rest",x:"Optional",rest:true},{d:"THU",w:"Full Body",x:"Circuit",rest:false},{d:"FRI",w:"Fun WOD",x:"Partner choice",rest:false},{d:"SAT",w:"Activity",x:"Free choice",rest:false},{d:"SUN",w:"Rest",x:"Recovery",rest:true}],
 };
 
-const PHASES = ["Base Build", "Aggressive Peak", "Maintenance"];
-
-const SAMPLE_WEEKS = {
-  "Base Build":      [{label:"Mon",wod:"Strength Foundation",detail:"5×5 @ 70%"},{label:"Tue",wod:"Conditioning",detail:"AMRAP 20 min"},{label:"Wed",wod:"Active Recovery",detail:"Mobility + Row"},{label:"Thu",wod:"Skill Work",detail:"Technique Focus"},{label:"Fri",wod:"WOD Benchmark",detail:"For Time"},{label:"Sat",wod:"Long Effort",detail:"Aerobic Base"},{label:"Sun",wod:"Rest",detail:"Full Recovery"}],
-  "Aggressive Peak": [{label:"Mon",wod:"Max Effort Lift",detail:"Work to 1RM"},{label:"Tue",wod:"High Intensity",detail:"Tabata + EMOM"},{label:"Wed",wod:"Speed Work",detail:"Sprint Intervals"},{label:"Thu",wod:"Heavy Metcon",detail:"Partner WOD"},{label:"Fri",wod:"Competition Prep",detail:"Test Week"},{label:"Sat",wod:"Volume Day",detail:"5×5 Clusters"},{label:"Sun",wod:"Rest",detail:"Full Recovery"}],
-  "Maintenance":     [{label:"Mon",wod:"Moderate Lift",detail:"3×8 @ 75%"},{label:"Tue",wod:"Cardio",detail:"30 min Zone 2"},{label:"Wed",wod:"Rest",detail:"Optional Mobility"},{label:"Thu",wod:"Full Body",detail:"Circuit Training"},{label:"Fri",wod:"Fun WOD",detail:"Partner Choice"},{label:"Sat",wod:"Outdoor Activity",detail:"Free Choice"},{label:"Sun",wod:"Rest",detail:"Full Recovery"}],
+const SPORT_META = {
+  "Bodybuilding":{weeks:12,days:5},"General Fitness":{weeks:8,days:4},"Weight Loss":{weeks:12,days:5},
+  "General Strength":{weeks:10,days:4},"Powerlifting":{weeks:10,days:4},"Olympic Lifting":{weeks:10,days:5},
+  "CrossFit":{weeks:12,days:5},"Hyrox":{weeks:16,days:4},"Running":{weeks:14,days:5},
+  "Marathon":{weeks:20,days:5},"Triathlon":{weeks:24,days:6},"Swimming":{weeks:12,days:4},
 };
 
 function AIDemo({ t }) {
   const [sport, setSport] = useState("CrossFit");
-  const [phase, setPhase] = useState("Base Build");
+  const [phase, setPhase] = useState("Base Build Peak");
   const [generating, setGenerating] = useState(false);
   const [generated, setGenerated] = useState(false);
-  const sports = t.sports || Object.keys(SPORT_DATA);
+  const [progress, setProgress] = useState(0);
 
   const generate = () => {
-    setGenerating(true);
-    setGenerated(false);
-    setTimeout(() => { setGenerating(false); setGenerated(true); }, 1800);
+    setGenerating(true); setGenerated(false); setProgress(0);
+    const interval = setInterval(()=>setProgress(p=>{if(p>=95){clearInterval(interval);return 95;}return p+Math.random()*12;}),180);
+    setTimeout(()=>{ clearInterval(interval); setProgress(100); setTimeout(()=>{ setGenerating(false); setGenerated(true); }, 300); }, 1900);
   };
 
-  const sportKey = Object.keys(SPORT_DATA).find(k => k.toLowerCase() === sport.toLowerCase()) || "CrossFit";
-  const meta = SPORT_DATA[sportKey] || SPORT_DATA["CrossFit"];
-  const weeks = SAMPLE_WEEKS[phase] || SAMPLE_WEEKS["Base Build"];
+  const meta = SPORT_META[sport] || {weeks:12,days:5};
+  const days = PROGRAM_PREVIEW[phase] || PROGRAM_PREVIEW["Base Build Peak"];
+  const sportEmoji = SPORTS_GRID.find(s=>s.key===sport)?.emoji || "⚡";
 
   return (
     <>
       <div className="divider"/>
       <section className="sec" id="ai-demo">
         <div className="wrap">
-          <div style={{textAlign:"center",maxWidth:600,margin:"0 auto 56px"}}>
+          <div style={{textAlign:"center",maxWidth:580,margin:"0 auto 52px"}}>
             <div className="eyebrow reveal" style={{justifyContent:"center",display:"flex"}}>{t.progEyebrow || "AI PROGRAM BUILDER"}</div>
-            <h2 className="raj reveal" style={{fontWeight:700,fontSize:"clamp(2.4rem,4.5vw,3.4rem)",lineHeight:1,letterSpacing:".02em",marginBottom:16,whiteSpace:"pre-line"}}>{t.progH || "Your coach.
-Powered by AI."}</h2>
-            <p className="reveal" style={{color:"var(--gray)",fontSize:"1rem",lineHeight:1.82}}>{t.progSub || "Select your sport, set your goal, and PACT's AI generates a fully periodized training program."}</p>
+            <h2 className="raj reveal" style={{fontWeight:700,fontSize:"clamp(2.4rem,4.5vw,3.4rem)",lineHeight:1,letterSpacing:".02em",marginBottom:14,whiteSpace:"pre-line"}}>{t.progH || "Your coach.\nPowered by AI."}</h2>
+            <p className="reveal" style={{color:"var(--gray)",fontSize:"1rem",lineHeight:1.8}}>{t.progSub || "Select your sport, set your phase, and PACT's AI generates a fully periodized training program tailored to you."}</p>
           </div>
 
-          <div className="glass reveal" style={{padding:"40px 36px",maxWidth:860,margin:"0 auto"}}>
-            {/* Step 1 — Sport */}
-            <div style={{marginBottom:32}}>
-              <div className="mono" style={{fontSize:".6rem",letterSpacing:".18em",color:"var(--cyan)",marginBottom:16}}>01 — SELECT YOUR SPORT</div>
-              <div style={{display:"flex",flexWrap:"wrap",gap:10}}>
-                {Object.keys(SPORT_DATA).map(s => (
-                  <button key={s} className={`sport-pill${sport===s?" selected":""}`} onClick={()=>{setSport(s);setGenerated(false);}}>
-                    <span>{SPORT_DATA[s].emoji}</span>{s}
-                  </button>
+          <div className="glass reveal" style={{padding:"36px 32px",maxWidth:820,margin:"0 auto"}}>
+
+            {/* Step 1 — Sport grid (mirrors real app layout) */}
+            <div style={{marginBottom:28}}>
+              <div className="mono" style={{fontSize:".58rem",letterSpacing:".18em",color:"var(--blue2)",marginBottom:14}}>01 — SELECT YOUR SPORT</div>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
+                {SPORTS_GRID.map(s=>(
+                  <div key={s.key} className={`sport-tile${sport===s.key?" selected":""}`} onClick={()=>{setSport(s.key);setGenerated(false);}}>
+                    <span style={{fontSize:"1.1rem",flexShrink:0}}>{s.emoji}</span>
+                    <span style={{fontWeight:sport===s.key?600:400}}>{s.key}</span>
+                  </div>
                 ))}
               </div>
             </div>
 
-            {/* Step 2 — Phase */}
-            <div style={{marginBottom:32}}>
-              <div className="mono" style={{fontSize:".6rem",letterSpacing:".18em",color:"var(--cyan)",marginBottom:16}}>02 — CHOOSE YOUR PHASE</div>
-              <div style={{display:"flex",gap:10,flexWrap:"wrap"}}>
-                {PHASES.map(p => (
-                  <button key={p} className={`phase-btn${phase===p?" selected":""}`} onClick={()=>{setPhase(p);setGenerated(false);}}>
-                    {p}
+            {/* Step 2 — Phase (mirrors real app: Base Build Peak / Conservative Base / Aggressive Build / Maintenance Focus) */}
+            <div style={{marginBottom:28}}>
+              <div className="mono" style={{fontSize:".58rem",letterSpacing:".18em",color:"var(--blue2)",marginBottom:14}}>02 — PHASE PREFERENCE</div>
+              <div style={{display:"flex",flexWrap:"wrap",gap:8}}>
+                {PHASE_OPTIONS.map(p=>(
+                  <button key={p.key} className={`phase-chip${phase===p.key?" selected":""}`} onClick={()=>{setPhase(p.key);setGenerated(false);}}>
+                    {p.key}
                   </button>
                 ))}
               </div>
+              {phase && <p style={{fontSize:".8rem",color:"var(--gray2)",marginTop:10}}>{PHASE_OPTIONS.find(p=>p.key===phase)?.desc}</p>}
             </div>
 
-            {/* Generate button */}
-            <button
-              className="btn-primary"
-              onClick={generate}
-              disabled={generating}
-              style={{width:"100%",justifyContent:"center",marginBottom:generated?28:0,opacity:generating?.7:1,position:"relative"}}
-            >
+            {/* Generate */}
+            <button className="btn-primary" onClick={generate} disabled={generating}
+              style={{width:"100%",justifyContent:"center",marginBottom:generated||generating?24:0,opacity:generating?.75:1}}>
               {generating ? (
-                <>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{animation:"spinPact 1s linear infinite"}}><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
-                  GENERATING YOUR PROGRAM...
-                </>
+                <><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{animation:"spinPact 1s linear infinite"}}><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>GENERATING YOUR PROGRAM...</>
               ) : generated ? (
-                <>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  REGENERATE PROGRAM
-                </>
+                <><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>REGENERATE PROGRAM</>
               ) : (
-                <>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                  GENERATE MY PROGRAM
-                </>
+                <><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>GENERATE MY PROGRAM</>
               )}
             </button>
 
+            {/* Progress bar */}
+            {generating && (
+              <div style={{marginBottom:20}}>
+                <div style={{height:4,background:"rgba(255,255,255,.07)",borderRadius:2,overflow:"hidden",marginBottom:8}}>
+                  <div style={{height:"100%",width:`${progress}%`,background:"linear-gradient(90deg,#3B7BFF,#00D4FF)",borderRadius:2,transition:"width .2s ease"}}/>
+                </div>
+                <div className="mono" style={{fontSize:".54rem",color:"var(--gray3)",textAlign:"center",letterSpacing:".1em"}}>
+                  {progress < 40 ? "ANALYZING YOUR SPORT..." : progress < 75 ? `WRITING WEEK 1 WORKOUTS...` : "FINALIZING PROGRAM..."}
+                </div>
+              </div>
+            )}
+
             {/* Output */}
             {generated && (
-              <div style={{animation:"fadeUp .5s ease both"}}>
-                {/* Header */}
-                <div style={{background:"rgba(59,123,255,.08)",border:"1px solid rgba(59,123,255,.2)",borderRadius:"var(--r-md)",padding:"20px 24px",marginBottom:20,display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:16}}>
+              <div style={{animation:"fadeUp .45s ease both"}}>
+                <div style={{background:"rgba(59,123,255,.07)",border:"1px solid rgba(59,123,255,.2)",borderRadius:"var(--r-md)",padding:"18px 22px",marginBottom:18,display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:12}}>
                   <div>
-                    <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:6}}>
-                      <span style={{fontSize:"1.4rem"}}>{meta.emoji}</span>
-                      <h3 className="raj" style={{fontWeight:700,fontSize:"1.3rem",color:"var(--frost)",margin:0}}>{meta.weeks}-Week {sport} Program</h3>
+                    <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:8}}>
+                      <span style={{fontSize:"1.5rem"}}>{sportEmoji}</span>
+                      <h3 className="raj" style={{fontWeight:700,fontSize:"1.25rem",color:"var(--frost)",margin:0}}>{meta.weeks}-Week {sport} Program</h3>
                     </div>
-                    <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
-                      <span className={`tag ${meta.tag}`}>{phase}</span>
-                      <span className="tag tag-blue">{meta.days} DAYS/WEEK</span>
+                    <div style={{display:"flex",gap:7,flexWrap:"wrap"}}>
+                      <span className="tag tag-blue">{phase}</span>
+                      <span className="tag tag-cyan">{meta.days} DAYS/WEEK</span>
                       <span className="tag tag-purple">{meta.weeks} WEEKS</span>
                     </div>
                   </div>
                   <div style={{textAlign:"right"}}>
-                    <div className="raj" style={{fontWeight:700,fontSize:"2rem",color:"var(--blue2)",lineHeight:1}}>Week 1</div>
-                    <div className="mono" style={{fontSize:".56rem",color:"var(--gray2)",letterSpacing:".1em"}}>SAMPLE PREVIEW</div>
+                    <div className="raj" style={{fontWeight:700,fontSize:"2.2rem",color:"var(--blue2)",lineHeight:1}}>Wk 1</div>
+                    <div className="mono" style={{fontSize:".52rem",color:"var(--gray2)",letterSpacing:".08em"}}>SAMPLE PREVIEW</div>
                   </div>
                 </div>
 
-                {/* Week grid */}
-                <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:8}}>
-                  {weeks.map((day,i) => (
-                    <div key={i} style={{background:day.wod==="Rest"?"var(--glass-1)":"rgba(59,123,255,.07)",border:`1px solid ${day.wod==="Rest"?"var(--glass-border)":"rgba(59,123,255,.18)"}`,borderRadius:"var(--r-sm)",padding:"10px 8px",textAlign:"center"}}>
-                      <div className="mono" style={{fontSize:".5rem",letterSpacing:".1em",color:"var(--gray3)",marginBottom:6}}>{day.label}</div>
-                      <div style={{fontSize:".7rem",fontWeight:600,color:day.wod==="Rest"?"var(--gray3)":"var(--frost)",lineHeight:1.3,marginBottom:4}}>{day.wod}</div>
-                      <div className="mono" style={{fontSize:".48rem",color:"var(--gray2)",letterSpacing:".04em"}}>{day.detail}</div>
+                <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:6}}>
+                  {days.map((day,i)=>(
+                    <div key={i} style={{background:day.rest?"var(--glass-1)":"rgba(59,123,255,.06)",border:`1px solid ${day.rest?"var(--glass-border)":"rgba(59,123,255,.16)"}`,borderRadius:"var(--r-sm)",padding:"8px 6px",textAlign:"center"}}>
+                      <div className="mono" style={{fontSize:".48rem",letterSpacing:".08em",color:"var(--gray3)",marginBottom:5}}>{day.d}</div>
+                      <div style={{fontSize:".64rem",fontWeight:600,color:day.rest?"var(--gray3)":"var(--frost)",lineHeight:1.25,marginBottom:3}}>{day.w}</div>
+                      <div className="mono" style={{fontSize:".44rem",color:"var(--gray2)",letterSpacing:".02em"}}>{day.x}</div>
                     </div>
                   ))}
                 </div>
 
-                <div style={{marginTop:16,display:"flex",alignItems:"center",justifyContent:"center",gap:8}}>
-                  <div style={{width:6,height:6,borderRadius:"50%",background:"var(--cyan)",animation:"glow 1.5s ease infinite"}}/>
-                  <span className="mono" style={{fontSize:".58rem",color:"var(--gray2)",letterSpacing:".1em"}}>FULL {meta.weeks}-WEEK PROGRAM AVAILABLE IN THE APP · JOIN THE WAITLIST FOR ACCESS</span>
+                <div style={{marginTop:14,padding:"10px 16px",background:"rgba(0,212,255,.06)",border:"1px solid rgba(0,212,255,.14)",borderRadius:"var(--r-sm)",display:"flex",alignItems:"center",gap:8}}>
+                  <div style={{width:5,height:5,borderRadius:"50%",background:"var(--cyan)",animation:"glow 1.5s ease infinite",flexShrink:0}}/>
+                  <span className="mono" style={{fontSize:".54rem",color:"var(--gray2)",letterSpacing:".08em"}}>FULL {meta.weeks}-WEEK PROGRAM IN THE APP · JOIN THE WAITLIST FOR FIRST ACCESS</span>
                 </div>
               </div>
             )}
@@ -2217,10 +2192,7 @@ Powered by AI."}</h2>
 export default function AccountaFit() {
   const [lang, setLang] = useState("en");
   const [entered, setEntered] = useState(false);
-  useReveal("reveal");
-  useReveal("reveal-left");
-  useReveal("reveal-right");
-  useReveal("reveal-scale");
+  useGlobalReveal();
   const t = T_MERGED[lang] || T_MERGED.en;
   const scrollToWaitlist = () => document.getElementById("waitlist")?.scrollIntoView({behavior:"smooth"});
 
