@@ -15,9 +15,9 @@ const IMG_PROFILE = "/images/pact-profile.webp";
 
 const IMG_LOGO_FULL = "/images/pact-logo-full.webp";
 
-/* ─────────────────────────────────────────────
+/* -
    LANGUAGE SYSTEM
-───────────────────────────────────────────── */
+- */
 const LANGS = {
   en: { name: "English",    flag: "🇺🇸" },
   fr: { name: "Français",   flag: "🇫🇷" },
