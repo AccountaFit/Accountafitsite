@@ -1414,8 +1414,7 @@ function AIDemo({ t }) {
         <div className="wrap">
           <div style={{textAlign:"center",maxWidth:580,margin:"0 auto 52px"}}>
             <div className="eyebrow reveal" style={{justifyContent:"center",display:"flex"}}>{t.progEyebrow || "AI PROGRAM BUILDER"}</div>
-            <h2 className="raj reveal" style={{fontWeight:700,fontSize:"clamp(2.4rem,4.5vw,3.4rem)",lineHeight:1,letterSpacing:".02em",marginBottom:14}}>{t.progH || "Your coach.
-Powered by AI."}</h2>
+            <h2 className="raj reveal" style={{fontWeight:700,fontSize:"clamp(2.4rem,4.5vw,3.4rem)",lineHeight:1,letterSpacing:".02em",marginBottom:14,whiteSpace:"pre-line"}}>{t.progH || "Your coach.\nPowered by AI."}</h2>
             <p className="reveal" style={{color:"var(--gray)",fontSize:"1rem",lineHeight:1.8}}>{t.progSub || "Select your sport, set your phase, and PACT generates a fully periodized training program."}</p>
           </div>
 
