@@ -40,7 +40,22 @@ function SEO({ lang = "en" }) {
     set('meta[name="twitter:title"]', "twitter:title", m.ogTitle);
     set('meta[name="twitter:description"]', "twitter:description", m.ogDesc);
     set('meta[name="twitter:image"]', "twitter:image", "/images/pact-og.webp");
+    set('meta[property="og:url"]', null, "https://pactapp.io", "og:url");
+    let canon = document.querySelector('link[rel="canonical"]');
+    if (!canon) { canon = document.createElement('link'); canon.rel = 'canonical'; document.head.appendChild(canon); }
+    canon.href = 'https://pactapp.io';
     document.documentElement.lang = lang;
+    // JSON-LD structured data
+    let ld = document.getElementById('pact-jsonld');
+    if (!ld) { ld = document.createElement('script'); ld.type = 'application/ld+json'; ld.id = 'pact-jsonld'; document.head.appendChild(ld); }
+    ld.textContent = JSON.stringify({
+      "@context":"https://schema.org","@type":"MobileApplication",
+      "name":"PACT","applicationCategory":"HealthApplication",
+      "operatingSystem":"iOS, Android",
+      "description":"The world's first fitness accountability partner-matching platform. Find your partner. Make your pact. Never start over.",
+      "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+      "author":{"@type":"Organization","name":"AccountaFit Corp","url":"https://accountafit.com"},
+    });
   }, [lang]);
   return null;
 }
@@ -636,6 +651,12 @@ function Chatbot({ t }) {
   const [inp, setInp] = useState("");
   const [loading, setLoading] = useState(false);
   const ref = useRef(null);
+
+  // Reset greeting when language changes
+  useEffect(() => {
+    setMsgs([{ role:"bot", text: t.chatGreeting }]);
+  }, [t.chatGreeting]);
+
   useEffect(() => { if (ref.current) ref.current.scrollTop = ref.current.scrollHeight; }, [msgs, loading]);
 
   const send = async (override) => {
@@ -647,16 +668,22 @@ function Chatbot({ t }) {
       const history = msgs.map(m => ({ role: m.role === "bot" ? "model" : "user", parts:[{ text: m.text }] }));
       const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`, {
         method:"POST", headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({ system_instruction:{ parts:[{ text: SYSTEM }] }, contents:[...history,{ role:"user", parts:[{ text }] }], generationConfig:{ maxOutputTokens:300, temperature:0.7 } }),
+        body: JSON.stringify({
+          system_instruction:{ parts:[{ text: SYSTEM }] },
+          contents:[...history,{ role:"user", parts:[{ text }] }],
+          generationConfig:{ maxOutputTokens:300, temperature:0.7 }
+        }),
       });
       const data = await res.json();
       const raw = data?.candidates?.[0]?.content?.parts?.[0]?.text || "";
       setMsgs(m => [...m, { role:"bot", text: raw.replace(/\*\*(.*?)\*\*/g,'$1').replace(/\*(.*?)\*/g,'$1').trim() || "Try again!" }]);
-    } catch { setMsgs(m => [...m, { role:"bot", text:"Something went wrong. Reach us at info@accountafit.com" }]); }
+    } catch {
+      setMsgs(m => [...m, { role:"bot", text: "Something went wrong. Email us at info@accountafit.com" }]);
+    }
     setLoading(false);
   };
 
-  const QUICK = ["How does matching work?", "What sports does AI support?", "Is it free?"];
+  const QUICK = ["How does matching work?", "What sports are supported?", "Is it free?"];
   return (
     <>
       {open && (
@@ -694,13 +721,13 @@ function Chatbot({ t }) {
           </div>
         </div>
       )}
-      <button className={`af-chat-btn${open?" open":""}`} onClick={()=>setOpen(o=>!o)}>
+      <button className={`af-chat-btn${open?" open":""}`} onClick={()=>setOpen(o=>!o)} aria-label="Open PACT AI chat">
         {open
           ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           : <>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" strokeWidth="2" strokeLinecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
               <span style={{color:"rgba(255,255,255,.9)",fontFamily:"'JetBrains Mono',monospace",fontWeight:500,fontSize:".76rem",letterSpacing:".1em",textTransform:"uppercase"}}>Ask PACT AI</span>
-              <div style={{width:7,height:7,borderRadius:"50%",background:"#22c55e",boxShadow:"0 0 6px rgba(34,197,94,.6)"}}/>
+              <div style={{width:7,height:7,borderRadius:"50%",background:"#22c55e",boxShadow:"0 0 8px rgba(34,197,94,.7)",animation:"glow 2s ease infinite"}}/>
             </>
         }
       </button>
@@ -708,41 +735,122 @@ function Chatbot({ t }) {
   );
 }
 
+
+/* ─────────────────────────────────────────────
+   CLOUDFLARE WORKER — Deploy to pact-waitlist.accountafit.workers.dev
+   
+   wrangler init pact-waitlist
+   wrangler kv:namespace create WAITLIST
+   
+   worker.js:
+   ───────────
+   export default {
+     async fetch(request, env) {
+       const cors = {
+         "Access-Control-Allow-Origin": "*",
+         "Access-Control-Allow-Methods": "POST, OPTIONS",
+         "Access-Control-Allow-Headers": "Content-Type",
+       };
+       if (request.method === "OPTIONS") return new Response(null, { headers: cors });
+       if (request.method !== "POST") return new Response("Method not allowed", { status: 405 });
+       try {
+         const { email, name, source, timestamp } = await request.json();
+         if (!email || !email.includes("@")) return new Response("Invalid email", { status: 400, headers: cors });
+         const key = `waitlist:${email.toLowerCase().trim()}`;
+         const existing = await env.WAITLIST.get(key);
+         if (!existing) {
+           await env.WAITLIST.put(key, JSON.stringify({ email, name, source, timestamp }));
+         }
+         return new Response(JSON.stringify({ ok: true }), { headers: { ...cors, "Content-Type": "application/json" } });
+       } catch (e) {
+         return new Response("Server error", { status: 500, headers: cors });
+       }
+     }
+   };
+───────────────────────────────────────────── */
 /* ─────────────────────────────────────────────
    WAITLIST FORM
 ───────────────────────────────────────────── */
 function WaitlistForm({ placeholder = "Enter your email", btnText = "Join the Waitlist", fullWidth = false }) {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState("idle");
+  const [name,  setName]  = useState("");
+  const [status, setStatus] = useState("idle"); // idle | loading | success | error
+  const [showName, setShowName] = useState(false);
 
   const submit = async (e) => {
     e.preventDefault();
     if (!email || status === "loading") return;
+    if (!showName) { setShowName(true); return; }
     setStatus("loading");
-    try {
-      const res = await fetch("https://formspree.io/f/mnjwagoo", {
-        method:"POST",
-        headers:{"Content-Type":"application/json","Accept":"application/json"},
-        body: JSON.stringify({ email, _subject:"PACT Waitlist Signup", message:`New PACT waitlist signup: ${email}` }),
-      });
-      setStatus(res.ok ? "success" : "error");
-    } catch { setStatus("error"); }
+
+    const payload = {
+      email,
+      name: name.trim() || undefined,
+      source: "pact-website",
+      timestamp: new Date().toISOString(),
+      _subject: "PACT Waitlist Signup",
+      message: `New PACT waitlist signup: ${email}${name ? " — " + name : ""}`,
+    };
+
+    // Try Cloudflare Worker first, fall back to Formspree
+    const endpoints = [
+      { url: "https://pact-waitlist.accountafit.workers.dev/waitlist", type: "worker" },
+      { url: "https://formspree.io/f/mnjwagoo", type: "formspree" },
+    ];
+
+    let success = false;
+    for (const ep of endpoints) {
+      try {
+        const res = await fetch(ep.url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        if (res.ok) { success = true; break; }
+      } catch { /* try next */ }
+    }
+    setStatus(success ? "success" : "error");
   };
 
   if (status === "success") return (
-    <div style={{background:"rgba(59,123,255,.1)",border:"1px solid rgba(59,123,255,.3)",borderRadius:100,padding:"16px 32px",textAlign:"center",fontFamily:"'JetBrains Mono',monospace",fontSize:".76rem",letterSpacing:".1em",color:"#93C5FD"}}>
-      YOU'RE ON THE LIST — WE'LL BE IN TOUCH
+    <div style={{background:"rgba(59,123,255,.08)",border:"1px solid rgba(59,123,255,.28)",borderRadius:16,padding:"20px 32px",textAlign:"center"}}>
+      <div style={{fontSize:"1.4rem",marginBottom:8}}>🎉</div>
+      <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:".76rem",letterSpacing:".1em",color:"#93C5FD",marginBottom:4}}>YOU'RE ON THE LIST</div>
+      <div style={{fontSize:".82rem",color:"var(--gray2)"}}>We'll reach out with early access details. Your discipline starts now.</div>
+    </div>
+  );
+
+  if (status === "error") return (
+    <div style={{textAlign:"center"}}>
+      <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:".72rem",color:"#F87171",marginBottom:12,letterSpacing:".08em"}}>SOMETHING WENT WRONG — TRY AGAIN</div>
+      <button className="btn-ghost" onClick={()=>setStatus("idle")}>RETRY</button>
     </div>
   );
 
   return (
-    <form onSubmit={submit} style={{display:"flex",gap:12,flexWrap:"wrap",width:fullWidth?"100%":undefined}}>
-      <input type="email" required value={email} onChange={e=>setEmail(e.target.value)} placeholder={placeholder}
-        style={{flex:"1 1 240px",minWidth:200,background:"rgba(255,255,255,.06)",border:"1px solid rgba(255,255,255,.12)",borderRadius:100,color:"var(--frost)",fontFamily:"'Inter',sans-serif",fontSize:14,padding:"14px 22px",outline:"none",transition:"border-color .2s"}}
-        onFocus={e=>e.target.style.borderColor="rgba(59,123,255,.5)"} onBlur={e=>e.target.style.borderColor="rgba(255,255,255,.12)"}/>
-      <button type="submit" className="btn-primary" style={{opacity:status==="loading"?.6:1}}>
-        {status==="loading" ? "JOINING..." : btnText}
-      </button>
+    <form onSubmit={submit} style={{display:"flex",flexDirection:"column",gap:10,width:fullWidth?"100%":undefined,maxWidth:480,margin:"0 auto"}}>
+      {showName && (
+        <input
+          type="text" value={name} onChange={e=>setName(e.target.value)}
+          placeholder="First name (optional)"
+          autoFocus
+          style={{background:"rgba(255,255,255,.06)",border:"1px solid rgba(255,255,255,.12)",borderRadius:100,color:"var(--frost)",fontFamily:"'Inter',sans-serif",fontSize:14,padding:"14px 22px",outline:"none",transition:"border-color .2s",width:"100%"}}
+          onFocus={e=>e.target.style.borderColor="rgba(59,123,255,.5)"}
+          onBlur={e=>e.target.style.borderColor="rgba(255,255,255,.12)"}
+        />
+      )}
+      <div style={{display:"flex",gap:10,flexWrap:"wrap"}}>
+        <input
+          type="email" required value={email} onChange={e=>setEmail(e.target.value)}
+          placeholder={placeholder}
+          style={{flex:"1 1 200px",minWidth:180,background:"rgba(255,255,255,.06)",border:"1px solid rgba(255,255,255,.12)",borderRadius:100,color:"var(--frost)",fontFamily:"'Inter',sans-serif",fontSize:14,padding:"14px 22px",outline:"none",transition:"border-color .2s"}}
+          onFocus={e=>e.target.style.borderColor="rgba(59,123,255,.5)"}
+          onBlur={e=>e.target.style.borderColor="rgba(255,255,255,.12)"}
+        />
+        <button type="submit" className="btn-primary" style={{opacity:status==="loading"?.6:1,flexShrink:0}}>
+          {status==="loading" ? "JOINING..." : showName ? "CONFIRM →" : btnText}
+        </button>
+      </div>
     </form>
   );
 }
