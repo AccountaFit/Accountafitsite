@@ -551,14 +551,14 @@ function EntryScreen({ onEnter }) {
         transition:"opacity 1s ease .3s, transform 1s ease .3s",
       }}>
         <img
-          src="/images/pact-logo-full.webp"
+          src="/images/pact-logo-full.png"
           alt="PACT"
           style={{
             height:"clamp(60px, 10vw, 100px)",
             width:"auto",
             display:"block",
             margin:"0 auto 24px",
-            mixBlendMode:"lighten",
+            
             filter:`
               drop-shadow(0 0 40px rgba(59,123,255,${phase === "ready" ? ".65" : ".2"}))
               drop-shadow(0 0 80px rgba(59,123,255,${phase === "ready" ? ".3" : ".05"}))
@@ -919,7 +919,7 @@ function Nav({ lang, setLang, t, onWaitlist }) {
       <div style={{maxWidth:1200,margin:"0 auto",display:"flex",alignItems:"center",justifyContent:"space-between",height:70}}>
         {/* Logo */}
         <a href="/" style={{display:"flex",alignItems:"center",flexShrink:0}}>
-          <img src="/images/pact-logo-full.webp" alt="PACT" style={{height:40,width:"auto",filter:"drop-shadow(0 0 10px rgba(59,123,255,.45))",mixBlendMode:"lighten"}}/>
+          <img src="/images/pact-logo-full.png" alt="PACT" style={{height:40,width:"auto",filter:"drop-shadow(0 0 10px rgba(59,123,255,.45)) brightness(1.15)"}}/>
         </a>
         {/* Desktop links */}
         <div className="hide-m" style={{display:"flex",alignItems:"center",gap:32}}>
@@ -1244,219 +1244,6 @@ function Features({ t }) {
                   <p className="mono" style={{fontSize:".72rem",color:"var(--gray3)",letterSpacing:".12em",lineHeight:1.6}}>SELECT A FEATURE<br/>TO SEE DETAILS</p>
                 </div>
               )}
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
-  );
-}
-
-/* ─────────────────────────────────────────────
-   APP MOCKUP — Real phone preview
-───────────────────────────────────────────── */
-function PhoneScreen_Home() {
-  return (
-    <div style={{display:"flex",flexDirection:"column",gap:8,flex:1,overflowY:"auto"}}>
-      <div style={{background:"rgba(255,255,255,.04)",border:"1px solid rgba(255,255,255,.07)",borderRadius:14,padding:"12px 14px",display:"flex",justifyContent:"space-between",alignItems:"flex-start"}}>
-        <div>
-          <div style={{fontWeight:700,fontSize:".9rem",color:"var(--frost)",marginBottom:2}}>Good Morning, Mike</div>
-          <div style={{fontSize:".58rem",color:"var(--gray2)"}}>Saturday, Jun 13</div>
-          <div style={{marginTop:6,display:"inline-flex",alignItems:"center",gap:4,background:"rgba(59,123,255,.15)",borderRadius:100,padding:"2px 8px"}}>
-            <span style={{fontSize:".56rem"}}>⚡</span>
-            <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:".46rem",color:"var(--blue2)"}}>3 DAY STREAK</span>
-          </div>
-        </div>
-        <div style={{width:28,height:28,borderRadius:"50%",background:"rgba(59,123,255,.2)",border:"1.5px solid rgba(59,123,255,.4)",display:"flex",alignItems:"center",justifyContent:"center"}}>
-          <span style={{fontSize:".7rem"}}>🔥</span>
-        </div>
-      </div>
-      <div style={{background:"rgba(255,255,255,.03)",border:"1px solid rgba(255,255,255,.06)",borderRadius:12,padding:"10px 12px"}}>
-        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
-          <div style={{fontSize:".62rem",fontWeight:600,color:"var(--frost)"}}>Connections</div>
-          <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:".44rem",color:"var(--blue2)"}}>VIEW ALL</div>
-        </div>
-        <div style={{display:"flex",gap:10}}>
-          {[{name:"Pr",c:"124,92,252"},{name:"Mark",c:"59,123,255",online:true},{name:"Carleigh",c:"0,212,255"}].map((p,i)=>(
-            <div key={i} style={{display:"flex",flexDirection:"column",alignItems:"center",gap:3}}>
-              <div style={{position:"relative"}}>
-                <div style={{width:28,height:28,borderRadius:"50%",background:`rgba(${p.c},.25)`,border:`1.5px solid rgba(${p.c},.5)`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:".58rem",fontWeight:700,color:"var(--frost)"}}>{p.name[0]}</div>
-                {p.online && <div style={{position:"absolute",bottom:0,right:0,width:7,height:7,borderRadius:"50%",background:"#22c55e",border:"1.5px solid #080c14"}}/>}
-              </div>
-              <div style={{fontSize:".42rem",color:"var(--gray2)"}}>{p.name}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div style={{background:"rgba(10,20,10,.9)",border:"1px solid rgba(34,197,94,.18)",borderRadius:12,padding:"10px 12px"}}>
-        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:5}}>
-          <div style={{display:"flex",alignItems:"center",gap:4}}>
-            <span style={{fontSize:".65rem"}}>👑</span>
-            <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:".44rem",color:"#facc15",letterSpacing:".06em"}}>KING/QUEEN OF THE WOD</div>
-          </div>
-          <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:".44rem",color:"var(--cyan)"}}>06:42:21</div>
-        </div>
-        <div style={{fontWeight:700,fontSize:".8rem",color:"var(--frost)",marginBottom:3}}>Iron Hour</div>
-        {["1000m Row","50 DB Thrusters","30 Pull-Ups"].map((m,i)=>(
-          <div key={i} style={{fontSize:".5rem",color:"var(--gray2)",marginBottom:1}}>• {m}</div>
-        ))}
-        <div style={{display:"flex",gap:5,marginTop:7}}>
-          <div style={{flex:1,padding:"5px",background:"rgba(0,212,255,.14)",border:"1px solid rgba(0,212,255,.28)",borderRadius:8,textAlign:"center",fontFamily:"'JetBrains Mono',monospace",fontSize:".44rem",color:"var(--cyan)"}}>LOG SCORE</div>
-          <div style={{flex:1,padding:"5px",background:"rgba(255,255,255,.04)",border:"1px solid rgba(255,255,255,.09)",borderRadius:8,textAlign:"center",fontFamily:"'JetBrains Mono',monospace",fontSize:".44rem",color:"var(--gray2)"}}>ADD TO SCHEDULE</div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function PhoneScreen_Match() {
-  return (
-    <div style={{display:"flex",flexDirection:"column",gap:8,flex:1}}>
-      <div style={{display:"flex",gap:6,marginBottom:2}}>
-        <div style={{flex:1,padding:"5px 0",background:"rgba(59,123,255,.2)",border:"1px solid rgba(59,123,255,.4)",borderRadius:100,textAlign:"center",fontFamily:"'JetBrains Mono',monospace",fontSize:".44rem",color:"var(--blue2)"}}>❤ MATCHES</div>
-        <div style={{flex:1,padding:"5px 0",background:"rgba(255,255,255,.04)",border:"1px solid rgba(255,255,255,.08)",borderRadius:100,textAlign:"center",fontFamily:"'JetBrains Mono',monospace",fontSize:".44rem",color:"var(--gray3)"}}>PARTNERS</div>
-      </div>
-      <div style={{flex:1,background:"rgba(255,255,255,.03)",border:"1px solid rgba(255,255,255,.08)",borderRadius:16,overflow:"hidden"}}>
-        <div style={{height:130,background:"linear-gradient(160deg,rgba(20,30,60,.9),rgba(10,15,30,.95))",display:"flex",alignItems:"center",justifyContent:"center",position:"relative"}}>
-          <div style={{display:"flex",gap:10,alignItems:"flex-end"}}>
-            {["#3B7BFF","#A78BFA","#00D4FF","#F59E0B"].map((c,i)=>(
-              <div key={i} style={{width:22,height:32+i*4,borderRadius:5,background:`${c}22`,border:`1.5px solid ${c}44`,display:"flex",alignItems:"flex-end",justifyContent:"center",paddingBottom:2}}>
-                <div style={{width:14,height:18,borderRadius:3,background:c+"55"}}/>
-              </div>
-            ))}
-          </div>
-          <div style={{position:"absolute",top:8,right:8,background:"rgba(59,123,255,.25)",border:"1px solid rgba(59,123,255,.4)",borderRadius:100,padding:"2px 7px",display:"flex",alignItems:"center",gap:3}}>
-            <span style={{fontSize:".48rem"}}>❤</span>
-            <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:".44rem",color:"var(--blue2)"}}>94% FIT</span>
-          </div>
-        </div>
-        <div style={{padding:"9px 11px"}}>
-          <div style={{fontWeight:700,fontSize:".82rem",color:"var(--frost)",marginBottom:4}}>Jordan M., 29</div>
-          <div style={{display:"flex",gap:4,flexWrap:"wrap",marginBottom:6}}>
-            {["📍 Denver · 12mi","📈 Intermediate"].map((t,i)=>(
-              <div key={i} style={{background:"rgba(255,255,255,.06)",borderRadius:100,padding:"2px 7px",fontSize:".46rem",color:"var(--gray2)"}}>{t}</div>
-            ))}
-          </div>
-          <div style={{display:"flex",gap:4,flexWrap:"wrap"}}>
-            {["Powerlifting","CrossFit","Hyrox"].map((t,i)=>(
-              <div key={i} style={{background:"rgba(59,123,255,.12)",border:"1px solid rgba(59,123,255,.25)",borderRadius:100,padding:"2px 6px",fontFamily:"'JetBrains Mono',monospace",fontSize:".42rem",color:"var(--blue2)"}}>{t}</div>
-            ))}
-          </div>
-        </div>
-      </div>
-      <div style={{display:"flex",gap:7}}>
-        <div style={{flex:1,padding:"8px",background:"rgba(255,255,255,.05)",border:"1px solid rgba(255,255,255,.1)",borderRadius:12,textAlign:"center",fontSize:".58rem",color:"var(--gray2)",cursor:"pointer"}}>✕ Pass</div>
-        <div style={{flex:2,padding:"8px",background:"linear-gradient(135deg,#3B7BFF,#2563EB)",borderRadius:12,textAlign:"center",fontSize:".58rem",color:"#fff",cursor:"pointer",fontWeight:600}}>❤ Like</div>
-      </div>
-    </div>
-  );
-}
-
-function PhoneScreen_Library() {
-  const tiles=[
-    {icon:"✨",label:"Programs",sub:"0 active",c:"#3B7BFF"},
-    {icon:"👑",label:"Crown Archive",sub:"Past WODs",c:"#facc15"},
-    {icon:"💪",label:"Workouts",sub:"178 saved",c:"#f59e0b"},
-    {icon:"🎯",label:"Goals & Events",sub:"7 events",c:"#10b981"},
-    {icon:"🏃",label:"Movements",sub:"Catalog",c:"#06b6d4"},
-    {icon:"🏆",label:"Personal Records",sub:"PRs",c:"#a78bfa"},
-  ];
-  return (
-    <div style={{flex:1,overflowY:"auto"}}>
-      <div style={{background:"rgba(255,255,255,.04)",border:"1px solid rgba(255,255,255,.07)",borderRadius:10,padding:"6px 10px",marginBottom:7,display:"flex",alignItems:"center",gap:6}}>
-        <span style={{fontSize:".65rem",color:"var(--gray3)"}}>🔍</span>
-        <span style={{fontSize:".55rem",color:"var(--gray3)"}}>Search Library</span>
-      </div>
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:5}}>
-        {tiles.map((t,i)=>(
-          <div key={i} style={{background:"rgba(255,255,255,.03)",border:"1px solid rgba(255,255,255,.06)",borderRadius:10,padding:"9px 9px 7px",cursor:"pointer"}}>
-            <span style={{fontSize:".85rem",display:"block",marginBottom:12}}>{t.icon}</span>
-            <div style={{fontWeight:700,fontSize:".62rem",color:"var(--frost)",marginBottom:2}}>{t.label}</div>
-            <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:".42rem",color:t.c}}>{t.sub}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-const PACT_PHONE_SCREENS = [
-  {id:"home",    label:"Home",    icon:<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,    Screen:PhoneScreen_Home},
-  {id:"match",   label:"Match",   icon:<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>, Screen:PhoneScreen_Match},
-  {id:"library", label:"Library", icon:<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>, Screen:PhoneScreen_Library},
-];
-
-function PhoneMockup() {
-  const [active, setActive] = useState(0);
-  const ActiveScreen = PACT_PHONE_SCREENS[active].Screen;
-  return (
-    <>
-      <div className="divider"/>
-      <section className="sec" id="app-preview" style={{overflow:"hidden"}}>
-        <div className="wrap">
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:72,alignItems:"center"}} className="two-col">
-            <div className="reveal-left">
-              <div className="eyebrow">APP PREVIEW</div>
-              <h2 className="raj" style={{fontWeight:700,fontSize:"clamp(2.2rem,4vw,3.2rem)",lineHeight:1.02,letterSpacing:".02em",marginBottom:18,color:"var(--frost)"}}>
-                Built for the<br/>
-                <span style={{background:"linear-gradient(135deg,#3B7BFF,#00D4FF)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",backgroundClip:"text"}}>athlete in you.</span>
-              </h2>
-              <p style={{color:"var(--gray)",fontSize:"1rem",lineHeight:1.82,marginBottom:32}}>Every screen in PACT is purpose-built — keep you and your partner locked in from the moment you open the app.</p>
-              <div style={{display:"flex",flexDirection:"column",gap:12}}>
-                {[
-                  {idx:0,label:"Home Dashboard",  desc:"WOD countdown, connections, streak & upcoming events",color:"var(--blue2)"},
-                  {idx:1,label:"Partner Matching", desc:"Swipe profiles by sport, level, and distance",         color:"var(--cyan)"},
-                  {idx:2,label:"Library",          desc:"Programs, workouts, goals, movements, and PRs",        color:"#A78BFA"},
-                ].map(item=>(
-                  <div key={item.idx} onClick={()=>setActive(item.idx)}
-                    style={{display:"flex",alignItems:"center",gap:14,padding:"13px 16px",background:active===item.idx?"rgba(59,123,255,.08)":"var(--glass-1)",border:`1px solid ${active===item.idx?"rgba(59,123,255,.3)":"var(--glass-border)"}`,borderRadius:"var(--r-md)",cursor:"pointer",transition:"all .2s"}}>
-                    <div style={{width:8,height:8,borderRadius:"50%",background:active===item.idx?item.color:"var(--gray3)",border:`1.5px solid ${item.color}`,transition:"background .2s",flexShrink:0}}/>
-                    <div>
-                      <div className="raj" style={{fontWeight:700,fontSize:"1rem",color:active===item.idx?"var(--frost)":"var(--gray)",marginBottom:2,transition:"color .2s"}}>{item.label}</div>
-                      <div style={{fontSize:".8rem",color:"var(--gray2)"}}>{item.desc}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="hide-m reveal-right" style={{display:"flex",justifyContent:"center",position:"relative"}}>
-              <div style={{position:"absolute",inset:"-80px",background:"radial-gradient(ellipse 55% 55% at 50% 50%,rgba(59,123,255,.18) 0%,transparent 70%)",pointerEvents:"none"}}/>
-              <div className="phone-shell">
-                <div className="phone-notch"/>
-                <div className="phone-screen">
-                  <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"0 2px",marginBottom:8,flexShrink:0}}>
-                    <span className="mono" style={{fontSize:".44rem",color:"var(--gray2)"}}>9:41</span>
-                    <div style={{display:"flex",gap:3,alignItems:"center"}}>
-                      {[3,4,5].map(i=><div key={i} style={{width:2.5,height:i*1.2,background:"var(--gray2)",borderRadius:1}}/>)}
-                      <div style={{width:12,height:6,border:"1.5px solid var(--gray2)",borderRadius:2,padding:"1px",marginLeft:2}}>
-                        <div style={{width:"60%",height:"100%",background:"var(--gray2)",borderRadius:1}}/>
-                      </div>
-                    </div>
-                  </div>
-                  <div style={{textAlign:"center",marginBottom:8,flexShrink:0}}>
-                    <img src="/images/pact-logo-full.webp" alt="PACT" style={{height:18,width:"auto",mixBlendMode:"lighten",filter:"drop-shadow(0 0 6px rgba(59,123,255,.5))"}}/>
-                  </div>
-                  <div style={{flex:1,overflow:"hidden",display:"flex",flexDirection:"column"}}>
-                    <ActiveScreen/>
-                  </div>
-                  <div className="phone-bnav">
-                    {PACT_PHONE_SCREENS.map((s,i)=>(
-                      i===active
-                        ? <div key={i} className="phone-bnav-pill" onClick={()=>setActive(i)} style={{cursor:"pointer"}}>
-                            <span style={{color:"var(--blue2)"}}>{s.icon}</span>
-                            <span className="mono" style={{fontSize:".42rem",color:"var(--blue2)",letterSpacing:".06em"}}>{s.label.toUpperCase()}</span>
-                          </div>
-                        : <div key={i} onClick={()=>setActive(i)} style={{cursor:"pointer",color:"var(--gray3)",padding:"2px 6px"}}>{s.icon}</div>
-                    ))}
-                    <div style={{color:"var(--gray3)",padding:"2px 6px"}}>
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                    </div>
-                    <div style={{color:"var(--gray3)",padding:"2px 6px"}}>
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -1796,7 +1583,7 @@ function Footer() {
             {/* Brand */}
             <div style={{maxWidth:300}}>
               <div style={{marginBottom:14}}>
-                <img src="/images/pact-logo-full.webp" alt="PACT" style={{height:34,width:"auto",filter:"drop-shadow(0 0 8px rgba(59,123,255,.4))",mixBlendMode:"lighten"}}/>
+                <img src="/images/pact-logo-full.png" alt="PACT" style={{height:34,width:"auto",filter:"drop-shadow(0 0 8px rgba(59,123,255,.4)) brightness(1.1)"}}/>
               </div>
               <p style={{color:"var(--gray2)",fontSize:".84rem",lineHeight:1.72,marginBottom:10}}>The fitness accountability partner-matching platform. Find your partner. Make your pact. Never start over.</p>
               <div className="mono" style={{fontSize:".56rem",letterSpacing:".12em",color:"var(--gray3)"}}>BUILT BY ACCOUNTAFIT CORP</div>
@@ -1918,7 +1705,6 @@ export default function AccountaFit() {
       <Hero t={t} onWaitlist={scrollToWaitlist}/>
       <Marquee/>
       <Intro t={t}/>
-      <PhoneMockup/>
       <HowItWorks t={t}/>
       <Features t={t}/>
       <AIDemo t={t}/>
