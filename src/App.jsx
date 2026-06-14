@@ -389,6 +389,7 @@ function EntryScreen({ onEnter }) {
             width:"auto",
             display:"block",
             margin:"0 auto 24px",
+            mixBlendMode:"lighten",
             filter:`
               drop-shadow(0 0 40px rgba(59,123,255,${phase === "ready" ? ".65" : ".2"}))
               drop-shadow(0 0 80px rgba(59,123,255,${phase === "ready" ? ".3" : ".05"}))
@@ -468,7 +469,7 @@ KEY FACTS:
 - 12 sports: Bodybuilding, General Fitness, Weight Loss, Strength Training, Powerlifting, Olympic Lifting, CrossFit, Hyrox, Running, Marathon, Triathlon, Swimming
 - Free core features. Premium AI programs via subscription coming soon
 - iOS & Android launch coming soon
-- Built by AccountaFit Corp (Delaware)
+- Built by AccountaFit Corp
 - Waitlist: info@accountafit.com
 
 Keep answers concise, enthusiastic, and fitness-focused. Max 3 sentences unless a list is needed.`;
@@ -654,7 +655,7 @@ function Nav({ lang, setLang, t, onWaitlist }) {
       <div style={{maxWidth:1200,margin:"0 auto",display:"flex",alignItems:"center",justifyContent:"space-between",height:70}}>
         {/* Logo */}
         <a href="/" style={{display:"flex",alignItems:"center",flexShrink:0}}>
-          <img src="/images/pact-logo-full.webp" alt="PACT" style={{height:40,width:"auto",filter:"drop-shadow(0 0 10px rgba(59,123,255,.45))"}}/>
+          <img src="/images/pact-logo-full.webp" alt="PACT" style={{height:40,width:"auto",filter:"drop-shadow(0 0 10px rgba(59,123,255,.45))",mixBlendMode:"lighten"}}/>
         </a>
         {/* Desktop links */}
         <div className="hide-m" style={{display:"flex",alignItems:"center",gap:32}}>
@@ -691,7 +692,7 @@ function Hero({ t, onWaitlist }) {
       <div style={{position:"absolute",top:"50%",left:"40%",transform:"translate(-50%,-50%)",width:"90vw",height:"90vw",maxWidth:900,maxHeight:900,borderRadius:"50%",border:"1px solid rgba(59,123,255,.06)",pointerEvents:"none"}}/>
       <div style={{position:"absolute",top:"50%",left:"40%",transform:"translate(-50%,-50%)",width:"58vw",height:"58vw",maxWidth:600,maxHeight:600,borderRadius:"50%",border:"1px solid rgba(0,212,255,.05)",pointerEvents:"none"}}/>
 
-      <div className="wrap" style={{position:"relative",zIndex:2,width:"100%",paddingTop:40,paddingBottom:60}}>
+      <div className="wrap" style={{position:"relative",zIndex:2,width:"100%",paddingTop:8,paddingBottom:40}}>
         <div style={{display:"grid",gridTemplateColumns:"1fr 400px",gap:56,alignItems:"center"}} className="two-col">
           {/* Left */}
           <div style={{animation:"fadeUp .8s ease both"}}>
@@ -807,11 +808,6 @@ function Intro({ t }) {
               </div>
               <div style={{width:1,height:36,background:"rgba(255,255,255,.1)"}}/>
               <div style={{display:"flex",flexDirection:"column",gap:2}}>
-                <span className="raj" style={{fontWeight:700,fontSize:"1.6rem",color:"var(--blue2)",lineHeight:1}}>DEL</span>
-                <span className="mono" style={{fontSize:".56rem",color:"var(--gray2)",letterSpacing:".1em"}}>DELAWARE, USA</span>
-              </div>
-              <div style={{width:1,height:36,background:"rgba(255,255,255,.1)"}}/>
-              <div style={{display:"flex",flexDirection:"column",gap:2}}>
                 <span className="raj" style={{fontWeight:700,fontSize:"1.6rem",color:"var(--blue2)",lineHeight:1}}>PACT</span>
                 <span className="mono" style={{fontSize:".56rem",color:"var(--gray2)",letterSpacing:".1em"}}>FLAGSHIP PRODUCT</span>
               </div>
@@ -893,16 +889,28 @@ function HowItWorks({ t }) {
 /* ─────────────────────────────────────────────
    FEATURES — Hub & spoke expand layout
 ───────────────────────────────────────────── */
+const FEAT_ICONS_SVG = {
+  match:  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="3.2"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a3.2 3.2 0 0 1 0 6.2"/></svg>,
+  ai:     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>,
+  wod:    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>,
+  cal:    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>,
+  lib:    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>,
+  comm:   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
+  goals:  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>,
+  pr:     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>,
+  chat:   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
+};
+
 const FEAT_DATA = [
-  { key:"match",  icon:"👥", title:"Smart Partner Matching",  body:"Paired by sport, goals, schedule, and intensity. Swipe through profiles, connect with someone at your level, and make a pact you will not break.",          accent:"#3B7BFF" },
-  { key:"ai",     icon:"🤖", title:"AI Program Builder",      body:"Generate fully personalized training programs across 12+ sports. Choose your phase — Base Build Peak, Aggressive, or Maintenance — and PACT's AI writes the plan.", accent:"#00D4FF" },
-  { key:"wod",    icon:"⚡", title:"King / Queen of the WOD", body:"A new benchmark every day. Log your score, compete on the real-time leaderboard, and claim the throne. King or Queen of the Workout — your title to earn.", accent:"#FBBF24" },
-  { key:"cal",    icon:"📅", title:"Schedule & Calendar",     body:"Plan your entire training week in one place. Add workouts, set goals, log habits, and sync events. Your calendar moves with your commitment.",                accent:"#5B94FF" },
-  { key:"lib",    icon:"📚", title:"Workout Library",         body:"200+ pre-built workouts across Bodybuilding, CrossFit, Hyrox, Powerlifting and more — each ready to log, share with your partner, or drop into your schedule.", accent:"#34D399" },
-  { key:"comm",   icon:"🏘️", title:"Communities",             body:"Join or create Communities around your gym, sport, or training style. Shared workouts, group chats, leaderboards, and collective progress — all in one space.", accent:"#A78BFA" },
-  { key:"goals",  icon:"🎯", title:"Goals & Events",          body:"Set fitness goals, register for upcoming events, and track daily habits all in one unified hub. See your progress accumulate day by day.",                    accent:"#00D4FF" },
-  { key:"pr",     icon:"📈", title:"Personal Records",        body:"Search, add, and manage your PRs across every movement. Watch your strength story grow week over week and share milestones with your accountability partner.",  accent:"#34D399" },
-  { key:"chat",   icon:"💬", title:"Direct Partner Chat",     body:"A private, direct line to your accountability partner. No feed noise. No distractions. Just the two of you staying on track — every single day.",           accent:"#3B7BFF" },
+  { key:"match",  title:"Smart Partner Matching",  body:"Paired by sport, goals, schedule, and intensity. Swipe through profiles, connect with someone at your level, and make a pact you will not break.",          accent:"#3B7BFF" },
+  { key:"ai",     title:"AI Program Builder",      body:"Generate fully personalized training programs across 12+ sports. Choose your phase — Base Build Peak, Aggressive, or Maintenance — and PACT's AI writes the plan.", accent:"#00D4FF" },
+  { key:"wod",    title:"King / Queen of the WOD", body:"A new benchmark every day. Log your score, compete on the real-time leaderboard, and claim the throne. King or Queen of the Workout — your title to earn.", accent:"#5B94FF" },
+  { key:"cal",    title:"Schedule & Calendar",     body:"Plan your entire training week in one place. Add workouts, set goals, log habits, and sync events. Your calendar moves with your commitment.",                accent:"#3B7BFF" },
+  { key:"lib",    title:"Workout Library",         body:"200+ pre-built workouts across Bodybuilding, CrossFit, Hyrox, Powerlifting and more — each ready to log, share with your partner, or drop into your schedule.", accent:"#00D4FF" },
+  { key:"comm",   title:"Communities",             body:"Join or create Communities around your gym, sport, or training style. Shared workouts, group chats, leaderboards, and collective progress — all in one space.", accent:"#5B94FF" },
+  { key:"goals",  title:"Goals & Events",          body:"Set fitness goals, register for upcoming events, and track daily habits all in one unified hub. See your progress accumulate day by day.",                    accent:"#3B7BFF" },
+  { key:"pr",     title:"Personal Records",        body:"Search, add, and manage your PRs across every movement. Watch your strength story grow week over week and share milestones with your accountability partner.",  accent:"#00D4FF" },
+  { key:"chat",   title:"Direct Partner Chat",     body:"A private, direct line to your accountability partner. No feed noise. No distractions. Just the two of you staying on track — every single day.",           accent:"#3B7BFF" },
 ];
 
 function Features({ t }) {
@@ -935,7 +943,7 @@ function Features({ t }) {
                   }}
                   onMouseEnter={e=>{if(active!==i){e.currentTarget.style.background="rgba(255,255,255,.07)";e.currentTarget.style.borderColor="rgba(255,255,255,.14)"}}}
                   onMouseLeave={e=>{if(active!==i){e.currentTarget.style.background="var(--glass-1)";e.currentTarget.style.borderColor="rgba(255,255,255,.08)"}}}>
-                  <div style={{width:36,height:36,borderRadius:10,background:`${f.accent}18`,border:`1px solid ${f.accent}30`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"1rem",flexShrink:0}}>{f.icon}</div>
+                  <div style={{width:36,height:36,borderRadius:10,background:`${f.accent}18`,border:`1px solid ${f.accent}30`,display:"flex",alignItems:"center",justifyContent:"center",color:f.accent,flexShrink:0}}>{FEAT_ICONS_SVG[f.key]}</div>
                   <div style={{minWidth:0}}>
                     <div className="raj" style={{fontWeight:700,fontSize:".95rem",color: active===i ? f.accent : "var(--frost)",lineHeight:1.2,letterSpacing:".01em"}}>{f.title}</div>
                   </div>
@@ -951,7 +959,7 @@ function Features({ t }) {
               {feat ? (
                 <div className="glass-card" style={{padding:"32px 28px",border:`1px solid ${feat.accent}40`,transition:"all .3s ease"}}>
                   <div style={{display:"flex",alignItems:"center",gap:14,marginBottom:20,paddingBottom:18,borderBottom:"1px solid rgba(255,255,255,.07)"}}>
-                    <div style={{width:52,height:52,borderRadius:14,background:`${feat.accent}18`,border:`1px solid ${feat.accent}30`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"1.5rem",flexShrink:0}}>{feat.icon}</div>
+                    <div style={{width:52,height:52,borderRadius:14,background:`${feat.accent}18`,border:`1px solid ${feat.accent}30`,display:"flex",alignItems:"center",justifyContent:"center",color:feat.accent,flexShrink:0}}>{FEAT_ICONS_SVG[feat.key]}</div>
                     <h3 className="raj" style={{fontWeight:700,fontSize:"1.25rem",color:feat.accent,letterSpacing:".02em",lineHeight:1.1}}>{feat.title}</h3>
                   </div>
                   <p style={{fontSize:".95rem",color:"var(--gray)",lineHeight:1.82}}>{feat.body}</p>
@@ -1207,48 +1215,53 @@ function Footer() {
   return (
     <>
       <div className="divider"/>
-      <footer style={{padding:"60px 5% 40px"}}>
+      <footer style={{padding:"44px 5% 32px"}}>
         <div style={{maxWidth:1200,margin:"0 auto"}}>
-          <div style={{display:"grid",gridTemplateColumns:"2fr 1fr 1fr 1fr",gap:48,marginBottom:56}} className="four-col">
+          {/* Top row: logo + tagline left, links right */}
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:32,marginBottom:36}}>
             {/* Brand */}
-            <div>
-              <div style={{marginBottom:18}}>
-                <img src="/images/pact-logo-full.webp" alt="PACT" style={{height:38,width:"auto",filter:"drop-shadow(0 0 8px rgba(59,123,255,.4))"}}/>
+            <div style={{maxWidth:300}}>
+              <div style={{marginBottom:14}}>
+                <img src="/images/pact-logo-full.webp" alt="PACT" style={{height:34,width:"auto",filter:"drop-shadow(0 0 8px rgba(59,123,255,.4))",mixBlendMode:"lighten"}}/>
               </div>
-              <p style={{color:"var(--gray2)",fontSize:".88rem",lineHeight:1.78,maxWidth:260,marginBottom:18}}>The fitness accountability partner-matching platform. Find your partner. Make your pact. Never start over.</p>
-              <div className="mono" style={{fontSize:".6rem",letterSpacing:".12em",color:"var(--gray3)",lineHeight:1.8}}>BUILT BY ACCOUNTAFIT CORP<br/>DELAWARE, USA</div>
+              <p style={{color:"var(--gray2)",fontSize:".84rem",lineHeight:1.72,marginBottom:10}}>The fitness accountability partner-matching platform. Find your partner. Make your pact. Never start over.</p>
+              <div className="mono" style={{fontSize:".56rem",letterSpacing:".12em",color:"var(--gray3)"}}>BUILT BY ACCOUNTAFIT CORP</div>
             </div>
-            {/* Product */}
-            <div>
-              <div className="mono" style={{fontSize:".6rem",letterSpacing:".18em",color:"var(--gray3)",marginBottom:18}}>PRODUCT</div>
-              {["Features","How It Works","AI Programs","Workout Library","Communities"].map(l=>(
-                <div key={l} style={{marginBottom:12,color:"var(--gray2)",fontSize:".88rem",cursor:"pointer",transition:"color .2s"}}
-                  onMouseEnter={e=>e.target.style.color="var(--frost)"} onMouseLeave={e=>e.target.style.color="var(--gray2)"}>{l}</div>
-              ))}
-            </div>
-            {/* Company */}
-            <div>
-              <div className="mono" style={{fontSize:".6rem",letterSpacing:".18em",color:"var(--gray3)",marginBottom:18}}>COMPANY</div>
-              {["About AccountaFit Corp","Contact","Press"].map(l=>(
-                <div key={l} style={{marginBottom:12,color:"var(--gray2)",fontSize:".88rem",cursor:"pointer",transition:"color .2s"}}
-                  onMouseEnter={e=>e.target.style.color="var(--frost)"} onMouseLeave={e=>e.target.style.color="var(--gray2)"}>{l}</div>
-              ))}
-              <a href="mailto:info@accountafit.com" style={{display:"block",marginBottom:12,color:"var(--gray2)",fontSize:".88rem",transition:"color .2s"}}
-                onMouseEnter={e=>e.target.style.color="var(--frost)"} onMouseLeave={e=>e.target.style.color="var(--gray2)"}>info@accountafit.com</a>
-            </div>
-            {/* Legal */}
-            <div>
-              <div className="mono" style={{fontSize:".6rem",letterSpacing:".18em",color:"var(--gray3)",marginBottom:18}}>LEGAL</div>
-              {[["Terms of Service","/terms"],["Privacy Policy","/privacy"],["Community Guidelines","/guidelines"],["Safety Policy","/safety"]].map(([l,href])=>(
-                <a key={l} href={href} style={{display:"block",marginBottom:12,color:"var(--gray2)",fontSize:".88rem",transition:"color .2s"}}
-                  onMouseEnter={e=>e.target.style.color="var(--frost)"} onMouseLeave={e=>e.target.style.color="var(--gray2)"}>{l}</a>
-              ))}
+            {/* All links horizontal */}
+            <div style={{display:"flex",flexWrap:"wrap",gap:40,alignItems:"flex-start"}}>
+              <div>
+                <div className="mono" style={{fontSize:".56rem",letterSpacing:".18em",color:"var(--gray3)",marginBottom:14}}>PRODUCT</div>
+                <div style={{display:"flex",flexWrap:"wrap",gap:"6px 20px"}}>
+                  {["Features","How It Works","AI Programs","Workout Library","Communities"].map(l=>(
+                    <div key={l} style={{color:"var(--gray2)",fontSize:".84rem",cursor:"pointer",transition:"color .2s",whiteSpace:"nowrap"}}
+                      onMouseEnter={e=>e.target.style.color="var(--frost)"} onMouseLeave={e=>e.target.style.color="var(--gray2)"}>{l}</div>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <div className="mono" style={{fontSize:".56rem",letterSpacing:".18em",color:"var(--gray3)",marginBottom:14}}>COMPANY</div>
+                <div style={{display:"flex",flexWrap:"wrap",gap:"6px 20px"}}>
+                  {[["About AccountaFit","#"],["Contact","mailto:info@accountafit.com"],["Press","#"]].map(([l,href])=>(
+                    <a key={l} href={href} style={{color:"var(--gray2)",fontSize:".84rem",transition:"color .2s",whiteSpace:"nowrap"}}
+                      onMouseEnter={e=>e.target.style.color="var(--frost)"} onMouseLeave={e=>e.target.style.color="var(--gray2)"}>{l}</a>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <div className="mono" style={{fontSize:".56rem",letterSpacing:".18em",color:"var(--gray3)",marginBottom:14}}>LEGAL</div>
+                <div style={{display:"flex",flexWrap:"wrap",gap:"6px 20px"}}>
+                  {[["Terms","/terms"],["Privacy","/privacy"],["Guidelines","/guidelines"],["Safety","/safety"]].map(([l,href])=>(
+                    <a key={l} href={href} style={{color:"var(--gray2)",fontSize:".84rem",transition:"color .2s",whiteSpace:"nowrap"}}
+                      onMouseEnter={e=>e.target.style.color="var(--frost)"} onMouseLeave={e=>e.target.style.color="var(--gray2)"}>{l}</a>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
-          <div style={{height:1,background:"linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent)",marginBottom:24}}/>
-          <div style={{display:"flex",justifyContent:"space-between",flexWrap:"wrap",gap:12}}>
-            <div className="mono" style={{fontSize:".6rem",letterSpacing:".12em",color:"var(--gray3)"}}>© 2026 ACCOUNTAFIT CORP. ALL RIGHTS RESERVED.</div>
-            <div className="mono" style={{fontSize:".6rem",letterSpacing:".12em",color:"var(--gray3)"}}>YOUR DISCIPLINE STARTS NOW</div>
+          <div style={{height:1,background:"linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent)",marginBottom:20}}/>
+          <div style={{display:"flex",justifyContent:"space-between",flexWrap:"wrap",gap:10}}>
+            <div className="mono" style={{fontSize:".56rem",letterSpacing:".1em",color:"var(--gray3)"}}>© 2026 ACCOUNTAFIT CORP. ALL RIGHTS RESERVED.</div>
+            <div className="mono" style={{fontSize:".56rem",letterSpacing:".1em",color:"var(--gray3)"}}>YOUR DISCIPLINE STARTS NOW</div>
           </div>
         </div>
       </footer>
