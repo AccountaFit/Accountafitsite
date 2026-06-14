@@ -35,11 +35,11 @@ const LANGS = {
 
 const T = {
   en: {
-    nav: [{t.howEyebrow}, {t.featEyebrow}, "Programs", "Community", {t.faqEyebrow}],
+    nav: ["How It Works", "Features", "Programs", "Community", "FAQ"],
     joinWaitlist: "Join Waitlist",
-    eyebrow: {t.eyebrow},
-    heroH1a: {t.heroH1a}, heroH1b: {t.heroH1b}, heroH1c: {t.heroH1c},
-    heroSub: "{t.heroSub}",
+    eyebrow: "BY ACCOUNTAFIT CORP",
+    heroH1a: "FIND YOUR", heroH1b: "FITNESS", heroH1c: "PARTNER.",
+    heroSub: "PACT matches you with a real accountability partner based on your goals, schedule, and commitment level. Train smarter. Stay consistent. Never start over.",
     heroCTA: "Get Early Access", heroGhost: "See How It Works",
     stat1v: "200+", stat1l: "Workout benchmarks",
     stat2v: "12+",  stat2l: "AI sport programs",
@@ -60,34 +60,34 @@ const T = {
     featH: "Built different. Because the problem is different.",
     features: [
       { t:"Smart Partner Matching",  b:"Paired by sport, goals, schedule, and intensity. Swipe, connect, and make a pact you will not break.",                        accent:"var(--blue2)" },
-      { t:{t.progEyebrow},      b:"Generate fully personalized training programs across 12+ sports. Choose your phase: Base Build Peak, Aggressive Build, or Maintenance.", accent:"var(--cyan)"  },
+      { t:"AI Program Builder",      b:"Generate fully personalized training programs across 12+ sports. Choose your phase: Base Build Peak, Aggressive Build, or Maintenance.", accent:"var(--cyan)"  },
       { t:"King/Queen of the WOD",   b:"A new benchmark every day. Log your score and compete on the real-time leaderboard. Claim the throne.",                       accent:"#FBBF24"      },
       { t:"Schedule & Calendar",     b:"Plan your training week. Add workouts, goals, habits, and events. Your calendar synced to your commitment.",                   accent:"var(--blue2)" },
-      { t:{t.libEyebrow},         b:"200+ pre-built workouts across Bodybuilding, CrossFit, Hyrox, Powerlifting and more. Ready to use or customize.",             accent:"#34D399"      },
-      { t:{t.commEyebrow},             b:"Join or create Communities around your gym, sport, or training style. Shared workouts, group chats, and collective progress.", accent:"#A78BFA"      },
+      { t:"Workout Library",         b:"200+ pre-built workouts across Bodybuilding, CrossFit, Hyrox, Powerlifting and more. Ready to use or customize.",             accent:"#34D399"      },
+      { t:"Communities",             b:"Join or create Communities around your gym, sport, or training style. Shared workouts, group chats, and collective progress.", accent:"#A78BFA"      },
       { t:"Goals & Events",          b:"Set fitness goals, register for upcoming events, and track daily habits all in one unified training hub.",                     accent:"var(--cyan)"  },
       { t:"Personal Records",        b:"Search, add, and manage your PRs across every movement. See your strength story grow week over week.",                        accent:"#34D399"      },
       { t:"Direct Partner Chat",     b:"A private, direct line to your accountability partner. No feed noise. Just the two of you staying on track.",                 accent:"var(--blue2)" },
     ],
     progEyebrow: "AI Program Builder", progH: "Your coach. Powered by AI.",
-    progSub: "{t.progSub}",
+    progSub: "Select your sport, set your goal, and PACT's AI generates a fully periodized training program tailored to you — weeks of structured programming in one tap.",
     libEyebrow: "Workout Library", libH: "200+ workouts. Zero guesswork.",
-    libSub: "{t.libSub}",
+    libSub: "From HYROX benchmarks to CrossFit WODs, from powerlifting templates to custom sessions — PACT's library has pre-built workouts ready to log, share, or add to your schedule.",
     commEyebrow: "Communities", commH: "Your gym. Your crew. Your community.",
-    commSub: "{t.commSub}",
+    commSub: "Create or join Communities built around your gym, sport, or training style. Share workouts, chat with members, and grow together.",
     commFeatures: [
       { lbl:"COMM", t:"Create a Community", b:"Start your own space — name it, set the level, and invite your training crew." },
       { lbl:"CHAT", t:"Community Chat",      b:"A dedicated group chat for every community. Share WODs, results, and motivation." },
       { lbl:"WOD",  t:"Shared Workouts",     b:"Post workouts to your community. Members log scores and compete together on a shared leaderboard." },
       { lbl:"LOCK", t:"Private or Public",   b:"Keep your community open to all or restricted to your inner circle. Your space, your rules." },
     ],
-    waitlistEyebrow: {t.waitlistEyebrow},
+    waitlistEyebrow: "Your Move",
     waitlistH: "Your next restart doesn't have to happen.",
     waitlistSub: "Find someone who won't let you quit. Join the PACT waitlist and get first access when we launch on iOS and Android.",
-    waitlistNote: {t.waitlistNote},
+    waitlistNote: "FREE TO JOIN - NO CREDIT CARD REQUIRED - iOS AND ANDROID COMING SOON",
     emailPH: "Enter your email", joinBtn: "Join the Waitlist",
-    faqEyebrow: "FAQ", faqH: {t.faqH},
-    faqSub: "{t.faqSub}",
+    faqEyebrow: "FAQ", faqH: "Real questions.",
+    faqSub: "Everything you need to know about PACT before you make yours.",
     faqs: [
       { q:"Is PACT a dating app?",                           a:"No. Partner matching is 100% based on fitness goals, schedule, and commitment level. This is accountability, not socializing." },
       { q:"What sports does the AI program builder support?", a:"12+ disciplines including Bodybuilding, CrossFit, Hyrox, Powerlifting, Olympic Lifting, Running, Marathon, Triathlon, Swimming, and General Fitness. Each program is fully personalized to your goal, phase preference, and timeline." },
@@ -96,9 +96,9 @@ const T = {
       { q:"When does PACT launch?",                          a:"PACT is in active development. iOS and Android launch is coming soon. Join the waitlist to get early access and be the first to know." },
       { q:"Is it free to use?",                              a:"Core features including partner matching, workout library, and scheduling are free. Premium AI programs and advanced analytics will be available on a subscription plan." },
     ],
-    footerTagline: "{t.footerTagline}",
-    footerCopy: {t.footerCopy},
-    footerProduct: {t.footerProduct}, footerCompany: {t.footerCompany}, footerLegal: {t.footerLegal},
+    footerTagline: "The fitness accountability matching platform by AccountaFit Corp. Find your partner. Make your pact. Never start over.",
+    footerCopy: "YOUR DISCIPLINE STARTS NOW",
+    footerProduct: "PRODUCT", footerCompany: "COMPANY", footerLegal: "LEGAL",
     productLinks: ["Features","How It Works","AI Programs","Workout Library","Communities"],
     companyLinks: ["About AccountaFit","Careers","Contact","Press"],
     chatGreeting: "Hey! I'm your PACT guide. Ask me anything about the app, features, or how to get matched with your fitness partner.",
@@ -958,9 +958,9 @@ export default function PactSite() {
               </div>
 
               <h1 className="hero-h1" style={{ fontFamily: "'Rajdhani',sans-serif", fontSize: "clamp(4rem,9vw,7rem)", fontWeight: 700, lineHeight: .95, letterSpacing: ".03em", marginBottom: 28 }}>
-                <span style={{ display: "block", color: "#EEF2FF" }}>FIND YOUR</span>
-                <span style={{ display: "block", background: "linear-gradient(135deg,#3B7BFF 0%,#00D4FF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>FITNESS</span>
-                <span style={{ display: "block", color: "#EEF2FF" }}>PARTNER.</span>
+                <span style={{ display: "block", color: "#EEF2FF" }}>{t.heroH1a}</span>
+                <span style={{ display: "block", background: "linear-gradient(135deg,#3B7BFF 0%,#00D4FF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{t.heroH1b}</span>
+                <span style={{ display: "block", color: "#EEF2FF" }}>{t.heroH1c}</span>
               </h1>
 
               <p style={{ fontSize: "1.1rem", color: "var(--gray)", lineHeight: 1.75, maxWidth: 500, marginBottom: 36 }}>
@@ -1211,7 +1211,7 @@ export default function PactSite() {
                 <img src={IMG_LOGO_FULL} alt="PACT" style={{ height: 38, width: "auto", filter: "drop-shadow(0 0 8px rgba(59,123,255,.4))" }} />
               </div>
               <p style={{ color: "var(--gray2)", fontSize: ".88rem", lineHeight: 1.75, maxWidth: 260, marginBottom: 20 }}>
-                The fitness accountability matching platform by AccountaFit Corp. Find your partner. Make your pact. Never start over.
+                {t.footerTagline}
               </p>
               <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: ".62rem", letterSpacing: ".12em", color: "var(--gray3)", lineHeight: 1.8 }}>
                 2026 ACCOUNTAFIT CORP<br />DELAWARE, USA
