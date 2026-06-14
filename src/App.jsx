@@ -1,4 +1,49 @@
 import { useState, useEffect, useRef } from "react";
+import { EXTRA_T } from "./pact-translations.js";
+
+
+/* ─────────────────────────────────────────────
+   SEO — inject/update <head> meta tags
+───────────────────────────────────────────── */
+const SEO_META = {
+  en:{ title:"PACT — Find Your Fitness Accountability Partner", desc:"PACT matches you with a real accountability partner based on your goals, schedule, and commitment level. iOS & Android coming soon.", kw:"fitness accountability, workout partner, accountability app, PACT app", ogTitle:"PACT — The Fitness Accountability Matching Platform", ogDesc:"Find your partner. Make your pact. Never start over. By AccountaFit Corp." },
+  fr:{ title:"PACT — Trouvez Votre Partenaire de Fitness", desc:"PACT vous associe à un vrai partenaire de responsabilité. iOS & Android bientôt.", kw:"partenaire fitness, responsabilité sportive, PACT app", ogTitle:"PACT — La Plateforme de Mise en Relation Fitness", ogDesc:"Trouvez votre partenaire. Faites votre pacte. Ne recommencez plus jamais." },
+  es:{ title:"PACT — Encuentra Tu Compañero de Fitness", desc:"PACT te empareja con un compañero de responsabilidad real. iOS y Android próximamente.", kw:"compañero fitness, app responsabilidad, PACT app", ogTitle:"PACT — La Plataforma de Emparejamiento Fitness", ogDesc:"Encuentra tu compañero. Haz tu pacto. No vuelvas a empezar." },
+  de:{ title:"PACT — Finde Deinen Fitness-Partner", desc:"PACT verbindet dich mit einem echten Verantwortungspartner. iOS & Android bald.", kw:"fitness partner, verantwortungs app, PACT app", ogTitle:"PACT — Die Fitness-Partner-Matching-Plattform", ogDesc:"Finde deinen Partner. Schließe deinen Pakt. Fang nie wieder von vorne an." },
+  pt:{ title:"PACT — Encontre Seu Parceiro de Fitness", desc:"PACT combina você com um parceiro de responsabilidade real. iOS & Android em breve.", kw:"parceiro fitness, app responsabilidade, PACT app", ogTitle:"PACT — A Plataforma de Matching Fitness", ogDesc:"Encontre seu parceiro. Faça seu pacto. Nunca recomece." },
+  it:{ title:"PACT — Trova il Tuo Partner Fitness", desc:"PACT ti abbina a un vero partner di responsabilità. iOS e Android presto.", kw:"partner fitness, app responsabilità, PACT app", ogTitle:"PACT — La Piattaforma di Matching per il Fitness", ogDesc:"Trova il tuo partner. Fai il tuo patto. Non ricominciare mai." },
+  sv:{ title:"PACT — Hitta Din Fitnesspartner", desc:"PACT matchar dig med en riktig ansvarspartner. iOS och Android snart.", kw:"fitnesspartner, ansvarsapp, PACT app", ogTitle:"PACT — Fitness Accountability Matchningsplattformen", ogDesc:"Hitta din partner. Gör din pakt. Börja aldrig om igen." },
+  nl:{ title:"PACT — Vind Jouw Fitnesspartner", desc:"PACT koppelt je aan een echte verantwoordelijkheidspartner. iOS en Android binnenkort.", kw:"fitnesspartner, verantwoordelijkheidsapp, PACT app", ogTitle:"PACT — Het Fitness Accountability Matchingplatform", ogDesc:"Vind je partner. Maak je pact. Begin nooit opnieuw." },
+  ja:{ title:"PACT — フィットネスパートナーを見つけよう", desc:"PACTはあなたの目標に基づいて本物のアカウンタビリティパートナーとマッチングします。iOS & Android近日公開。", kw:"フィットネス パートナー, PACT", ogTitle:"PACT — フィットネスアカウンタビリティマッチングプラットフォーム", ogDesc:"パートナーを見つけて。パクトを結んで。もう一度始めることはない。" },
+  zh:{ title:"PACT — 找到你的健身伙伴", desc:"PACT根据你的目标为你匹配真正的责任伙伴。iOS和Android即将推出。", kw:"健身伙伴, 责任应用, PACT应用", ogTitle:"PACT — 健身责任匹配平台", ogDesc:"找到你的伙伴。订立你的契约。永远不要重新开始。" },
+  ko:{ title:"PACT — 나의 피트니스 파트너를 찾아보세요", desc:"PACT는 목표에 따라 진짜 책임 파트너를 매칭해 드립니다. iOS & Android 출시 예정.", kw:"피트니스 파트너, 책임 앱, PACT 앱", ogTitle:"PACT — 피트니스 어카운터빌리티 매칭 플랫폼", ogDesc:"파트너를 찾아보세요. 팩트를 맺으세요. 다시는 처음부터 시작하지 마세요." },
+  hi:{ title:"PACT — अपना फिटनेस पार्टनर खोजें", desc:"PACT आपको आपके लक्ष्यों के आधार पर एक वास्तविक जवाबदेही भागीदार से मिलाता है।", kw:"फिटनेस पार्टनर, PACT ऐप", ogTitle:"PACT — फिटनेस अकाउंटेबिलिटी मैचिंग प्लेटफॉर्म", ogDesc:"अपना पार्टनर खोजें। अपना समझौता करें। फिर कभी शुरुआत न करें।" },
+};
+
+function SEO({ lang = "en" }) {
+  useEffect(() => {
+    const m = SEO_META[lang] || SEO_META.en;
+    document.title = m.title;
+    const set = (sel, attr, val, prop) => {
+      let el = document.querySelector(sel);
+      if (!el) { el = document.createElement("meta"); document.head.appendChild(el); }
+      if (prop) el.setAttribute("property", prop); else el.setAttribute("name", attr);
+      el.setAttribute("content", val);
+    };
+    set('meta[name="description"]', "description", m.desc);
+    set('meta[name="keywords"]', "keywords", m.kw);
+    set('meta[property="og:title"]', null, m.ogTitle, "og:title");
+    set('meta[property="og:description"]', null, m.ogDesc, "og:description");
+    set('meta[property="og:type"]', null, "website", "og:type");
+    set('meta[property="og:image"]', null, "/images/pact-og.webp", "og:image");
+    set('meta[name="twitter:card"]', "twitter:card", "summary_large_image");
+    set('meta[name="twitter:title"]', "twitter:title", m.ogTitle);
+    set('meta[name="twitter:description"]', "twitter:description", m.ogDesc);
+    set('meta[name="twitter:image"]', "twitter:image", "/images/pact-og.webp");
+    document.documentElement.lang = lang;
+  }, [lang]);
+  return null;
+}
 
 /* ─────────────────────────────────────────────
    LANGUAGE DATA
@@ -83,6 +128,20 @@ const T = {
     ],
     chatGreeting: "Hey! I'm the PACT AI assistant. Ask me anything about the app, matching, features, or how to get started.",
     chatPH: "Ask about PACT...",
+    pricingEyebrow: "PRICING",
+    pricingH: "Simple pricing.\nNo surprises.",
+    pricingSub: "Start free. Upgrade when you're ready to unlock the full power of PACT.",
+    pricingNote: "Prices in USD · Billed monthly · Cancel anytime",
+    plans: [
+      { key:"free", name:"PACT FREE", price:"$0", period:"/forever", badge:null,
+        desc:"Everything you need to find your partner and get started.",
+        features:["Smart Partner Matching (3 active pacts)","Daily Check-Ins & Progress Logging","King / Queen of the WOD — Daily Leaderboard","Workout Library — 200+ pre-built workouts","Schedule & Calendar","Communities (join up to 3)","Personal Records Tracker","Direct Partner Chat","Goals & Events"],
+        cta:"Join Waitlist", ctaStyle:"ghost" },
+      { key:"pro", name:"PACT PRO", price:"$9.99", period:"/month", badge:"MOST POPULAR",
+        desc:"Unlock AI coaching, unlimited matching, and advanced analytics.",
+        features:["Everything in Free","AI Program Builder — 12+ sports, unlimited programs","Unlimited Active Pacts","Advanced Partner Analytics & Insights","Custom WOD Creation & Community Leaderboards","Unlimited Communities","Priority Partner Matching (24H avg.)","Workout Export & Sharing","Early Access to New Features"],
+        cta:"Get Early Access", ctaStyle:"primary" },
+    ],
   },
 };
 
@@ -324,6 +383,16 @@ a{color:inherit;text-decoration:none}
   .af-chat-btn{right:16px;bottom:16px}
 }
 @media(min-width:961px){.hide-d{display:none!important}}
+/* ── Pricing ── */
+.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:900px;margin:0 auto}
+.pricing-card{border-radius:var(--r-lg);padding:40px 36px;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:0}
+.pricing-card.featured{background:linear-gradient(145deg,rgba(59,123,255,.13) 0%,rgba(0,212,255,.07) 100%);border:1px solid rgba(59,123,255,.35)}
+.pricing-card.standard{background:var(--glass-1);border:1px solid var(--glass-border)}
+.pricing-feat{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.86rem;color:var(--gray);line-height:1.45}
+.pricing-feat:last-child{border-bottom:none}
+.pricing-check{width:16px;height:16px;border-radius:50%;background:rgba(59,123,255,.18);border:1.5px solid rgba(59,123,255,.4);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+@media(max-width:600px){.pricing-grid{grid-template-columns:1fr!important}}
+
 `;
 
 /* ─────────────────────────────────────────────
@@ -459,6 +528,8 @@ function EntryScreen({ onEnter }) {
 /* ─────────────────────────────────────────────
    CHATBOT
 ───────────────────────────────────────────── */
+const T_MERGED = { ...T, ...EXTRA_T };
+
 const GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY;
 const SYSTEM = `You are the PACT app AI assistant, embedded on the PACT website. PACT is a fitness accountability partner-matching platform by AccountaFit Corp.
 
@@ -1270,12 +1341,66 @@ function Footer() {
 }
 
 /* ─────────────────────────────────────────────
+   PRICING
+───────────────────────────────────────────── */
+function Pricing({ t, onWaitlist }) {
+  if (!t.plans) return null;
+  return (
+    <>
+      <div className="divider"/>
+      <section className="sec" id="pricing">
+        <div className="wrap">
+          <div style={{textAlign:"center",maxWidth:600,margin:"0 auto 64px"}}>
+            <div className="eyebrow" style={{justifyContent:"center",display:"flex"}}>{t.pricingEyebrow}</div>
+            <h2 className="raj" style={{fontWeight:700,fontSize:"clamp(2.4rem,4.5vw,3.4rem)",lineHeight:1,letterSpacing:".02em",marginBottom:16,whiteSpace:"pre-line"}}>{t.pricingH}</h2>
+            <p style={{color:"var(--gray)",fontSize:"1rem",lineHeight:1.8}}>{t.pricingSub}</p>
+          </div>
+          <div className="pricing-grid">
+            {t.plans.map(plan => (
+              <div key={plan.key} className={`pricing-card ${plan.key==="pro"?"featured":"standard"}`}>
+                {plan.badge && (
+                  <div style={{position:"absolute",top:20,right:20}}>
+                    <span className="tag tag-cyan" style={{fontSize:".52rem",letterSpacing:".14em"}}>{plan.badge}</span>
+                  </div>
+                )}
+                <div className="mono" style={{fontSize:".6rem",letterSpacing:".18em",color:"var(--gray3)",marginBottom:10}}>{plan.name}</div>
+                <div style={{display:"flex",alignItems:"baseline",gap:6,marginBottom:8}}>
+                  <span className="raj" style={{fontWeight:700,fontSize:"clamp(2.8rem,5vw,3.8rem)",lineHeight:1,background:"linear-gradient(135deg,#3B7BFF,#00D4FF)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",backgroundClip:"text"}}>{plan.price}</span>
+                  <span className="mono" style={{fontSize:".72rem",color:"var(--gray2)"}}>{plan.period}</span>
+                </div>
+                <p style={{color:"var(--gray)",fontSize:".88rem",lineHeight:1.65,marginBottom:28,minHeight:42}}>{plan.desc}</p>
+                <button
+                  className={plan.ctaStyle==="primary"?"btn-primary":"btn-ghost"}
+                  onClick={onWaitlist}
+                  style={{width:"100%",marginBottom:28,justifyContent:"center"}}
+                >{plan.cta}</button>
+                <div style={{display:"flex",flexDirection:"column"}}>
+                  {plan.features.map((f,i) => (
+                    <div key={i} className="pricing-feat">
+                      <div className="pricing-check">
+                        <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="var(--blue2)" strokeWidth="3" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      </div>
+                      {f}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="mono" style={{textAlign:"center",fontSize:".58rem",letterSpacing:".12em",color:"var(--gray3)",marginTop:28}}>{t.pricingNote}</p>
+        </div>
+      </section>
+    </>
+  );
+}
+
+/* ─────────────────────────────────────────────
    ROOT
 ───────────────────────────────────────────── */
 export default function AccountaFit() {
   const [lang, setLang] = useState("en");
   const [entered, setEntered] = useState(false);
-  const t = T[lang] || T.en;
+  const t = T_MERGED[lang] || T_MERGED.en;
   const scrollToWaitlist = () => document.getElementById("waitlist")?.scrollIntoView({behavior:"smooth"});
 
   return (
@@ -1284,12 +1409,14 @@ export default function AccountaFit() {
       {!entered && <EntryScreen onEnter={()=>setEntered(true)}/>}
       <div className="page-bg"/>
       <div className="page-bg-noise"/>
+      <SEO lang={lang}/>
       <Nav lang={lang} setLang={setLang} t={t} onWaitlist={scrollToWaitlist}/>
       <Hero t={t} onWaitlist={scrollToWaitlist}/>
       <Marquee/>
       <Intro t={t}/>
       <HowItWorks t={t}/>
       <Features t={t}/>
+      <Pricing t={t} onWaitlist={scrollToWaitlist}/>
       <Waitlist t={t}/>
       <FAQ t={t}/>
       <Footer/>
