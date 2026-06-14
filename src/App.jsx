@@ -1920,7 +1920,6 @@ export default function AccountaFit() {
       <Intro t={t}/>
       <PhoneMockup/>
       <HowItWorks t={t}/>
-      <AppMockup t={t}/>
       <Features t={t}/>
       <AIDemo t={t}/>
       <Community t={t}/>
