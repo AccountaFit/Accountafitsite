@@ -14,9 +14,9 @@ const LANGS = {
 
 const T = {
   en: {
-    nav: ["How It Works", "Features", "Programs", "Community", "FAQ"],
+    nav: ["Our Story", "Features", "How It Works", "FAQ"],
     joinWaitlist: "Join Waitlist",
-    heroBadge: "BY ACCOUNTAFIT CORP",
+    heroBadge: "A PRODUCT BY ACCOUNTAFIT CORP",
     heroH1a: "FIND YOUR", heroH1b: "FITNESS", heroH1c: "PARTNER.",
     heroSub: "PACT matches you with a real accountability partner based on your goals, schedule, and commitment level. Train smarter. Stay consistent. Never start over.",
     heroCTA: "Get Early Access", heroGhost: "See How It Works",
@@ -27,6 +27,7 @@ const T = {
     introH1: "The World's First", introH2: "Fitness Accountability", introH3: "Matching Platform.",
     introSub: "AccountaFit Corp didn't build another workout tracker. We built something the fitness world has never seen — a partner-matching system designed around the one thing that determines whether you succeed:",
     introSub2: "who's with you.",
+    introNote: "iOS & Android coming soon. Waitlist members get first access.",
     howEyebrow: "HOW IT WORKS",
     howH: "Four steps. One system.\nNo more restarting.",
     steps: [
@@ -326,6 +327,135 @@ a{color:inherit;text-decoration:none}
 `;
 
 /* ─────────────────────────────────────────────
+   ENTRY SCREEN — Light reveal + click to enter
+───────────────────────────────────────────── */
+function EntryScreen({ onEnter }) {
+  const [phase, setPhase] = useState("dark");   // dark → sweep → reveal → ready
+  const [leaving, setLeaving] = useState(false);
+
+  useEffect(() => {
+    const t1 = setTimeout(() => setPhase("sweep"), 600);
+    const t2 = setTimeout(() => setPhase("reveal"), 2200);
+    const t3 = setTimeout(() => setPhase("ready"), 3400);
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
+  }, []);
+
+  const handleEnter = () => {
+    setLeaving(true);
+    setTimeout(onEnter, 700);
+  };
+
+  return (
+    <div style={{
+      position:"fixed", inset:0, zIndex:9999,
+      background:"#020508",
+      display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center",
+      opacity: leaving ? 0 : 1,
+      transition: leaving ? "opacity .7s ease" : "none",
+      cursor: phase === "ready" ? "pointer" : "default",
+      overflow:"hidden",
+    }} onClick={phase === "ready" ? handleEnter : undefined}>
+
+      {/* Background atmosphere */}
+      <div style={{
+        position:"absolute", inset:0, pointerEvents:"none",
+        background:"radial-gradient(ellipse 70% 60% at 50% 50%, rgba(59,123,255,.12) 0%, transparent 65%)",
+        opacity: phase === "dark" ? 0 : 1,
+        transition:"opacity 1.8s ease",
+      }}/>
+
+      {/* Light sweep ray */}
+      <div style={{
+        position:"absolute", top:0, bottom:0,
+        width:"35%",
+        background:"linear-gradient(90deg, transparent 0%, rgba(180,210,255,.06) 40%, rgba(220,235,255,.13) 55%, rgba(180,210,255,.06) 70%, transparent 100%)",
+        transform: phase === "dark" ? "translateX(-160%)" : "translateX(380%)",
+        transition: phase === "sweep" || phase === "reveal" || phase === "ready" ? "transform 1.5s cubic-bezier(.25,.1,.25,1)" : "none",
+        pointerEvents:"none",
+      }}/>
+
+      {/* PACT Logo — revealed by sweep */}
+      <div style={{
+        position:"relative", zIndex:2, textAlign:"center",
+        opacity: phase === "dark" ? 0 : 1,
+        transform: phase === "dark" ? "scale(.94)" : "scale(1)",
+        transition:"opacity 1s ease .3s, transform 1s ease .3s",
+      }}>
+        <img
+          src="/images/pact-logo-full.webp"
+          alt="PACT"
+          style={{
+            height:"clamp(60px, 10vw, 100px)",
+            width:"auto",
+            display:"block",
+            margin:"0 auto 24px",
+            filter:`
+              drop-shadow(0 0 40px rgba(59,123,255,${phase === "ready" ? ".65" : ".2"}))
+              drop-shadow(0 0 80px rgba(59,123,255,${phase === "ready" ? ".3" : ".05"}))
+              brightness(${phase === "ready" ? "1.08" : "0.9"})
+            `,
+            transition:"filter 1.2s ease",
+          }}
+        />
+
+        {/* Presented by line */}
+        <div style={{
+          fontFamily:"'JetBrains Mono',monospace",
+          fontSize:"clamp(.58rem,.9vw,.72rem)",
+          letterSpacing:".28em",
+          color:`rgba(154,170,200,${phase === "reveal" || phase === "ready" ? ".75" : "0"})`,
+          textTransform:"uppercase",
+          marginBottom: 48,
+          transition:"color .8s ease .6s",
+        }}>
+          A PRODUCT BY ACCOUNTAFIT CORP
+        </div>
+
+        {/* Enter prompt */}
+        <div style={{
+          opacity: phase === "ready" ? 1 : 0,
+          transform: phase === "ready" ? "translateY(0)" : "translateY(10px)",
+          transition:"opacity .6s ease, transform .6s ease",
+          display:"flex", flexDirection:"column", alignItems:"center", gap:14,
+        }}>
+          <div style={{
+            fontFamily:"'JetBrains Mono',monospace",
+            fontSize:"clamp(.65rem,1vw,.78rem)",
+            letterSpacing:".22em",
+            color:"rgba(255,255,255,.35)",
+            textTransform:"uppercase",
+          }}>
+            CLICK ANYWHERE TO ENTER
+          </div>
+          {/* Pulsing dot */}
+          <div style={{
+            width:8, height:8, borderRadius:"50%",
+            background:"rgba(59,123,255,.7)",
+            boxShadow:"0 0 12px rgba(59,123,255,.5)",
+            animation:"glow 1.4s ease-in-out infinite",
+          }}/>
+        </div>
+      </div>
+
+      {/* Corner branding */}
+      <div style={{
+        position:"absolute", bottom:32, left:0, right:0,
+        textAlign:"center",
+        opacity: phase === "ready" ? .35 : 0,
+        transition:"opacity .8s ease .2s",
+        fontFamily:"'JetBrains Mono',monospace",
+        fontSize:".58rem",
+        letterSpacing:".18em",
+        color:"rgba(154,170,200,.6)",
+        textTransform:"uppercase",
+      }}>
+        THE FITNESS ACCOUNTABILITY MATCHING PLATFORM
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────
    CHATBOT
 ───────────────────────────────────────────── */
 const GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY;
@@ -518,7 +648,7 @@ function Nav({ lang, setLang, t, onWaitlist }) {
     window.addEventListener("scroll", h); return () => window.removeEventListener("scroll", h);
   }, []);
   const scrollTo = (id) => { document.getElementById(id)?.scrollIntoView({behavior:"smooth"}); setMenuOpen(false); };
-  const IDS = ["how","features","programs","community","faq"];
+  const IDS = ["our-story","features","how","faq"];
   return (
     <nav style={{position:"fixed",top:0,left:0,right:0,zIndex:500,padding:"0 5%",background:scrolled?"rgba(5,9,15,.9)":"transparent",backdropFilter:scrolled?"blur(28px)":"none",WebkitBackdropFilter:scrolled?"blur(28px)":"none",borderBottom:scrolled?"1px solid rgba(255,255,255,.07)":"none",transition:"all .35s ease"}}>
       <div style={{maxWidth:1200,margin:"0 auto",display:"flex",alignItems:"center",justifyContent:"space-between",height:70}}>
@@ -646,47 +776,62 @@ function Marquee() {
 }
 
 /* ─────────────────────────────────────────────
-   INTRO
+   INTRO — AccountaFit presents PACT
 ───────────────────────────────────────────── */
-function Intro({ t, onWaitlist }) {
+function Intro({ t }) {
   return (
-    <section className="sec" style={{textAlign:"center"}}>
+    <section className="sec" id="our-story">
       <div className="wrap">
-        <div className="eyebrow" style={{justifyContent:"center",display:"flex"}}>{t.introEyebrow}</div>
-        <h2 className="raj" style={{fontWeight:700,fontSize:"clamp(2.6rem,5.5vw,4.6rem)",lineHeight:.9,letterSpacing:".02em",marginBottom:28,maxWidth:820,margin:"0 auto 28px"}}>
-          <span style={{display:"block",color:"var(--frost)"}}>{t.introH1}</span>
-          <span style={{display:"block",background:"linear-gradient(135deg,#3B7BFF 0%,#00D4FF 100%)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",backgroundClip:"text"}}>{t.introH2}</span>
-          <span style={{display:"block",color:"var(--frost)"}}>{t.introH3}</span>
-        </h2>
-        <p style={{fontSize:"1.05rem",color:"var(--gray)",lineHeight:1.85,maxWidth:560,margin:"0 auto 20px"}}>{t.introSub}</p>
-        <p style={{fontSize:"1.15rem",color:"var(--frost)",fontStyle:"italic",marginBottom:48}}>{t.introSub2}</p>
-
-        {/* 3 concept cards */}
-        <div className="three-col" style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:3,marginBottom:56}}>
-          {[
-            {n:"01",title:"Build Your Profile",body:"Set your fitness goals, upload photos, define your schedule and commitment level. Tell us what you're working toward and how hard you're willing to push.",accent:"var(--blue2)"},
-            {n:"02",title:"Set Your Preferences",body:"Choose your training style, intensity level, and what you need from a partner. Someone to push you? Someone to match your pace? You decide.",accent:"var(--cyan)"},
-            {n:"03",title:"Make Your Pact",body:"Think Tinder, but for fitness accountability. Swipe through profiles, connect with someone who has the same fire — and make a pact that neither of you will break.",accent:"#A78BFA"},
-          ].map((s,i) => (
-            <div key={i} className="glass-card" style={{padding:"40px 30px",borderRadius:i===0?"22px 4px 4px 22px":i===2?"4px 22px 22px 4px":"4px",textAlign:"left"}}>
-              <div className="raj" style={{fontWeight:700,fontSize:"4rem",color:"rgba(59,123,255,.09)",lineHeight:1,marginBottom:16,letterSpacing:".02em"}}>{s.n}</div>
-              <h3 className="raj" style={{fontWeight:700,fontSize:"1.4rem",color:"var(--frost)",marginBottom:12,letterSpacing:".02em"}}>{s.title}</h3>
-              <p style={{fontSize:".9rem",color:"var(--gray)",lineHeight:1.78}}>{s.body}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Coming soon banner */}
-        <div className="glass" style={{padding:"36px 44px",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:24,textAlign:"left",background:"linear-gradient(135deg,rgba(59,123,255,.09) 0%,rgba(0,212,255,.05) 100%)",border:"1px solid rgba(59,123,255,.2)"}}>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:80,alignItems:"center"}} className="two-col">
+          {/* Left — the story */}
           <div>
-            <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:10}}>
-              <div style={{width:7,height:7,borderRadius:"50%",background:"var(--cyan)",animation:"glow 2s ease infinite"}}/>
-              <span className="mono" style={{fontSize:".64rem",color:"var(--cyan)",letterSpacing:".2em"}}>MORE FEATURES COMING SOON</span>
+            <div className="mono" style={{fontSize:".62rem",letterSpacing:".22em",color:"var(--cyan)",marginBottom:6,display:"flex",alignItems:"center",gap:8}}>
+              <span style={{display:"block",width:18,height:1.5,background:"var(--cyan)",flexShrink:0}}/>
+              ACCOUNTAFIT CORP
             </div>
-            <h3 className="raj" style={{fontWeight:700,fontSize:"clamp(1.6rem,3vw,2.2rem)",color:"var(--frost)",marginBottom:10,letterSpacing:".02em"}}>We're just getting started.</h3>
-            <p style={{fontSize:".92rem",color:"var(--gray)",maxWidth:500,lineHeight:1.75}}>Leaderboards. AI workout programs. Meal planning. Real-time partner updates. Video check-ins. Waitlist members get everything first.</p>
+            <h2 className="raj" style={{fontWeight:700,fontSize:"clamp(2.2rem,4vw,3.2rem)",lineHeight:1.02,letterSpacing:".02em",color:"var(--frost)",marginBottom:20}}>
+              We set out to solve fitness.<br/>
+              We discovered the real problem<br/>
+              was <span style={{background:"linear-gradient(135deg,#3B7BFF,#00D4FF)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",backgroundClip:"text"}}>doing it alone.</span>
+            </h2>
+            <p style={{fontSize:"1rem",color:"var(--gray)",lineHeight:1.85,marginBottom:20}}>
+              AccountaFit Corp spent years studying why people fail fitness. Not the workouts. Not the diet plans. Not the apps. The answer was always the same: no one was holding them accountable.
+            </p>
+            <p style={{fontSize:"1rem",color:"var(--gray)",lineHeight:1.85,marginBottom:32}}>
+              So we built <strong style={{color:"var(--frost)",fontWeight:600}}>PACT</strong> — the world's first fitness accountability matching platform. Find your partner. Make your pact. Never start over.
+            </p>
+            <div style={{display:"flex",alignItems:"center",gap:16,paddingTop:24,borderTop:"1px solid rgba(255,255,255,.07)"}}>
+              <div style={{display:"flex",flexDirection:"column",gap:2}}>
+                <span className="raj" style={{fontWeight:700,fontSize:"1.6rem",color:"var(--blue2)",lineHeight:1}}>2026</span>
+                <span className="mono" style={{fontSize:".56rem",color:"var(--gray2)",letterSpacing:".1em"}}>FOUNDED</span>
+              </div>
+              <div style={{width:1,height:36,background:"rgba(255,255,255,.1)"}}/>
+              <div style={{display:"flex",flexDirection:"column",gap:2}}>
+                <span className="raj" style={{fontWeight:700,fontSize:"1.6rem",color:"var(--blue2)",lineHeight:1}}>DEL</span>
+                <span className="mono" style={{fontSize:".56rem",color:"var(--gray2)",letterSpacing:".1em"}}>DELAWARE, USA</span>
+              </div>
+              <div style={{width:1,height:36,background:"rgba(255,255,255,.1)"}}/>
+              <div style={{display:"flex",flexDirection:"column",gap:2}}>
+                <span className="raj" style={{fontWeight:700,fontSize:"1.6rem",color:"var(--blue2)",lineHeight:1}}>PACT</span>
+                <span className="mono" style={{fontSize:".56rem",color:"var(--gray2)",letterSpacing:".1em"}}>FLAGSHIP PRODUCT</span>
+              </div>
+            </div>
           </div>
-          <button className="btn-primary" onClick={onWaitlist} style={{flexShrink:0}}>Join the Waitlist →</button>
+          {/* Right — what PACT is */}
+          <div>
+            <div className="eyebrow">{t.introEyebrow}</div>
+            <h3 className="raj" style={{fontWeight:700,fontSize:"clamp(2rem,3.5vw,2.8rem)",lineHeight:1.02,letterSpacing:".02em",marginBottom:20}}>
+              <span style={{color:"var(--frost)"}}>{t.introH1}</span><br/>
+              <span style={{background:"linear-gradient(135deg,#3B7BFF 0%,#00D4FF 100%)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",backgroundClip:"text"}}>{t.introH2}</span><br/>
+              <span style={{color:"var(--frost)"}}>{t.introH3}</span>
+            </h3>
+            <p style={{fontSize:".98rem",color:"var(--gray)",lineHeight:1.85,marginBottom:16}}>{t.introSub}</p>
+            <p style={{fontSize:"1.05rem",color:"var(--frost)",fontStyle:"italic",marginBottom:28}}>"{t.introSub2}"</p>
+            <div style={{display:"flex",alignItems:"center",gap:10,padding:"14px 18px",background:"rgba(59,123,255,.08)",border:"1px solid rgba(59,123,255,.18)",borderRadius:12}}>
+              <div style={{width:7,height:7,borderRadius:"50%",background:"var(--cyan)",animation:"glow 2s ease infinite",flexShrink:0}}/>
+              <span className="mono" style={{fontSize:".62rem",color:"var(--cyan)",letterSpacing:".14em"}}>iOS & ANDROID — COMING SOON · JOIN THE WAITLIST FOR FIRST ACCESS</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -746,42 +891,82 @@ function HowItWorks({ t }) {
 }
 
 /* ─────────────────────────────────────────────
-   FEATURES
+   FEATURES — Hub & spoke expand layout
 ───────────────────────────────────────────── */
-const FEAT_ICONS = {
-  match:  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="3.2"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a3.2 3.2 0 0 1 0 6.2"/></svg>,
-  ai:     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>,
-  wod:    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>,
-  cal:    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>,
-  lib:    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>,
-  comm:   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
-  goals:  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>,
-  pr:     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>,
-  chat:   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
-};
-
-const FEAT_ACCENTS = {
-  match:"var(--blue2)", ai:"var(--cyan)", wod:"#FBBF24", cal:"var(--blue2)", lib:"#34D399", comm:"#A78BFA", goals:"var(--cyan)", pr:"#34D399", chat:"var(--blue2)"
-};
+const FEAT_DATA = [
+  { key:"match",  icon:"👥", title:"Smart Partner Matching",  body:"Paired by sport, goals, schedule, and intensity. Swipe through profiles, connect with someone at your level, and make a pact you will not break.",          accent:"#3B7BFF" },
+  { key:"ai",     icon:"🤖", title:"AI Program Builder",      body:"Generate fully personalized training programs across 12+ sports. Choose your phase — Base Build Peak, Aggressive, or Maintenance — and PACT's AI writes the plan.", accent:"#00D4FF" },
+  { key:"wod",    icon:"⚡", title:"King / Queen of the WOD", body:"A new benchmark every day. Log your score, compete on the real-time leaderboard, and claim the throne. King or Queen of the Workout — your title to earn.", accent:"#FBBF24" },
+  { key:"cal",    icon:"📅", title:"Schedule & Calendar",     body:"Plan your entire training week in one place. Add workouts, set goals, log habits, and sync events. Your calendar moves with your commitment.",                accent:"#5B94FF" },
+  { key:"lib",    icon:"📚", title:"Workout Library",         body:"200+ pre-built workouts across Bodybuilding, CrossFit, Hyrox, Powerlifting and more — each ready to log, share with your partner, or drop into your schedule.", accent:"#34D399" },
+  { key:"comm",   icon:"🏘️", title:"Communities",             body:"Join or create Communities around your gym, sport, or training style. Shared workouts, group chats, leaderboards, and collective progress — all in one space.", accent:"#A78BFA" },
+  { key:"goals",  icon:"🎯", title:"Goals & Events",          body:"Set fitness goals, register for upcoming events, and track daily habits all in one unified hub. See your progress accumulate day by day.",                    accent:"#00D4FF" },
+  { key:"pr",     icon:"📈", title:"Personal Records",        body:"Search, add, and manage your PRs across every movement. Watch your strength story grow week over week and share milestones with your accountability partner.",  accent:"#34D399" },
+  { key:"chat",   icon:"💬", title:"Direct Partner Chat",     body:"A private, direct line to your accountability partner. No feed noise. No distractions. Just the two of you staying on track — every single day.",           accent:"#3B7BFF" },
+];
 
 function Features({ t }) {
+  const [active, setActive] = useState(null);
+  const feat = active !== null ? FEAT_DATA[active] : null;
   return (
     <>
       <div className="divider"/>
       <section className="sec" id="features">
         <div className="wrap">
-          <div style={{textAlign:"center",marginBottom:60}}>
+          <div style={{textAlign:"center",marginBottom:52}}>
             <div className="eyebrow" style={{justifyContent:"center",display:"flex"}}>{t.featEyebrow}</div>
             <h2 className="raj" style={{fontWeight:700,fontSize:"clamp(2.4rem,4.5vw,3.4rem)",lineHeight:1,letterSpacing:".02em",whiteSpace:"pre-line"}}>{t.featH}</h2>
+            <p style={{color:"var(--gray2)",fontSize:".88rem",marginTop:14}}>Tap any feature to learn more</p>
           </div>
-          <div className="feat-grid" style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:3}}>
-            {t.features.map(({ key, title, body },i) => (
-              <div key={key} className="glass-card" style={{padding:"34px 28px",borderRadius:i===0?"22px 4px 4px 22px":i===2?"4px 22px 4px 4px":i===3?"4px 4px 4px 22px":i===5?"4px 4px 22px 4px":"4px"}}>
-                <div style={{color:FEAT_ACCENTS[key],marginBottom:18,opacity:.9}}>{FEAT_ICONS[key]}</div>
-                <h3 className="raj" style={{fontWeight:700,fontSize:"1.15rem",color:"var(--frost)",marginBottom:10,letterSpacing:".02em"}}>{title}</h3>
-                <p style={{fontSize:".88rem",color:"var(--gray)",lineHeight:1.78}}>{body}</p>
-              </div>
-            ))}
+
+          {/* Hub layout */}
+          <div style={{display:"flex",gap:32,alignItems:"flex-start",flexWrap:"wrap"}}>
+            {/* Left — feature buttons */}
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,flex:"1 1 400px",minWidth:0}}>
+              {FEAT_DATA.map((f,i) => (
+                <button key={f.key} onClick={()=>setActive(active===i?null:i)}
+                  style={{
+                    display:"flex",alignItems:"center",gap:12,
+                    padding:"16px 18px",
+                    background: active===i ? `${f.accent}18` : "var(--glass-1)",
+                    border: `1px solid ${active===i ? f.accent+"55" : "rgba(255,255,255,.08)"}`,
+                    borderRadius:14,cursor:"pointer",textAlign:"left",
+                    transition:"all .2s ease",
+                  }}
+                  onMouseEnter={e=>{if(active!==i){e.currentTarget.style.background="rgba(255,255,255,.07)";e.currentTarget.style.borderColor="rgba(255,255,255,.14)"}}}
+                  onMouseLeave={e=>{if(active!==i){e.currentTarget.style.background="var(--glass-1)";e.currentTarget.style.borderColor="rgba(255,255,255,.08)"}}}>
+                  <div style={{width:36,height:36,borderRadius:10,background:`${f.accent}18`,border:`1px solid ${f.accent}30`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"1rem",flexShrink:0}}>{f.icon}</div>
+                  <div style={{minWidth:0}}>
+                    <div className="raj" style={{fontWeight:700,fontSize:".95rem",color: active===i ? f.accent : "var(--frost)",lineHeight:1.2,letterSpacing:".01em"}}>{f.title}</div>
+                  </div>
+                  <div style={{marginLeft:"auto",width:16,height:16,borderRadius:"50%",border:`1.5px solid ${active===i ? f.accent : "rgba(255,255,255,.2)"}`,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,transition:"all .2s"}}>
+                    <div style={{fontSize:"10px",color:active===i?f.accent:"rgba(255,255,255,.4)",lineHeight:1,transform:active===i?"rotate(45deg)":"none",transition:"transform .2s"}}>+</div>
+                  </div>
+                </button>
+              ))}
+            </div>
+
+            {/* Right — detail panel */}
+            <div style={{flex:"0 0 340px",minWidth:280,position:"sticky",top:88}}>
+              {feat ? (
+                <div className="glass-card" style={{padding:"32px 28px",border:`1px solid ${feat.accent}40`,transition:"all .3s ease"}}>
+                  <div style={{display:"flex",alignItems:"center",gap:14,marginBottom:20,paddingBottom:18,borderBottom:"1px solid rgba(255,255,255,.07)"}}>
+                    <div style={{width:52,height:52,borderRadius:14,background:`${feat.accent}18`,border:`1px solid ${feat.accent}30`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"1.5rem",flexShrink:0}}>{feat.icon}</div>
+                    <h3 className="raj" style={{fontWeight:700,fontSize:"1.25rem",color:feat.accent,letterSpacing:".02em",lineHeight:1.1}}>{feat.title}</h3>
+                  </div>
+                  <p style={{fontSize:".95rem",color:"var(--gray)",lineHeight:1.82}}>{feat.body}</p>
+                  <div style={{marginTop:20,display:"flex",alignItems:"center",gap:8}}>
+                    <div style={{width:6,height:6,borderRadius:"50%",background:feat.accent}}/>
+                    <span className="mono" style={{fontSize:".6rem",color:"var(--gray3)",letterSpacing:".12em"}}>INCLUDED IN PACT · FREE TIER AVAILABLE</span>
+                  </div>
+                </div>
+              ) : (
+                <div style={{padding:"40px 28px",textAlign:"center",background:"rgba(255,255,255,.02)",border:"1px dashed rgba(255,255,255,.08)",borderRadius:16}}>
+                  <div style={{fontSize:"2rem",marginBottom:14,opacity:.4}}>↖</div>
+                  <p className="mono" style={{fontSize:".72rem",color:"var(--gray3)",letterSpacing:".12em",lineHeight:1.6}}>SELECT A FEATURE<br/>TO SEE DETAILS</p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </section>
@@ -1076,25 +1261,22 @@ function Footer() {
 ───────────────────────────────────────────── */
 export default function AccountaFit() {
   const [lang, setLang] = useState("en");
-  const [showWaitlist, setShowWaitlist] = useState(false);
+  const [entered, setEntered] = useState(false);
   const t = T[lang] || T.en;
-
   const scrollToWaitlist = () => document.getElementById("waitlist")?.scrollIntoView({behavior:"smooth"});
 
   return (
     <>
       <style dangerouslySetInnerHTML={{__html:G}}/>
+      {!entered && <EntryScreen onEnter={()=>setEntered(true)}/>}
       <div className="page-bg"/>
       <div className="page-bg-noise"/>
       <Nav lang={lang} setLang={setLang} t={t} onWaitlist={scrollToWaitlist}/>
       <Hero t={t} onWaitlist={scrollToWaitlist}/>
       <Marquee/>
-      <Intro t={t} onWaitlist={scrollToWaitlist}/>
+      <Intro t={t}/>
       <HowItWorks t={t}/>
       <Features t={t}/>
-      <Programs t={t}/>
-      <Library t={t}/>
-      <Community t={t}/>
       <Waitlist t={t}/>
       <FAQ t={t}/>
       <Footer/>
