@@ -930,7 +930,8 @@ function Nav({ lang, setLang, t, onWaitlist }) {
           <button className="btn-primary" onClick={onWaitlist} style={{padding:"10px 24px",fontSize:".72rem"}}>{t.joinWaitlist}</button>
         </div>
         {/* Mobile */}
-        <div className="hide-d" style={{display:"flex",alignItems:"center",gap:12}}>
+        <div className="hide-d" style={{display:"flex",alignItems:"center",gap:10}}>
+          <LangSwitcher lang={lang} setLang={setLang}/>
           <button onClick={()=>setMenuOpen(o=>!o)} style={{background:"none",border:"none",color:"var(--frost)",fontSize:"1.5rem",cursor:"pointer",lineHeight:1,padding:4}}>{menuOpen?"✕":"☰"}</button>
         </div>
       </div>
@@ -943,8 +944,7 @@ function Nav({ lang, setLang, t, onWaitlist }) {
             </button>
           ))}
           <div style={{height:1,background:"rgba(255,255,255,.07)",margin:"16px 0"}}/>
-          <button className="btn-primary" onClick={()=>{onWaitlist();setMenuOpen(false);}} style={{width:"100%",justifyContent:"center",marginBottom:14}}>{t.joinWaitlist}</button>
-          <LangSwitcher lang={lang} setLang={setLang}/>
+          <button className="btn-primary" onClick={()=>{onWaitlist();setMenuOpen(false);}} style={{width:"100%",justifyContent:"center"}}>{t.joinWaitlist}</button>
         </div>
       )}
     </nav>
@@ -1619,6 +1619,36 @@ function Footer() {
               </div>
             </div>
           </div>
+          {/* App Store badges */}
+          <div style={{display:"flex",gap:14,marginBottom:28,flexWrap:"wrap",alignItems:"center"}}>
+            <div className="mono" style={{fontSize:".52rem",letterSpacing:".14em",color:"var(--gray3)",marginRight:4}}>AVAILABLE SOON ON</div>
+            {/* Apple App Store badge */}
+            <div style={{position:"relative",display:"inline-block",opacity:.45,filter:"grayscale(0.3)"}}>
+              <a href="https://apps.apple.com" aria-label="Download on the App Store" style={{display:"block",cursor:"default",pointerEvents:"none"}}>
+                <img
+                  src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                  alt="Download on the App Store"
+                  style={{height:38,width:"auto",display:"block",filter:"brightness(0.9)"}}
+                />
+              </a>
+              <div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(5,9,15,.55)",borderRadius:8}}>
+                <span className="mono" style={{fontSize:".44rem",letterSpacing:".14em",color:"rgba(255,255,255,.6)"}}>COMING SOON</span>
+              </div>
+            </div>
+            {/* Google Play badge */}
+            <div style={{position:"relative",display:"inline-block",opacity:.45,filter:"grayscale(0.3)"}}>
+              <a href="https://play.google.com" aria-label="Get it on Google Play" style={{display:"block",cursor:"default",pointerEvents:"none"}}>
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+                  alt="Get it on Google Play"
+                  style={{height:38,width:"auto",display:"block",filter:"brightness(0.9)"}}
+                />
+              </a>
+              <div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(5,9,15,.55)",borderRadius:8}}>
+                <span className="mono" style={{fontSize:".44rem",letterSpacing:".14em",color:"rgba(255,255,255,.6)"}}>COMING SOON</span>
+              </div>
+            </div>
+          </div>
           <div style={{height:1,background:"linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent)",marginBottom:20}}/>
           <div style={{display:"flex",justifyContent:"space-between",flexWrap:"wrap",gap:10}}>
             <div className="mono" style={{fontSize:".56rem",letterSpacing:".1em",color:"var(--gray3)"}}>© 2026 ACCOUNTAFIT CORP. ALL RIGHTS RESERVED.</div>
@@ -1664,15 +1694,23 @@ function Pricing({ t, onWaitlist }) {
                   onClick={onWaitlist}
                   style={{width:"100%",marginBottom:28,justifyContent:"center"}}
                 >{plan.cta}</button>
-                <div style={{display:"flex",flexDirection:"column"}}>
-                  {plan.features.map((f,i) => (
-                    <div key={i} className="pricing-feat">
-                      <div className="pricing-check">
-                        <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="var(--blue2)" strokeWidth="3" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <div style={{display:"flex",flexDirection:"column",position:"relative"}}>
+                  <div style={{filter:"blur(5px)",userSelect:"none",pointerEvents:"none"}}>
+                    {plan.features.map((f,i) => (
+                      <div key={i} className="pricing-feat">
+                        <div className="pricing-check">
+                          <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="var(--blue2)" strokeWidth="3" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        {f}
                       </div>
-                      {f}
+                    ))}
+                  </div>
+                  <div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column",gap:8}}>
+                    <div style={{background:"rgba(59,123,255,.12)",border:"1px solid rgba(59,123,255,.28)",borderRadius:"var(--r-md)",padding:"10px 20px",textAlign:"center"}}>
+                      <div className="mono" style={{fontSize:".58rem",letterSpacing:".14em",color:"var(--blue2)",marginBottom:4}}>COMING SOON</div>
+                      <div style={{fontSize:".78rem",color:"var(--gray)"}}>Full feature list revealed at launch</div>
                     </div>
-                  ))}
+                  </div>
                 </div>
               </div>
             ))}
