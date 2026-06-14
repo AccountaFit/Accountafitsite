@@ -1,16 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
 /* IMAGE CONSTANTS - embedded app screenshots */
-const IMG_WOLF = "/images/pact-wolf.webp";
-const IMG_HOME = "/images/pact-home.webp";
-const IMG_MATCH = "/images/pact-match.webp";
-const IMG_LIBRARY = "/images/pact-library.webp";
-const IMG_SCHEDULE = "/images/pact-schedule.webp";
-const IMG_PROGRAMS_SEL = "/images/pact-programs-sel.webp";
-const IMG_PROGRAM_FORM = "/images/pact-program-form.webp";
-const IMG_PROGRAM_GEN = "/images/pact-program-gen.webp";
-const IMG_COMMUNITY = "/images/pact-community.webp";
-const IMG_PROFILE = "/images/pact-profile.webp";
 
 
 const IMG_LOGO_FULL = "/images/pact-logo-full.webp";
@@ -549,7 +539,6 @@ body{font-family:'Inter',sans-serif;background:#05090f;color:#EEF2FF;overflow-x:
 @keyframes floatC{0%,100%{transform:translateY(-10px) rotate(-1deg)}50%{transform:translateY(4px) rotate(1deg)}}
 @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 @keyframes glow{0%,100%{opacity:.5}50%{opacity:1}}
-@keyframes scanline{0%{top:-40%}100%{top:140%}}
 @keyframes afDot{0%,100%{opacity:.3}50%{opacity:1;background:var(--blue)}}
 
 .page-bg{
@@ -597,11 +586,6 @@ body{font-family:'Inter',sans-serif;background:#05090f;color:#EEF2FF;overflow-x:
 .marquee-item{display:flex;align-items:center;gap:24px;padding:0 32px;font-family:'Rajdhani',sans-serif;font-size:1.6rem;font-weight:600;letter-spacing:.1em;white-space:nowrap;color:rgba(154,170,200,.45);border-right:1px solid rgba(255,255,255,.07)}
 .marquee-item.hi{color:var(--cyan)}
 
-.phone-shell{width:100%;max-width:270px;background:linear-gradient(160deg,#161e30 0%,#0d1423 100%);border-radius:40px;border:1.5px solid rgba(255,255,255,.12);box-shadow:0 0 0 1px rgba(255,255,255,.05),0 40px 80px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.15);position:relative;overflow:hidden;aspect-ratio:9/19.5;flex-shrink:0}
-.phone-shell::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:90px;height:28px;background:#090e1a;border-radius:0 0 18px 18px;z-index:10;box-shadow:0 0 0 1.5px rgba(255,255,255,.08)}
-.phone-screen{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.phone-screen img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
-.phone-shell::after{content:'';position:absolute;left:0;right:0;height:40%;background:linear-gradient(180deg,rgba(255,255,255,.04) 0%,transparent 100%);animation:scanline 4s linear infinite;z-index:5;pointer-events:none}
 
 .faq-row{background:var(--glass-1);border:1px solid var(--glass-border);border-radius:var(--r-sm);overflow:hidden;margin-bottom:4px;transition:background .2s,border-color .2s}
 .faq-row.open{background:rgba(59,123,255,.06);border-color:rgba(59,123,255,.25)}
@@ -813,15 +797,6 @@ function Chatbot() {
   );
 }
 
-function Phone({ src, style = {}, float = "A" }) {
-  return (
-    <div className="phone-shell" style={{ animation: `float${float} ${float === "A" ? "5.5s" : float === "B" ? "6.8s" : "7.4s"} ease-in-out infinite`, ...style }}>
-      <div className="phone-screen">
-        <img src={src} alt="PACT app screen" loading="lazy" />
-      </div>
-    </div>
-  );
-}
 
 function FaqRow({ q, a }) {
   const [open, setOpen] = useState(false);
@@ -985,10 +960,35 @@ export default function PactSite() {
               </div>
             </div>
 
-            <div className="hide-m" style={{ display: "flex", gap: 20, alignItems: "flex-end", justifyContent: "center", position: "relative", padding: "40px 20px" }}>
-              <div style={{ position: "absolute", inset: "-40px", background: "radial-gradient(ellipse 60% 70% at 50% 50%,rgba(59,123,255,.22) 0%,transparent 70%)", pointerEvents: "none" }} />
-              <Phone src={IMG_MATCH} float="A" style={{ marginBottom: 40 }} />
-              <Phone src={IMG_HOME} float="B" />
+            <div className="hide-m" style={{ display: "flex", flexDirection: "column", gap: 14, minWidth: 300 }}>
+              {/* Animated app preview cards */}
+              {[
+                { icon: "MATCH", label: "67% fit", sub: "Deven Moore · 15 miles away", color: "var(--blue2)", accent: "rgba(59,123,255,.15)" },
+                { icon: "WOD",   label: "Iron Hour", sub: "King/Queen of the Workout · Today", color: "var(--cyan)", accent: "rgba(0,212,255,.1)" },
+                { icon: "AI",    label: "12-Week Program", sub: "Generating with AI coach...", color: "#A78BFA", accent: "rgba(124,92,252,.12)" },
+              ].map((card, i) => (
+                <div key={card.icon} className="glass-card" style={{
+                  padding: "18px 20px", display: "flex", alignItems: "center", gap: 16,
+                  animation: `fadeUp .6s ease ${i * .15}s both`,
+                  border: `1px solid ${card.color}33`,
+                }}>
+                  <div style={{ width: 44, height: 44, borderRadius: 12, background: card.accent, border: `1px solid ${card.color}44`, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'JetBrains Mono',monospace", fontSize: ".55rem", color: card.color, flexShrink: 0, letterSpacing: ".1em" }}>{card.icon}</div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontFamily: "'Rajdhani',sans-serif", fontWeight: 700, fontSize: "1rem", color: "var(--frost)", marginBottom: 2 }}>{card.label}</div>
+                    <div style={{ fontSize: ".75rem", color: "var(--gray2)", fontFamily: "'Inter',sans-serif" }}>{card.sub}</div>
+                  </div>
+                  <div style={{ width: 8, height: 8, borderRadius: "50%", background: card.color, animation: "glow 2s ease infinite" }} />
+                </div>
+              ))}
+              {/* Stat strip */}
+              <div className="glass-card" style={{ padding: "14px 20px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                {[["3", "Active Matches"], ["200+", "Workouts"], ["12", "Sports"]].map(([v, l]) => (
+                  <div key={l} style={{ textAlign: "center" }}>
+                    <div style={{ fontFamily: "'Rajdhani',sans-serif", fontWeight: 700, fontSize: "1.3rem", color: "var(--blue2)" }}>{v}</div>
+                    <div style={{ fontSize: ".65rem", color: "var(--gray2)", fontFamily: "'JetBrains Mono',monospace", letterSpacing: ".08em" }}>{l}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -1030,7 +1030,21 @@ export default function PactSite() {
             </div>
             <div className="hide-m" style={{ display: "flex", justifyContent: "center", position: "relative" }}>
               <div style={{ position: "absolute", inset: "-60px", background: "radial-gradient(ellipse 60% 70% at 50% 50%,rgba(0,212,255,.15) 0%,transparent 70%)", pointerEvents: "none" }} />
-              <Phone src={IMG_SCHEDULE} float="C" style={{ maxWidth: 280 }} />
+              <div className="glass-panel" style={{ padding: 32, width: 300, background: "rgba(255,255,255,.04)" }}>
+                <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: ".6rem", letterSpacing: ".18em", color: "var(--cyan)", marginBottom: 20 }}>TRAINING SCHEDULE</div>
+                {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day, i) => (
+                  <div key={day} style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
+                    <div style={{ width: 36, fontFamily: "'JetBrains Mono',monospace", fontSize: ".62rem", color: i === 5 ? "var(--blue2)" : "var(--gray3)", letterSpacing: ".08em" }}>{day}</div>
+                    <div style={{ flex: 1, height: 8, borderRadius: 4, background: i === 5 ? "linear-gradient(90deg,#3B7BFF,#00D4FF)" : i % 2 === 0 ? "rgba(59,123,255,.2)" : "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.06)" }} />
+                    {i < 5 && i % 2 === 0 && <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#34D399" }} />}
+                    {i === 5 && <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: ".55rem", color: "var(--blue2)", letterSpacing: ".08em" }}>TODAY</div>}
+                  </div>
+                ))}
+                <div style={{ marginTop: 20, padding: "12px 16px", background: "rgba(59,123,255,.1)", border: "1px solid rgba(59,123,255,.25)", borderRadius: 12 }}>
+                  <div style={{ fontFamily: "'Rajdhani',sans-serif", fontWeight: 700, fontSize: ".95rem", color: "var(--frost)", marginBottom: 4 }}>Iron Hour</div>
+                  <div style={{ fontSize: ".75rem", color: "var(--gray2)" }}>For Time · 1000m Row · 50 Thrusters</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1084,10 +1098,29 @@ export default function PactSite() {
                 ))}
               </div>
             </div>
-            <div className="hide-m" style={{ display: "flex", gap: 16, justifyContent: "center", alignItems: "flex-end", position: "relative" }}>
+            <div className="hide-m" style={{ position: "relative" }}>
               <div style={{ position: "absolute", inset: "-40px", background: "radial-gradient(ellipse 60% 70% at 50% 50%,rgba(59,123,255,.2) 0%,transparent 70%)", pointerEvents: "none" }} />
-              <Phone src={IMG_PROGRAMS_SEL} float="A" style={{ maxWidth: 230, marginBottom: 30 }} />
-              <Phone src={IMG_PROGRAM_FORM} float="B" style={{ maxWidth: 230 }} />
+              <div className="glass-panel" style={{ padding: 28, background: "rgba(255,255,255,.04)" }}>
+                <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: ".6rem", letterSpacing: ".18em", color: "var(--blue2)", marginBottom: 20 }}>BUILD A PROGRAM</div>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 20 }}>
+                  {[["CF","CrossFit","var(--cyan)"],["BB","Bodybuilding","var(--blue2)"],["HX","Hyrox","#FBBF24"],["PL","Powerlifting","#A78BFA"],["RN","Running","#34D399"],["OL","Olympic Lifting","#FB923C"]].map(([code, label, color]) => (
+                    <div key={code} style={{ background: "rgba(255,255,255,.04)", border: `1px solid ${color}33`, borderRadius: 10, padding: "10px 12px", display: "flex", alignItems: "center", gap: 10 }}>
+                      <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: ".55rem", color, width: 28, height: 28, borderRadius: 8, background: `${color}18`, display: "flex", alignItems: "center", justifyContent: "center" }}>{code}</div>
+                      <span style={{ fontFamily: "'Inter',sans-serif", fontSize: ".78rem", color: "var(--gray)" }}>{label}</span>
+                    </div>
+                  ))}
+                </div>
+                <div style={{ background: "linear-gradient(135deg,rgba(59,123,255,.15),rgba(0,212,255,.08))", border: "1px solid rgba(59,123,255,.3)", borderRadius: 12, padding: "14px 16px" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
+                    <span style={{ fontFamily: "'Rajdhani',sans-serif", fontWeight: 700, fontSize: ".95rem", color: "var(--frost)" }}>Generating Program</span>
+                    <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: ".65rem", color: "var(--cyan)" }}>AI</span>
+                  </div>
+                  <div style={{ height: 6, borderRadius: 3, background: "rgba(255,255,255,.08)", overflow: "hidden" }}>
+                    <div style={{ height: "100%", width: "65%", borderRadius: 3, background: "linear-gradient(90deg,#3B7BFF,#00D4FF)", animation: "glow 2s ease infinite" }} />
+                  </div>
+                  <div style={{ fontFamily: "'Inter',sans-serif", fontSize: ".72rem", color: "var(--gray2)", marginTop: 8 }}>Writing week 1 workouts with AI coach...</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1099,9 +1132,30 @@ export default function PactSite() {
       <section className="sec">
         <div className="wrap">
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }} className="two-col">
-            <div className="hide-m" style={{ display: "flex", justifyContent: "center", position: "relative" }}>
+            <div className="hide-m" style={{ position: "relative" }}>
               <div style={{ position: "absolute", inset: "-40px", background: "radial-gradient(ellipse 60% 70% at 50% 50%,rgba(124,92,252,.2) 0%,transparent 70%)", pointerEvents: "none" }} />
-              <Phone src={IMG_LIBRARY} float="A" style={{ maxWidth: 280 }} />
+              <div className="glass-panel" style={{ padding: 28, background: "rgba(255,255,255,.04)" }}>
+                <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: ".6rem", letterSpacing: ".18em", color: "#A78BFA", marginBottom: 16 }}>WORKOUT LIBRARY</div>
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 18 }}>
+                  {[["All","var(--blue2)"],["Hyrox","var(--cyan)"],["CrossFit","#34D399"],["Powerlifting","#A78BFA"]].map(([l,c],i) => (
+                    <div key={l} style={{ padding: "4px 12px", borderRadius: 100, fontFamily: "'JetBrains Mono',monospace", fontSize: ".58rem", letterSpacing: ".08em", background: i===0 ? "rgba(59,123,255,.22)" : "rgba(255,255,255,.05)", border: `1px solid ${i===0?"rgba(59,123,255,.4)":"rgba(255,255,255,.1)"}`, color: i===0?"var(--blue2)":"var(--gray2)" }}>{l}</div>
+                  ))}
+                </div>
+                {[
+                  { tag:"HYROX", name:"HYROX Individual (Open)", detail:"90 min · For Time", color:"var(--cyan)" },
+                  { tag:"HYROX", name:"HYROX Individual (Pro)", detail:"75 min · For Time", color:"var(--cyan)" },
+                  { tag:"CF",    name:"Iron Hour",               detail:"20 min cap · For Time", color:"#34D399" },
+                  { tag:"CF",    name:"2026 CF Semifinals",       detail:"Modified · AMRAP", color:"#34D399" },
+                ].map(w => (
+                  <div key={w.name} style={{ display: "flex", alignItems: "center", gap: 14, padding: "12px 0", borderBottom: "1px solid rgba(255,255,255,.06)" }}>
+                    <div style={{ width: 36, height: 36, borderRadius: 10, background: `${w.color}18`, border: `1px solid ${w.color}33`, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'JetBrains Mono',monospace", fontSize: ".5rem", color: w.color, flexShrink: 0 }}>{w.tag}</div>
+                    <div>
+                      <div style={{ fontFamily: "'Inter',sans-serif", fontWeight: 600, fontSize: ".82rem", color: "var(--frost)", marginBottom: 2 }}>{w.name}</div>
+                      <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: ".6rem", color: "var(--gray2)", letterSpacing: ".06em" }}>{w.detail}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
             <div>
               <div className="eyebrow">Workout Library</div>
@@ -1155,9 +1209,33 @@ export default function PactSite() {
                 </div>
               ))}
             </div>
-            <div className="hide-m" style={{ display: "flex", justifyContent: "center", position: "relative" }}>
+            <div className="hide-m" style={{ position: "relative" }}>
               <div style={{ position: "absolute", inset: "-40px", background: "radial-gradient(ellipse 60% 70% at 50% 50%,rgba(124,92,252,.2) 0%,transparent 70%)", pointerEvents: "none" }} />
-              <Phone src={IMG_COMMUNITY} float="B" style={{ maxWidth: 280 }} />
+              <div className="glass-panel" style={{ padding: 28, background: "rgba(255,255,255,.04)" }}>
+                <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: ".6rem", letterSpacing: ".18em", color: "#A78BFA", marginBottom: 20 }}>COMMUNITIES</div>
+                {[
+                  { name:"PR Star Barbell", members:24, tag:"Powerlifting", online: 8 },
+                  { name:"Hyrox DC Crew",   members:61, tag:"Hyrox",        online: 14 },
+                  { name:"CrossFit Capital",members:38, tag:"CrossFit",      online: 5 },
+                ].map((c, i) => (
+                  <div key={c.name} style={{ background: "rgba(255,255,255,.04)", border: "1px solid rgba(255,255,255,.08)", borderRadius: 12, padding: "14px 16px", marginBottom: 10, display: "flex", alignItems: "center", gap: 14 }}>
+                    <div style={{ width: 42, height: 42, borderRadius: 12, background: `rgba(124,92,252,${.1 + i*.05})`, border: "1px solid rgba(124,92,252,.25)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Rajdhani',sans-serif", fontWeight: 700, fontSize: "1rem", color: "#A78BFA", flexShrink: 0 }}>{c.name[0]}</div>
+                    <div style={{ flex: 1 }}>
+                      <div style={{ fontFamily: "'Inter',sans-serif", fontWeight: 600, fontSize: ".85rem", color: "var(--frost)", marginBottom: 3 }}>{c.name}</div>
+                      <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                        <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: ".58rem", color: "var(--gray2)" }}>{c.members} members</span>
+                        <span style={{ width: 3, height: 3, borderRadius: "50%", background: "var(--gray3)", display: "inline-block" }} />
+                        <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: ".58rem", color: "#34D399" }}>{c.online} online</span>
+                      </div>
+                    </div>
+                    <div style={{ padding: "4px 10px", borderRadius: 100, background: "rgba(124,92,252,.12)", border: "1px solid rgba(124,92,252,.25)", fontFamily: "'JetBrains Mono',monospace", fontSize: ".55rem", color: "#A78BFA" }}>JOIN</div>
+                  </div>
+                ))}
+                <div style={{ padding: "10px 16px", background: "rgba(59,123,255,.08)", border: "1px solid rgba(59,123,255,.2)", borderRadius: 12, display: "flex", alignItems: "center", gap: 10 }}>
+                  <div style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--blue2)" }} />
+                  <span style={{ fontFamily: "'Inter',sans-serif", fontSize: ".78rem", color: "var(--gray2)" }}>New community workout posted in PR Star Barbell</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
